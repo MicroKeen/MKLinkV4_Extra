@@ -1,0 +1,9 @@
+[submodule "external/notGUIyet"]
+	path = external/notGUIyet
+	url = https://github.com/GorgonMeducer/notGUIyet.git
+[submodule "external/perf_counter"]
+	path = external/perf_counter
+	url = https://github.com/GorgonMeducer/perf_counter.git
+[submodule "external/Arm-2D"]
+	path = external/Arm-2D
+	url = https://github.com/GorgonMeducer/Arm-2D.git
