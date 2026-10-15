@@ -1,0 +1,8 @@
+build*/
+hpm5301evklite_*/
+__pycache__/
+*.pyc
+*.log
+/assets/
+/docs/**/*.png
+/docs/*.png

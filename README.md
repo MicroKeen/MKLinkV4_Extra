@@ -21,11 +21,14 @@ git submodule update --init --recursive
 ## 目录
 
 - `mklink_sample_fire/`：Arm-2D 火焰示例工程。
+- `mklink_sample_fishing/`：240×240 RGB565 单编码器钓鱼游戏，含图鉴、装备与 SD 手动/自动存档。
 - `common/`：公共驱动、适配代码及显示组件。
 - `hpm5301evklite/`：开发板配置与支持代码。
 - `external/`：通过 Git 子模块管理的 notGUIyet、perf_counter 和 Arm-2D。
 
 示例工程使用 HPM SDK，构建前需要配置 `HPM_SDK_BASE`。
+
+钓鱼示例的构建、操作、旧存档兼容性与验证记录见 [mklink_sample_fishing](mklink_sample_fishing/README.md)。其 SD 适配保留 PA26 为屏幕背光；运行期间不启用 USB 磁盘，以避免与游戏同时写 SD 卡。
 
 ## 火焰示例与 USB 日志
 

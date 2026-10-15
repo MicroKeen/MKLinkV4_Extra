@@ -1,0 +1,16 @@
+{
+  "schema_version": 3,
+  "logical_size": [
+    240,
+    240
+  ],
+  "interaction": "rotate scrolls the goods list; selection shows details; press trades",
+  "list": {
+    "x": 6,
+    "y": 56,
+    "w": 120,
+    "h": 108,
+    "rows": 5,
+    "row_h": 21
+  }
+}

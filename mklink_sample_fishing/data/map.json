@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "map_id": "north_wetland_park",
+  "world_width": 960,
+  "water_left": 56,
+  "water_right": 904,
+  "nearshore_distance_px": 120,
+  "depth_unit": "virtual_cm",
+  "depth_basis": "游戏虚拟地形，不是实测公园水深或物种自然极限",
+  "depth_profile": [
+    [
+      0,
+      0
+    ],
+    [
+      56,
+      0
+    ],
+    [
+      96,
+      60
+    ],
+    [
+      176,
+      160
+    ],
+    [
+      280,
+      300
+    ],
+    [
+      400,
+      520
+    ],
+    [
+      480,
+      600
+    ],
+    [
+      560,
+      580
+    ],
+    [
+      672,
+      360
+    ],
+    [
+      784,
+      160
+    ],
+    [
+      864,
+      50
+    ],
+    [
+      904,
+      0
+    ],
+    [
+      960,
+      0
+    ]
+  ],
+  "zones": [
+    {
+      "id": "reed_bay",
+      "name_zh": "芦苇浅湾",
+      "left": 56,
+      "right": 200
+    },
+    {
+      "id": "open_pond",
+      "name_zh": "开阔水面",
+      "left": 200,
+      "right": 352
+    },
+    {
+      "id": "mud_channel",
+      "name_zh": "泥底深槽",
+      "left": 352,
+      "right": 672
+    },
+    {
+      "id": "stream_inlet",
+      "name_zh": "缓流入口",
+      "left": 672,
+      "right": 784
+    },
+    {
+      "id": "gravel_margin",
+      "name_zh": "浅岸砾石",
+      "left": 784,
+      "right": 904
+    }
+  ],
+  "docks": [
+    {
+      "id": "west_dock",
+      "deck_left": 40,
+      "deck_right": 108,
+      "boat_x": 132,
+      "shore_x": 96,
+      "walk_left": 8,
+      "walk_right": 108
+    },
+    {
+      "id": "east_dock",
+      "deck_left": 852,
+      "deck_right": 920,
+      "boat_x": 828,
+      "shore_x": 864,
+      "walk_left": 852,
+      "walk_right": 952
+    }
+  ],
+  "dock_reach_px": 12,
+  "depth_options_cm": [
+    0,
+    50,
+    100,
+    200,
+    300,
+    450,
+    600,
+    65535
+  ],
+  "bottom_option": 65535,
+  "bottom_band_min_cm": 20,
+  "bottom_band_divisor": 8,
+  "surface_band_cm": 30,
+  "shore_extension": {
+    "shore_left": -284,
+    "shore_camera_left": -336,
+    "shop_x": -260,
+    "shop_reach": 16,
+    "shore_speed": 32
+  }
+}

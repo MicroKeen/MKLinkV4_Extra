@@ -1,0 +1,51 @@
+#ifndef FISH_SPECIES_ASSETS_H
+#define FISH_SPECIES_ASSETS_H
+#include "arm_2d.h"
+#include "fish_species.h"
+typedef struct { const arm_2d_tile_t *sprite, *mask; } fish_species_art_t;
+extern const fish_species_art_t fish_species_art[FISH_SPECIES_COUNT];
+extern const arm_2d_tile_t c_tileSpeciesCrucianRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCrucianAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCrucianIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCrucianIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCarpRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCarpAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCarpIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCarpIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesHooksnoutRGB565;
+extern const arm_2d_tile_t c_tileSpeciesHooksnoutAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesHooksnoutIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesHooksnoutIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCatfishRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCatfishAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCatfishIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCatfishIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesGobyRGB565;
+extern const arm_2d_tile_t c_tileSpeciesGobyAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesGobyIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesGobyIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesYellowCatfishRGB565;
+extern const arm_2d_tile_t c_tileSpeciesYellowCatfishAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesYellowCatfishIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesYellowCatfishIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSharpbellyRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSharpbellyAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSharpbellyIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSharpbellyIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesMandarinRGB565;
+extern const arm_2d_tile_t c_tileSpeciesMandarinAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesMandarinIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesMandarinIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSoftshellRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSoftshellAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSoftshellIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSoftshellIconAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesHenanCrabRGB565;
+extern const arm_2d_tile_t c_tileSpeciesHenanCrabAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesHenanCrabIconRGB565;
+extern const arm_2d_tile_t c_tileSpeciesHenanCrabIconAlphaGRAY8;
+#endif
