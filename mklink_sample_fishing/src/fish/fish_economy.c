@@ -15,6 +15,21 @@ void fish_economy_init(fish_economy_t *e)
 {
     memset(e,0,sizeof(*e));e->rods=1;e->lines=2;e->floats=1;e->hanging_species=FISH_SPECIES_COUNT;
 }
+unsigned fish_hold_page_count(const fish_economy_t *e)
+{
+    unsigned count=e->hanging_species<FISH_SPECIES_COUNT;
+    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) count+=e->count[i]>0;
+    return count;
+}
+unsigned fish_hold_page_index(const fish_economy_t *e,unsigned page)
+{
+    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) if(e->count[i]) {
+        if(!page) return i;
+        --page;
+    }
+    if(!page && e->hanging_species<FISH_SPECIES_COUNT) return FISH_SPECIES_COUNT;
+    return FISH_SPECIES_COUNT+1;
+}
 uint32_t fish_catch_price(unsigned species,uint16_t size_mm)
 {
     if(species>=FISH_SPECIES_COUNT) return 0;

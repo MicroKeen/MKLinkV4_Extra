@@ -67,18 +67,19 @@ int main(void)
     }
     assert(patterns==31);
     /* Actual bite timing, including line-window modifiers and exact boundaries. */
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) for(unsigned line=0;line<FISH_LINE_COUNT;line++) {
+    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) for(unsigned line=0;line<FISH_LINE_COUNT;line++) for(unsigned fl=0;fl<FISH_FLOAT_COUNT;fl++) {
         const fish_species_t *s=&fish_species[i];fish_game_t test;
-        unsigned end=s->strike_delay_ms+(s->bite_window_ms-s->strike_delay_ms)*fish_line_sets[line].strike_window_percent/100;
-        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);
+        unsigned base=(s->bite_window_ms-s->strike_delay_ms)*fish_line_sets[line].strike_window_percent/100;
+        unsigned end=s->strike_delay_ms+base*(fl==1?115:100)/100;
+        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);test.float_index=fl;
         fish_game_input(&test,FISH_PRESS,0,s->strike_delay_ms-1);
         assert(test.loss==FISH_LOSS_EARLY && test.mode==FISH_LOST);
         fish_game_input(&test,FISH_RELEASE,0,s->strike_delay_ms);assert(test.mode==FISH_LOST);
-        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);
+        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);test.float_index=fl;
         fish_game_input(&test,FISH_PRESS,0,s->strike_delay_ms);assert(test.mode==FISH_FIGHT);
-        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);
+        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);test.float_index=fl;
         fish_game_input(&test,FISH_PRESS,0,end-1);assert(test.mode==FISH_FIGHT);
-        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);
+        bite(&test,i,s->min_mm,0);fish_game_equip_line(&test,line);test.float_index=fl;
         fish_game_input(&test,FISH_PRESS,0,end);assert(test.loss==FISH_LOSS_MISSED);
         fish_game_input(&test,FISH_RELEASE,0,end+1);assert(test.mode==FISH_LOST);
     }

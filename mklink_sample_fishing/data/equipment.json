@@ -96,7 +96,8 @@
       ],
       "tip_height": 4,
       "body_height": 3,
-      "night_bite_bonus_percent": 0
+      "night_bite_bonus_percent": 0,
+      "strike_window_bonus_percent": 0
     },
     {
       "id": "feather",
@@ -113,7 +114,8 @@
       ],
       "tip_height": 6,
       "body_height": 2,
-      "night_bite_bonus_percent": 0
+      "night_bite_bonus_percent": 0,
+      "strike_window_bonus_percent": 15
     },
     {
       "id": "glow",
@@ -130,7 +132,8 @@
       ],
       "tip_height": 4,
       "body_height": 4,
-      "night_bite_bonus_percent": 10
+      "night_bite_bonus_percent": 15,
+      "strike_window_bonus_percent": 0
     }
   ],
   "baits": [

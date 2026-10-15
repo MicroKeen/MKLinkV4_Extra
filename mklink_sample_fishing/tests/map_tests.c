@@ -125,20 +125,43 @@ int main(void)
         }
     }
     for (unsigned dock=0;dock<2;dock++) {
-        fish_game_init(&g,0); time_ms=0; g.boat_x=fish_docks[dock].boat_x;
-        tap(&g); item(&g,FISH_BAG_DOCK);
+        fish_game_init(&g,0); time_ms=0; g.boat_x=fish_docks[dock].boat_x+(dock?-2:2);
+        rotate(&g,dock?1:-1);time_ms=251;fish_game_update(&g,time_ms);
+        assert(g.mode==FISH_MOVE && !g.boat_speed && g.boat_x==fish_docks[dock].boat_x);
+        rotate(&g,dock?1:-1);
         assert(g.mode==FISH_SHORE && fish_game_ashore(&g) && g.shore_x==fish_docks[dock].shore_x);
         int boat=g.boat_x;
-        rotate(&g,dock?40:-40); assert(g.boat_x==boat && fish_game_actor_x(&g)==g.shore_x);
-        assert(g.shore_x==(dock?fish_docks[dock].walk_right:-64));
-        tap(&g); item(&g,FISH_BAG_DOCK); assert(g.mode==FISH_BAG); /* Away from dock. */
+        assert(g.boat_x==boat && fish_game_actor_x(&g)==g.shore_x);
+        assert(g.shore_speed==(dock?1:-1));
+        for(unsigned n=0;n<40;n++) {time_ms+=50;fish_game_update(&g,time_ms);}
+        assert(g.shore_x==(dock?fish_docks[dock].shore_x+64:32));
+        tap(&g); assert(g.mode==FISH_BAG); /* Away from dock. */
         item(&g,FISH_BAG_BACK); rotate(&g,dock?-40:40);
         g.shore_x=fish_docks[dock].shore_x;
-        tap(&g); item(&g,FISH_BAG_DOCK); assert(g.mode==FISH_MOVE && !fish_game_ashore(&g));
+        g.shore_speed=0;rotate(&g,dock?-1:1);assert(g.mode==FISH_MOVE && !fish_game_ashore(&g) && !g.boat_speed);
     }
     fish_game_init(&g,0); g.depth_index=0; g.boat_x=400;
     fish_game_input(&g,FISH_PRESS,0,10); fish_game_input(&g,FISH_RELEASE,0,1510);
     assert(g.cast_depth_cm==0 && g.pending_species!=3);
+    /* One detent starts slow walking without teleporting. A button stops it,
+     * menus stay still, reversing works, and clock wrap preserves distance. */
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=0;g.boat_x=132;
+    fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.shore_x==0 && g.shore_speed==-1);
+    assert(fish_game_shore_pose(&g)==1);
+    for(unsigned t=10;t<=1000;t+=10) fish_game_update(&g,t);
+    assert(g.shore_x==-32 && fish_game_shore_pose(&g)==2);fish_game_input(&g,FISH_ROTATE,1,1000);
+    for(unsigned t=1010;t<=2000;t+=10) fish_game_update(&g,t);
+    assert(g.shore_x==0);fish_game_input(&g,FISH_PRESS,0,2000);fish_game_input(&g,FISH_RELEASE,0,2001);
+    assert(g.mode==FISH_BAG && !g.shore_speed && !fish_game_shore_pose(&g));fish_game_update(&g,9000);assert(g.shore_x==0);
+    fish_game_init(&g,UINT32_MAX-499);g.mode=FISH_SHORE;g.boat_x=132;g.shore_x=0;
+    fish_game_input(&g,FISH_ROTATE,-1,UINT32_MAX-499);
+    for(unsigned i=1;i<=100;i++) fish_game_update(&g,(UINT32_MAX-499)+i*10u);
+    assert(g.shore_x==-32);
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.boat_x=132;
+    fish_game_input(&g,FISH_ROTATE,1,0);
+    for(unsigned t=16;t<=12000;t+=16) fish_game_update(&g,t);
+    assert(g.shore_x==96 && !g.shore_speed && fish_game_dock_action(&g)==0);
+    assert(fish_floats[1].strike_window_bonus_percent==15 && fish_floats[2].night_bite_bonus_percent==15);
     puts("PASS: continuous virtual terrain, shoreline/bottom exclusions, bait weighting, no fallback, all species reachable");
     printf("PASS: %u local weighted draws, equipment UI state, rods/line-hook sets/depth, both docks/walking/reboarding\n",samples);
 }

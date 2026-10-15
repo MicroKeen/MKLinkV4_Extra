@@ -20,7 +20,7 @@ int main(void)
     fish_game_init(&g,0);
     fish_game_input(&g, FISH_PRESS, 0, 30);
     fish_game_input(&g, FISH_RELEASE, 0, 100); assert(g.mode == FISH_BAG);
-    fish_game_input(&g, FISH_ROTATE, FISH_BAG_COUNT-1, 110);
+    fish_game_input(&g, FISH_ROTATE, FISH_BAG_VISIBLE_COUNT-1, 110);
     fish_game_input(&g, FISH_PRESS, 0, 120);
     fish_game_input(&g, FISH_RELEASE, 0, 150); assert(g.mode==FISH_MOVE);
     fish_game_input(&g, FISH_ROTATE, 1, 160); assert(g.boat_speed==1 && g.facing == 1);
@@ -56,7 +56,7 @@ int main(void)
     fish_game_input(&g, FISH_RELEASE, 0, next+1280); assert(g.mode == FISH_AIM);
     fish_game_input(&g, FISH_PRESS, 0, next+1330);
     fish_game_input(&g, FISH_RELEASE, 0, next+1380); assert(g.mode == FISH_BAG);
-    fish_game_input(&g, FISH_ROTATE, FISH_BAG_COUNT-1, next+1390);
+    fish_game_input(&g, FISH_ROTATE, FISH_BAG_VISIBLE_COUNT-1, next+1390);
     fish_game_input(&g, FISH_PRESS, 0, next+1400);
     fish_game_input(&g, FISH_RELEASE, 0, next+1410); assert(g.mode==FISH_AIM);
     fish_game_input(&g,FISH_ROTATE,-2,next+1430);

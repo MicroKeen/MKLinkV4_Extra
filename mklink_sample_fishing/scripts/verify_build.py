@@ -59,7 +59,7 @@ if args.write_report:
     import shutil
     shutil.copy2(build/'output/MicroLink.fish.uf2',demo/'MicroLink.uf2')
 report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x80023000',family='0x0A4D5048',
-    host_tests=10,simulator_tests=32,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
+    host_tests=10,simulator_tests=35,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
     save_key_public=True,save_schema_version=4,save_bytes=236,legacy_save_versions=[1,2,3],legacy_save_bytes=[92,236,236],
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
 ses=build/'segger_embedded_studio/Output/Debug/Exe/MicroLink.elf'

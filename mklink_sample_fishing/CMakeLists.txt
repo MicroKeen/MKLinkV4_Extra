@@ -78,13 +78,16 @@ sdk_app_src(lcd/fatfs/ff.c)
 sdk_app_src(lcd/fatfs/ffunicode.c)
 sdk_app_src(lcd/fatfs/diskio.c)
 sdk_app_src(lcd/fatfs/spi_sd/hpm_spi_sd_disk.c)
-# These infrequent storage/crypto paths favor small code; rendering stays -O3.
+# Storage, commerce, cast selection and scene dispatch favor small code.
+# Arm-2D pixel kernels retain the SDK's -O3 rendering optimization.
 file(GLOB FISH_CRYPTO_SOURCES CONFIGURE_DEPENDS src/fish/crypto/source/*.c)
 set_source_files_properties(${FISH_CRYPTO_SOURCES}
     src/fish/fish_save.c src/fish/fish_save_crypto.c src/fish/fish_save_key.c
     src/fish/fish_save_hpm.c lcd/adapt/spi_sd_adapt.c lcd/fatfs/ff.c
+    src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
     lcd/fatfs/ffunicode.c lcd/fatfs/diskio.c lcd/fatfs/spi_sd/hpm_spi_sd_disk.c
     PROPERTIES COMPILE_OPTIONS "-Os")
+set_source_files_properties(src/fish/fish_scene.c PROPERTIES COMPILE_OPTIONS "-Os")
 sdk_app_src_glob(src/fish/assets/*.c)
 sdk_app_src(../common/lcd/st7789.c)
 sdk_app_src(../common/lcd/fonts.c)

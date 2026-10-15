@@ -1,0 +1,19 @@
+#include "list_goods.h"
+const arm_2d_tile_t *const fish_shop_list_goods[16]={
+    &c_tileShopGoods0RGB565,
+    &c_tileShopGoods1RGB565,
+    &c_tileShopGoods2RGB565,
+    &c_tileShopGoods3RGB565,
+    &c_tileShopGoods4RGB565,
+    &c_tileShopGoods5RGB565,
+    &c_tileShopGoods6RGB565,
+    &c_tileShopGoods7RGB565,
+    &c_tileShopGoods8RGB565,
+    &c_tileShopGoods9RGB565,
+    &c_tileShopGoods10RGB565,
+    &c_tileShopGoods11RGB565,
+    &c_tileShopGoods12RGB565,
+    &c_tileShopGoods13RGB565,
+    &c_tileShopGoods0RGB565,
+    NULL,
+};

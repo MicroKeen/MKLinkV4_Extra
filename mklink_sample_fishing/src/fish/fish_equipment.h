@@ -10,7 +10,7 @@ typedef struct {
     uint16_t comfortable_weight_g;
     uint8_t bite_percent[3]; /* <=100g, <=1000g, >1000g; game concealment tuning. */
 } fish_line_set_t;
-typedef struct {const char *name; uint16_t tip,body; uint8_t tip_height,body_height,night_bite_bonus_percent;} fish_float_t;
+typedef struct {const char *name; uint16_t tip,body; uint8_t tip_height,body_height,night_bite_bonus_percent,strike_window_bonus_percent;} fish_float_t;
 typedef struct {const char *name,*description; uint8_t weights[FISH_SPECIES_COUNT];} fish_bait_t;
 extern const fish_rod_t fish_rods[FISH_ROD_COUNT];
 extern const fish_line_set_t fish_line_sets[FISH_LINE_COUNT];

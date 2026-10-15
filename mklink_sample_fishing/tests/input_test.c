@@ -61,7 +61,7 @@ int main(void)
     assert(rg_send_key_evt(&g_tMyGUI,NGY_MSG_KEY_EVT_REPEAT,RG_KEY_DOWN));
     assert(rg_send_key_evt(&g_tMyGUI,NGY_MSG_KEY_EVT_DOUBLE_PRESSED,RG_KEY_DOWN));
     assert(game.mode==FISH_BAG && presses==1 && releases==1);
-    wheel(FISH_BAG_COUNT-1);button=true;run_ms(60);button=false;run_ms(150);
+    wheel(FISH_BAG_VISIBLE_COUNT-1);button=true;run_ms(60);button=false;run_ms(150);
     assert(game.mode==FISH_MOVE && presses==2 && releases==2);
 
     button=true;run_ms(300);assert(game.mode==FISH_CHARGE);
@@ -73,7 +73,7 @@ int main(void)
     run_ms(fish_species[game.pending_species].strike_delay_ms);
     button=true;run_ms(20);assert(game.mode==FISH_FIGHT);
     button=false;run_ms(20);assert(releases==4 && game.mode==FISH_FIGHT);
-    uint16_t value=FISH_BAG_COUNT-1;
+    uint16_t value=FISH_BAG_VISIBLE_COUNT-1;
     int before=game.reel_units;
     wheel(++value);assert(game.reel_units>before);
     game.tension=50;before=game.reel_units;

@@ -30,6 +30,8 @@ void fish_economy_init(fish_economy_t *e);
 uint32_t fish_catch_price(unsigned species,uint16_t size_mm);
 uint32_t fish_hold_weight(const fish_economy_t *e);
 uint32_t fish_hold_value(const fish_economy_t *e);
+unsigned fish_hold_page_count(const fish_economy_t *e);
+unsigned fish_hold_page_index(const fish_economy_t *e,unsigned page);
 fish_cargo_result_t fish_hold_add(fish_economy_t *e,unsigned species,uint16_t size_mm,uint32_t grams);
 bool fish_equipment_owned(const fish_economy_t *e,unsigned slot,unsigned index);
 const char *fish_shop_name(unsigned item);

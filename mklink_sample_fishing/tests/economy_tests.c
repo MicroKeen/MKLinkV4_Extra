@@ -7,6 +7,17 @@ int main(void)
 {
     fish_game_t g;fish_game_init(&g,0);g.game_minute=720;
     assert(g.rod_index==0 && g.line_index==1 && g.bait_index==FISH_PLASTIC_BAIT && g.economy.coins==0);
+    assert(!fish_hold_page_count(&g.economy) && fish_hold_page_index(&g.economy,0)==FISH_SPECIES_COUNT+1);
+    fish_economy_t sparse=g.economy;
+    fish_hold_add(&sparse,8,200,160);fish_hold_add(&sparse,0,200,160);
+    assert(fish_hold_page_count(&sparse)==2 && fish_hold_page_index(&sparse,0)==0 && fish_hold_page_index(&sparse,1)==8);
+    fish_hold_add(&sparse,1,1000,fish_species_weight_g(&fish_species[1],1000));
+    assert(fish_hold_page_count(&sparse)==3 && fish_hold_page_index(&sparse,2)==FISH_SPECIES_COUNT);
+    g.economy=sparse;g.mode=FISH_HOLD;g.guide_index=0;
+    fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.guide_index==2);
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.guide_index==0);
+    fish_economy_init(&g.economy);fish_game_input(&g,FISH_ROTATE,40,0);assert(g.guide_index==0);
+    fish_game_init(&g,0);g.game_minute=720;
     for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
         assert(fish_catch_price(i,fish_species[i].mean_x2_mm/2)==fish_base_prices[i]);
         assert(fish_catch_price(i,fish_species[i].min_mm)<=fish_catch_price(i,fish_species[i].max_mm));
@@ -41,14 +52,15 @@ int main(void)
     assert(g.bait_index==FISH_PLASTIC_BAIT);
     /* Left dock -> extended shore -> shop -> hold -> shop -> path. */
     fish_game_init(&g,0);g.game_minute=720;g.mode=FISH_SHORE;g.shore_x=96;g.boat_x=132;
-    fish_game_input(&g,FISH_ROTATE,-40,1);fish_game_input(&g,FISH_ROTATE,-40,2);
-    assert(g.shore_x==-120 && fish_game_at_shop(&g) && fish_game_camera(&g)==-144);
+    fish_game_input(&g,FISH_ROTATE,-1,1);
+    for(unsigned t=17;t<=11249;t+=16) fish_game_update(&g,t);
+    assert(g.shore_x==FISH_SHOP_X && !g.shore_speed && fish_game_at_shop(&g) && fish_game_camera(&g)==FISH_SHORE_CAMERA_LEFT);
     int prior_camera=fish_game_camera(&g);
-    for(int x=-119;x<=120;x++) {
+    for(int x=FISH_SHOP_X+1;x<=120;x++) {
         g.shore_x=x;int camera=fish_game_camera(&g);
         assert(camera>=prior_camera && camera-prior_camera<=1);prior_camera=camera;
     }
-    g.shore_x=-120;
+    fish_game_init(&g,0);g.game_minute=720;g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.boat_x=132;
     tap(&g,3);assert(g.mode==FISH_SHOP && fish_game_ashore(&g));g.shop_index=FISH_SHOP_CARGO;tap(&g,5);
     assert(g.mode==FISH_HOLD && fish_game_ashore(&g));tap(&g,7);assert(g.mode==FISH_SHOP);
     g.shop_index=FISH_SHOP_BACK;tap(&g,9);assert(g.mode==FISH_SHORE);
@@ -79,15 +91,15 @@ int main(void)
     fish_game_update(&g,499);assert(g.game_minute==(minute+1)%1440);
     assert(fish_shop_price(1)==550 && fish_shop_price(2)==1800 && fish_shop_price(5)==90 && fish_shop_price(6)==120);
     assert(fish_shop_price(12)==300 && fish_shop_price(13)==750);
-    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=-100;g.game_minute=419;
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.game_minute=419;
     tap(&g,0);assert(g.mode==FISH_SHORE && g.merchant_reply==FISH_MERCHANT_CLOSED);
     assert(g.shop_closed_notice);fish_game_update(&g,1600);assert(g.shop_closed_notice);
     fish_game_update(&g,1601);assert(!g.shop_closed_notice);
     /* The short above-player notice also expires correctly across wrap. */
-    fish_game_init(&g,UINT32_MAX-500);g.mode=FISH_SHORE;g.shore_x=-100;g.game_minute=1080;
+    fish_game_init(&g,UINT32_MAX-500);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.game_minute=1080;
     tap(&g,UINT32_MAX-500);assert(g.shop_closed_notice && g.mode==FISH_SHORE);
     fish_game_update(&g,1100);assert(!g.shop_closed_notice);
-    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=-100;
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;
     g.game_minute=420;tap(&g,2);assert(g.mode==FISH_SHOP);
     const char *welcome=fish_merchant_says(&g);g.merchant_line_variant^=1;
     assert(strcmp(welcome,fish_merchant_says(&g)) && fish_merchant_pose(&g)<4);

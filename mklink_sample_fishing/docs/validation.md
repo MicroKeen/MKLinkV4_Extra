@@ -2,7 +2,7 @@
 
 HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-15 编译检查。
 
-GNU UF2 的 3316 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、261 个唯一源文件及 include 路径检查通过。
+GNU UF2 的 3306 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、265 个唯一源文件及 include 路径检查通过。
 
 独立 demo 的 10 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、存档 v1/v2/v3 迁移、首次装备初始化与 v4 再次恢复、编码器事件和 SD/背光隔离。
 
@@ -10,13 +10,13 @@ GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并�
 
 | 工具链/区域 | 占用或预留 | 容量 | 余量 |
 |---|---:|---:|---:|
-| GNU / APP_FLASH | 848,872 B | 851,968 B | 3,096 B |
+| GNU / APP_FLASH | 846,200 B | 851,968 B | 5,768 B |
 | GNU / ILM | 2,112 B | 131,072 B | 128,960 B |
 | GNU / DLM | 92,880 B | 130,304 B | 37,424 B |
 | GNU / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
-| SES / APP_FLASH | 821,060 B | 851,968 B | 30,908 B |
+| SES / APP_FLASH | 827,788 B | 851,968 B | 24,180 B |
 | SES / ILM | 27,608 B | 131,072 B | 103,464 B |
-| SES / DLM | 66,928 B | 130,304 B | 63,376 B |
+| SES / DLM | 66,920 B | 130,304 B | 63,384 B |
 | SES / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
 
 Flash 包含代码、只读字形/位图、初始化映像和对齐。RAM 包含两块 240×24 RGB565 PFB、游戏状态、4 KiB 存档线程栈及原 RT/C 堆栈预留。SES 放在 DLM 顶部的固定栈按实际大小计入，未将其下方空闲间隙误记为已用。
@@ -27,6 +27,6 @@ Flash 包含代码、只读字形/位图、初始化映像和对齐。RAM 包含
 
 旧存档兼容性：保留原项目密钥、目录、UUID 派生和原索引。读取 v1/v2/v3 后写入 236 字节 v4，保留图鉴/金币/饵料库存/鱼获/容器/时间，首次升级初始化竿/线组/漂及所有权，后续购买不再重置。旧固件无法读取 v4；切回新版本可恢复。密钥按作者要求公开，源码访问者可伪造存档。
 
-仓库附带 GNU 固件 SHA-256：`755d6727c9748bd4eedd8561ebe3d3ac021435df618718814671dc8d8a1fd9a1`。
+仓库附带 GNU 固件 SHA-256：`457abcc62bea465f3f18c2afd5db0e6e0e80e101be7098dff025d143ad7e6e7f`。
 
 可重新运行 `python scripts/verify_build.py --write-report`（默认检查标准 flash_uf2 构建目录）。

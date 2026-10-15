@@ -15,6 +15,7 @@ typedef enum { FISH_MOVE, FISH_AIM, FISH_CHARGE, FISH_CAST,
                FISH_BAG, FISH_SHORE, FISH_LOST, FISH_SHOP, FISH_HOLD } fish_mode_t;
 enum {FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,
       FISH_BAG_DOCK,FISH_BAG_GUIDE,FISH_BAG_BACK,FISH_BAG_SAVE,FISH_BAG_COUNT};
+enum {FISH_BAG_VISIBLE_COUNT=FISH_BAG_COUNT-1}; /* Dock ID reserved, no menu entry. */
 typedef enum { FISH_LOSS_NONE, FISH_LOSS_MISSED, FISH_LOSS_BREAK,
                FISH_LOSS_SLACK, FISH_LOSS_RANGE, FISH_LOSS_EARLY } fish_loss_t;
 typedef enum { FISH_ROTATE, FISH_PRESS, FISH_RELEASE } fish_event_t;
@@ -32,6 +33,9 @@ typedef struct fish_game {
     int8_t boat_speed; /* -2/-1/0/+1/+2: two cruise gears and stop. */
     int16_t boat_motion_q8;
     int16_t shore_x;
+    int8_t shore_speed;
+    uint16_t shore_remainder;
+    uint8_t shore_walk_phase;
     uint16_t cast_bottom_cm,cast_depth_cm;
     uint32_t random_state;
     uint8_t pending_species, last_species;
@@ -70,6 +74,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
 int fish_game_power(const fish_game_t *g);
 int fish_game_camera(const fish_game_t *g);
 int fish_game_actor_x(const fish_game_t *g);
+unsigned fish_game_shore_pose(const fish_game_t *g);
 bool fish_game_ashore(const fish_game_t *g);
 bool fish_game_at_shop(const fish_game_t *g);
 bool fish_game_shop_open(const fish_game_t *g);
