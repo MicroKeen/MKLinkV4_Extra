@@ -59,8 +59,9 @@ if args.write_report:
     import shutil
     shutil.copy2(build/'output/MicroLink.fish.uf2',demo/'MicroLink.uf2')
 report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x80023000',family='0x0A4D5048',
-    host_tests=10,simulator_tests=35,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
+    host_tests=10,simulator_tests=36,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
     save_key_public=True,save_schema_version=4,save_bytes=236,legacy_save_versions=[1,2,3],legacy_save_bytes=[92,236,236],
+    shore_actor_height=36,world_pixel_grid=2,shop_logical_size=[64,48],dock_logical_size=[56,47],dock_join_frames=43,
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
 ses=build/'segger_embedded_studio/Output/Debug/Exe/MicroLink.elf'
 if ses.exists():
@@ -74,6 +75,7 @@ if args.write_report:
         '',f'GNU UF2 的 {count} 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、{len(paths)} 个唯一源文件及 include 路径检查通过。',
         '', '独立 demo 的 10 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、存档 v1/v2/v3 迁移、首次装备初始化与 v4 再次恢复、编码器事件和 SD/背光隔离。',
         '', 'GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。',
+        '', 'Windows模拟器36项检查通过。接岸修正另核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素。43幅新PFB捕获覆盖两岸、上船/上岸比例、地面边界和商店营业/打烊；36像素人物与64×48逻辑像素外屋统一整数2倍显示。',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:

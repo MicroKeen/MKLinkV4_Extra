@@ -36,7 +36,8 @@ typedef struct {
     arm_2d_tile_t counter_front_tile;
     arm_2d_op_trans_msk_t merchant_operation,hanging_operation;
     arm_2d_op_trans_msk_t container_operation;
-    arm_2d_op_trans_msk_t footpath_operation,exterior_operation;
+    arm_2d_op_trans_msk_t footpath_operation,exterior_operation,shore_player_operation;
+    arm_2d_op_trans_msk_t dock_operation[2];
 } fish_scene_t;
 _Static_assert(offsetof(fish_scene_t,use_as__arm_2d_scene_t)==0,"Scene base must be first");
 static fish_scene_t scene;
@@ -216,36 +217,42 @@ static void banks_and_docks(const arm_2d_tile_t *tile,const fish_game_t *game)
     int camera=fish_game_camera(game);
     if(camera<56) {
         arm_2d_point_float_t centre;
-        for(int right=8;right>FISH_SHORE_CAMERA_LEFT;right-=96) {
+        arm_2d_region_t land={.tLocation={-600-camera,0},.tSize={624,240}};
+        for(int right=104;right>FISH_SHORE_CAMERA_LEFT;right-=96) {
             centre=(arm_2d_point_float_t){right-48-camera,156};
-            arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.footpath_operation,tile,NULL,&centre);
+            arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.footpath_operation,tile,&land,&centre);
             ARM_2D_OP_WAIT_ASYNC(&scene.footpath_operation);
         }
-        centre=(arm_2d_point_float_t){FISH_SHOP_X+2-camera,100};
+        centre=(arm_2d_point_float_t){FISH_SHOP_X+10-camera,90};
         arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.exterior_operation,tile,NULL,&centre);
         ARM_2D_OP_WAIT_ASYNC(&scene.exterior_operation);
         if(!fish_game_shop_open(game)) {
-            centre=(arm_2d_point_float_t){FISH_SHOP_X+7-camera,114};
+            centre=(arm_2d_point_float_t){FISH_SHOP_X+18-camera,109};
             arm_2dp_tile_transform_xy(&scene.exterior_closed_operation,tile,NULL,&centre);
             ARM_2D_OP_WAIT_ASYNC(&scene.exterior_closed_operation);
         }
     }
+    if(camera>FISH_MAP_WIDTH-280) {
+        arm_2d_region_t land={.tLocation={FISH_MAP_WIDTH-24-camera,0},.tSize={240,240}};
+        arm_2d_point_float_t centre={FISH_MAP_WIDTH+24-camera,156};
+        arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.footpath_operation,tile,&land,&centre);
+        ARM_2D_OP_WAIT_ASYNC(&scene.footpath_operation);
+    }
     for (unsigned side=0;side<2;side++) {
-        int width=c_tileShoreDockRGB565.tRegion.tSize.iWidth;
-        int x=(side?FISH_MAP_WIDTH-width:0)-camera;
-        arm_2d_region_t region={.tLocation={x,110},.tSize=c_tileShoreDockRGB565.tRegion.tSize};
-        if (arm_2d_helper_pfb_is_region_active(tile,&region,true))
-            masked_bitmap(tile,&c_tileShoreDockRGB565,&c_tileShoreDockAlphaGRAY8,x,110,side!=0);
+        arm_2d_point_float_t centre={ (side?FISH_MAP_WIDTH-57:56)-camera,158 };
+        arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.dock_operation[side],tile,NULL,&centre);
+        ARM_2D_OP_WAIT_ASYNC(&scene.dock_operation[side]);
     }
 }
 
 static void shore_player(const arm_2d_tile_t *tile,const fish_game_t *game)
 {
     int x=game->shore_x-fish_game_camera(game);
-    int y=game->shore_x<0?134:game->shore_x<FISH_WATER_LEFT || game->shore_x>FISH_WATER_RIGHT?126:130;
-    box(tile,x-5,y,10,2,SHADOW);
-    const fish_ui_art_t *art=&fish_shore_player_art[fish_game_shore_pose(game)];
-    masked_bitmap(tile,art->sprite,art->mask,x-7,y-24,game->facing<0);
+    int y=134;
+    box(tile,x-7,y,14,2,SHADOW);
+    arm_2d_point_float_t centre={x-(game->facing<0),y-18};
+    arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.shore_player_operation,tile,NULL,&centre);
+    ARM_2D_OP_WAIT_ASYNC(&scene.shore_player_operation);
 }
 
 static void water_splash(const arm_2d_tile_t *tile, const fish_game_t *game, int x, int y)
@@ -918,9 +925,12 @@ static void frame_start(arm_2d_scene_t *s)
     arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->footpath_operation,
         &c_tileFootpathRGB565,&c_tileFootpathAlphaGRAY8,(arm_2d_point_float_t){25,24},0,2,2);
     arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->exterior_operation,
-        &c_tileShopExteriorRGB565,&c_tileShopExteriorAlphaGRAY8,(arm_2d_point_float_t){23,19},0,2,2);
+        &c_tileShopExteriorRGB565,&c_tileShopExteriorAlphaGRAY8,(arm_2d_point_float_t){33,25},0,2,2);
     arm_2dp_rgb565_tile_transform_xy_only_prepare(&self->exterior_closed_operation,
-        &c_tileShopExteriorClosedPatchRGB565,(arm_2d_point_float_t){14.5f,8},0,2,2);
+        &c_tileShopExteriorClosedPatchRGB565,(arm_2d_point_float_t){20,11.5f},0,2,2);
+    for(unsigned side=0;side<2;side++)
+        arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->dock_operation[side],
+            &c_tileShoreDockRGB565,&c_tileShoreDockAlphaGRAY8,(arm_2d_point_float_t){29,25},0,side?-2:2,2);
     if (game->mode==FISH_BAG) {
         char attributes[48];
         self->guide_name_box=arm_lcd_get_string_line_box(bag_attributes(game,attributes,sizeof(attributes)),fish_remarks_font());
@@ -954,6 +964,11 @@ static void frame_start(arm_2d_scene_t *s)
         if(fish_shop_list_goods[game->shop_index])
             arm_2dp_rgb565_tile_transform_xy_only_prepare(&self->shop_detail_operation,fish_shop_list_goods[game->shop_index],
                 (arm_2d_point_float_t){8,8},0,2,2);
+    }
+    if(fish_game_ashore(game)) {
+        const fish_ui_art_t *art=&fish_shore_player_art[fish_game_shore_pose(game)];
+        arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->shore_player_operation,art->sprite,art->mask,
+            (arm_2d_point_float_t){7,10},0,game->facing<0?-2:2,2);
     }
     if(game->mode==FISH_HOLD) {
         const fish_ui_art_t *container=&fish_container_art[game->economy.container];
@@ -1011,11 +1026,11 @@ static IMPL_PFB_ON_DRAW(draw_scene)
         night_moon(ptTile,game);night_float(ptTile,game);
         if(game->mode==FISH_SHORE && game->shop_closed_notice) {
             int x=game->shore_x-fish_game_camera(game);
-            int y=game->shore_x<0?134:126;
+            int y=134;
             if(x<23) x=23;
             if(x>217) x=217;
-            box(ptTile,x-23,y-49,46,19,RPG_DARK);
-            caption(ptTile,x,y-49,"打烊了",RPG_LIGHT,RPG_DARK);
+            box(ptTile,x-23,y-57,46,19,RPG_DARK);
+            caption(ptTile,x,y-57,"打烊了",RPG_LIGHT,RPG_DARK);
         }
     }
     hud(ptTile,self); bag_panel(ptTile,self);
@@ -1047,6 +1062,8 @@ void fish_scene_init(arm_2d_scene_player_t *player)
     ARM_2D_OP_INIT(scene.container_operation);
     ARM_2D_OP_INIT(scene.footpath_operation);
     ARM_2D_OP_INIT(scene.exterior_operation);
+    ARM_2D_OP_INIT(scene.shore_player_operation);
+    for(unsigned side=0;side<2;side++) ARM_2D_OP_INIT(scene.dock_operation[side]);
     scene.use_as__arm_2d_scene_t=(arm_2d_scene_t){ .tCanvas={SKY}, .fnScene=draw_scene,
         .fnOnFrameStart=frame_start, .fnOnFrameCPL=NULL,
         .bUseDirtyRegionHelper=false };

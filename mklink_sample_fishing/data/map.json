@@ -130,7 +130,7 @@
   "surface_band_cm": 30,
   "shore_extension": {
     "shore_left": -284,
-    "shore_camera_left": -308,
+    "shore_camera_left": -336,
     "shop_x": -260,
     "shop_reach": 16,
     "shore_speed": 32
