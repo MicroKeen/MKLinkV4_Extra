@@ -75,15 +75,16 @@
         "source_png": "assets/source/species/crucian.png",
         "sprite_png": "assets/processed/species/crucian.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -230,15 +231,22 @@
         "source_png": "assets/source/species/carp.png",
         "sprite_png": "assets/processed/species/carp.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2,
+        "large_sprite_png": "assets/processed/species/carp_large.png",
+        "large_native_size": [
+          96,
+          56
+        ],
+        "large_min_scale_q8": 257
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -384,15 +392,16 @@
         "source_png": "assets/source/species/hooksnout.png",
         "sprite_png": "assets/processed/species/hooksnout.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -540,15 +549,22 @@
         "source_png": "assets/source/species/catfish.png",
         "sprite_png": "assets/processed/species/catfish.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2,
+        "large_sprite_png": "assets/processed/species/catfish_large.png",
+        "large_native_size": [
+          96,
+          56
+        ],
+        "large_min_scale_q8": 257
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -691,15 +707,16 @@
         "source_png": "assets/source/species/goby.png",
         "sprite_png": "assets/processed/species/goby.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -845,15 +862,22 @@
         "source_png": "assets/source/species/snakehead.png",
         "sprite_png": "assets/processed/species/snakehead.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2,
+        "large_sprite_png": "assets/processed/species/snakehead_large.png",
+        "large_native_size": [
+          96,
+          56
+        ],
+        "large_min_scale_q8": 257
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -1003,15 +1027,16 @@
         "source_png": "assets/source/species/yellow_catfish.png",
         "sprite_png": "assets/processed/species/yellow_catfish.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -1156,15 +1181,16 @@
         "source_png": "assets/source/species/sharpbelly.png",
         "sprite_png": "assets/processed/species/sharpbelly.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -1310,15 +1336,16 @@
         "source_png": "assets/source/species/mandarin.png",
         "sprite_png": "assets/processed/species/mandarin.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -1467,15 +1494,16 @@
         "source_png": "assets/source/species/softshell.png",
         "sprite_png": "assets/processed/species/softshell.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "right",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "size_distribution": {
         "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
@@ -1623,15 +1651,16 @@
         "source_png": "assets/source/species/henan_crab.png",
         "sprite_png": "assets/processed/species/henan_crab.png",
         "native_size": [
-          96,
-          56
+          48,
+          28
         ],
         "logical_grid": [
           48,
           28
         ],
         "default_facing": "front",
-        "frames": 1
+        "frames": 1,
+        "display_scale": 2
       },
       "photo_reference_status": "Exact live-species photo not verified; text morphology and nearby potamid photographs consulted, not treated as this species.",
       "size_distribution": {

@@ -845,10 +845,8 @@ static void hold_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     unsigned species=i<FISH_SPECIES_COUNT?i:e->hanging_species;
     if(species<FISH_SPECIES_COUNT && (i==FISH_SPECIES_COUNT || e->count[i])) {
         const fish_species_art_t *art=&fish_species_art[species];
-        if(species>=FISH_BASE_SPECIES_COUNT) {
-            special_frame(tile,66,50,108,64);
-            scaled_species_bitmap(tile,art->sprite,art->mask,120,83,false,512,(arm_2d_op_trans_msk_t *)&self->hold_portrait_operation);
-        } else masked_bitmap(tile,art->sprite,art->mask,72,55,false);
+        if(species>=FISH_BASE_SPECIES_COUNT) special_frame(tile,66,50,108,64);
+        scaled_species_bitmap(tile,art->sprite,art->mask,120,83,false,512,(arm_2d_op_trans_msk_t *)&self->hold_portrait_operation);
         int name_x=120-(int)strlen(fish_species[species].ui_name)*3;
         text(tile,name_x+1,114,INK,fish_species[species].ui_name);text(tile,name_x,113,CREAM,fish_species[species].ui_name);
         uint32_t grams=i<FISH_SPECIES_COUNT?e->grams[i]:e->hanging_grams;
@@ -881,7 +879,7 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
     unsigned index=guide?game->guide_index:game->last_species;
     bool known=!guide || game->species_catches[index]>0;
     const fish_species_t *species=&fish_species[index];
-    const fish_species_art_t *art=&fish_species_art[index];
+    const fish_species_art_t *art=fish_species_portrait_art(index,self->portrait_scale_q8);
     uint16_t frame_color=fish_rarity_colors[species->rarity];
     bool special=known && index>=FISH_BASE_SPECIES_COUNT;
     box(tile,27,43,186,157,SHADOW); box(tile,25,41,186,157,frame_color);
@@ -894,7 +892,7 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
         int x=120+(mirror?-1:1)*(48-species->portrait_centre_x)*scale/256;
         int y=95+(28-species->portrait_centre_y)*scale/256;
         if (height>56) y-=(height-56)/2; /* Giants grow upward, leaving captions clear. */
-        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale*(special?2:1),&self->portrait_operation);
+        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale*96/art->sprite->tRegion.tSize.iWidth,&self->portrait_operation);
     }
     else {
         static const uint8_t question[7]={14,17,1,2,4,0,4};
@@ -1016,7 +1014,7 @@ static void frame_start(arm_2d_scene_t *s)
             (arm_2d_point_float_t){16,18},0,4,4);
         unsigned item=fish_hold_page_index(&game->economy,game->guide_index);
         unsigned index=item<FISH_SPECIES_COUNT?item:game->economy.hanging_species;
-        if(index>=FISH_BASE_SPECIES_COUNT && index<FISH_SPECIES_COUNT) {
+        if(index<FISH_SPECIES_COUNT) {
             const fish_species_art_t *art=&fish_species_art[index];
             arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hold_portrait_operation,art->sprite,art->mask,
                 (arm_2d_point_float_t){24,14},0,2,2);
@@ -1024,9 +1022,8 @@ static void frame_start(arm_2d_scene_t *s)
     }
     if(game->economy.hanging_species<FISH_SPECIES_COUNT) {
         const fish_species_art_t *art=&fish_species_art[game->economy.hanging_species];
-        bool special=game->economy.hanging_species>=FISH_BASE_SPECIES_COUNT;
         arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hanging_operation,art->sprite,art->mask,
-            (arm_2d_point_float_t){special?8:16,special?14:28},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*(special?1.1f:0.55f),special?1.1f:0.55f);
+            (arm_2d_point_float_t){8,14},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*1.1f,1.1f);
     }
     if (game->mode==FISH_CAUGHT || game->mode==FISH_GUIDE) {
         bool guide=game->mode==FISH_GUIDE;
@@ -1042,10 +1039,10 @@ static void frame_start(arm_2d_scene_t *s)
         self->card_weight_g=guide && known?fish_species_weight_g(&fish_species[index],self->card_size_mm):game->last_weight_g;
         /* Prepare once per frame, reuse the operation across all PFB blocks. */
         self->portrait_scale_q8=known?fish_species_scale_q8(&fish_species[index],self->card_size_mm):256;
-        if (known && (self->portrait_scale_q8!=256 || index>=FISH_BASE_SPECIES_COUNT)) {
-            const fish_species_art_t *art=&fish_species_art[index];
+        if (known) {
+            const fish_species_art_t *art=fish_species_portrait_art(index,self->portrait_scale_q8);
             arm_2d_point_float_t pivot={art->sprite->tRegion.tSize.iWidth/2.0f,art->sprite->tRegion.tSize.iHeight/2.0f};
-            float scale=self->portrait_scale_q8/256.0f*(index>=FISH_BASE_SPECIES_COUNT?2:1);
+            float scale=self->portrait_scale_q8/256.0f*96/art->sprite->tRegion.tSize.iWidth;
             bool mirror=fish_smoke_test==4 && self->smoke_frame%3==1;
             arm_2d_err_t result=arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(
                 &self->portrait_operation,art->sprite,art->mask,pivot,0.0f,mirror?-scale:scale,scale);

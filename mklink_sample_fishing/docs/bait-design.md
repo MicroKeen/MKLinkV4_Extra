@@ -28,7 +28,9 @@
 | shrimp | 2 | 2 | 5 | 4 | 7 | 4 | 5 | 2 | 6 | 1 | 7 |
 | plastic | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
 
-实际候选权重＝鱼种稀有度权重×地图区域倍率×本表数字；不合适的位置或钓层权重为0。选定候选后，鱼线隐蔽性仍决定咬钩等待，鱼饵不直接改变搏鱼拉力、体型分布和星级。五种特殊饵料在商店以每包五份出售，每次抛竿消耗一份；普通假饵无限使用。耗尽后下一次抛竿自动改用普通假饵。
+实际候选权重＝鱼种稀有度权重×地图区域倍率×本表数字×当前时段活跃百分比÷100；不合适的位置或钓层权重为0，原本大于0的候选经整数运算后至少保留1。活跃系数及晨昏插值见[整体设定](game-design.md)。选定候选后，鱼线隐蔽性仍决定咬钩等待，鱼饵不直接改变搏鱼拉力、体型分布和星级。五种特殊饵料在商店以每包五份出售，每次抛竿消耗一份；普通假饵无限使用。耗尽后下一次抛竿自动改用普通假饵。
+
+Candidate weight = species encounter weight × map-zone multiplier × bait attraction weight × current activity percentage ÷ 100. Invalid locations or fishing layers keep a zero weight; valid positive candidates retain at least 1 after integer rounding. Activity values and dawn/dusk interpolation are listed in the game design. Bait does not directly change fighting force, size distribution or star ratings. Special bait is sold in packs of five and consumes one unit per cast; the plastic lure is reusable and becomes the fallback when special bait runs out.
 
 ## 调整后实装
 
@@ -42,4 +44,4 @@ python tools/prepare_remarks.py
 
 ## 参考依据
 
-偏好方向参考食性，再转为游戏数值。鲤鱼为杂食，摄食底栖动物并利用谷物饲料：[FAO 鲤鱼资料](https://www.fao.org/fi/static-media/FI/CDrom/aquaculture/I1129m/file/en/en_commoncarp.htm)。成年黑鱼主要捕食鱼类：[USFWS 黑鱼资料](https://www.fws.gov/sites/default/files/documents/2024-11/ecological-risk-screening-summary-northern-snakehead.pdf)。斑鳜食鱼及虾：[日本国立环境研究所斑鳜资料](https://www.nies.go.jp/biodiversity/invasive/DB/detail/51020.html)。其余鱼种研究入口见 [鱼种考据](species-research.md)。0/1–8及米饭、面饵差异是本版玩法设计，不作为实测食性结论。
+偏好方向参考食性，再转为游戏数值。鲤鱼为杂食，摄食底栖动物并利用谷物饲料：[FAO 鲤鱼资料](https://www.fao.org/fi/static-media/FI/CDrom/aquaculture/I1129m/file/en/en_commoncarp.htm)。成年黑鱼主要捕食鱼类：[USFWS 黑鱼资料](https://www.fws.gov/sites/default/files/documents/2024-11/ecological-risk-screening-summary-northern-snakehead.pdf)。斑鳜食鱼及虾：[日本国立环境研究所斑鳜资料](https://www.nies.go.jp/biodiversity/invasive/DB/detail/51020.html)。鱼种、水层与活跃时间见[整体设定](game-design.md)。0/1–8及米饭、面饵差异是本版玩法设计，不作为实测食性结论。

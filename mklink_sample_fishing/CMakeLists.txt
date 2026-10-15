@@ -20,6 +20,11 @@ if(NOT FISH_PYTHON_EXECUTABLE)
     set(FISH_PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE}")
 endif()
 project(mklink_sample_fishing)
+# The SDK forces floating scanf into every GNU app. This game never scans input;
+# let section GC discard it while retaining floating printf for diagnostics.
+get_target_property(FISH_SDK_LINK_OPTIONS ${HPM_SDK_LIB_ITF} INTERFACE_LINK_LIBRARIES)
+list(REMOVE_ITEM FISH_SDK_LINK_OPTIONS "-u _scanf_float")
+set_property(TARGET ${HPM_SDK_LIB_ITF} PROPERTY INTERFACE_LINK_LIBRARIES "${FISH_SDK_LINK_OPTIONS}")
 set(FISH_ENCODER_DIRECTION "1" CACHE STRING "Physical encoder direction: 1 or -1")
 if(NOT FISH_ENCODER_DIRECTION STREQUAL "1" AND NOT FISH_ENCODER_DIRECTION STREQUAL "-1")
     message(FATAL_ERROR "FISH_ENCODER_DIRECTION must be 1 or -1")

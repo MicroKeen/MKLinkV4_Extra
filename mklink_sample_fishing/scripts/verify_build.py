@@ -59,9 +59,11 @@ if args.write_report:
     import shutil
     shutil.copy2(build/'output/MicroLink.fish.uf2',demo/'MicroLink.uf2')
 report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x80023000',family='0x0A4D5048',
-    host_tests=11,simulator_tests=39,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
+    hardware_platform='MKLink V4',host_tests=11,simulator_tests=39,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
     save_key_public=True,save_schema_version=5,save_bytes=292,legacy_save_versions=[1,2,3,4],legacy_save_bytes=[92,236,236,236],
     shore_actor_height=36,world_pixel_grid=2,shop_logical_size=[64,48],dock_logical_size=[56,47],dock_join_frames=43,
+    base_fish_native_size=[48,28],large_fish_native_size=[96,56],large_fish_ids=['snakehead','carp','catfish'],
+    large_fish_min_scale_q8=257,fish_bitmap_bytes_saved=84672,
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
 ses=build/'segger_embedded_studio/Output/Debug/Exe/MicroLink.elf'
 if ses.exists():
@@ -76,6 +78,8 @@ if args.write_report:
         '', '独立 demo 的 11 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件和 SD/背光隔离。',
         '', 'GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。',
         '', 'Windows模拟器39项检查通过。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡6,358个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。',
+        '', 'v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型卡面逐像素不变，大体型文字/售价保留；位图净节省84,672 B，无新增整屏缓冲。',
+        '', 'v21 detail art: enlarged snakehead, carp and catfish use 96×56 detail tiles; all base sprites store native 48×28 pixels. Small cards are pixel-identical and large-card text/prices are preserved. Net bitmap saving: 84,672 bytes; no additional full-screen buffer.',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:

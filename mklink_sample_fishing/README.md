@@ -1,9 +1,38 @@
-# mklink_sample_fishing / 北方湿地钓鱼
+# mklink_sample_fishing / 北方湿地钓鱼 / North Wetland
 
-基于同仓库 `mklink_sample_fire` 标准工程的独立钓鱼 demo。目标是 MKLink V4 / HPM5301、240×240 RGB565 ST7789 和一颗双向旋转、可按下的编码器。
+基于同仓库 `mklink_sample_fire` 标准工程的独立钓鱼 demo。游戏使用的硬件平台为 **MKLink V4**，主控为HPM5301，搭配240×240 RGB565 ST7789屏幕和一颗双向旋转、可按下的编码器。
 
+An independent fishing demo based on this repository's `mklink_sample_fire` project. The hardware platform is **MKLink V4**, with an HPM5301 MCU, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button.
 
-包含横向小船/岸边移动、蓄力抛竿、漂相提竿、张力与体力搏鱼、11 种鱼图鉴、鱼竿/线钩/浮漂/鱼饵/钓深选择，以及 小木桶/可购买扩容容器/船尾单条巨鱼、左岸渔具店/coins、装备解锁/特殊饵料消耗、系统毫秒驱动的昼夜和 SD 手动/五分钟自动存档。
+## 当前玩法 v21 / Current gameplay v21
+
+1. **鱼饵吸引力与装备效果 / Bait attraction and tackle effects**
+
+   蚯蚓、米饭、面饵、小鱼、虾饵和普通假饵分别具有针对11种基础鱼的相对吸引权重，并结合落点、水域、水深、钓层和活跃时段选择鱼种。线钩影响等待和搏鱼，鹅毛漂延长15%提竿窗口，夜光漂在完全入夜时使每轮咬钩概率相对提高15%；装备效果分别计算。
+
+   Worms, rice, dough, baitfish, shrimp and the reusable plastic lure have distinct attraction weights for the 11 base species. Selection also considers cast position, habitat, depth, fishing layer and activity time. Line/hook sets affect waiting and fighting; the feather float extends the hook window by 15%, while the luminous float gives a relative 15% bite-chance bonus per attempt at full night. These tackle effects are calculated separately.
+
+2. **游戏时间与昼夜 / Game time and day–night cycle**
+
+   现实1秒对应游戏1分钟，一昼夜24分钟；05:00–07:00渐亮、18:00–20:00渐暗，夜晚呈深蓝天空、星星和月亮，日月与云被远山遮挡。不同鱼种随时段改变活跃权重，斑鳜白天与夜间权重相同。存档恢复游戏时间，退出期间不快进。
+
+   One real second equals one game minute, making a full day 24 real minutes. Dawn runs from 05:00 to 07:00 and dusk from 18:00 to 20:00, with a dark blue night sky, stars and a moon. Mountains occlude the sun, moon and clouds. Species activity varies by time; mandarin fish have equal daytime and nighttime weights. Saves restore game time without offline advancement.
+
+3. **经济、左岸商店与船上鱼库 / Economy, left-bank shop and boat storage**
+
+   在左侧码头停稳后继续向岸旋转即可上岸，沿小路到渔具店，营业时间07:00–18:00。出售鱼获获得coins，购买鱼竿、线钩、浮漂、消耗饵料与扩容容器。船上初始“小木桶”10 kg，大木桶20 kg／300 coins，储鱼箱35 kg／750 coins；单条超过容器总容量的巨鱼可挂船尾，限一条。鱼库只显示当前实际存有的鱼。
+
+   Stop at the left dock, then rotate toward the bank again to disembark and follow the path to the tackle shop, open from 07:00 to 18:00. Sell catches for coins and buy rods, line/hook sets, floats, consumable bait and larger containers. Boat storage starts with a 10 kg wooden bucket; upgrades are a 20 kg large bucket for 300 coins and a 35 kg fish box for 750 coins. One fish exceeding the container's total capacity can hang from the stern. Storage pages show only fish currently held.
+
+4. **1%稀有变异 / 1% rare variants**
+
+   黄化土鲶、长鳍马口、红色长尾鲤和白化鳖，在选中对应基础鱼后各有独立1%概率出现，并非所有抛竿的1%。稀有鱼有彩色外框、独立图鉴与鱼库记录，售价为同尺寸普通鱼计算结果的10倍；携带进店有专属台词，日常对话也有小概率给出收购线索。
+
+   Xanthic catfish, longfin hooksnout minnow, red longtail carp and albino softshell each have a conditional 1% chance after their corresponding base species is selected, rather than 1% of all casts. Rare catches have rainbow frames, separate collection/storage records and ten times the ordinary sale price at the same size. Carrying them into the shop triggers special dialogue, with occasional buyer hints during ordinary visits.
+
+数值与规则见 [整体设定 / Full design](docs/game-design.md)、[鱼饵权重 / Bait weights](docs/bait-design.md) 和 [稀有变异 / Rare variants](docs/rare-variants.md)。游戏还包括蓄力抛竿、漂相提竿、张力/体力搏鱼及SD手动/五分钟自动存档。
+
+See the linked documents for detailed values and rules. The game also includes charged casting, float cues, tension/stamina fighting, and manual SD saves plus autosaves every five real minutes.
 
 ## 获取与构建
 
@@ -37,7 +66,7 @@ GNU 输出位于构建目录 `output/`。`MicroLink.app.bin` 是去除配置头�
 
 ## 单编码器操作
 
-- 旋转控制横向移动；继续旋转可改变速度和方向。
+- 旋转控制横向移动；岸上转一格持续慢走，反向一格先停住，再转一格反向走，短按停止并交互。
 - 短按打开行囊，旋转选择装备/图鉴/存档/返回；短按选择或确认。
 - 长按蓄力，松开抛竿；出现可提竿漂相时按下。
 - 搏鱼时顺转收线、逆转放线，观察张力与体力。
@@ -85,7 +114,7 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 
 初始装备为竹竿、通用线钩、红白漂和无限普通假饵（“塑料味”）。普通鱼获收入初始“小木桶”（10 kg），可购买大木桶（20 kg / 300 coins）和储鱼箱（35 kg / 750 coins）。单条超过当前容量才挂船尾，限一条；装不下时放流，仍记图鉴。行囊显示当前容器名称和实物，打开后以容器背景查看鱼获。升级保留全部鱼，并将能装下的船尾鱼收入容器。
 
-在西码头下船后向左沿小径走，靠近木屋短按进入商店。旋转浏览五行商品列表，底部详情显示选中商品的名称、价格和容量；短按交易，出售全部鱼获换取 coins，购买渔具永久解锁，特殊饵料每包五份/每次抛竿消耗一份；钱不足、重复装备、库存满均不扣钱。“返回小径”退出，再回码头登船。具体价格和规则见 [管理文档](docs/economy-time-and-shop.md)。
+在西码头下船后向左沿小径走，靠近木屋短按进入商店。旋转浏览五行商品列表，底部详情显示选中商品的名称、价格和容量；短按交易，出售全部鱼获换取 coins，购买渔具永久解锁，特殊饵料每包五份/每次抛竿消耗一份；钱不足、重复装备、库存满均不扣钱。“返回小径”退出，再回码头登船。具体价格和规则见 [整体设定](docs/game-design.md)。
 
 游戏时间由系统单调毫秒驱动，每秒折算一分钟，一昼夜 24 分钟；日夜渐变、太阳/月亮移动和 12 条水面反光不增加整屏缓冲。读取存档恢复游戏分钟，退出期间不快进，尚未实测硬件帧率。
 
@@ -105,7 +134,7 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 
 常用工程由构建脚本生成：`hpm5301evklite_flash_uf2_debug/segger_embedded_studio/mklink_sample_fishing.emProject`，选择 Debug。另有 `hpm5301evklite_flash_xip_debug/segger_embedded_studio/mklink_sample_fishing.emProject`。构建方式、占用及 UF2 检查见 [验证报告](docs/validation.md)。显示方向尚需实板最终确认。
 
-完整设定、最新价格与11种鱼的活跃时段统一见 [整体设定](docs/game-design.md)。斑鳜无夜间加成，白天与夜间权重相同；晨昏渐变，其他鱼种按各自表值变化。
+完整设定、最新价格、11种基础鱼与4种稀有变异及活跃时段统一见 [整体设定](docs/game-design.md)。斑鳜无夜间加成，白天与夜间权重相同；晨昏渐变，其他鱼种按各自表值变化。
 
 营业时间07:00 AM–06:00 PM，外屋正面亮灯/熄灯随时间切换，尝试进入关门商店时主角上方显示“打烊了”1.6秒；打烊无人且无法进入交易。店主四种表情与14类情境各两句台词见 [merchant-dialogue.md](docs/merchant-dialogue.md)。可编辑装备描述稿见 [tackle-descriptions.md](docs/tackle-descriptions.md)，完整当前设定见 [game-design.md](docs/game-design.md)。
 
@@ -118,3 +147,11 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 接岸v19：重绘接岸草地/土路，24像素地面重叠与同网格蒙版消除x=0处硬接缝，两岸共用56×47逻辑像素码头资源整数2倍显示。人物同为2像素颗粒，脚底统一高度；店屋由原始母图按64×48逻辑像素重新生成，2倍显示约128×96，门框略高于36像素人物，完整屋顶/地基留在画面内。打烊仍只切换门窗区域。
 
 v20新增四种1%稀有变异（黄化土鲶、长鳍马口、红色长尾鲤、白化鳖），彩色边框、独立收藏/鱼库和同尺寸普通鱼10倍售价，携带时有专属招呼，日常5%给收购线索。云层轮廓重绘并按原山线遮挡；步行反转一格先停、再转反向走，移除方向上船提示。存档v5为292B，独立V5_A/B槽保留旧A/B文件，读取v1–v4，V4装备不会再初始化。[完整设定](docs/rare-variants.md)。
+
+v21：黑鱼、鲤鱼、土鲶在大体型收鱼卡/图鉴中自动使用96×56细节贴图，小尺寸保留48×28原图。11种基础鱼改存原生像素并在绘制时放大，三种细节图加入后位图仍净节省84,672 B；无需新增整屏缓冲。硬件平台继续为MKLink V4，存档与玩法数值保持不变。
+
+v21: Large snakehead, carp and catfish automatically use 96×56 detail tiles in catch cards and guide entries, while small presentations retain the 48×28 originals. Base sprites now store native pixels and scale at draw time; even with three detail tiles, bitmap storage drops by 84,672 bytes without adding a full-screen buffer. The hardware platform remains MKLink V4; saves and gameplay values are unchanged.
+
+去掉未使用的浮点scanf强制链接后，GNU应用占用748,892／851,968 B，剩余103,076 B（约100.7 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
+
+After removing unused forced floating scanf support, the GNU app uses 748,892 / 851,968 bytes, leaving 103,076 bytes (about 100.7 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.

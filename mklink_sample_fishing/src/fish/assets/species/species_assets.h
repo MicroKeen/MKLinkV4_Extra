@@ -4,18 +4,26 @@
 #include "fish_species.h"
 typedef struct { const arm_2d_tile_t *sprite, *mask; } fish_species_art_t;
 extern const fish_species_art_t fish_species_art[FISH_SPECIES_COUNT];
+extern const fish_species_art_t fish_species_large_art[FISH_SPECIES_COUNT];
+const fish_species_art_t *fish_species_portrait_art(unsigned index,uint16_t scale_q8);
 extern const arm_2d_tile_t c_tileSpeciesCrucianRGB565;
 extern const arm_2d_tile_t c_tileSpeciesCrucianAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesCarpRGB565;
 extern const arm_2d_tile_t c_tileSpeciesCarpAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCarpLargeRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCarpLargeAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesHooksnoutRGB565;
 extern const arm_2d_tile_t c_tileSpeciesHooksnoutAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesCatfishRGB565;
 extern const arm_2d_tile_t c_tileSpeciesCatfishAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesCatfishLargeRGB565;
+extern const arm_2d_tile_t c_tileSpeciesCatfishLargeAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesGobyRGB565;
 extern const arm_2d_tile_t c_tileSpeciesGobyAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesSnakeheadRGB565;
 extern const arm_2d_tile_t c_tileSpeciesSnakeheadAlphaGRAY8;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadLargeRGB565;
+extern const arm_2d_tile_t c_tileSpeciesSnakeheadLargeAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesYellowCatfishRGB565;
 extern const arm_2d_tile_t c_tileSpeciesYellowCatfishAlphaGRAY8;
 extern const arm_2d_tile_t c_tileSpeciesSharpbellyRGB565;

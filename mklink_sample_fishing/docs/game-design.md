@@ -1,6 +1,25 @@
-# 北方湿地公园：整体设定 v18
+# 北方湿地公园：整体设定 v21 / North Wetland: Game Design v21
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
+
+## 功能概述 / Feature overview
+
+硬件平台为 **MKLink V4**：HPM5301、240×240 RGB565 ST7789屏幕、单颗可按下的双向旋转编码器。Windows模拟器用于开发和验证同一份游戏规则。
+
+The hardware platform is **MKLink V4**: HPM5301, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button. The Windows simulator develops and validates the same game rules.
+
+1. **鱼饵与道具 / Bait and tackle**：六种鱼饵对11种基础鱼使用不同吸引权重，结合水域、钓层和时段选鱼；线钩影响等待/搏鱼，鹅毛漂延长提竿窗口，夜光漂提高夜间咬钩概率。
+
+   Six bait types have distinct attraction weights for the 11 base species, combined with habitat, fishing layer and time. Line/hook sets affect waiting/fighting, the feather float extends the hook window, and the luminous float improves nighttime bite chance.
+2. **时间与昼夜 / Time and day–night cycle**：现实1秒为游戏1分钟，完整昼夜24分钟，晨昏渐变并影响鱼种活跃度；保存游戏时间，退出期间不快进。
+
+   One real second equals one game minute; a full day lasts 24 real minutes. Dawn/dusk transitions affect species activity. Game time is saved, with no offline advancement.
+3. **经济、商店、船上鱼库 / Economy, shop and boat storage**：左侧码头上岸沿路访问渔具店，07:00–18:00营业；卖鱼换coins并购买装备、饵料和容器。初始小木桶10 kg，可升级20 kg大木桶和35 kg储鱼箱。
+
+   Disembark at the left dock and follow the path to the tackle shop, open 07:00–18:00. Sell fish for coins and buy tackle, bait and containers. The initial 10 kg bucket upgrades to a 20 kg bucket or a 35 kg fish box.
+4. **稀有变异 / Rare variants**：黄化土鲶、长鳍马口、红色长尾鲤、白化鳖，在选中对应基础鱼后独立抽取1%；彩色外框、独立收藏/库存、普通计算价格×10，并有商店专属对白。
+
+   Xanthic catfish, longfin hooksnout minnow, red longtail carp and albino softshell each have a conditional 1% chance after their base species is selected. They have rainbow frames, separate collection/storage records, ten times the ordinary calculated price and special shop dialogue.
 
 ## 设备与操作
 
@@ -99,3 +118,19 @@
 行走中反向一格先停止，第二格再反向走；停在码头后另转一格上下船，不显示顺向上船之类提示。云重绘为舒展的薄云，90×10逻辑像素加边框（3312B）整数2倍显示，以原山线裁切，始终位于山后，不占用额外整屏缓存。
 
 存档升级为v5（260B载荷、292B文件），前204B基础字段不重排，追加四种稀有进度与库存。读取v1/v2/v3/v4，V4装备保持；继续使用原密钥/UUID/目录。新V5_A/B槽与原A/B文件分开，原文件只读保留，有效V5优先加载，防止切回旧版覆盖稀有鱼记录。
+
+## 大鱼细节 v21 / Large-fish detail v21
+
+黑鱼、鲤鱼、土鲶各有48×28普通贴图与96×56细节贴图。收鱼卡和已解锁图鉴按实际显示比例选择：超过原96×56参考画布的1倍比例时使用细节版，较小时仍用原版，体型与屏幕显示尺寸不变。细节从已批准的原始母图重新采样，保留16色RGB565像素风、二值透明蒙版、原朝向和外形比例；不对低清贴图插值造细节。小鱼、鱼库和船尾保持原显示颗粒，四种稀有变异及所有数值规则不变。
+
+Snakehead, carp and catfish each have a 48×28 regular tile and a 96×56 detail tile. Catch cards and unlocked guide entries select detail art when the display scale exceeds 1× the original 96×56 reference canvas; smaller presentations retain the original pixels and all on-screen sizes stay unchanged. Detail is resampled from the approved masters, retaining the 16-color RGB565 pixel style, binary alpha, facing and proportions. Small fish, storage and stern fish retain their original pixel density; rare variants and gameplay values are unchanged.
+
+11种基础鱼取消预先展开的2倍重复像素，统一以48×28原生贴图绘制；释放133,056 B，三种细节贴图增加48,384 B，位图净节省84,672 B（约82.7 KiB），另有少量资源表与绘制代码变化。沿用Arm-2D/PFB变换操作，每帧准备一次、分块复用，不增加整屏缓冲、运行时解码或堆分配。最终Flash/RAM占用见`validation.md`。
+
+The 11 base sprites now store native 48×28 pixels instead of duplicated 2× pixels, recovering 133,056 bytes. Three detail tiles add 48,384 bytes, for a net bitmap saving of 84,672 bytes (about 82.7 KiB), plus small table/code changes. Existing Arm-2D/PFB transforms are prepared once per frame and reused across blocks, with no additional full-screen buffer, runtime decoder or heap allocation. Final Flash/RAM usage is recorded in `validation.md`.
+
+## 后续规划，暂不执行 / Future plan, not implemented
+
+多地图扩展时，可将地图位图素材存放在SD卡上，进入或切换地图时花费几秒读取所需资源，再供场景绘制使用。允许显式加载等待，以减少应用Flash对地图数量的限制。后续需要核算资源缓存与RAM预算，并协调现有SD存档访问。本次只记录方案，不实现SD素材存储、加载器或加载画面。
+
+For a future multi-map expansion, store map bitmaps on the SD card and allow a few seconds to load the required assets when entering or switching maps. An explicit loading period can reduce the limit imposed by application Flash capacity. Cache/RAM budgets and coordination with SD save access will need evaluation. This is a recorded proposal only; SD asset storage, loaders and loading screens are not implemented in this update.

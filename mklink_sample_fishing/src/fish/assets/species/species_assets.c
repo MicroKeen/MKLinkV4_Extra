@@ -16,3 +16,12 @@ const fish_species_art_t fish_species_art[FISH_SPECIES_COUNT]={
     {&c_tileSpeciesCarpRedLongfinRGB565,&c_tileSpeciesCarpRedLongfinAlphaGRAY8},
     {&c_tileSpeciesSoftshellAlbinoRGB565,&c_tileSpeciesSoftshellAlbinoAlphaGRAY8},
 };
+const fish_species_art_t fish_species_large_art[FISH_SPECIES_COUNT]={
+    [1]={&c_tileSpeciesCarpLargeRGB565,&c_tileSpeciesCarpLargeAlphaGRAY8},
+    [3]={&c_tileSpeciesCatfishLargeRGB565,&c_tileSpeciesCatfishLargeAlphaGRAY8},
+    [5]={&c_tileSpeciesSnakeheadLargeRGB565,&c_tileSpeciesSnakeheadLargeAlphaGRAY8},
+};
+const fish_species_art_t *fish_species_portrait_art(unsigned index,uint16_t scale_q8)
+{
+    return scale_q8>256 && fish_species_large_art[index].sprite?&fish_species_large_art[index]:&fish_species_art[index];
+}
