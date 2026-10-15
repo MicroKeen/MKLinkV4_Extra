@@ -23,6 +23,7 @@ typedef struct {
     uint16_t strike_delay_ms,stamina_base;
     uint8_t portrait_width_px,portrait_height_px; /* Visible alpha bounds, not padded tile. */
     uint8_t portrait_centre_x,portrait_centre_y;
+    uint8_t run_percent; /* Burst-only outward movement, 100 = original pace. */
 } fish_species_t;
 extern const fish_species_t fish_species[FISH_SPECIES_COUNT];
 extern const char *const fish_species_remarks[FISH_SPECIES_COUNT];

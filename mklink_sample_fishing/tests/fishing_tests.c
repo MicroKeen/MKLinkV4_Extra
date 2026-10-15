@@ -107,7 +107,42 @@ int main(void)
     assert(fish_game_distance_cm(&g)==192);
     g.reel_units=5000;assert(fish_game_distance_cm(&g)==96);
     fish_game_input(&g,FISH_ROTATE,-1,0);assert(fish_game_distance_cm(&g)>96);
-    g.reel_units=10000-(int)g.line_capacity_units;assert(fish_game_distance_cm(&g)==600);
+    g.reel_units=10000-(int)g.line_capacity_units;assert(fish_game_distance_cm(&g)==450);
+    /* Full spool rejects payout and tension relief; partial payout uses real room. */
+    for(unsigned line=0;line<FISH_LINE_COUNT;line++) {
+        bite(&g,0,200,0);fish_game_equip_line(&g,line);
+        g.phase_at-=fish_species[0].strike_delay_ms;
+        fish_game_input(&g,FISH_PRESS,0,0);fish_game_input(&g,FISH_RELEASE,0,0);
+        g.reel_units=10000-(int)g.line_capacity_units+75;g.tension=80;
+        fish_game_input(&g,FISH_ROTATE,-40,0);
+        assert(fish_game_distance(&g)==g.line_capacity_units);
+        unsigned tension=g.tension;int paid_out=g.reel_units;
+        fish_game_input(&g,FISH_ROTATE,-40,0);
+        assert(g.reel_units==paid_out && g.tension==tension);
+        g.tension=20;fish_game_input(&g,FISH_ROTATE,1,0);
+        assert(fish_game_distance(&g)<g.line_capacity_units);
+        fish_game_input(&g,FISH_ROTATE,-40,0);
+        assert(fish_game_distance(&g)==g.line_capacity_units);
+    }
+    /* Elastic distance belongs to the rod, not to extra manual payout. */
+    hook(&g,0,200,0);g.stamina_recovering=true;g.stamina=0;g.tension=50;
+    g.reel_units=10000-(int)g.line_capacity_units-100;
+    assert(fish_game_rod_flex(&g)>0);
+    for(unsigned t=20;t<=1980;t+=20)fish_game_update(&g,t);
+    assert(g.mode==FISH_FIGHT && g.range_ms==1980);
+    a=g;fish_game_update(&g,2000);assert(g.mode==FISH_LOST && g.loss==FISH_LOSS_BREAK);
+    for(unsigned n=0;n<10 && fish_game_rod_flex(&a);n++)fish_game_input(&a,FISH_ROTATE,1,1980);
+    assert(!fish_game_rod_flex(&a));fish_game_update(&a,2000);
+    assert(a.mode==FISH_FIGHT && !a.range_ms);
+    unsigned outward=0;
+    for(unsigned seed=1;seed<=4000;seed++) {
+        hook(&g,1,400,0);g.motion_random_state=seed*0x9e3779b9u;
+        g.phase_at=0;g.simulation_at=fish_rules.hook_settle_ms-20;
+        fish_game_update(&g,fish_rules.hook_settle_ms);
+        assert(g.run_direction==1 || g.run_direction==-1);outward+=g.run_direction==1;
+    }
+    assert(outward>2600 && outward<3000);
+    printf("burst_directions trials=4000 outward=%u inward=%u\n",outward,4000-outward);
     hook(&g,1,666,0);
     assert(g.stamina_max>400 && g.stamina==g.stamina_max);
     fish_game_input(&g,FISH_ROTATE,40,0);assert(g.mode==FISH_FIGHT && g.reel_units<=4000);
@@ -138,14 +173,11 @@ int main(void)
         if (g.mode==FISH_FIGHT && g.tension>1) fish_game_input(&g,FISH_ROTATE,-1,t);
     }
     assert(g.loss==FISH_LOSS_SLACK && g.catches==0);
-    /* Range failure with healthy tension, independent of overload and slack. */
-    hook(&g,0,200,0); g.reel_units=10000-g.line_capacity_units;
-    fish_game_update(&g,600); assert(g.mode==FISH_FIGHT && g.range_ms==600);
-    fish_game_input(&g,FISH_ROTATE,1,600);
-    fish_game_update(&g,800); assert(g.range_ms<600 && g.range_ms>0);
-    fish_game_update(&g,1000); assert(g.range_ms==0);
+    /* Exactly reaching line length is valid; only elastic excess starts grace. */
+    hook(&g,0,200,0);g.stamina_recovering=true;g.stamina=0;g.tension=50;
     g.reel_units=10000-g.line_capacity_units;
-    fish_game_update(&g,2000); assert(g.loss==FISH_LOSS_RANGE && g.catches==0);
+    for(unsigned t=20;t<=2000;t+=20)fish_game_update(&g,t);
+    assert(g.mode==FISH_FIGHT && !g.range_ms && !fish_game_rod_flex(&g));
     hook(&g,0,80,0);
     for (uint32_t t=100;t<=60000;t+=100) fish_game_update(&g,t);
     assert(g.mode==FISH_FIGHT && g.loss==FISH_LOSS_NONE); /* No hard fight timeout. */

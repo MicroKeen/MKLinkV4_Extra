@@ -139,7 +139,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 360,
-        "stamina_base": 70
+        "stamina_base": 70,
+        "run_percent": 100
       },
       "catch_comment_zh": "小鲫小鲫，今天大吉！",
       "rarity": "bronze",
@@ -301,7 +302,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
-        "stamina_base": 90
+        "stamina_base": 90,
+        "run_percent": 135
       },
       "catch_comment_zh": "鲤好呀，老朋友！",
       "rarity": "bronze",
@@ -456,7 +458,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
-        "stamina_base": 45
+        "stamina_base": 45,
+        "run_percent": 140
       },
       "catch_comment_zh": "嘴巴挺大，个头挺小！",
       "rarity": "silver",
@@ -619,7 +622,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 240,
-        "stamina_base": 110
+        "stamina_base": 110,
+        "run_percent": 100
       },
       "catch_comment_zh": "一身泥色，藏得真好！",
       "rarity": "bronze",
@@ -771,7 +775,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 300,
-        "stamina_base": 40
+        "stamina_base": 40,
+        "run_percent": 100
       },
       "catch_comment_zh": "趴在水底，也被找到了！",
       "rarity": "silver",
@@ -932,7 +937,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
-        "stamina_base": 75
+        "stamina_base": 75,
+        "run_percent": 100
       },
       "catch_comment_zh": "酸菜雷龙！",
       "rarity": "silver",
@@ -1091,7 +1097,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
-        "stamina_base": 70
+        "stamina_base": 70,
+        "run_percent": 100
       },
       "catch_comment_zh": "有刺！",
       "rarity": "silver",
@@ -1245,7 +1252,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 80,
-        "stamina_base": 40
+        "stamina_base": 40,
+        "run_percent": 100
       },
       "catch_comment_zh": "怎么又是你",
       "rarity": "bronze",
@@ -1400,7 +1408,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
-        "stamina_base": 70
+        "stamina_base": 70,
+        "run_percent": 130
       },
       "catch_comment_zh": "很帅一条",
       "rarity": "gold",
@@ -1558,7 +1567,8 @@
         "fight_style_index": 1,
         "fight_style": "slow_drag",
         "strike_delay_ms": 300,
-        "stamina_base": 55
+        "stamina_base": 55,
+        "run_percent": 100
       },
       "catch_comment_zh": "还有意外收获？",
       "rarity": "gold",
@@ -1716,7 +1726,8 @@
         "fight_style_index": 2,
         "fight_style": "passive_load",
         "strike_delay_ms": 350,
-        "stamina_base": 35
+        "stamina_base": 35,
+        "run_percent": 100
       },
       "catch_comment_zh": "当宠物养？",
       "rarity": "silver",
@@ -1872,7 +1883,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 240,
-        "stamina_base": 110
+        "stamina_base": 110,
+        "run_percent": 100
       },
       "catch_comment_zh": "金灿灿的，先别下锅。",
       "rarity": "bronze",
@@ -2027,7 +2039,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
-        "stamina_base": 45
+        "stamina_base": 45,
+        "run_percent": 140
       },
       "catch_comment_zh": "这尾巴，可别给碰坏了。",
       "rarity": "silver",
@@ -2184,7 +2197,8 @@
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
-        "stamina_base": 90
+        "stamina_base": 90,
+        "run_percent": 135
       },
       "catch_comment_zh": "尾巴一摆，红了一片。",
       "rarity": "bronze",
@@ -2344,7 +2358,8 @@
         "fight_style_index": 1,
         "fight_style": "slow_drag",
         "strike_delay_ms": 300,
-        "stamina_base": 55
+        "stamina_base": 55,
+        "run_percent": 100
       },
       "catch_comment_zh": "白得晃眼，还挺精神。",
       "rarity": "gold",
@@ -2446,7 +2461,7 @@
     "source_note_zh": "体型—重量采用立方锚点游戏估算；浮漂模式和搏鱼参数为玩法设定，并非物种识别/垂钓指导。",
     "overload_recovery_per_tick_ms": 20,
     "slack_recovery_per_tick_ms": 40,
-    "range_limit_ms": 1000,
+    "range_limit_ms": 2000,
     "range_recovery_per_tick_ms": 40,
     "default_line_capacity_units": 18000,
     "default_line_strength": 100,

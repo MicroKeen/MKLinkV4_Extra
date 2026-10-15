@@ -52,6 +52,8 @@ typedef struct fish_game {
     int tension, reel_units;
     uint16_t stamina,stamina_max,recovery_ms;
     bool stamina_recovering;
+    bool run_burst;
+    int8_t run_direction; /* +1 away from player, -1 toward player; cached per burst. */
     /* Q8 water contact position; updated with the existing 20 ms fight tick. */
     int32_t float_dx_q8, float_dy_q8;
     uint32_t motion_random_state;
@@ -88,6 +90,8 @@ int fish_game_pull(const fish_game_t *g, uint32_t elapsed_ms);
 void fish_game_float(const fish_game_t *g, int *dx, int *dy);
 int fish_game_distance(const fish_game_t *g);
 unsigned fish_game_distance_cm(const fish_game_t *g);
+unsigned fish_game_max_cast_px(const fish_game_t *g);
+unsigned fish_game_rod_flex(const fish_game_t *g);
 bool fish_game_burst_warning(const fish_game_t *g);
 bool fish_game_burst_active(const fish_game_t *g);
 bool fish_game_strike_ready(const fish_game_t *g);

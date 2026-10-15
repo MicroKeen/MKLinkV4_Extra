@@ -112,7 +112,7 @@ int main(void)
         fish_game_init(&g,10000+rod*10000); g.boat_x=400; g.rod_index=(uint8_t)rod;
         fish_game_input(&g,FISH_PRESS,0,g.now);
         fish_game_input(&g,FISH_RELEASE,0,g.now+1500);
-        assert(g.mode==FISH_CAST && g.cast_distance==fish_rods[rod].max_cast_px);
+        assert(g.mode==FISH_CAST && g.cast_distance==fish_game_max_cast_px(&g));
         assert(g.cast_bottom_cm==fish_map_depth(g.cast_x) && g.cast_depth_cm==g.cast_bottom_cm);
         assert(fish_map_weight(g.pending_species,g.cast_x,g.cast_depth_cm,g.bait_index)>0);
         for (int facing=-1;facing<=1;facing+=2) {
@@ -123,6 +123,17 @@ int main(void)
             assert(fish_game_camera(&g)==camera);
             int landing=g.cast_x-camera; assert(landing>=4 && landing<=236);
         }
+    }
+    /* Casting, preview camera and physical length share the same gear limit. */
+    static const unsigned line_cm[]={450,650,850};
+    for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++)
+    for(int facing=-1;facing<=1;facing+=2) {
+        fish_game_init(&g,0);g.boat_x=480;g.rod_index=rod;g.facing=facing;fish_game_equip_line(&g,line);
+        assert(fish_line_sets[line].distance_limit_cm==line_cm[line]);
+        fish_game_input(&g,FISH_PRESS,0,0);fish_game_update(&g,1500);
+        int camera=fish_game_camera(&g);fish_game_input(&g,FISH_RELEASE,0,1500);
+        assert(g.mode==FISH_CAST && g.cast_distance*FISH_WORLD_CM_PER_PIXEL<=line_cm[line]);
+        assert(g.cast_distance==fish_game_max_cast_px(&g) && fish_game_camera(&g)==camera);
     }
     for (unsigned dock=0;dock<2;dock++) {
         fish_game_init(&g,0); time_ms=0; g.boat_x=fish_docks[dock].boat_x+(dock?-2:2);

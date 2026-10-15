@@ -59,11 +59,14 @@ if args.write_report:
     import shutil
     shutil.copy2(build/'output/MicroLink.fish.uf2',demo/'MicroLink.uf2')
 report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x80023000',family='0x0A4D5048',
-    hardware_platform='MKLink V4',host_tests=11,simulator_tests=39,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
+    hardware_platform='MKLink V4',host_tests=12,simulator_tests=42,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
     save_key_public=True,save_schema_version=5,save_bytes=292,legacy_save_versions=[1,2,3,4],legacy_save_bytes=[92,236,236,236],
     shore_actor_height=36,world_pixel_grid=2,shop_logical_size=[64,48],dock_logical_size=[56,47],dock_join_frames=43,
     base_fish_native_size=[48,28],large_fish_native_size=[96,56],large_fish_ids=['snakehead','carp','catfish'],
     large_fish_min_scale_q8=257,fish_bitmap_bytes_saved=84672,
+    line_lengths_cm=[450,650,850],rod_elastic_grace_ms=2000,burst_away_percent=70,
+    localization=True,all_fish_cast_audit=2200000,merchant_contexts=14,merchant_expressions=4,
+    shore_parallax_pixels=240000,sd_map_asset_loader_implemented=False,
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
 ses=build/'segger_embedded_studio/Output/Debug/Exe/MicroLink.elf'
 if ses.exists():
@@ -75,11 +78,12 @@ if args.write_report:
     lines=['# 标准钓鱼 demo 验证','',
         'HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-15 编译检查。',
         '',f'GNU UF2 的 {count} 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、{len(paths)} 个唯一源文件及 include 路径检查通过。',
-        '', '独立 demo 的 11 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件和 SD/背光隔离。',
+        '', '独立 demo 的 12 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件和 SD/背光隔离。',
         '', 'GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。',
-        '', 'Windows模拟器39项检查通过。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡6,358个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。',
-        '', 'v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型卡面逐像素不变，大体型文字/售价保留；位图净节省84,672 B，无新增整屏缓冲。',
-        '', 'v21 detail art: enlarged snakehead, carp and catfish use 96×56 detail tiles; all base sprites store native 48×28 pixels. Small cards are pixel-identical and large-card text/prices are preserved. Net bitmap saving: 84,672 bytes; no additional full-screen buffer.',
+        '', 'Windows模拟器42项检查通过。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡8,090个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。',
+        '', 'v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型鱼图区域逐像素不变，文字/售价在v22汉化；位图净节省84,672 B，无新增整屏缓冲。',
+        '', 'v21 detail art: enlarged snakehead, carp and catfish use 96×56 detail tiles; all base sprites store native 48×28 pixels. Small portrait areas are pixel-identical; labels/prices are localized in v22. Net bitmap saving: 84,672 bytes; no additional full-screen buffer.',
+        '', 'v22：中文鱼名/数值，4.5/6.5/8.5米线长、两秒弯竿缓冲、双向且70%偏远离玩家的冲刺。220万次抛竿核实全部15个收藏项；14类店主情境/28句台词/4种实际表情，24万个岸上远景像素及14幅弯竿画面通过检查。SD多地图加载仅记录。',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:

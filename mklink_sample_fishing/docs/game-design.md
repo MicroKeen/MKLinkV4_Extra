@@ -1,4 +1,4 @@
-# 北方湿地公园：整体设定 v21 / North Wetland: Game Design v21
+# 北方湿地公园：整体设定 v22 / North Wetland: Game Design v22
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
@@ -61,7 +61,9 @@ The hardware platform is **MKLink V4**: HPM5301, a 240×240 RGB565 ST7789 displa
 
 夜光漂夜间发明亮蓝绿色光，环境压暗后绘制，附轻微光晕，只显示露出水面的部分；白天维持原色。完全入夜时每轮真实咬钩概率相对提高15%，例如70%→80%（整数向下取整），上限100%，晨昏随暗度渐变。这个加成缩短同等条件下的等待，不改变鱼种权重或提竿窗口。鹅毛漂独立把线组修正后的可提竿窗口延长15%，试饵延迟不变，白天和夜间都有效；红白漂没有额外加成。
 
-搏鱼仍以20 ms整数步进更新张力、松线、距离、爆发与体力；竿影响抛距/收线，线钩影响强度/距离/窗口/隐蔽性。原有断线、松脱、超距、错失和恢复逻辑保留，不提高稀有鱼默认尺寸。
+搏鱼仍以20 ms整数步进更新张力、松线、距离、爆发与体力；竿影响抛距/收线，线钩影响强度/距离/窗口/隐蔽性。v22线长为细线4.5米、通用6.5米、强韧8.5米，抛竿/预览同步受线长限制；最大出线后不能继续放线。鱼冲刺可产生10%以内的竿身弹性超距，竿形随之弯曲；持续超距2000 ms断线，收回标称范围立即解除计时。每次爆发约70%远离玩家、30%靠近玩家；鲤鱼、马口、斑鳜位移系数135%、140%、130%，其他基础鱼100%，变异继承基础鱼。尺寸、售价、星级和变异概率不变。
+
+Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actual casts and previews. Manual payout stops at nominal length. Fish surges can use up to 10% elastic rod excess; continuous excess for 2,000 ms breaks the line, while retrieving into nominal range clears the timer. Each burst is about 70% away from the player and 30% toward the player, with movement factors of 135%/140%/130% for carp/hooksnout minnow/mandarin fish and 100% for other base species. Variants inherit their parents. Size, prices, stars and rare probabilities are unchanged.
 
 ## 鱼获容器与船尾
 
@@ -128,6 +130,16 @@ Snakehead, carp and catfish each have a 48×28 regular tile and a 96×56 detail 
 11种基础鱼取消预先展开的2倍重复像素，统一以48×28原生贴图绘制；释放133,056 B，三种细节贴图增加48,384 B，位图净节省84,672 B（约82.7 KiB），另有少量资源表与绘制代码变化。沿用Arm-2D/PFB变换操作，每帧准备一次、分块复用，不增加整屏缓冲、运行时解码或堆分配。最终Flash/RAM占用见`validation.md`。
 
 The 11 base sprites now store native 48×28 pixels instead of duplicated 2× pixels, recovering 133,056 bytes. Three detail tiles add 48,384 bytes, for a net bitmap saving of 84,672 bytes (about 82.7 KiB), plus small table/code changes. Existing Arm-2D/PFB transforms are prepared once per frame and reused across blocks, with no additional full-screen buffer, runtime decoder or heap allocation. Final Flash/RAM usage is recorded in `validation.md`.
+
+## 汉化、视差与内容核实 v22 / Localization, parallax and content audit v22
+
+收鱼卡与鱼库的鱼名、尺寸类型/长度/重量、状态/水深/钓深、售价/纪录、商店价格/已拥有和装备数值说明已补齐中文。12像素正文与8像素紧凑A1小字库配合，不依赖运行时字体文件。左岸使用连续有符号远景视差、原图边缘镜像延展，云每900 ms漂移一像素并保持山后遮挡，无新增背景位图。
+
+Fish names, metrics, states, depths, prices, records, ownership and tackle properties are localized using the existing 12-pixel font and a compact 8-pixel A1 subset. Signed shore parallax reflects the existing panorama edge; clouds drift one pixel per 900 ms and remain behind the skyline, with no new background bitmap.
+
+11种基础鱼各20万次实际抛竿选择，共220万次，全部15个收藏项均能抽中并完成起鱼/图鉴/售价记录。趴地虎未被条件误排除：右岸浅水虾饵钓底的专门匹配条件下抽中136363次；这不是全局概率。店主14类情境、28句台词和四种立绘的逻辑与实际PFB画面均核对通过。完整鱼种抽样、线长/竿身弹性、双向挣扎与界面规则见[v22玩法与核实](v22-gameplay-and-audit.md)。
+
+The audit runs 200,000 actual cast selections for each of 11 base species (2.2 million total); all 15 collection entries are selected and pass landing, guide and price checks. Goby is reachable, with 136,363 selections under its targeted right-bank shallow/shrimp/bottom profile, rather than a general probability. All 14 merchant contexts, 28 lines and four portraits pass logic and actual PFB checks. The linked v22 audit documents complete results and current rules.
 
 ## 后续规划，暂不执行 / Future plan, not implemented
 
