@@ -92,7 +92,7 @@ int main(void)
             seen|=1u<<id; ++samples;
         }
     }
-    assert(seen==(1u<<FISH_SPECIES_COUNT)-1);
+    assert(seen==(1u<<FISH_BASE_SPECIES_COUNT)-1);
     fish_game_t g;
     fish_game_init(&g,0); unchanged=g.random_state;
     g.economy.rods=g.economy.lines=g.economy.floats=7;g.rod_index=1;g.bait_index=0;
@@ -149,7 +149,8 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.shore_x==0 && g.shore_speed==-1);
     assert(fish_game_shore_pose(&g)==1);
     for(unsigned t=10;t<=1000;t+=10) fish_game_update(&g,t);
-    assert(g.shore_x==-32 && fish_game_shore_pose(&g)==2);fish_game_input(&g,FISH_ROTATE,1,1000);
+    assert(g.shore_x==-32 && fish_game_shore_pose(&g)==2);fish_game_input(&g,FISH_ROTATE,1,1000);assert(!g.shore_speed);fish_game_update(&g,1000);assert(g.shore_x==-32);
+    fish_game_input(&g,FISH_ROTATE,1,1000);
     for(unsigned t=1010;t<=2000;t+=10) fish_game_update(&g,t);
     assert(g.shore_x==0);fish_game_input(&g,FISH_PRESS,0,2000);fish_game_input(&g,FISH_RELEASE,0,2001);
     assert(g.mode==FISH_BAG && !g.shore_speed && !fish_game_shore_pose(&g));fish_game_update(&g,9000);assert(g.shore_x==0);
@@ -157,6 +158,9 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,-1,UINT32_MAX-499);
     for(unsigned i=1;i<=100;i++) fish_game_update(&g,(UINT32_MAX-499)+i*10u);
     assert(g.shore_x==-32);
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.boat_x=132;g.shore_x=96;g.shore_speed=-1;
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_SHORE && !g.shore_speed);
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_MOVE && !g.boat_speed);
     fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.boat_x=132;
     fish_game_input(&g,FISH_ROTATE,1,0);
     for(unsigned t=16;t<=12000;t+=16) fish_game_update(&g,t);

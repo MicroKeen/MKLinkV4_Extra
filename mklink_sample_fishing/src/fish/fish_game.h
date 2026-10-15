@@ -39,6 +39,8 @@ typedef struct fish_game {
     uint16_t cast_bottom_cm,cast_depth_cm;
     uint32_t random_state;
     uint8_t pending_species, last_species;
+    uint8_t pending_variant;
+    bool merchant_hint;
     uint16_t pending_size_mm, last_size_mm;
     uint32_t pending_weight_g, last_weight_g;
     uint8_t base_pull,line_response_percent;

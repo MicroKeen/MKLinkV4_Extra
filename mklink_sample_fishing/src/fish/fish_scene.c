@@ -38,6 +38,8 @@ typedef struct {
     arm_2d_op_trans_msk_t container_operation;
     arm_2d_op_trans_msk_t footpath_operation,exterior_operation,shore_player_operation;
     arm_2d_op_trans_msk_t dock_operation[2];
+    arm_2d_op_trans_msk_t hold_portrait_operation;
+    arm_2d_op_trans_msk_t cloud_operation;
 } fish_scene_t;
 _Static_assert(offsetof(fish_scene_t,use_as__arm_2d_scene_t)==0,"Scene base must be first");
 static fish_scene_t scene;
@@ -87,6 +89,15 @@ static void text(const arm_2d_tile_t *tile, int x, int y, uint16_t color, const 
     arm_lcd_text_location(0,0);
     arm_lcd_puts(value);
     ARM_2D_OP_WAIT_ASYNC();
+}
+static void special_frame(const arm_2d_tile_t *tile,int x,int y,int w,int h)
+{
+    static const uint16_t colors[]={RGB(255,113,98),RGB(255,208,80),RGB(110,210,135),RGB(79,205,226),RGB(139,154,246),RGB(225,123,221)};
+    for(unsigned i=0;i<6;i++) {
+        int a=w*(int)i/6,b=w*(int)(i+1)/6,c=h*(int)i/6,d=h*(int)(i+1)/6;
+        box(tile,x+a,y,b-a,2,colors[i]);box(tile,x+a,y+h-2,b-a,2,colors[5-i]);
+        box(tile,x,y+c,2,d-c,colors[5-i]);box(tile,x+w-2,y+c,2,d-c,colors[i]);
+    }
 }
 
 static void masked_bitmap(const arm_2d_tile_t *target, const arm_2d_tile_t *source,
@@ -140,6 +151,31 @@ static void sky_rect(const arm_2d_tile_t *tile,int source_x,int x,int y,int w,in
     }
 }
 
+static void sky_cloud(const arm_2d_tile_t *tile,int sky_source_x,int x)
+{
+    int start=x-2,end=x+182;
+    if(start<0) start=0;
+    if(end>240) end=240;
+    arm_2d_point_float_t centre={x+90,54};
+    for(int col=start;col<end;) {
+        int bottom=fish_sky_horizon[(sky_source_x+col)/2],next=col+1;
+        if(bottom>66) bottom=66;
+        while(next<end) {
+            int limit=fish_sky_horizon[(sky_source_x+next)/2];
+            if(limit>66) limit=66;
+            if(limit!=bottom) break;
+            ++next;
+        }
+        if(bottom>42) {
+            arm_2d_region_t sky={.tLocation={col,42},.tSize={next-col,bottom-42}};
+            if(arm_2d_helper_pfb_is_region_active(tile,&sky,true)) {
+                arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.cloud_operation,tile,&sky,&centre);
+                ARM_2D_OP_WAIT_ASYNC(&scene.cloud_operation);
+            }
+        }
+        col=next;
+    }
+}
 static void night_moon(const arm_2d_tile_t *tile,const fish_game_t *game)
 {
     unsigned minute=game->game_minute;
@@ -189,8 +225,9 @@ static void landscape(const arm_2d_tile_t *tile, const fish_game_t *game)
         box(tile,celestial_x-w+shift,132+i*5,w*2,1,sun?RGB(176,146,83):RGB(131,157,170));
     }
     int cloud_offset=(camera/8+(int)(game->now/350))%300;
-    for (int x=-cloud_offset; x<240; x+=300)
-        masked_bitmap(tile,&c_tileCloudsRGB565,&c_tileCloudsAlphaGRAY8,x,32,false);
+    if(cloud_offset<0) cloud_offset+=300;
+    if(!(fish_smoke_test==27 && (scene.smoke_frame&1)))
+        for (int x=-cloud_offset; x<240; x+=300) sky_cloud(tile,sky_source_x,x);
     if(sun) {
         for(int dy=-5;dy<=5;dy++) {
             int half=5-abs(dy)/2;
@@ -424,10 +461,6 @@ static const char *control_hint(const fish_game_t *game)
     if(game->mode==FISH_SHOP) return "旋转选商品，短按交易";
     if(game->mode==FISH_HOLD) return "旋转查看鱼获，短按返回";
     if(game->mode==FISH_SHORE && fish_game_at_shop(game)) return fish_game_shop_open(game)?"短按进入水产渔具店":"营业07:00-18:00";
-    if(game->mode==FISH_SHORE && !game->shore_speed && fish_game_dock_action(game)>=0)
-        return game->boat_x<FISH_MAP_WIDTH/2?"顺转登船  逆转沿岸走":"逆转登船  顺转沿岸走";
-    if((game->mode==FISH_MOVE || game->mode==FISH_AIM) && !game->boat_speed && fish_map_dock(game->boat_x)>=0)
-        return game->boat_x<FISH_MAP_WIDTH/2?"逆转上岸  顺转驶离":"顺转上岸  逆转驶离";
     const char *hint="";
     switch (game->mode) {
         case FISH_AIM: break;
@@ -812,7 +845,10 @@ static void hold_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     unsigned species=i<FISH_SPECIES_COUNT?i:e->hanging_species;
     if(species<FISH_SPECIES_COUNT && (i==FISH_SPECIES_COUNT || e->count[i])) {
         const fish_species_art_t *art=&fish_species_art[species];
-        masked_bitmap(tile,art->sprite,art->mask,72,55,false);
+        if(species>=FISH_BASE_SPECIES_COUNT) {
+            special_frame(tile,66,50,108,64);
+            scaled_species_bitmap(tile,art->sprite,art->mask,120,83,false,512,(arm_2d_op_trans_msk_t *)&self->hold_portrait_operation);
+        } else masked_bitmap(tile,art->sprite,art->mask,72,55,false);
         int name_x=120-(int)strlen(fish_species[species].ui_name)*3;
         text(tile,name_x+1,114,INK,fish_species[species].ui_name);text(tile,name_x,113,CREAM,fish_species[species].ui_name);
         uint32_t grams=i<FISH_SPECIES_COUNT?e->grams[i]:e->hanging_grams;
@@ -847,16 +883,18 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
     const fish_species_t *species=&fish_species[index];
     const fish_species_art_t *art=&fish_species_art[index];
     uint16_t frame_color=fish_rarity_colors[species->rarity];
+    bool special=known && index>=FISH_BASE_SPECIES_COUNT;
     box(tile,27,43,186,157,SHADOW); box(tile,25,41,186,157,frame_color);
+    if(special) special_frame(tile,25,41,186,157);
     box(tile,27,43,182,153,INK);
     char label[48];
-    snprintf(label,sizeof(label),"%s%s",fish_rarity_labels[species->rarity],guide?"":" CATCH");
+    snprintf(label,sizeof(label),"%s%s",special?"RARE x10":fish_rarity_labels[species->rarity],guide?"":" CATCH");
     if (known) {
         int scale=self->portrait_scale_q8,height=species->portrait_height_px*scale/256;
         int x=120+(mirror?-1:1)*(48-species->portrait_centre_x)*scale/256;
         int y=95+(28-species->portrait_centre_y)*scale/256;
         if (height>56) y-=(height-56)/2; /* Giants grow upward, leaving captions clear. */
-        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale,&self->portrait_operation);
+        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale*(special?2:1),&self->portrait_operation);
     }
     else {
         static const uint8_t question[7]={14,17,1,2,4,0,4};
@@ -919,6 +957,8 @@ static void frame_start(arm_2d_scene_t *s)
     fish_save_tick(&self->save,game,game->now);
     self->save_box=arm_lcd_get_string_line_box(fish_save_label(&self->save),fish_remarks_font());
     self->hint_box=arm_lcd_get_string_line_box(control_hint(game),fish_remarks_font());
+    arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->cloud_operation,
+        &c_tileCloudsRGB565,&c_tileCloudsAlphaGRAY8,(arm_2d_point_float_t){46,6},0,2,2);
     if (fish_smoke_test && (self->hint_box.iWidth>222 || self->hint_box.iHeight>19)) {
         fprintf(stderr,"Control hint does not fit HUD: %d x %d\n",self->hint_box.iWidth,self->hint_box.iHeight); exit(1);
     }
@@ -974,11 +1014,19 @@ static void frame_start(arm_2d_scene_t *s)
         const fish_ui_art_t *container=&fish_container_art[game->economy.container];
         arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->container_operation,container->sprite,container->mask,
             (arm_2d_point_float_t){16,18},0,4,4);
+        unsigned item=fish_hold_page_index(&game->economy,game->guide_index);
+        unsigned index=item<FISH_SPECIES_COUNT?item:game->economy.hanging_species;
+        if(index>=FISH_BASE_SPECIES_COUNT && index<FISH_SPECIES_COUNT) {
+            const fish_species_art_t *art=&fish_species_art[index];
+            arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hold_portrait_operation,art->sprite,art->mask,
+                (arm_2d_point_float_t){24,14},0,2,2);
+        }
     }
     if(game->economy.hanging_species<FISH_SPECIES_COUNT) {
         const fish_species_art_t *art=&fish_species_art[game->economy.hanging_species];
+        bool special=game->economy.hanging_species>=FISH_BASE_SPECIES_COUNT;
         arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hanging_operation,art->sprite,art->mask,
-            (arm_2d_point_float_t){16,28},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*0.55f,0.55f);
+            (arm_2d_point_float_t){special?8:16,special?14:28},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*(special?1.1f:0.55f),special?1.1f:0.55f);
     }
     if (game->mode==FISH_CAUGHT || game->mode==FISH_GUIDE) {
         bool guide=game->mode==FISH_GUIDE;
@@ -994,10 +1042,10 @@ static void frame_start(arm_2d_scene_t *s)
         self->card_weight_g=guide && known?fish_species_weight_g(&fish_species[index],self->card_size_mm):game->last_weight_g;
         /* Prepare once per frame, reuse the operation across all PFB blocks. */
         self->portrait_scale_q8=known?fish_species_scale_q8(&fish_species[index],self->card_size_mm):256;
-        if (known && self->portrait_scale_q8!=256) {
+        if (known && (self->portrait_scale_q8!=256 || index>=FISH_BASE_SPECIES_COUNT)) {
             const fish_species_art_t *art=&fish_species_art[index];
-            arm_2d_point_float_t pivot={48.0f,28.0f};
-            float scale=self->portrait_scale_q8/256.0f;
+            arm_2d_point_float_t pivot={art->sprite->tRegion.tSize.iWidth/2.0f,art->sprite->tRegion.tSize.iHeight/2.0f};
+            float scale=self->portrait_scale_q8/256.0f*(index>=FISH_BASE_SPECIES_COUNT?2:1);
             bool mirror=fish_smoke_test==4 && self->smoke_frame%3==1;
             arm_2d_err_t result=arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(
                 &self->portrait_operation,art->sprite,art->mask,pivot,0.0f,mirror?-scale:scale,scale);
@@ -1064,6 +1112,8 @@ void fish_scene_init(arm_2d_scene_player_t *player)
     ARM_2D_OP_INIT(scene.exterior_operation);
     ARM_2D_OP_INIT(scene.shore_player_operation);
     for(unsigned side=0;side<2;side++) ARM_2D_OP_INIT(scene.dock_operation[side]);
+    ARM_2D_OP_INIT(scene.hold_portrait_operation);
+    ARM_2D_OP_INIT(scene.cloud_operation);
     scene.use_as__arm_2d_scene_t=(arm_2d_scene_t){ .tCanvas={SKY}, .fnScene=draw_scene,
         .fnOnFrameStart=frame_start, .fnOnFrameCPL=NULL,
         .bUseDirtyRegionHelper=false };

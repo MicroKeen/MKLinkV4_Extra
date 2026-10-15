@@ -383,12 +383,14 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             }
         } else if (g->mode==FISH_SHORE && !g->pressed && steps) {
             int dock=g->boat_x<FISH_MAP_WIDTH/2?0:1;
-            if(g->shore_x==fish_docks[dock].shore_x && (steps>0?1:-1)==(dock?-1:1)) {
+            if(!g->shore_speed && g->shore_x==fish_docks[dock].shore_x && (steps>0?1:-1)==(dock?-1:1)) {
                 g->shore_speed=0;g->shore_remainder=0;g->boat_speed=0;g->boat_motion_q8=0;
                 g->facing=dock?-1:1;phase(g,FISH_MOVE);return;
             }
-            g->shore_speed=steps>0?1:-1;g->shore_remainder=0;g->shore_walk_phase=0;
-            g->facing=g->shore_speed;
+            int direction=steps>0?1:-1;
+            g->shore_speed=g->shore_speed && g->shore_speed!=direction?0:direction;
+            g->shore_remainder=0;g->shore_walk_phase=0;
+            if(g->shore_speed) g->facing=g->shore_speed;
         } else if ((g->mode==FISH_MOVE || g->mode==FISH_AIM) && !g->pressed && steps) {
             int direction=steps>0?1:-1,previous=g->boat_speed;
             int dock=fish_map_dock(g->boat_x);
@@ -434,7 +436,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->reel=clamp(g->reel_units/100,0,100);
             if (g->reel_units == 10000) {
                 if(g->catches<INT_MAX) ++g->catches;
-                g->last_species=g->pending_species; g->last_size_mm=g->pending_size_mm;
+                g->last_species=g->pending_variant?g->pending_variant:g->pending_species; g->last_size_mm=g->pending_size_mm;
                 g->last_weight_g=g->pending_weight_g;
                 if(g->species_catches[g->last_species]<UINT16_MAX) ++g->species_catches[g->last_species];
                 if (g->last_size_mm>g->species_best_size_mm[g->last_species])
@@ -497,9 +499,11 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->cast_bottom_cm=(uint16_t)fish_map_depth(g->cast_x);
             uint16_t depth=fish_game_rig_depth(g);
             g->cast_depth_cm=depth>g->cast_bottom_cm?g->cast_bottom_cm:depth;
-            g->pending_species=FISH_SPECIES_COUNT; g->pending_size_mm=0; g->pending_weight_g=0;
+            g->pending_species=FISH_SPECIES_COUNT;g->pending_variant=0; g->pending_size_mm=0; g->pending_weight_g=0;
             g->bite_wait_ms=0;
             if (fish_map_roll_at(&g->random_state,g->cast_x,g->cast_depth_cm,g->bait_index,g->game_minute,&g->pending_species,&g->pending_size_mm)) {
+                unsigned special=fish_species_special_roll(&g->random_state,g->pending_species);
+                if(special>=FISH_BASE_SPECIES_COUNT) g->pending_variant=(uint8_t)special;
                 g->pending_weight_g=fish_species_weight_g(&fish_species[g->pending_species],g->pending_size_mm);
                 unsigned bonus=fish_floats[g->float_index].night_bite_bonus_percent*fish_game_night_opacity(g)/150;
                 g->bite_wait_ms=fish_line_bite_wait_bonus(&g->random_state,g->line_index,g->pending_weight_g,bonus);
@@ -509,7 +513,8 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             phase(g, FISH_CAST);
         } else if ((g->mode==FISH_MOVE || g->mode==FISH_AIM || g->mode==FISH_SHORE) && g->previous_mode==g->mode) {
             if(g->mode==FISH_SHORE && fish_game_at_shop(g)) {
-                if(fish_game_shop_open(g)) {g->shop_index=0;g->merchant_reply=FISH_MERCHANT_GREETING;g->merchant_line_variant^=1;phase(g,FISH_SHOP);}
+                if(fish_game_shop_open(g)) {g->shop_index=0;g->merchant_reply=FISH_MERCHANT_GREETING;g->merchant_line_variant^=1;
+                    g->merchant_hint=fish_random_next(&g->random_state)%20==0;phase(g,FISH_SHOP);}
                 else {g->merchant_reply=FISH_MERCHANT_CLOSED;g->shop_closed_notice=true;g->shop_closed_at=now;}
             }
             else {g->bag_return_mode=(uint8_t)g->mode; g->bag_editing=false; g->bag_index=0; phase(g,FISH_BAG);}

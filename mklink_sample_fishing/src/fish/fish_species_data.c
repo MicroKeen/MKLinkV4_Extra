@@ -12,6 +12,10 @@ const fish_species_t fish_species[FISH_SPECIES_COUNT] = {
     {"mandarin", "斑鳜", "Siniperca scherzeri", "SPOTTED PERCH", 80, 350, 120, 250, 12, 6, 0, 370, 130, {128, 189, 254, 326}, 190, 130, 1, 90, 26, 2, 900, 3100, 700, 0, 180, 70, 92, 46, 48, 27},
     {"softshell", "中华鳖", "Pelodiscus sinensis", "SOFTSHELL", 50, 300, 100, 220, 25, 1, 1, 320, 120, {104, 162, 222, 284}, 160, 650, 3, 42, 3, 2, 1500, 5000, 1200, 1, 300, 55, 90, 38, 49, 27},
     {"henan_crab", "河南华溪蟹", "Longpotamon honanense", "HENAN CRAB", 15, 45, 25, 40, 24, 6, 2, 65, 15, {25, 32, 39, 45}, 32, 30, 4, 48, 0, 1, 1500, 3600, 0, 2, 350, 35, 92, 46, 48, 27},
+    {"catfish_xanthic", "黄化土鲶", "Silurus asotus", "GOLDEN CATFISH", 150, 1200, 250, 650, 12, 0, 0, 900, 400, {285, 467, 668, 915}, 450, 800, 3, 78, 12, 0, 1300, 4200, 1700, 0, 240, 110, 92, 26, 48, 27},
+    {"hooksnout_longfin", "长鳍马口", "Opsariichthys bidens", "LONGFIN MINNOW", 60, 220, 80, 160, 3, 0, 0, 240, 80, {87, 123, 163, 207}, 120, 20, 2, 85, 24, 1, 700, 1400, 350, 0, 100, 45, 92, 38, 48, 27},
+    {"carp_red_longfin", "红色长尾鲤", "Cyprinus carpio", "RED LONGFIN CARP", 150, 1000, 250, 650, 12, 0, 0, 900, 400, {285, 466, 666, 898}, 450, 1500, 1, 68, 18, 0, 1000, 3400, 1100, 0, 180, 90, 92, 40, 48, 28},
+    {"softshell_albino", "白化鳖", "Pelodiscus sinensis", "ALBINO SOFTSHELL", 50, 300, 100, 220, 25, 0, 1, 320, 120, {104, 162, 222, 284}, 160, 650, 3, 42, 3, 2, 1500, 5000, 1200, 1, 300, 55, 92, 40, 48, 28},
 };
 const char *const fish_species_remarks[FISH_SPECIES_COUNT] = {
     "小鲫小鲫，今天大吉！",
@@ -25,6 +29,10 @@ const char *const fish_species_remarks[FISH_SPECIES_COUNT] = {
     "很帅一条",
     "还有意外收获？",
     "当宠物养？",
+    "金灿灿的，先别下锅。",
+    "这尾巴，可别给碰坏了。",
+    "尾巴一摆，红了一片。",
+    "白得晃眼，还挺精神。",
 };
 const uint16_t fish_rarity_colors[FISH_RARITY_COUNT] = {
     48138,

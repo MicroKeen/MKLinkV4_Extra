@@ -7,7 +7,7 @@ int main(void)
 {
     const uint8_t expected[]={0,0,1,0,1,1,1,0,2,2,1};
     unsigned weights[3]={0},total=0,counts[FISH_SPECIES_COUNT]={0},tiers[3]={0};
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+    for (unsigned i=0;i<FISH_BASE_SPECIES_COUNT;i++) {
         assert(fish_species[i].rarity==expected[i]);
         weights[expected[i]]+=fish_species[i].encounter_weight;
         total+=fish_species[i].encounter_weight;
@@ -36,7 +36,7 @@ int main(void)
     fish_game_input(&g,FISH_PRESS,0,10);
     fish_game_input(&g,FISH_ROTATE,1,30); assert(g.mode==FISH_GUIDE && g.guide_index==0);
     fish_game_input(&g,FISH_RELEASE,0,40); assert(g.mode==FISH_GUIDE && !g.pressed);
-    fish_game_input(&g,FISH_ROTATE,-1,50); assert(g.guide_index==10);
+    fish_game_input(&g,FISH_ROTATE,-1,50); assert(g.guide_index==FISH_SPECIES_COUNT-1);
     fish_game_input(&g,FISH_ROTATE,2,60); assert(g.guide_index==1);
     fish_game_update(&g,5000); assert(g.mode==FISH_GUIDE);
     assert(g.random_state==before && g.boat_x==x && g.catches==0);

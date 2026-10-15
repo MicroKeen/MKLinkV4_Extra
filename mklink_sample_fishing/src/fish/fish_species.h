@@ -2,7 +2,10 @@
 #define FISH_SPECIES_H
 #include <stdint.h>
 #include <stdbool.h>
-enum { FISH_SPECIES_COUNT = 11 };
+enum { FISH_BASE_SPECIES_COUNT=11,FISH_VARIANT_COUNT=4,FISH_SPECIES_COUNT=15 };
+unsigned fish_species_parent(unsigned index);
+unsigned fish_species_special_roll(uint32_t *random_state,unsigned index);
+uint32_t fish_random_next(uint32_t *random_state);
 typedef enum { FISH_RARITY_BRONZE, FISH_RARITY_SILVER, FISH_RARITY_GOLD, FISH_RARITY_COUNT } fish_rarity_t;
 typedef enum { FISH_SIZE_TOTAL_LENGTH, FISH_SIZE_CARAPACE_LENGTH, FISH_SIZE_CARAPACE_WIDTH } fish_size_metric_t;
 enum { FISH_LAYER_SURFACE=1, FISH_LAYER_MIDDLE=2, FISH_LAYER_LOWER=4, FISH_LAYER_BOTTOM=8, FISH_LAYER_SHORE=16 };

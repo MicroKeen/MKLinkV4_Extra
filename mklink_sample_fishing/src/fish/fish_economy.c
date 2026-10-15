@@ -3,7 +3,7 @@
 #include <string.h>
 #include "fish_merchant_dialogue_data.h"
 /* Species indices are stable across saves: see data/species.json. */
-const uint16_t fish_base_prices[FISH_SPECIES_COUNT]={8,12,16,12,16,28,30,6,72,60,10};
+const uint16_t fish_base_prices[FISH_SPECIES_COUNT]={8,12,16,12,16,28,30,6,72,60,10,120,160,120,600};
 const fish_container_t fish_containers[FISH_CONTAINER_COUNT]={
     {"小木桶",10000,0},{"大木桶",20000,300},{"储鱼箱",35000,750}};
 typedef struct {uint8_t slot,index;uint16_t price;} shop_item_t;
@@ -33,6 +33,7 @@ unsigned fish_hold_page_index(const fish_economy_t *e,unsigned page)
 uint32_t fish_catch_price(unsigned species,uint16_t size_mm)
 {
     if(species>=FISH_SPECIES_COUNT) return 0;
+    if(species>=FISH_BASE_SPECIES_COUNT) return fish_catch_price(fish_species_parent(species),size_mm)*10;
     const fish_species_t *s=&fish_species[species];
     unsigned typical=s->mean_x2_mm/2;
     /* Length squared gives carp a broad range without cubic weight explosions. */
@@ -137,7 +138,16 @@ static unsigned merchant_context(const struct fish_game *g)
         case FISH_MERCHANT_OWNED:return 7;
         case FISH_MERCHANT_FULL:return 8;
         case FISH_MERCHANT_CLOSED:return 0;
-        default:return g->economy.hanging_species<FISH_SPECIES_COUNT?2:fish_hold_value(&g->economy)?1:0;
+        default: {
+            unsigned special=FISH_SPECIES_COUNT;uint32_t best=0;
+            for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_SPECIES_COUNT;i++) {
+                uint32_t value=g->economy.value[i]+(g->economy.hanging_species==i?g->economy.hanging_value:0);
+                if(value>best) {best=value;special=i;}
+            }
+            if(special<FISH_SPECIES_COUNT) return 9+special-FISH_BASE_SPECIES_COUNT;
+            if(g->merchant_hint) return 13;
+            return g->economy.hanging_species<FISH_SPECIES_COUNT?2:fish_hold_value(&g->economy)?1:0;
+        }
     }
 }
 const char *fish_merchant_says(const struct fish_game *g)
