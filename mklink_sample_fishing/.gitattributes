@@ -1,0 +1,11 @@
+# Preserve upstream/template formatting; generated bitmap arrays are not code reviews.
+config/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+linkers/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+lcd/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+src/key_module/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+src/fish/crypto/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+src/fish/assets/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab linguist-generated=true
+MicroLink.uf2 binary
+tools/img2c.py whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+# Keep the original user-authored requirements verbatim.
+docs/v15-user-requirements.txt whitespace=-blank-at-eol,-blank-at-eof

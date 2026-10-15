@@ -1,0 +1,97 @@
+{
+  "schema_version": 3,
+  "currency": "coins",
+  "hold_capacity_g": 10000,
+  "hanging_slots": 1,
+  "containers": [
+    {
+      "id": "small_bucket",
+      "name_zh": "小木桶",
+      "capacity_g": 10000,
+      "price": 0
+    },
+    {
+      "id": "large_bucket",
+      "name_zh": "大木桶",
+      "capacity_g": 20000,
+      "price": 300
+    },
+    {
+      "id": "cooler",
+      "name_zh": "储鱼箱",
+      "capacity_g": 35000,
+      "price": 750
+    }
+  ],
+  "container_purchase": "replace with higher tier; transfer existing tail fish if remaining room fits",
+  "shop_layout": "shop_layout.json",
+  "overflow": "release; guide record still counts",
+  "price_formula": "max(1, round(base * size_mm^2 / (mean_x2_mm/2)^2))",
+  "base_prices": {
+    "crucian": 8,
+    "carp": 12,
+    "hooksnout": 16,
+    "catfish": 12,
+    "goby": 16,
+    "snakehead": 28,
+    "yellow_catfish": 30,
+    "sharpbelly": 6,
+    "mandarin": 72,
+    "softshell": 60,
+    "henan_crab": 10
+  },
+  "goby_price_assumption": "16 coins at silver rarity tier",
+  "shop": {
+    "rod": [
+      0,
+      550,
+      1800
+    ],
+    "line": [
+      35,
+      0,
+      100
+    ],
+    "float": [
+      0,
+      90,
+      120
+    ],
+    "bait_pack": [
+      8,
+      6,
+      10,
+      18,
+      20
+    ],
+    "bait_pack_units": 5,
+    "bait_stock_limit": 999,
+    "plastic_unlimited": true
+  },
+  "clock": {
+    "source": "platform monotonic milliseconds",
+    "start_game_minute": 360,
+    "real_ms_per_game_minute": 1000,
+    "day_minutes": 1440,
+    "dawn": [
+      300,
+      420
+    ],
+    "dusk": [
+      1080,
+      1200
+    ],
+    "offline_advance": false
+  },
+  "shore_path": {
+    "left_x": -120,
+    "shop_door_x": -100,
+    "entry_max_x": -84
+  },
+  "shop_hours": {
+    "open_game_minute": 420,
+    "close_game_minute": 1080,
+    "display": "07:00 AM - 06:00 PM",
+    "closing": "reject entry/trade; return from shop or its container view to shore"
+  }
+}

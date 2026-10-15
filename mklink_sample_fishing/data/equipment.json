@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "availability": "初始竹竿/通用线钩/红白漂/普通假饵；其他装备在左岸商店购买，特殊饵料消耗",
+  "default": {
+    "rod": 0,
+    "line_set": 1,
+    "float": 0,
+    "bait": 5
+  },
+  "rods": [
+    {
+      "id": "bamboo",
+      "name_zh": "竹竿",
+      "max_cast_px": 88,
+      "reel_percent": 90
+    },
+    {
+      "id": "fiberglass",
+      "name_zh": "玻纤竿",
+      "max_cast_px": 116,
+      "reel_percent": 100
+    },
+    {
+      "id": "carbon",
+      "name_zh": "碳素竿",
+      "max_cast_px": 140,
+      "reel_percent": 110
+    }
+  ],
+  "line_sets": [
+    {
+      "id": "light",
+      "name_zh": "细线小钩",
+      "hook_zh": "小钩",
+      "strength": 75,
+      "capacity_units": 14000,
+      "strike_window_percent": 110,
+      "diameter_hundredths_mm": 18,
+      "response_percent": 160,
+      "comfortable_weight_g": 300,
+      "bite_percent": [
+        96,
+        94,
+        92
+      ],
+      "distance_limit_cm": 600
+    },
+    {
+      "id": "standard",
+      "name_zh": "通用线钩",
+      "hook_zh": "中钩",
+      "strength": 100,
+      "capacity_units": 18000,
+      "strike_window_percent": 100,
+      "diameter_hundredths_mm": 28,
+      "response_percent": 100,
+      "comfortable_weight_g": 1500,
+      "bite_percent": [
+        76,
+        74,
+        70
+      ],
+      "distance_limit_cm": 800
+    },
+    {
+      "id": "heavy",
+      "name_zh": "强韧大钩",
+      "hook_zh": "大钩",
+      "strength": 140,
+      "capacity_units": 26000,
+      "strike_window_percent": 90,
+      "diameter_hundredths_mm": 45,
+      "response_percent": 65,
+      "comfortable_weight_g": 6500,
+      "bite_percent": [
+        28,
+        50,
+        62
+      ],
+      "distance_limit_cm": 1000
+    }
+  ],
+  "floats": [
+    {
+      "id": "red_white",
+      "name_zh": "红白漂",
+      "tip_rgb": [
+        195,
+        105,
+        75
+      ],
+      "body_rgb": [
+        237,
+        227,
+        188
+      ],
+      "tip_height": 4,
+      "body_height": 3,
+      "night_bite_bonus_percent": 0
+    },
+    {
+      "id": "feather",
+      "name_zh": "鹅毛漂",
+      "tip_rgb": [
+        206,
+        153,
+        95
+      ],
+      "body_rgb": [
+        237,
+        227,
+        188
+      ],
+      "tip_height": 6,
+      "body_height": 2,
+      "night_bite_bonus_percent": 0
+    },
+    {
+      "id": "glow",
+      "name_zh": "夜光漂",
+      "tip_rgb": [
+        136,
+        220,
+        132
+      ],
+      "body_rgb": [
+        224,
+        235,
+        208
+      ],
+      "tip_height": 4,
+      "body_height": 4,
+      "night_bite_bonus_percent": 10
+    }
+  ],
+  "baits": [
+    {
+      "id": "worm",
+      "name_zh": "蚯蚓",
+      "multipliers": [
+        5,
+        3,
+        4,
+        4,
+        4,
+        1,
+        6,
+        2,
+        1,
+        1,
+        3
+      ],
+      "short_description_zh": "泛用性很好的饵料",
+      "description_zh": "入门活饵，鲫鱼、黄颡鱼更感兴趣；底层土鲶与近岸趴地虎也会尝试。用途广，但不专门诱大鱼。"
+    },
+    {
+      "id": "rice",
+      "name_zh": "米饭",
+      "multipliers": [
+        6,
+        3,
+        1,
+        0,
+        1,
+        0,
+        1,
+        5,
+        0,
+        0,
+        1
+      ],
+      "short_description_zh": "主食，素食主义之选",
+      "description_zh": "清淡的小颗粒谷物饵，主攻鲫鱼和餐条，兼顾鲤鱼；对黑鱼、鲶鱼、鳜鱼和鳖不合口味。"
+    },
+    {
+      "id": "dough",
+      "name_zh": "面饵",
+      "multipliers": [
+        4,
+        7,
+        1,
+        0,
+        1,
+        0,
+        1,
+        3,
+        0,
+        0,
+        1
+      ],
+      "short_description_zh": "我闻了都觉得香",
+      "description_zh": "谷物面团，主要吸引鲤鱼，兼顾鲫鱼；食鱼型鱼种不感兴趣。适合想钓鲤鱼时使用。"
+    },
+    {
+      "id": "small_fish",
+      "name_zh": "小鱼",
+      "multipliers": [
+        0,
+        1,
+        2,
+        7,
+        1,
+        8,
+        3,
+        0,
+        8,
+        1,
+        2
+      ],
+      "short_description_zh": "吓跑卡拉米，吸引掠食者",
+      "description_zh": "以小鱼作饵，重点针对黑鱼、斑鳜和土鲶；能减少鲫鱼、餐条干扰。没有保底大鱼或稀有鱼效果。"
+    },
+    {
+      "id": "shrimp",
+      "name_zh": "虾饵",
+      "multipliers": [
+        2,
+        2,
+        5,
+        4,
+        7,
+        4,
+        5,
+        2,
+        6,
+        1,
+        7
+      ],
+      "short_description_zh": "大鱼吃小鱼，小鱼吃虾米",
+      "description_zh": "小块虾肉，偏向马口、趴地虎和河南华溪蟹，也兼顾黄颡鱼、斑鳜。中华鳖仍然很稀有。"
+    },
+    {
+      "id": "plastic",
+      "name_zh": "普通假饵",
+      "short_description_zh": "塑料味",
+      "description_zh": "初始无限使用的普通塑料假饵，所有适合当前位置和水层的鱼均可能尝试。",
+      "multipliers": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "multiplier_basis": "游戏体验权重，不能解释为实际垂钓成功率"
+}

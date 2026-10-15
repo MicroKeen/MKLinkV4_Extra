@@ -1,0 +1,43 @@
+#ifndef FISH_SHOP_ART_H
+#define FISH_SHOP_ART_H
+#include "../equipment/equipment_art.h"
+extern const arm_2d_tile_t c_tileMerchantGreetingRGB565;
+extern const arm_2d_tile_t c_tileMerchantGreetingAlphaGRAY8;
+extern const arm_2d_tile_t c_tileMerchantSoldRGB565;
+extern const arm_2d_tile_t c_tileMerchantSoldAlphaGRAY8;
+extern const arm_2d_tile_t c_tileMerchantBoughtRGB565;
+extern const arm_2d_tile_t c_tileMerchantBoughtAlphaGRAY8;
+extern const arm_2d_tile_t c_tileMerchantSurprisedRGB565;
+extern const arm_2d_tile_t c_tileMerchantSurprisedAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopExteriorRGB565;
+extern const arm_2d_tile_t c_tileShopExteriorAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopExteriorClosedPatchRGB565;
+extern const arm_2d_tile_t c_tileShopInteriorRGB565;
+extern const arm_2d_tile_t c_tileSmallBucketRGB565;
+extern const arm_2d_tile_t c_tileSmallBucketAlphaGRAY8;
+extern const arm_2d_tile_t c_tileLargeBucketRGB565;
+extern const arm_2d_tile_t c_tileLargeBucketAlphaGRAY8;
+extern const arm_2d_tile_t c_tileFishCoolerRGB565;
+extern const arm_2d_tile_t c_tileFishCoolerAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropLightLineRGB565;
+extern const arm_2d_tile_t c_tileShopPropLightLineAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropHeavyLineRGB565;
+extern const arm_2d_tile_t c_tileShopPropHeavyLineAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropFeatherFloatRGB565;
+extern const arm_2d_tile_t c_tileShopPropFeatherFloatAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropGlowFloatRGB565;
+extern const arm_2d_tile_t c_tileShopPropGlowFloatAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropWormTinRGB565;
+extern const arm_2d_tile_t c_tileShopPropWormTinAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropRiceJarRGB565;
+extern const arm_2d_tile_t c_tileShopPropRiceJarAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropDoughCrockRGB565;
+extern const arm_2d_tile_t c_tileShopPropDoughCrockAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropFishBoxRGB565;
+extern const arm_2d_tile_t c_tileShopPropFishBoxAlphaGRAY8;
+extern const arm_2d_tile_t c_tileShopPropShrimpBoxRGB565;
+extern const arm_2d_tile_t c_tileShopPropShrimpBoxAlphaGRAY8;
+extern const fish_ui_art_t fish_merchant_art[4];
+extern const fish_ui_art_t fish_container_art[3];
+extern const fish_ui_art_t fish_shop_prop_art[9];
+#endif

@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "logical_size": [
+    240,
+    240
+  ],
+  "interaction": "rotate browses 16 items; selected product occupies one counter display; press/release confirms",
+  "items": [
+    {
+      "index": 0,
+      "id": "sell_catch_crate",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 1,
+      "id": "fiberglass_rod_corner",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 2,
+      "id": "carbon_rod_corner",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 3,
+      "id": "light_line_rack",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 4,
+      "id": "heavy_line_rack",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 5,
+      "id": "feather_float_rack",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 6,
+      "id": "glow_float_rack",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 7,
+      "id": "worm_jar",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 8,
+      "id": "rice_jar",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 9,
+      "id": "dough_jar",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 10,
+      "id": "small_fish_jar",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 11,
+      "id": "shrimp_jar",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 12,
+      "id": "large_bucket_upgrade",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 13,
+      "id": "cooler_upgrade",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 14,
+      "id": "current_container",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    },
+    {
+      "index": 15,
+      "id": "exit_door",
+      "rect": [
+        18,
+        93,
+        100,
+        72
+      ]
+    }
+  ]
+}
