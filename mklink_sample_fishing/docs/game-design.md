@@ -1,4 +1,4 @@
-# 北方湿地公园：整体设定 v22 / North Wetland: Game Design v22
+# 北方湿地公园：整体设定 v23 / North Wetland: Game Design v23
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
@@ -35,7 +35,7 @@ The hardware platform is **MKLink V4**: HPM5301, a 240×240 RGB565 ST7789 displa
 
 ## 鱼种、钓层与活跃时间
 
-保留11种鱼。按落点、水深、钓层、分区、饵料和游戏时间筛选权重；趴地虎、河南华溪蟹仅近岸底层，土鲶仅底层。默认钓到底，行囊可选表层、0.5/1/2/3/4.5/6m。铜/银/金70/25/5为基础比例，实际局部比例随条件变化；卡面稀有度不变，体型星级按物种独立评级。
+保留11种鱼。按落点、水深、钓层、分区、饵料和游戏时间筛选权重；趴地虎、溪蟹仅近岸底层，土鲶仅底层。默认钓到底，行囊可选表层、0.5/1/2/3/4.5/6m。铜/银/金70/25/5为基础比例，实际局部比例随条件变化；卡面稀有度不变，体型星级按物种独立评级。
 
 活跃度是相对出现权重的百分比，100为基础值；这是虚构湿地的游戏数值，不是自然调查结论。5–7点与18–20点按小时线性插值，6点/19点达到晨昏系数，7–18点使用白天系数，20–5点使用夜间系数。午夜连续，非活跃时段仍有机会；不突破水域/钓层/饵料限制。**斑鳜没有夜间偏好：白天和夜间都是100，只在晨昏轻微增加。**
 
@@ -44,14 +44,14 @@ The hardware platform is **MKLink V4**: HPM5301, a 240×240 RGB565 ST7789 displa
 | 鲫鱼 | 100 | 125 | 90 |
 | 鲤鱼 | 100 | 130 | 85 |
 | 马口鱼 | 130 | 115 | 60 |
-| 土鲶（黄河鲶鱼） | 65 | 125 | 155 |
+| 土鲶 | 65 | 125 | 155 |
 | 子陵吻虾虎鱼（趴地虎） | 115 | 110 | 80 |
 | 黑鱼（乌鳢） | 125 | 130 | 65 |
 | 黄颡鱼 | 65 | 130 | 155 |
 | 䱗（餐条／白条） | 135 | 110 | 55 |
 | 斑鳜 | 100 | 115 | 100 |
 | 中华鳖 | 85 | 110 | 130 |
-| 河南华溪蟹 | 70 | 125 | 145 |
+| 溪蟹 | 70 | 125 | 145 |
 
 先用环境基础权重乘时间系数，再进行原来的物种/体型抽样。切换时间不改变星级阈值、体型范围、重量公式或售价公式；当前一竿的候选在抛竿时确定，等待期间经过时段边界不重新选鱼。活动表保存在 `data/species.json` 的 `game_distribution.activity_percent`。
 
@@ -75,7 +75,7 @@ Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actu
 
 营业时间07:00 AM–06:00 PM（07:00–18:00），外屋正面亮灯/熄灯两种状态表示营业，不再挂牌。尝试进入关门商店时，主角上方显示“打烊了”1.6秒。打烊无人且无法进入或交易，18点退出店内，查看容器后也不能返回已打烊的店；不增加打烊对话。店主台词与表情可在 `docs/merchant-dialogue.md` 修改，装备描述草稿在 `docs/tackle-descriptions.md`。
 
-币重分开：coins为货币，g/kg为重量。单鱼售价为 `max(1, floor((base * size_mm² + typical_mm²/2) / typical_mm²))`，`typical_mm=mean_x2_mm/2`。鱼种基础价仍为白条6、鲫鱼8、鲤鱼12、土鲶12、河南华溪蟹10、马口16、趴地虎16、黑鱼28、黄颡鱼30、中华鳖60、斑鳜72。出售一次结算容器及船尾全部鱼，不清图鉴；超过金币上限整笔拒绝。
+币重分开：coins为货币，g/kg为重量。单鱼售价为 `max(1, floor((base * size_mm² + typical_mm²/2) / typical_mm²))`，`typical_mm=mean_x2_mm/2`。鱼种基础价仍为白条6、鲫鱼8、鲤鱼12、土鲶12、溪蟹10、马口16、趴地虎16、黑鱼28、黄颡鱼30、中华鳖60、斑鳜72。出售一次结算容器及船尾全部鱼，不清图鉴；超过金币上限整笔拒绝。
 
 | 商品 | coins | 交付 |
 |---|---:|---|
@@ -133,13 +133,19 @@ The 11 base sprites now store native 48×28 pixels instead of duplicated 2× pix
 
 ## 汉化、视差与内容核实 v22 / Localization, parallax and content audit v22
 
-收鱼卡与鱼库的鱼名、尺寸类型/长度/重量、状态/水深/钓深、售价/纪录、商店价格/已拥有和装备数值说明已补齐中文。12像素正文与8像素紧凑A1小字库配合，不依赖运行时字体文件。左岸使用连续有符号远景视差、原图边缘镜像延展，云每900 ms漂移一像素并保持山后遮挡，无新增背景位图。
+收鱼卡与鱼库的鱼名、尺寸类型/长度/重量、状态/水深/钓深、售价/纪录、商店价格/已拥有和装备数值说明已补齐中文。v23统一恢复原有12像素中文字体；撤销v22新增的8像素小字库，价格、鱼获数值及状态栏通过对齐和间距调整适配，不依赖运行时字体文件。左岸使用连续有符号远景视差、原图边缘镜像延展，云每900 ms漂移一像素并保持山后遮挡，无新增背景位图。
 
-Fish names, metrics, states, depths, prices, records, ownership and tackle properties are localized using the existing 12-pixel font and a compact 8-pixel A1 subset. Signed shore parallax reflects the existing panorama edge; clouds drift one pixel per 900 ms and remain behind the skyline, with no new background bitmap.
+Fish names, metrics, states, depths, prices, records, ownership and tackle properties are localized using the original 12-pixel Chinese font throughout in v23. The v22 8-pixel subset is removed; price, catch metrics and HUD rows use adjusted alignment and spacing. Signed shore parallax reflects the existing panorama edge; clouds drift one pixel per 900 ms and remain behind the skyline, with no new background bitmap.
 
 11种基础鱼各20万次实际抛竿选择，共220万次，全部15个收藏项均能抽中并完成起鱼/图鉴/售价记录。趴地虎未被条件误排除：右岸浅水虾饵钓底的专门匹配条件下抽中136363次；这不是全局概率。店主14类情境、28句台词和四种立绘的逻辑与实际PFB画面均核对通过。完整鱼种抽样、线长/竿身弹性、双向挣扎与界面规则见[v22玩法与核实](v22-gameplay-and-audit.md)。
 
 The audit runs 200,000 actual cast selections for each of 11 base species (2.2 million total); all 15 collection entries are selected and pass landing, guide and price checks. Goby is reachable, with 136,363 selections under its targeted right-bank shallow/shrimp/bottom profile, rather than a general probability. All 14 merchant contexts, 28 lines and four portraits pass logic and actual PFB checks. The linked v22 audit documents complete results and current rules.
+
+## 字号与提示修正 v23 / Font and hint correction v23
+
+全部中文统一使用原有12像素字体；移除v22新增的8像素字库，紧凑栏通过对齐和间距调整适配。移除“鱼竿弯了！快收线”提示；弯竿表现、两秒弹性窗口及搏鱼规则不变。蟹的显示名改为“溪蟹”，土鲶去掉真实水域别称，地图设定不指向真实地区；物种索引和存档不变。
+
+All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is removed, with alignment and spacing adjustments for compact rows. The misleading reel-now message during rod flex is removed; rod animation, the two-second elastic window and fight rules are unchanged. Crab uses the generic display name “溪蟹” (stream crab), catfish loses its geographic alias, and the setting is a fictional wetland. Species indices and saves are preserved.
 
 ## 后续规划，暂不执行 / Future plan, not implemented
 

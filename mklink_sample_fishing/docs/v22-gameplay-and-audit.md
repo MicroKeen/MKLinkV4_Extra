@@ -48,7 +48,7 @@ For each base species, the audit finds a reachable cast position/layer/bait prof
 | 白条 / Sharpbelly | 197614 | 0 |
 | 斑鳜 / Mandarin fish | 126555 | 0 |
 | 中华鳖 / Softshell | 927 | 10 |
-| 河南华溪蟹 / Freshwater crab | 45705 | 0 |
+| 溪蟹 / Freshwater crab | 45705 | 0 |
 
 每行使用各自专门匹配的条件，数值不表示一般抛竿概率。趴地虎仅近岸底层、5–250 cm虚拟钓深；右岸浅水、虾饵、钓底可正常遇到。收鱼卡现显示“子陵吻虾虎鱼（趴地虎）”，便于识别，图鉴索引未变。
 
@@ -60,9 +60,9 @@ All 14 merchant contexts, 28 dialogue lines and four portraits are verified. Gre
 
 ## 汉化与岸上视差 / Localization and shore parallax
 
-收鱼卡和鱼库使用中文鱼名；尺寸类型、长度/重量、售价/纪录、状态、水深/钓深、张力/距离、商品价格/已拥有和抛距/收线说明补齐中文。复用12像素主字库，并新增仅含所需文字的8像素A1小字库，用于紧凑数值栏；构建不依赖字体源文件。
+收鱼卡和鱼库使用中文鱼名；尺寸类型、长度/重量、售价/纪录、状态、水深/钓深、张力/距离、商品价格/已拥有和抛距/收线说明补齐中文。v23恢复原有12像素中文字体，撤销v22新增的8像素小字库；商店名称和售价左右对齐，鱼获尺寸/重量与线组属性调整间距，保持原字号；构建不依赖字体源文件。
 
-Catch/storage screens now use Chinese fish names. Size metrics, length/weight, sale/record values, states, depths, tension/distance, shop prices/ownership and casting/retrieval descriptions are localized. The existing 12-pixel font is supplemented by a small 8-pixel A1 subset for compact numeric rows. Normal builds need no source font.
+Catch/storage screens now use Chinese fish names. Size metrics, length/weight, sale/record values, states, depths, tension/distance, shop prices/ownership and casting/retrieval descriptions are localized. v23 restores the original 12-pixel Chinese font and removes the v22 8-pixel subset. Shop names/prices are aligned to opposite edges, and catch metrics/line properties use revised spacing to retain the original size. Normal builds need no source font.
 
 左岸镜头使用有符号远景视差，按原湖景边缘镜像延展；不新增背景位图。原山林轮廓同步映射，日月、星星、云仍在山后。云采用较浅视差和每900 ms一像素的缓慢漂移。50幅昼夜画面核对240000个远景像素，另10幅检查缓慢云漂移；原码头接岸与人物比例检查继续通过。
 

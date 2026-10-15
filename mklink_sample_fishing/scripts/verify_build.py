@@ -65,7 +65,9 @@ report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x8002300
     base_fish_native_size=[48,28],large_fish_native_size=[96,56],large_fish_ids=['snakehead','carp','catfish'],
     large_fish_min_scale_q8=257,fish_bitmap_bytes_saved=84672,
     line_lengths_cm=[450,650,850],rod_elastic_grace_ms=2000,burst_away_percent=70,
-    localization=True,all_fish_cast_audit=2200000,merchant_contexts=14,merchant_expressions=4,
+    localization=True,chinese_font_pixel_size=12,compact_chinese_font=False,rod_flex_reel_hint=False,
+    crab_display_name='溪蟹',catfish_display_name='土鲶',fictional_setting=True,
+    all_fish_cast_audit=2200000,merchant_contexts=14,merchant_expressions=4,
     shore_parallax_pixels=240000,sd_map_asset_loader_implemented=False,
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
 ses=build/'segger_embedded_studio/Output/Debug/Exe/MicroLink.elf'
@@ -84,6 +86,8 @@ if args.write_report:
         '', 'v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型鱼图区域逐像素不变，文字/售价在v22汉化；位图净节省84,672 B，无新增整屏缓冲。',
         '', 'v21 detail art: enlarged snakehead, carp and catfish use 96×56 detail tiles; all base sprites store native 48×28 pixels. Small portrait areas are pixel-identical; labels/prices are localized in v22. Net bitmap saving: 84,672 bytes; no additional full-screen buffer.',
         '', 'v22：中文鱼名/数值，4.5/6.5/8.5米线长、两秒弯竿缓冲、双向且70%偏远离玩家的冲刺。220万次抛竿核实全部15个收藏项；14类店主情境/28句台词/4种实际表情，24万个岸上远景像素及14幅弯竿画面通过检查。SD多地图加载仅记录。',
+        '', 'v23：全部中文恢复原有12像素字体，移除v22新增的8像素小字库；商店名称/售价、鱼获尺寸/重量及线组属性调整对齐和间距。移除“鱼竿弯了！快收线”提示，显示名改为溪蟹/土鲶，地图设定不指向真实地区。42项模拟器检查通过。',
+        '', 'v23 restores the original 12-pixel Chinese font throughout and removes the v22 8-pixel subset. Shop names/prices, catch metrics and line properties use adjusted alignment and spacing. The misleading rod-flex reel-now hint is removed, crab/catfish use generic names and the setting is fictional. All 42 simulator checks pass.',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:

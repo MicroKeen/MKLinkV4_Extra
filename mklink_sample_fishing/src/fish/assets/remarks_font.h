@@ -2,5 +2,4 @@
 #define REMARKS_FONT_H
 #include "arm_2d_helper_font.h"
 const arm_2d_font_t *fish_remarks_font(void);
-const arm_2d_font_t *fish_ui_font(void);
 #endif

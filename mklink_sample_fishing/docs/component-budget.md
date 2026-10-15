@@ -1,4 +1,4 @@
-# MKLink V4 组件与容量 v22 / Component and capacity audit v22
+# MKLink V4 组件与容量 v23 / Component and capacity audit v23
 
 应用分区为851,968 B（832 KiB），不扩大分区。下表以GNU ELF应用净载荷为准，包含代码、只读资源、初始化映像和对齐。
 
@@ -10,6 +10,7 @@ The application partition remains 851,968 bytes (832 KiB). Values below are meas
 | v21 原生鱼图＋三种细节图 / Native fish tiles + three detail tiles | 757,524 | 94,444 |
 | v21 去掉浮点scanf强制链接 / Remove forced floating scanf | 748,892 | 103,076 |
 | v22 汉化、竿身弹性及视差 / Localization, rod flex and parallax | 756,350 | 95,618 |
+| v23 恢复原字号并清理小字库 / Restore original text size and remove compact font | 751,672 | 100,296 |
 
 11种基础鱼从96×56展开数组改为48×28原生像素，恢复133,056 B；黑鱼、鲤鱼、土鲶各增加96×56细节图，共48,384 B，位图净减少84,672 B。大体型卡面/图鉴自动切换细节图，小尺寸画面保持原像素；没有新增整屏缓冲、运行时解码或堆分配。
 

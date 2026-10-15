@@ -3,7 +3,7 @@
   "updated": "2026-10-15",
   "map_id": "north_wetland_park",
   "map_name_zh": "北方湿地公园",
-  "region_zh": "河南北部为主、山东风格参考的虚构湿地公园；并非真实公园物种普查",
+  "region_zh": "虚构的淡水湿地公园，不对应任何真实地区或公园",
   "units": {
     "size": "mm",
     "fish": "total_length",
@@ -497,10 +497,9 @@
     {
       "id": "catfish",
       "index": 3,
-      "name_zh": "土鲶（黄河鲶鱼）",
+      "name_zh": "土鲶",
       "scientific_name": "Silurus asotus",
       "aliases": [
-        "黄河鲶鱼",
         "土鲶"
       ],
       "ui_name": "MUD CATFISH",
@@ -1605,13 +1604,13 @@
     {
       "id": "henan_crab",
       "index": 10,
-      "name_zh": "河南华溪蟹",
+      "name_zh": "溪蟹",
       "scientific_name": "Longpotamon honanense",
       "aliases": [
         "Sinopotamon honanense",
         "Sinopotamon denticulatum honanense"
       ],
-      "ui_name": "HENAN CRAB",
+      "ui_name": "STREAM CRAB",
       "kind": "crustacean",
       "size_metric": "carapace_width",
       "size_unit": "mm",
@@ -1767,7 +1766,6 @@
       "name_zh": "黄化土鲶",
       "scientific_name": "Silurus asotus",
       "aliases": [
-        "黄河鲶鱼",
         "土鲶"
       ],
       "ui_name": "GOLDEN CATFISH",
