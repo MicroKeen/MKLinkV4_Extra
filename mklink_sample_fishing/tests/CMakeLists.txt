@@ -6,7 +6,7 @@ set(APP "${CMAKE_CURRENT_SOURCE_DIR}/../src/fish")
 set(CORE ${APP}/fish_game.c ${APP}/fish_economy.c ${APP}/fish_species.c ${APP}/fish_species_data.c
     ${APP}/fish_map.c ${APP}/fish_map_data.c ${APP}/fish_equipment.c ${APP}/fish_equipment_data.c)
 file(GLOB CRYPTO "${APP}/crypto/source/*.c")
-foreach(name game fishing fight_balance rarity map species economy)
+foreach(name game fishing fight_balance rarity map species economy variant content_audit)
     add_executable(${name}_tests ${name}_tests.c ${CORE})
     target_include_directories(${name}_tests PRIVATE "${APP}")
     target_compile_options(${name}_tests PRIVATE -UNDEBUG)

@@ -92,7 +92,7 @@ int main(void)
             seen|=1u<<id; ++samples;
         }
     }
-    assert(seen==(1u<<FISH_SPECIES_COUNT)-1);
+    assert(seen==(1u<<FISH_BASE_SPECIES_COUNT)-1);
     fish_game_t g;
     fish_game_init(&g,0); unchanged=g.random_state;
     g.economy.rods=g.economy.lines=g.economy.floats=7;g.rod_index=1;g.bait_index=0;
@@ -112,7 +112,7 @@ int main(void)
         fish_game_init(&g,10000+rod*10000); g.boat_x=400; g.rod_index=(uint8_t)rod;
         fish_game_input(&g,FISH_PRESS,0,g.now);
         fish_game_input(&g,FISH_RELEASE,0,g.now+1500);
-        assert(g.mode==FISH_CAST && g.cast_distance==fish_rods[rod].max_cast_px);
+        assert(g.mode==FISH_CAST && g.cast_distance==fish_game_max_cast_px(&g));
         assert(g.cast_bottom_cm==fish_map_depth(g.cast_x) && g.cast_depth_cm==g.cast_bottom_cm);
         assert(fish_map_weight(g.pending_species,g.cast_x,g.cast_depth_cm,g.bait_index)>0);
         for (int facing=-1;facing<=1;facing+=2) {
@@ -123,6 +123,17 @@ int main(void)
             assert(fish_game_camera(&g)==camera);
             int landing=g.cast_x-camera; assert(landing>=4 && landing<=236);
         }
+    }
+    /* Casting, preview camera and physical length share the same gear limit. */
+    static const unsigned line_cm[]={450,650,850};
+    for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++)
+    for(int facing=-1;facing<=1;facing+=2) {
+        fish_game_init(&g,0);g.boat_x=480;g.rod_index=rod;g.facing=facing;fish_game_equip_line(&g,line);
+        assert(fish_line_sets[line].distance_limit_cm==line_cm[line]);
+        fish_game_input(&g,FISH_PRESS,0,0);fish_game_update(&g,1500);
+        int camera=fish_game_camera(&g);fish_game_input(&g,FISH_RELEASE,0,1500);
+        assert(g.mode==FISH_CAST && g.cast_distance*FISH_WORLD_CM_PER_PIXEL<=line_cm[line]);
+        assert(g.cast_distance==fish_game_max_cast_px(&g) && fish_game_camera(&g)==camera);
     }
     for (unsigned dock=0;dock<2;dock++) {
         fish_game_init(&g,0); time_ms=0; g.boat_x=fish_docks[dock].boat_x+(dock?-2:2);
@@ -149,7 +160,8 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.shore_x==0 && g.shore_speed==-1);
     assert(fish_game_shore_pose(&g)==1);
     for(unsigned t=10;t<=1000;t+=10) fish_game_update(&g,t);
-    assert(g.shore_x==-32 && fish_game_shore_pose(&g)==2);fish_game_input(&g,FISH_ROTATE,1,1000);
+    assert(g.shore_x==-32 && fish_game_shore_pose(&g)==2);fish_game_input(&g,FISH_ROTATE,1,1000);assert(!g.shore_speed);fish_game_update(&g,1000);assert(g.shore_x==-32);
+    fish_game_input(&g,FISH_ROTATE,1,1000);
     for(unsigned t=1010;t<=2000;t+=10) fish_game_update(&g,t);
     assert(g.shore_x==0);fish_game_input(&g,FISH_PRESS,0,2000);fish_game_input(&g,FISH_RELEASE,0,2001);
     assert(g.mode==FISH_BAG && !g.shore_speed && !fish_game_shore_pose(&g));fish_game_update(&g,9000);assert(g.shore_x==0);
@@ -157,6 +169,9 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,-1,UINT32_MAX-499);
     for(unsigned i=1;i<=100;i++) fish_game_update(&g,(UINT32_MAX-499)+i*10u);
     assert(g.shore_x==-32);
+    fish_game_init(&g,0);g.mode=FISH_SHORE;g.boat_x=132;g.shore_x=96;g.shore_speed=-1;
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_SHORE && !g.shore_speed);
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_MOVE && !g.boat_speed);
     fish_game_init(&g,0);g.mode=FISH_SHORE;g.shore_x=FISH_SHOP_X;g.boat_x=132;
     fish_game_input(&g,FISH_ROTATE,1,0);
     for(unsigned t=16;t<=12000;t+=16) fish_game_update(&g,t);

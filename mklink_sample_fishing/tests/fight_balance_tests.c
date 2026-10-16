@@ -9,7 +9,7 @@ static void hook(fish_game_t *g,unsigned id,uint16_t size,unsigned rod,unsigned 
     g->pending_species=(uint8_t)id;g->pending_size_mm=size;
     g->phase_at-=fish_species[id].strike_delay_ms;
     g->pending_weight_g=fish_species_weight_g(&fish_species[id],size);
-    g->cast_start_x=162;g->cast_distance=fish_rods[rod].max_cast_px;
+    g->cast_start_x=162;g->cast_distance=fish_game_max_cast_px(g);
     g->cast_x=g->cast_start_x+g->cast_distance;
     fish_game_input(g,FISH_PRESS,0,0);fish_game_input(g,FISH_RELEASE,0,0);
 }
@@ -82,6 +82,7 @@ int main(void)
             play(&g,4);if(g.mode==FISH_CAUGHT) ++wins;else {assert(g.loss!=FISH_LOSS_NONE);++losses;}
         }
         printf("four_star_seeds line=%u seeds=128 landed=%u lost=%u\n",line,wins,losses);
+        /* The short light line stays risky, with a few recoverable flex cases. */
         if(line==0) assert(wins>0 && losses>0);
         if(line==2) assert(wins==128);
     }
@@ -105,7 +106,11 @@ int main(void)
         }
     }
     /* A large fish loads the line without any retrieval; warning permits rescue. */
-    fish_game_t idle,rescued;hook(&idle,3,fish_species[3].max_mm,1,0);rescued=idle;
+    fish_game_t idle,rescued;hook(&idle,3,fish_species[3].max_mm,1,0);
+    /* A short cast leaves real payout room on the new 4.5 m light line. */
+    idle.cast_distance/=2;idle.cast_x=idle.cast_start_x+idle.cast_distance;
+    idle.line_capacity_units=fish_line_sets[0].distance_limit_cm*10000u/(idle.cast_distance*FISH_WORLD_CM_PER_PIXEL);
+    rescued=idle;
     bool warned=false;unsigned warning_at=0;
     for (unsigned t=100;t<=20000 && idle.mode==FISH_FIGHT;t+=100) {
         fish_game_update(&idle,t);
@@ -162,7 +167,8 @@ int main(void)
     int locked_tension=idle.tension;
     fish_game_input(&idle,FISH_ROTATE,-40,0);
     assert(idle.tension==locked_tension && fish_game_distance(&idle)==idle.line_capacity_units);
-    fish_game_update(&idle,800);assert(idle.loss==FISH_LOSS_BREAK);
+    for(unsigned t=20;t<=4000 && idle.mode==FISH_FIGHT;t+=20)fish_game_update(&idle,t);
+    assert(idle.loss==FISH_LOSS_BREAK);
     printf("four_star_carp_mm=%u weight_g=%lu response thin=%u balanced=%u thick=%u; balanced continuous retrieve breaks\n",
         four_star,(unsigned long)big_carp_weight,fish_line_response_percent(0,big_carp_weight),
         fish_line_response_percent(1,big_carp_weight),fish_line_response_percent(2,big_carp_weight));

@@ -38,6 +38,8 @@ typedef struct {
     arm_2d_op_trans_msk_t container_operation;
     arm_2d_op_trans_msk_t footpath_operation,exterior_operation,shore_player_operation;
     arm_2d_op_trans_msk_t dock_operation[2];
+    arm_2d_op_trans_msk_t hold_portrait_operation;
+    arm_2d_op_trans_msk_t cloud_operation;
 } fish_scene_t;
 _Static_assert(offsetof(fish_scene_t,use_as__arm_2d_scene_t)==0,"Scene base must be first");
 static fish_scene_t scene;
@@ -88,6 +90,27 @@ static void text(const arm_2d_tile_t *tile, int x, int y, uint16_t color, const 
     arm_lcd_puts(value);
     ARM_2D_OP_WAIT_ASYNC();
 }
+static void ui_text(const arm_2d_tile_t *tile,int x,int y,int width,uint16_t color,uint16_t bg,const char *value)
+{
+    arm_2d_size_t size=arm_lcd_get_string_line_box(value,fish_remarks_font());
+    if(fish_smoke_test && (size.iWidth>width || size.iHeight>19 || x<0 || x+size.iWidth>240)) {
+        fprintf(stderr,"UI label does not fit: %s (%d/%d, height %d)\n",value,size.iWidth,width,size.iHeight);exit(1);
+    }
+    arm_2d_region_t region={.tLocation={x,y},.tSize={size.iWidth,19}};
+    arm_lcd_text_set_target_framebuffer((arm_2d_tile_t *)tile);
+    arm_lcd_text_set_font(fish_remarks_font());arm_lcd_text_set_draw_region(&region);
+    arm_lcd_text_set_colour(color,bg);arm_lcd_text_location(0,0);arm_lcd_puts(value);
+    ARM_2D_OP_WAIT_ASYNC();
+}
+static void special_frame(const arm_2d_tile_t *tile,int x,int y,int w,int h)
+{
+    static const uint16_t colors[]={RGB(255,113,98),RGB(255,208,80),RGB(110,210,135),RGB(79,205,226),RGB(139,154,246),RGB(225,123,221)};
+    for(unsigned i=0;i<6;i++) {
+        int a=w*(int)i/6,b=w*(int)(i+1)/6,c=h*(int)i/6,d=h*(int)(i+1)/6;
+        box(tile,x+a,y,b-a,2,colors[i]);box(tile,x+a,y+h-2,b-a,2,colors[5-i]);
+        box(tile,x,y+c,2,d-c,colors[5-i]);box(tile,x+w-2,y+c,2,d-c,colors[i]);
+    }
+}
 
 static void masked_bitmap(const arm_2d_tile_t *target, const arm_2d_tile_t *source,
                           const arm_2d_tile_t *mask, int x, int y, bool flip)
@@ -115,6 +138,14 @@ static void scaled_species_bitmap(const arm_2d_tile_t *target, const arm_2d_tile
 
 extern const uint8_t fish_sky_horizon[240];
 
+static int floor_divide(int value,int divisor)
+{ return value>=0?value/divisor:-((-value+divisor-1)/divisor); }
+static int horizon_at(int source_column)
+{
+    if(source_column<0) source_column=-source_column-1;
+    return fish_sky_horizon[source_column/2];
+}
+
 /* The original lake skyline clips sky objects behind mountains and trees,
  * using the exact same shallow camera parallax and 2-pixel source grid. */
 static void sky_rect(const arm_2d_tile_t *tile,int source_x,int x,int y,int w,int h,
@@ -126,7 +157,7 @@ static void sky_rect(const arm_2d_tile_t *tile,int source_x,int x,int y,int w,in
     for(int col=x;col<end;) {
         int span=2-((source_x+col)&1);
         if(span>end-col) span=end-col;
-        int bottom=fish_sky_horizon[(source_x+col)/2];
+        int bottom=horizon_at(source_x+col);
         if(bottom>y+h) bottom=y+h;
         if(bottom>y) {
             arm_2d_region_t region={.tLocation={col,y},.tSize={span,bottom-y}};
@@ -140,13 +171,38 @@ static void sky_rect(const arm_2d_tile_t *tile,int source_x,int x,int y,int w,in
     }
 }
 
+static void sky_cloud(const arm_2d_tile_t *tile,int sky_source_x,int x)
+{
+    int start=x-2,end=x+182;
+    if(start<0) start=0;
+    if(end>240) end=240;
+    arm_2d_point_float_t centre={x+90,54};
+    for(int col=start;col<end;) {
+        int bottom=horizon_at(sky_source_x+col),next=col+1;
+        if(bottom>66) bottom=66;
+        while(next<end) {
+            int limit=horizon_at(sky_source_x+next);
+            if(limit>66) limit=66;
+            if(limit!=bottom) break;
+            ++next;
+        }
+        if(bottom>42) {
+            arm_2d_region_t sky={.tLocation={col,42},.tSize={next-col,bottom-42}};
+            if(arm_2d_helper_pfb_is_region_active(tile,&sky,true)) {
+                arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.cloud_operation,tile,&sky,&centre);
+                ARM_2D_OP_WAIT_ASYNC(&scene.cloud_operation);
+            }
+        }
+        col=next;
+    }
+}
 static void night_moon(const arm_2d_tile_t *tile,const fish_game_t *game)
 {
     unsigned minute=game->game_minute;
     if(minute>=360 && minute<1080) return;
     unsigned arc=(minute+360)%1440;if(arc>720) arc=720;
     int x=18+(int)arc*204/720,y=104-(int)(arc*(720-arc)*52/(360*360));
-    int camera=fish_game_camera(game),source_x=camera>0?camera/3:0;
+    int camera=fish_game_camera(game),source_x=floor_divide(camera,3);
     static const uint8_t crescent[8]={0x3c,0x0e,0x07,0x07,0x07,0x07,0x0e,0x3c};
     for(int row=0;row<8;row++) for(int col=0;col<8;col++) {
         if(crescent[row]&(1u<<col)) sky_rect(tile,source_x,x-8+col*2,y-8+row*2,2,2,
@@ -157,12 +213,27 @@ static void night_moon(const arm_2d_tile_t *tile,const fish_game_t *game)
 static void landscape(const arm_2d_tile_t *tile, const fish_game_t *game)
 {
     int camera = fish_game_camera(game);
-    arm_2d_region_t source_region = { .tLocation={camera>0?camera/3:0,0}, .tSize={240,240} };
+    int source_x=floor_divide(camera,3);
+    arm_2d_region_t source_region = { .tLocation={source_x>0?source_x:0,0}, .tSize={240,240} };
     arm_2d_tile_t view;
-    arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
-    arm_2d_rgb16_tile_copy(&view,tile,NULL,ARM_2D_CP_MODE_COPY);
-    ARM_2D_OP_WAIT_ASYNC();
-    int sky_source_x=source_region.tLocation.iX;
+    if(source_x<0) {
+        /* Reflect the left edge to extend the existing panorama continuously.
+         * Two clipped tile copies preserve signed parallax without a new bitmap. */
+        int left=-source_x;source_region.tSize.iWidth=left;
+        /* Copy-mirror addresses the root tile; select its opposite window. */
+        source_region.tLocation.iX=c_tileLakeRGB565.tRegion.tSize.iWidth-left;
+        arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
+        arm_2d_region_t target={.tLocation={0,0},.tSize={left,240}};
+        arm_2d_rgb16_tile_copy_with_x_mirror(&view,tile,&target);ARM_2D_OP_WAIT_ASYNC();
+        source_region.tLocation.iX=0;source_region.tSize.iWidth=240-left;
+        arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
+        target.tLocation.iX=left;target.tSize.iWidth=240-left;
+        arm_2d_rgb16_tile_copy(&view,tile,&target,ARM_2D_CP_MODE_COPY);ARM_2D_OP_WAIT_ASYNC();
+    } else {
+        arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
+        arm_2d_rgb16_tile_copy(&view,tile,NULL,ARM_2D_CP_MODE_COPY);ARM_2D_OP_WAIT_ASYNC();
+    }
+    int sky_source_x=source_x;
     unsigned night=fish_game_night_opacity(game);
     if(night) {
         unsigned opacity=night*255/150;
@@ -173,6 +244,8 @@ static void landscape(const arm_2d_tile_t *tile, const fish_game_t *game)
             int x=(int)((i*73+19)%480)-sky_source_x;
             int y=30+(int)((i*29+7)%46);
             sky_rect(tile,sky_source_x,x,y,i%5==0?2:1,1,
+                i%3==0?RGB(173,184,192):RGB(112,135,160),(uint8_t)opacity);
+            if(sky_source_x<0) sky_rect(tile,sky_source_x,-1-(int)((i*73+19)%480)-sky_source_x,y,i%5==0?2:1,1,
                 i%3==0?RGB(173,184,192):RGB(112,135,160),(uint8_t)opacity);
         }
     }
@@ -188,9 +261,10 @@ static void landscape(const arm_2d_tile_t *tile, const fish_game_t *game)
         int w=2+i/3,shift=(int)((game->now/180+i*13)%7)-3;
         box(tile,celestial_x-w+shift,132+i*5,w*2,1,sun?RGB(176,146,83):RGB(131,157,170));
     }
-    int cloud_offset=(camera/8+(int)(game->now/350))%300;
-    for (int x=-cloud_offset; x<240; x+=300)
-        masked_bitmap(tile,&c_tileCloudsRGB565,&c_tileCloudsAlphaGRAY8,x,32,false);
+    int cloud_offset=(floor_divide(camera,4)+(int)(game->now/900))%300;
+    if(cloud_offset<0) cloud_offset+=300;
+    if(!(fish_smoke_test==27 && (scene.smoke_frame&1)))
+        for (int x=-cloud_offset; x<240; x+=300) sky_cloud(tile,sky_source_x,x);
     if(sun) {
         for(int dy=-5;dy<=5;dy++) {
             int half=5-abs(dy)/2;
@@ -352,8 +426,21 @@ static void fisherman(const arm_2d_tile_t *tile, const fish_game_t *game)
     unsigned loss_age=game->now-game->phase_at;
     if(game->mode==FISH_LOST && game->loss==FISH_LOSS_BREAK && loss_age<400)
         tipy+=(400-(int)loss_age)*((loss_age/70)%2?1:-1)/100;
-    line(tile,rodx,rody,tipx,tipy,INK);
-    line(tile,rodx+game->facing,rody,tipx+game->facing,tipy,WOOD_LIGHT);
+    unsigned flex=fish_game_rod_flex(game);
+    if(flex) {
+        tipx+=game->facing*(int)flex/10;tipy+=(int)flex/6;
+        int cx=(rodx+tipx)/2-game->facing*(int)flex/16,cy=(rody+tipy)/2-(int)flex/7;
+        int px=rodx,py=rody;
+        for(int step=1;step<=8;step++) {
+            int a=8-step,nx=(a*a*rodx+2*a*step*cx+step*step*tipx)/64;
+            int ny=(a*a*rody+2*a*step*cy+step*step*tipy)/64;
+            line(tile,px,py,nx,ny,INK);line(tile,px+game->facing,py,nx+game->facing,ny,WOOD_LIGHT);
+            px=nx;py=ny;
+        }
+    } else {
+        line(tile,rodx,rody,tipx,tipy,INK);
+        line(tile,rodx+game->facing,rody,tipx+game->facing,tipy,WOOD_LIGHT);
+    }
     if(game->mode==FISH_LOST) {
         int t=(int)loss_age, camera=fish_game_camera(game);
         int fx=game->cast_x-camera+game->float_dx_q8/256*game->facing;
@@ -424,10 +511,6 @@ static const char *control_hint(const fish_game_t *game)
     if(game->mode==FISH_SHOP) return "旋转选商品，短按交易";
     if(game->mode==FISH_HOLD) return "旋转查看鱼获，短按返回";
     if(game->mode==FISH_SHORE && fish_game_at_shop(game)) return fish_game_shop_open(game)?"短按进入水产渔具店":"营业07:00-18:00";
-    if(game->mode==FISH_SHORE && !game->shore_speed && fish_game_dock_action(game)>=0)
-        return game->boat_x<FISH_MAP_WIDTH/2?"顺转登船  逆转沿岸走":"逆转登船  顺转沿岸走";
-    if((game->mode==FISH_MOVE || game->mode==FISH_AIM) && !game->boat_speed && fish_map_dock(game->boat_x)>=0)
-        return game->boat_x<FISH_MAP_WIDTH/2?"逆转上岸  顺转驶离":"顺转上岸  逆转驶离";
     const char *hint="";
     switch (game->mode) {
         case FISH_AIM: break;
@@ -456,7 +539,8 @@ static const char *control_hint(const fish_game_t *game)
              game->loss==FISH_LOSS_EARLY?"提早了":
              game->loss==FISH_LOSS_MISSED?"错过了":"鱼逃走了";
     if (game->mode==FISH_FIGHT) {
-        if (game->tension*100/game->line_strength>=85 || game->overload_ms>=fish_rules.overload_limit_ms/3) hint="张力过高！停止收线，逆转放线";
+        if(fish_game_distance(game)>=game->line_capacity_units) hint="已到最大线长，无法继续放线";
+        else if (game->tension*100/game->line_strength>=85 || game->overload_ms>=fish_rules.overload_limit_ms/3) hint="张力过高！停止收线，逆转放线";
         else if (game->slack_ms>=fish_rules.slack_limit_ms/4) hint="线太松了！顺转收线";
         else if (fish_game_burst_active(game) && game->tension*100/game->line_strength>=65)
             hint=fish_species[game->pending_species].fight_style==FISH_FIGHT_ACTIVE?"鱼在猛拉！逆转放线":"线在绷紧！留意张力";
@@ -519,37 +603,37 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
         snprintf(label,sizeof(label),"%02u:%02u",game->game_minute/60,game->game_minute%60);text(tile,121,7,CREAM,label);
     }
     if (game->mode==FISH_GUIDE) {
-        text(tile,122,7,GREEN,"GUIDE");
+        ui_text(tile,122,4,48,GREEN,INK,"图鉴");
         snprintf(label,sizeof(label),"%02u/%02u",game->guide_index+1,FISH_SPECIES_COUNT);
         text(tile,177,7,GREEN,label);
     } else if (map_hud) {
         int depth=fish_map_depth(fish_game_actor_x(game));
-        snprintf(label,sizeof(label),"WATER %d.%dm",depth/100,depth%100/10);
-        text(tile,166,7,GREEN,label);
+        snprintf(label,sizeof(label),"水深%d.%d米",depth/100,depth%100/10);
+        ui_text(tile,166,0,74,GREEN,INK,label);
     }
     if (map_hud) position_and_depth(tile,game);
     box(tile,0,header_height-1,240,1,game->mode==FISH_BAG?RPG_BRASS:HILL);
     box(tile,0,203,240,37,game->mode==FISH_BAG?RPG_DARK:INK);
     box(tile,0,203,240,1,game->mode==FISH_BAG?RPG_EDGE:HILL);
-    static const char *modes[]={"MOVE","FISH","CHARGE","CAST","WAIT","BITE!","ENERGY","CAUGHT!","GUIDE","BAG","SHORE","LOST","SHOP","HOLD"};
+    static const char *modes[]={"划船","垂钓","蓄力","抛竿","等待","咬钩","搏鱼","收获","图鉴","行囊","岸上","跑鱼","商店","鱼库"};
     const char *mode=modes[game->mode], *hint=control_hint(game);
     if ((game->mode==FISH_MOVE || game->mode==FISH_AIM) && game->boat_speed)
-        mode=game->boat_speed==1 || game->boat_speed==-1?"SLOW":"FAST";
-    if(game->mode==FISH_SHORE && game->shore_speed) mode="WALK";
-    if (game->mode==FISH_BITE && !fish_game_strike_ready(game)) mode="NIBBLE";
-    text(tile,9,211,game->mode==FISH_LOST?RED:game->mode==FISH_BITE?SUN:GREEN,mode);
-    snprintf(label,sizeof(label),"CATCH%02d",game->catches); text(tile,188,211,CREAM,label);
+        mode=game->boat_speed==1 || game->boat_speed==-1?"慢行":"快行";
+    if(game->mode==FISH_SHORE && game->shore_speed) mode="步行";
+    if (game->mode==FISH_BITE && !fish_game_strike_ready(game)) mode="试饵";
+    ui_text(tile,9,204,52,game->mode==FISH_LOST?RED:game->mode==FISH_BITE?SUN:GREEN,INK,mode);
+    snprintf(label,sizeof(label),"鱼获%d",game->catches); ui_text(tile,180,204,60,CREAM,INK,label);
     chinese_text(tile,120,220,hint,self->hint_box);
     if (game->mode==FISH_GUIDE) {
         unsigned found=0; for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) found+=game->species_catches[i]>0;
-        snprintf(label,sizeof(label),"FOUND %u/%u",found,FISH_SPECIES_COUNT);
-        text(tile,64,211,fish_rarity_colors[fish_species[game->guide_index].rarity],label);
+        snprintf(label,sizeof(label),"收集%u/%u",found,FISH_SPECIES_COUNT);
+        ui_text(tile,64,204,104,fish_rarity_colors[fish_species[game->guide_index].rarity],INK,label);
     }
     if (game->mode==FISH_MOVE || game->mode==FISH_AIM) {
         uint16_t depth=fish_game_rig_depth(game);
-        if (depth==FISH_BOTTOM_OPTION) snprintf(label,sizeof(label),"BAIT BOTTOM");
-        else snprintf(label,sizeof(label),"BAIT %u.%um",depth/100,depth%100/10);
-        text(tile,66,211,HILL,label);
+        if (depth==FISH_BOTTOM_OPTION) snprintf(label,sizeof(label),"钓底");
+        else snprintf(label,sizeof(label),"钓深%u.%u米",depth/100,depth%100/10);
+        ui_text(tile,66,204,92,HILL,INK,label);
     }
     if (game->mode==FISH_CHARGE) {
         int power=fish_game_power(game);
@@ -557,14 +641,14 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
         box(tile,66,212,power*84/100,6,power>=85?SUN:GREEN);
         snprintf(label,sizeof(label),"%d%%",power); text(tile,158,211,CREAM,label);
         if (game->mode==FISH_CHARGE) {
-            int x=game->boat_x-fish_game_camera(game), d=28+power*(fish_rods[game->rod_index].max_cast_px-28)/100;
+            int x=game->boat_x-fish_game_camera(game), d=28+power*(fish_game_max_cast_px(game)-28)/100;
             int target=x+game->facing*(12+d);
             box(tile,target-3,148,7,1,SUN); box(tile,target,145,1,7,SUN);
         }
     }
     if (game->mode==FISH_FIGHT) {
         box(tile,5,183,230,17,INK);
-        text(tile,8,187,CREAM,"LINE");
+        ui_text(tile,8,183,32,CREAM,INK,"张力");
         int stamina=game->stamina_max?game->stamina*100/game->stamina_max:0;
         box(tile,64,210,88,10,SHADOW);box(tile,66,212,stamina*84/100,6,stamina>50?GREEN:SUN);
         snprintf(label,sizeof(label),"%d%%",stamina);text(tile,158,211,CREAM,label);
@@ -575,8 +659,8 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
         box(tile,144,188,3,6,game->overload_ms?RED:game->slack_ms?SUN:HILL);
         int range=fish_game_distance(game)*100/game->line_capacity_units;
         unsigned decimetres=(fish_game_distance_cm(game)+9)/10;
-        snprintf(label,sizeof(label),"FAR %u.%um",decimetres/10,decimetres%10);
-        text(tile,152,187,range>=fish_rules.range_warning_percent?RED:CREAM,label);
+        snprintf(label,sizeof(label),"距离%u.%u米",decimetres/10,decimetres%10);
+        ui_text(tile,152,183,88,range>=fish_rules.range_warning_percent?RED:CREAM,INK,label);
     }
 }
 
@@ -602,8 +686,10 @@ static const char *bag_value(const fish_game_t *g,unsigned item,char *scratch,si
 {
     switch (item) {
         case FISH_BAG_ROD:return fish_rods[g->rod_index].name;
-        case FISH_BAG_LINE:
-            snprintf(scratch,length,"%s %um",fish_line_sets[g->line_index].name,fish_line_sets[g->line_index].distance_limit_cm/100);return scratch;
+        case FISH_BAG_LINE: {
+            unsigned cm=fish_line_sets[g->line_index].distance_limit_cm;
+            snprintf(scratch,length,"%s %u.%u米",fish_line_sets[g->line_index].name,cm/100,cm%100/10);return scratch;
+        }
         case FISH_BAG_FLOAT:return fish_floats[g->float_index].name;
         case FISH_BAG_BAIT:
             if(g->bait_index==FISH_PLASTIC_BAIT) return fish_baits[g->bait_index].name;
@@ -612,7 +698,7 @@ static const char *bag_value(const fish_game_t *g,unsigned item,char *scratch,si
             uint16_t depth=fish_game_rig_depth(g);
             if (depth==FISH_BOTTOM_OPTION) return "到底";
             if (!depth) return "表层";
-            snprintf(scratch,length,"%u.%um",depth/100,depth%100/10);return scratch;
+            snprintf(scratch,length,"%u.%u米",depth/100,depth%100/10);return scratch;
         }
         case FISH_BAG_MISC:return fish_containers[g->economy.container].name;
         case FISH_BAG_GUIDE:return "图鉴";
@@ -642,7 +728,7 @@ static const char *bag_attributes(const fish_game_t *g,char *scratch,size_t leng
         case FISH_BAG_LINE:
         {
             const fish_line_set_t *line=&fish_line_sets[g->line_index];
-            snprintf(scratch,length,"0.%02umm 隐蔽%s",line->diameter_hundredths_mm,
+            snprintf(scratch,length,"0.%02u毫米 隐蔽%s",line->diameter_hundredths_mm,
                 line->bite_percent[0]>=90?"高":line->bite_percent[0]>=60?"中":"低");return scratch;
         }
         case FISH_BAG_FLOAT:return fish_float_descriptions[g->float_index];
@@ -667,7 +753,7 @@ static void bag_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
         {30,58,84,82},{121,62,40,30},{173,62,40,30},{121,108,40,32},
         {173,108,40,32},{26,146,46,31},{0,0,0,0},{8,183,66,18},{160,183,72,18},{84,183,68,18}};
     static const char *titles[]={"鱼竿","线钩","浮漂","鱼饵","钓深"};
-    char label[48],scratch[24];
+    char label[64],scratch[48];
     arm_2d_point_float_t centre={120.0f,115.0f};
     arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&self->backpack_operation,tile,NULL,&centre);
     ARM_2D_OP_WAIT_ASYNC(&self->backpack_operation);
@@ -753,40 +839,47 @@ static void shop_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     } else {
         line(tile,44,193,20,193,RPG_LIGHT);line(tile,20,193,30,183,RPG_LIGHT);line(tile,20,193,30,203,RPG_LIGHT);
     }
-    caption(tile,96,164,item==FISH_SHOP_CARGO?fish_containers[g->economy.container].name:fish_shop_name(item),RPG_LIGHT,RPG_DARK);
-    if(item==0) snprintf(label,sizeof(label),"+%lu coins",(unsigned long)fish_hold_value(&g->economy));
-    else if(kind==FISH_SHOP_BAIT) snprintf(label,sizeof(label),"%lu coins/5",(unsigned long)fish_shop_price(item));
-    else if(kind<FISH_SHOP_BAIT) snprintf(label,sizeof(label),"%lu coins%s",(unsigned long)fish_shop_price(item),
-        fish_equipment_owned(&g->economy,kind,index)?" OWNED":"");
-    else if(kind==FISH_SHOP_CONTAINER) snprintf(label,sizeof(label),"%lu coins%s",(unsigned long)fish_shop_price(item),g->economy.container>=index?" OWNED":"");
+    const char *item_name=item==FISH_SHOP_CARGO?fish_containers[g->economy.container].name:fish_shop_name(item);
+    arm_2d_size_t name_size=arm_lcd_get_string_line_box(item_name,fish_remarks_font());
+    chinese_text_tinted(tile,60+name_size.iWidth/2,164,item_name,name_size,RPG_LIGHT,RPG_DARK);
+    if(item==0) snprintf(label,sizeof(label),"+%lu金币",(unsigned long)fish_hold_value(&g->economy));
+    else if(kind==FISH_SHOP_BAIT) snprintf(label,sizeof(label),"%lu金币/5份",(unsigned long)fish_shop_price(item));
+    else if(kind<FISH_SHOP_BAIT) snprintf(label,sizeof(label),"%lu金币%s",(unsigned long)fish_shop_price(item),
+        fish_equipment_owned(&g->economy,kind,index)?" 已拥有":"");
+    else if(kind==FISH_SHOP_CONTAINER) snprintf(label,sizeof(label),"%lu金币%s",(unsigned long)fish_shop_price(item),g->economy.container>=index?" 已拥有":"");
     else if(item==FISH_SHOP_CARGO) snprintf(label,sizeof(label),"%lu.%lu/%lu kg",(unsigned long)fish_hold_weight(&g->economy)/1000,
         (unsigned long)fish_hold_weight(&g->economy)%1000/100,(unsigned long)fish_hold_capacity(&g->economy)/1000);
-    else snprintf(label,sizeof(label),"EXIT");
-    text(tile,234-(int)strlen(label)*6,170,SUN,label);
+    else snprintf(label,sizeof(label),"返回");
+    arm_2d_size_t price_size=arm_lcd_get_string_line_box(label,fish_remarks_font());
+    ui_text(tile,234-price_size.iWidth,164,174-name_size.iWidth-4,SUN,RPG_DARK,label);
     char detail[96];const char *description=detail;
     if(kind==FISH_SHOP_ROD) description=fish_rod_descriptions[index];
     else if(kind==FISH_SHOP_FLOAT) description=fish_float_descriptions[index];
     else if(kind==FISH_SHOP_BAIT) description=fish_baits[index].description;
-    else if(kind==FISH_SHOP_LINE) snprintf(detail,sizeof(detail),"线径0.%02umm 隐蔽%s",fish_line_sets[index].diameter_hundredths_mm,
+    else if(kind==FISH_SHOP_LINE) snprintf(detail,sizeof(detail),"线径0.%02u毫米 隐蔽%s",fish_line_sets[index].diameter_hundredths_mm,
         fish_line_sets[index].bite_percent[0]>=90?"高":"低");
     else if(kind==FISH_SHOP_CONTAINER) description="扩容并保留原有鱼获";
     else description=item==0?"出售容器内和船尾鱼获":item==FISH_SHOP_CARGO?"查看容器内和船尾鱼获":"回到岸边继续垂钓";
     caption(tile,148,181,description,RPG_LIGHT,RPG_DARK);
     if(kind==FISH_SHOP_ROD) {
-        snprintf(detail,sizeof(detail),"CAST %upx  REEL %u%%",fish_rods[index].max_cast_px,fish_rods[index].reel_percent);
-        text(tile,148-(int)strlen(detail)*3,203,SUN,detail);
+        snprintf(detail,sizeof(detail),"抛距%u像素 收线%u%%",fish_rods[index].max_cast_px,fish_rods[index].reel_percent);
+        caption(tile,148,200,detail,SUN,RPG_DARK);
     } else {
         const char *effect=detail;
         if(kind==FISH_SHOP_FLOAT) {
             if(index==1) snprintf(detail,sizeof(detail),"提竿窗口 +%u%%",fish_floats[index].strike_window_bonus_percent);
             else snprintf(detail,sizeof(detail),"夜间咬钩 +%u%%",fish_floats[index].night_bite_bonus_percent);
         }
-        else if(kind==FISH_SHOP_LINE) snprintf(detail,sizeof(detail),"强度%u 窗口%u%%",fish_line_sets[index].strength,fish_line_sets[index].strike_window_percent);
+        else if(kind==FISH_SHOP_LINE) {
+            unsigned cm=fish_line_sets[index].distance_limit_cm;
+            snprintf(detail,sizeof(detail),"线长%u.%u米 强度%u窗口%u%%",cm/100,cm%100/10,fish_line_sets[index].strength,fish_line_sets[index].strike_window_percent);
+        }
         else if(kind==FISH_SHOP_BAIT) snprintf(detail,sizeof(detail),"库存%u份 每包5份",g->economy.bait_stock[index]);
         else if(kind==FISH_SHOP_CONTAINER) snprintf(detail,sizeof(detail),"容量%lu kg",(unsigned long)fish_containers[index].capacity_g/1000);
         else if(item==FISH_SHOP_BACK) effect="短按返回岸边";
         else snprintf(detail,sizeof(detail),"总重%lu.%02lu kg",(unsigned long)fish_hold_weight(&g->economy)/1000,(unsigned long)fish_hold_weight(&g->economy)%1000/10);
-        caption(tile,148,200,effect,SUN,RPG_DARK);
+        if(kind==FISH_SHOP_LINE) ui_text(tile,60,200,176,SUN,RPG_DARK,effect);
+        else caption(tile,148,200,effect,SUN,RPG_DARK);
     }
 }
 static void hold_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
@@ -812,17 +905,18 @@ static void hold_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     unsigned species=i<FISH_SPECIES_COUNT?i:e->hanging_species;
     if(species<FISH_SPECIES_COUNT && (i==FISH_SPECIES_COUNT || e->count[i])) {
         const fish_species_art_t *art=&fish_species_art[species];
-        masked_bitmap(tile,art->sprite,art->mask,72,55,false);
-        int name_x=120-(int)strlen(fish_species[species].ui_name)*3;
-        text(tile,name_x+1,114,INK,fish_species[species].ui_name);text(tile,name_x,113,CREAM,fish_species[species].ui_name);
+        if(species>=FISH_BASE_SPECIES_COUNT) special_frame(tile,66,50,108,64);
+        scaled_species_bitmap(tile,art->sprite,art->mask,120,83,false,512,(arm_2d_op_trans_msk_t *)&self->hold_portrait_operation);
+        caption(tile,120,110,fish_species[species].name_zh,CREAM,RPG_DARK);
         uint32_t grams=i<FISH_SPECIES_COUNT?e->grams[i]:e->hanging_grams;
         uint32_t value=i<FISH_SPECIES_COUNT?e->value[i]:e->hanging_value;
-        snprintf(label,sizeof(label),"x%u  %lu.%02lu kg",i<FISH_SPECIES_COUNT?e->count[i]:1,
-            (unsigned long)grams/1000,(unsigned long)grams%1000/10);text(tile,55,133,INK,label);text(tile,54,132,CREAM,label);
-        snprintf(label,sizeof(label),"VALUE %lu coins",(unsigned long)value);text(tile,55,148,INK,label);text(tile,54,147,SUN,label);
+        snprintf(label,sizeof(label),"%u条 共%lu.%02lu千克",i<FISH_SPECIES_COUNT?e->count[i]:1,
+            (unsigned long)grams/1000,(unsigned long)grams%1000/10);caption(tile,120,130,label,CREAM,RPG_DARK);
+        snprintf(label,sizeof(label),"价值%lu金币",(unsigned long)value);caption(tile,120,147,label,SUN,RPG_DARK);
     } else caption(tile,120,87,"鱼库空空，去钓一条吧",RPG_MUTED,RPG_DARK);
     if(pages) caption(tile,120,166,i==FISH_SPECIES_COUNT?"船尾大鱼：限一条":"装满后自动放流",RPG_LIGHT,RPG_DARK);
-    snprintf(label,sizeof(label),"%02u/%02u  TOTAL %lu coins",pages?g->guide_index+1:0,pages,(unsigned long)fish_hold_value(e));text(tile,27,189,SUN,label);
+    snprintf(label,sizeof(label),"%02u/%02u 总价%lu金币",pages?g->guide_index+1:0,pages,(unsigned long)fish_hold_value(e));
+    ui_text(tile,27,185,207,SUN,RPG_DARK,label);
 }
 static void hanging_fish(const arm_2d_tile_t *tile,const fish_scene_t *self)
 {
@@ -845,37 +939,36 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
     unsigned index=guide?game->guide_index:game->last_species;
     bool known=!guide || game->species_catches[index]>0;
     const fish_species_t *species=&fish_species[index];
-    const fish_species_art_t *art=&fish_species_art[index];
+    const fish_species_art_t *art=fish_species_portrait_art(index,self->portrait_scale_q8);
     uint16_t frame_color=fish_rarity_colors[species->rarity];
+    bool special=known && index>=FISH_BASE_SPECIES_COUNT;
     box(tile,27,43,186,157,SHADOW); box(tile,25,41,186,157,frame_color);
+    if(special) special_frame(tile,25,41,186,157);
     box(tile,27,43,182,153,INK);
     char label[48];
-    snprintf(label,sizeof(label),"%s%s",fish_rarity_labels[species->rarity],guide?"":" CATCH");
+    static const char *tiers[]={"铜","银","金"};
+    snprintf(label,sizeof(label),"%s%s",special?"稀有十倍":tiers[species->rarity],guide?"":" 收获");
     if (known) {
         int scale=self->portrait_scale_q8,height=species->portrait_height_px*scale/256;
         int x=120+(mirror?-1:1)*(48-species->portrait_centre_x)*scale/256;
         int y=95+(28-species->portrait_centre_y)*scale/256;
         if (height>56) y-=(height-56)/2; /* Giants grow upward, leaving captions clear. */
-        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale,&self->portrait_operation);
+        scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale*96/art->sprite->tRegion.tSize.iWidth,&self->portrait_operation);
     }
     else {
         static const uint8_t question[7]={14,17,1,2,4,0,4};
         for (unsigned y=0;y<7;y++) for (unsigned x=0;x<5;x++)
             if (question[y]&(1u<<(4-x))) box(tile,112+x*3,84+y*3,3,3,HILL);
     }
-    int title_x=120-(int)strlen(label)*3;
-    if (known && species->portrait_height_px*self->portrait_scale_q8/256>56) {
-        text(tile,title_x-1,52,INK,label);text(tile,title_x+1,52,INK,label);
-        text(tile,title_x,51,INK,label);text(tile,title_x,53,INK,label);
-    }
-    text(tile,title_x,52,frame_color,label);
-    if (guide) chinese_text(tile,120,126,known?species->name_zh:"未收集",self->guide_name_box);
-    else text(tile,120-(int)strlen(species->ui_name)*3,128,CREAM,species->ui_name);
-    const char *metric=species->size_metric==FISH_SIZE_TOTAL_LENGTH?"TL":
-        species->size_metric==FISH_SIZE_CARAPACE_LENGTH?"CL":"CW";
-    if (known) snprintf(label,sizeof(label),"%s %u.%ucm ~%lug",metric,self->card_size_mm/10,self->card_size_mm%10,(unsigned long)self->card_weight_g);
-    else snprintf(label,sizeof(label),"NO RECORD YET");
-    text(tile,120-(int)strlen(label)*3,145,SUN,label);
+    arm_2d_size_t title_size=arm_lcd_get_string_line_box(label,fish_remarks_font());
+    ui_text(tile,120-title_size.iWidth/2,48,title_size.iWidth,frame_color,INK,label);
+    caption(tile,120,125,known?species->name_zh:"未收集",CREAM,INK);
+    const char *metric=species->size_metric==FISH_SIZE_TOTAL_LENGTH?"全长":
+        species->size_metric==FISH_SIZE_CARAPACE_LENGTH?"背甲长":"头胸甲宽";
+    if (known) snprintf(label,sizeof(label),"%s%u.%u厘米 %lu克",metric,self->card_size_mm/10,self->card_size_mm%10,(unsigned long)self->card_weight_g);
+    else snprintf(label,sizeof(label),"暂无记录");
+    arm_2d_size_t metric_size=arm_lcd_get_string_line_box(label,fish_remarks_font());
+    ui_text(tile,120-metric_size.iWidth/2,144,178,SUN,INK,label);
     uint8_t stars=known?fish_species_stars(species,self->card_size_mm):0;
     static const uint16_t star_rows[9]={0x010,0x038,0x038,0x1ff,0x0fe,0x07c,0x07c,0x0c6,0x082};
     for (unsigned star=0;star<5;star++) {
@@ -895,12 +988,12 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
         caption(tile,120,199,cargo,game->cargo_result==FISH_RELEASED?RED:SUN,INK);
     }
     if (guide) {
-        snprintf(label,sizeof(label),"SEEN %u",game->species_catches[index]);
-        text(tile,8,31,HILL,label);
+        snprintf(label,sizeof(label),"钓获%u次",game->species_catches[index]);
+        ui_text(tile,8,24,90,HILL,INK,label);
     }
     if(known) {
         box(tile,100,28,134,13,INK);
-        text(tile,104,31,SUN,guide?"BEST":"SELL");
+        ui_text(tile,104,24,34,SUN,INK,guide?"纪录":"售价");
         coin_count(tile,139,30,fish_catch_price(index,self->card_size_mm));
     }
 }
@@ -919,6 +1012,8 @@ static void frame_start(arm_2d_scene_t *s)
     fish_save_tick(&self->save,game,game->now);
     self->save_box=arm_lcd_get_string_line_box(fish_save_label(&self->save),fish_remarks_font());
     self->hint_box=arm_lcd_get_string_line_box(control_hint(game),fish_remarks_font());
+    arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->cloud_operation,
+        &c_tileCloudsRGB565,&c_tileCloudsAlphaGRAY8,(arm_2d_point_float_t){46,6},0,2,2);
     if (fish_smoke_test && (self->hint_box.iWidth>222 || self->hint_box.iHeight>19)) {
         fprintf(stderr,"Control hint does not fit HUD: %d x %d\n",self->hint_box.iWidth,self->hint_box.iHeight); exit(1);
     }
@@ -974,11 +1069,18 @@ static void frame_start(arm_2d_scene_t *s)
         const fish_ui_art_t *container=&fish_container_art[game->economy.container];
         arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->container_operation,container->sprite,container->mask,
             (arm_2d_point_float_t){16,18},0,4,4);
+        unsigned item=fish_hold_page_index(&game->economy,game->guide_index);
+        unsigned index=item<FISH_SPECIES_COUNT?item:game->economy.hanging_species;
+        if(index<FISH_SPECIES_COUNT) {
+            const fish_species_art_t *art=&fish_species_art[index];
+            arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hold_portrait_operation,art->sprite,art->mask,
+                (arm_2d_point_float_t){24,14},0,2,2);
+        }
     }
     if(game->economy.hanging_species<FISH_SPECIES_COUNT) {
         const fish_species_art_t *art=&fish_species_art[game->economy.hanging_species];
         arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->hanging_operation,art->sprite,art->mask,
-            (arm_2d_point_float_t){16,28},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*0.55f,0.55f);
+            (arm_2d_point_float_t){8,14},ARM_2D_ANGLE(game->facing>0?-30:30),-game->facing*1.1f,1.1f);
     }
     if (game->mode==FISH_CAUGHT || game->mode==FISH_GUIDE) {
         bool guide=game->mode==FISH_GUIDE;
@@ -994,10 +1096,10 @@ static void frame_start(arm_2d_scene_t *s)
         self->card_weight_g=guide && known?fish_species_weight_g(&fish_species[index],self->card_size_mm):game->last_weight_g;
         /* Prepare once per frame, reuse the operation across all PFB blocks. */
         self->portrait_scale_q8=known?fish_species_scale_q8(&fish_species[index],self->card_size_mm):256;
-        if (known && self->portrait_scale_q8!=256) {
-            const fish_species_art_t *art=&fish_species_art[index];
-            arm_2d_point_float_t pivot={48.0f,28.0f};
-            float scale=self->portrait_scale_q8/256.0f;
+        if (known) {
+            const fish_species_art_t *art=fish_species_portrait_art(index,self->portrait_scale_q8);
+            arm_2d_point_float_t pivot={art->sprite->tRegion.tSize.iWidth/2.0f,art->sprite->tRegion.tSize.iHeight/2.0f};
+            float scale=self->portrait_scale_q8/256.0f*96/art->sprite->tRegion.tSize.iWidth;
             bool mirror=fish_smoke_test==4 && self->smoke_frame%3==1;
             arm_2d_err_t result=arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(
                 &self->portrait_operation,art->sprite,art->mask,pivot,0.0f,mirror?-scale:scale,scale);
@@ -1011,6 +1113,7 @@ static IMPL_PFB_ON_DRAW(draw_scene)
     fish_scene_t *self=(fish_scene_t *)pTarget;
     const fish_game_t *game=&self->game;
     (void)bIsNewFrame;
+    if(fish_smoke_test==28) {landscape(ptTile,game);return arm_fsm_rt_cpl;}
     if (game->mode==FISH_BAG || game->mode==FISH_SHOP || game->mode==FISH_HOLD) box(ptTile,0,0,240,240,RPG_DARK);
     else {
         landscape(ptTile,game); banks_and_docks(ptTile,game); fisherman(ptTile,game);
@@ -1064,6 +1167,8 @@ void fish_scene_init(arm_2d_scene_player_t *player)
     ARM_2D_OP_INIT(scene.exterior_operation);
     ARM_2D_OP_INIT(scene.shore_player_operation);
     for(unsigned side=0;side<2;side++) ARM_2D_OP_INIT(scene.dock_operation[side]);
+    ARM_2D_OP_INIT(scene.hold_portrait_operation);
+    ARM_2D_OP_INIT(scene.cloud_operation);
     scene.use_as__arm_2d_scene_t=(arm_2d_scene_t){ .tCanvas={SKY}, .fnScene=draw_scene,
         .fnOnFrameStart=frame_start, .fnOnFrameCPL=NULL,
         .bUseDirtyRegionHelper=false };

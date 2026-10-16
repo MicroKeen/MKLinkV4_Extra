@@ -1,6 +1,25 @@
-# 北方湿地公园：整体设定 v18
+# 北方湿地公园：整体设定 v23 / North Wetland: Game Design v23
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
+
+## 功能概述 / Feature overview
+
+硬件平台为 **MKLink V4**：HPM5301、240×240 RGB565 ST7789屏幕、单颗可按下的双向旋转编码器。Windows模拟器用于开发和验证同一份游戏规则。
+
+The hardware platform is **MKLink V4**: HPM5301, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button. The Windows simulator develops and validates the same game rules.
+
+1. **鱼饵与道具 / Bait and tackle**：六种鱼饵对11种基础鱼使用不同吸引权重，结合水域、钓层和时段选鱼；线钩影响等待/搏鱼，鹅毛漂延长提竿窗口，夜光漂提高夜间咬钩概率。
+
+   Six bait types have distinct attraction weights for the 11 base species, combined with habitat, fishing layer and time. Line/hook sets affect waiting/fighting, the feather float extends the hook window, and the luminous float improves nighttime bite chance.
+2. **时间与昼夜 / Time and day–night cycle**：现实1秒为游戏1分钟，完整昼夜24分钟，晨昏渐变并影响鱼种活跃度；保存游戏时间，退出期间不快进。
+
+   One real second equals one game minute; a full day lasts 24 real minutes. Dawn/dusk transitions affect species activity. Game time is saved, with no offline advancement.
+3. **经济、商店、船上鱼库 / Economy, shop and boat storage**：左侧码头上岸沿路访问渔具店，07:00–18:00营业；卖鱼换coins并购买装备、饵料和容器。初始小木桶10 kg，可升级20 kg大木桶和35 kg储鱼箱。
+
+   Disembark at the left dock and follow the path to the tackle shop, open 07:00–18:00. Sell fish for coins and buy tackle, bait and containers. The initial 10 kg bucket upgrades to a 20 kg bucket or a 35 kg fish box.
+4. **稀有变异 / Rare variants**：黄化土鲶、长鳍马口、红色长尾鲤、白化鳖，在选中对应基础鱼后独立抽取1%；彩色外框、独立收藏/库存、普通计算价格×10，并有商店专属对白。
+
+   Xanthic catfish, longfin hooksnout minnow, red longtail carp and albino softshell each have a conditional 1% chance after their base species is selected. They have rainbow frames, separate collection/storage records, ten times the ordinary calculated price and special shop dialogue.
 
 ## 设备与操作
 
@@ -10,13 +29,13 @@
 
 ## 地图、背景与场景
 
-水域x=56–904，船中心132–828，左右码头可上下船；13节点虚拟水深0–6m，五分区为芦苇浅湾、开阔水面、泥底深槽、缓流入口、浅岸砾石。左岸延伸到x=-284，商店入口x=-260，入口±16像素短按进入。船与水域碰撞坐标不变，岸上相机可到-308，经过小路/码头世界x=0时连续移动。
+水域x=56–904，船中心132–828，左右码头可上下船；13节点虚拟水深0–6m，五分区为芦苇浅湾、开阔水面、泥底深槽、缓流入口、浅岸砾石。左岸延伸到x=-284，商店入口x=-260，入口±16像素短按进入。船与水域碰撞坐标不变，岸上相机可到-336，经过小路/码头世界x=0时连续移动。
 
-原湖景的山、森林、岸、水面保留，夜空在原山林轮廓上方转为接近黑的深蓝，少量星星和圆润月牙随原视差移动；日月被远山和树冠遮挡。生成小路使用同样2像素颗粒，和西岸重叠24像素，码头在上层盖接；外屋也用2倍粗像素。渔具店为柜台近景与放大的老人上半身，保留四种表情和9种情境各两句台词，老人位于柜台后方，原柜台前沿遮挡人物下缘；左侧显示五行滚动商品列表，旋转浏览16个稳定条目，列表保留文字与选中高亮，底部左下角以2倍整数缩放显示选中装备图标，右侧按名称/售价、描述、实际效果分三行显示详情。重绘粗像素背景，壁灯、线轴和浮漂挂在墙上，柜台只有窄台沿与正面木板，没有深斜桌面。
+原湖景的山、森林、岸、水面保留，夜空在原山林轮廓上方转为接近黑的深蓝，少量星星和圆润月牙随原视差移动；日月被远山和树冠遮挡。生成小路使用同样2像素颗粒，和西岸重叠24像素，码头在上层盖接；外屋也用2倍粗像素。渔具店为柜台近景与放大的老人上半身，保留四种表情和14种情境各两句台词，老人位于柜台后方，原柜台前沿遮挡人物下缘；左侧显示五行滚动商品列表，旋转浏览16个稳定条目，列表保留文字与选中高亮，底部左下角以2倍整数缩放显示选中装备图标，右侧按名称/售价、描述、实际效果分三行显示详情。重绘粗像素背景，壁灯、线轴和浮漂挂在墙上，柜台只有窄台沿与正面木板，没有深斜桌面。
 
 ## 鱼种、钓层与活跃时间
 
-保留11种鱼。按落点、水深、钓层、分区、饵料和游戏时间筛选权重；趴地虎、河南华溪蟹仅近岸底层，土鲶仅底层。默认钓到底，行囊可选表层、0.5/1/2/3/4.5/6m。铜/银/金70/25/5为基础比例，实际局部比例随条件变化；卡面稀有度不变，体型星级按物种独立评级。
+保留11种鱼。按落点、水深、钓层、分区、饵料和游戏时间筛选权重；趴地虎、溪蟹仅近岸底层，土鲶仅底层。默认钓到底，行囊可选表层、0.5/1/2/3/4.5/6m。铜/银/金70/25/5为基础比例，实际局部比例随条件变化；卡面稀有度不变，体型星级按物种独立评级。
 
 活跃度是相对出现权重的百分比，100为基础值；这是虚构湿地的游戏数值，不是自然调查结论。5–7点与18–20点按小时线性插值，6点/19点达到晨昏系数，7–18点使用白天系数，20–5点使用夜间系数。午夜连续，非活跃时段仍有机会；不突破水域/钓层/饵料限制。**斑鳜没有夜间偏好：白天和夜间都是100，只在晨昏轻微增加。**
 
@@ -25,14 +44,14 @@
 | 鲫鱼 | 100 | 125 | 90 |
 | 鲤鱼 | 100 | 130 | 85 |
 | 马口鱼 | 130 | 115 | 60 |
-| 土鲶（黄河鲶鱼） | 65 | 125 | 155 |
+| 土鲶 | 65 | 125 | 155 |
 | 子陵吻虾虎鱼（趴地虎） | 115 | 110 | 80 |
 | 黑鱼（乌鳢） | 125 | 130 | 65 |
 | 黄颡鱼 | 65 | 130 | 155 |
 | 䱗（餐条／白条） | 135 | 110 | 55 |
 | 斑鳜 | 100 | 115 | 100 |
 | 中华鳖 | 85 | 110 | 130 |
-| 河南华溪蟹 | 70 | 125 | 145 |
+| 溪蟹 | 70 | 125 | 145 |
 
 先用环境基础权重乘时间系数，再进行原来的物种/体型抽样。切换时间不改变星级阈值、体型范围、重量公式或售价公式；当前一竿的候选在抛竿时确定，等待期间经过时段边界不重新选鱼。活动表保存在 `data/species.json` 的 `game_distribution.activity_percent`。
 
@@ -42,7 +61,9 @@
 
 夜光漂夜间发明亮蓝绿色光，环境压暗后绘制，附轻微光晕，只显示露出水面的部分；白天维持原色。完全入夜时每轮真实咬钩概率相对提高15%，例如70%→80%（整数向下取整），上限100%，晨昏随暗度渐变。这个加成缩短同等条件下的等待，不改变鱼种权重或提竿窗口。鹅毛漂独立把线组修正后的可提竿窗口延长15%，试饵延迟不变，白天和夜间都有效；红白漂没有额外加成。
 
-搏鱼仍以20 ms整数步进更新张力、松线、距离、爆发与体力；竿影响抛距/收线，线钩影响强度/距离/窗口/隐蔽性。原有断线、松脱、超距、错失和恢复逻辑保留，不提高稀有鱼默认尺寸。
+搏鱼仍以20 ms整数步进更新张力、松线、距离、爆发与体力；竿影响抛距/收线，线钩影响强度/距离/窗口/隐蔽性。v22线长为细线4.5米、通用6.5米、强韧8.5米，抛竿/预览同步受线长限制；最大出线后不能继续放线。鱼冲刺可产生10%以内的竿身弹性超距，竿形随之弯曲；持续超距2000 ms断线，收回标称范围立即解除计时。每次爆发约70%远离玩家、30%靠近玩家；鲤鱼、马口、斑鳜位移系数135%、140%、130%，其他基础鱼100%，变异继承基础鱼。尺寸、售价、星级和变异概率不变。
+
+Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actual casts and previews. Manual payout stops at nominal length. Fish surges can use up to 10% elastic rod excess; continuous excess for 2,000 ms breaks the line, while retrieving into nominal range clears the timer. Each burst is about 70% away from the player and 30% toward the player, with movement factors of 135%/140%/130% for carp/hooksnout minnow/mandarin fish and 100% for other base species. Variants inherit their parents. Size, prices, stars and rare probabilities are unchanged.
 
 ## 鱼获容器与船尾
 
@@ -54,7 +75,7 @@
 
 营业时间07:00 AM–06:00 PM（07:00–18:00），外屋正面亮灯/熄灯两种状态表示营业，不再挂牌。尝试进入关门商店时，主角上方显示“打烊了”1.6秒。打烊无人且无法进入或交易，18点退出店内，查看容器后也不能返回已打烊的店；不增加打烊对话。店主台词与表情可在 `docs/merchant-dialogue.md` 修改，装备描述草稿在 `docs/tackle-descriptions.md`。
 
-币重分开：coins为货币，g/kg为重量。单鱼售价为 `max(1, floor((base * size_mm² + typical_mm²/2) / typical_mm²))`，`typical_mm=mean_x2_mm/2`。鱼种基础价仍为白条6、鲫鱼8、鲤鱼12、土鲶12、河南华溪蟹10、马口16、趴地虎16、黑鱼28、黄颡鱼30、中华鳖60、斑鳜72。出售一次结算容器及船尾全部鱼，不清图鉴；超过金币上限整笔拒绝。
+币重分开：coins为货币，g/kg为重量。单鱼售价为 `max(1, floor((base * size_mm² + typical_mm²/2) / typical_mm²))`，`typical_mm=mean_x2_mm/2`。鱼种基础价仍为白条6、鲫鱼8、鲤鱼12、土鲶12、溪蟹10、马口16、趴地虎16、黑鱼28、黄颡鱼30、中华鳖60、斑鳜72。出售一次结算容器及船尾全部鱼，不清图鉴；超过金币上限整笔拒绝。
 
 | 商品 | coins | 交付 |
 |---|---:|---|
@@ -72,22 +93,62 @@
 
 系统单调毫秒驱动，每1秒现实时间为1分钟游戏时间，一昼夜24分钟，05–07渐亮、18–20渐暗。新游戏起始06:00加运行秒数，读档恢复游戏分钟，退出期间不快进。毫秒余量与uint32回绕安全。
 
-存档v4仍236 B，读取v1/v2/v3。首次升级保持图鉴、金币、饵料库存、鱼获、容器和时间，把竿/线组/漂及所有权恢复为竹竿/通用线钩/红白漂，当前饵料恢复普通假饵，钓深到底。偏移200为容器，201记录装备初始化世代1，202–203保留零；成功写入后，新买的高级装备不再重置。保持原密钥、UUID派生、SD目录和鱼种/装备/饵料索引；迁移写非活动槽、同步并读回校验后确认。旧固件不能读v4，切回本版本可恢复。存档期不操作背光PA26。
+存档v5为292B，读取v1/v2/v3/v4，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。追加四种稀有图鉴和实物记录，V5使用独立A/B文件，原文件只读保留，避免切回旧版覆盖稀有进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
 
 标准工程默认 `FISH_LCD_ROTATION=0`，对应ST7789由原2转向180°，240×240窗口按驱动使用Y_SHIFT=80；其他工程未指定时保持默认2。常用Embedded Studio工程在 `hpm5301evklite_flash_uf2_debug/segger_embedded_studio/mklink_sample_fishing.emProject`，选择Debug。方向与帧率仍需实板确认。
 
-公开仓库只保留实际运行链接的 C 位图/蒙版/字形及必需许可；原图、备用版本、PNG/图集、TTF、提示词与预览均留本地。没有新增整屏缓冲。Windows36项CTest、标准demo10项测试、GNU UF2/XIP及SEGGER构建，具体结果见验证报告。尚未实板烧录、掉电或栈水位验证，也未创建Android/微信运行应用。
+公开仓库只保留实际运行链接的 C 位图/蒙版/字形及必需许可；原图、备用版本、PNG/图集、TTF、提示词与预览均留本地。没有新增整屏缓冲。Windows39项CTest、标准demo11项测试、GNU UF2/XIP及SEGGER构建，具体结果见验证报告。尚未实板烧录、掉电或栈水位验证，也未创建Android/微信运行应用。
 
 商店素材统一正面、较平面的构图。外屋64×48逻辑像素加采样边框，整数2倍显示约128×96；原图重新生成到目标网格，门框约38像素，略高于36像素主角。营业亮窗开门，打烊暗窗关门；两个状态共用轮廓，熄灯状态只导出实际变化的门窗区域，避免整屋跳动及重复占用Flash。内景120×72、店主每帧40×50，全部2倍最近邻显示；柜台水平前沿遮挡人物下缘。商品改为五行文字列表，已移除九组独立商品摆拍位图及对应变换操作。背景保留RGB565灯光色，不量化丢失壁灯亮部。
 
-左岸转动一次即以32像素/秒持续慢走，反向转动换向；短按停止并执行交互。走到商店门口、西码头上岸点或岸边界自动停止，菜单中不会继续行走。单帧补算上限250 ms，避免卡顿后的瞬移；计时支持uint32回绕。地面使用生成的48×46逻辑像素草地/土路贴图，2倍显示并连续铺满左岸下方，店铺下不再透出湖水。
+左岸转动一次即以32像素/秒持续慢走，反向转动先停住，再转一格反向起步；短按停止并执行交互。走到商店门口、西码头上岸点或岸边界自动停止，菜单中不会继续行走。单帧补算上限250 ms，避免卡顿后的瞬移；计时支持uint32回绕。地面使用生成的48×46逻辑像素草地/土路贴图，2倍显示并连续铺满左岸下方，店铺下不再透出湖水。
 
 六条竿/漂描述由 `docs/tackle-descriptions.md` 导出到运行界面，店主台词由 `docs/merchant-dialogue.md` 导出，新增汉字同步位图字库。价格和存档格式不变。
 
-码头交互替代行囊上下船按钮：船抵达码头自动停止，再向岸方向转动一格上岸并开始慢走；步行回到码头自动停止，再向水方向转动一格登船，船保持停泊。左码头逆转上岸/顺转登船，右码头顺转上岸/逆转登船。菜单仅保留图鉴、存档、返回；原DOCK菜单ID保留为内部空位，未序列化进存档。
+码头交互替代行囊上下船按钮：船抵达码头自动停止，再向岸方向转动一格上岸并开始慢走；步行回到码头自动停止，再向水方向转动一格登船，船保持停泊。码头方向操作保持，去掉顺逆方向上船提示。菜单仅保留图鉴、存档、返回；原DOCK菜单ID保留为内部空位，未序列化进存档。
 
 收鱼卡显示当前鱼的出售价格（SELL＋金币图标），已解锁图鉴显示该鱼最佳纪录尺寸对应的价格（BEST）；未解锁项不显示售价。鱼库按每种实际存货汇总价值，商店“出售鱼获”显示整批售价。价格展示统一调用实际结算函数，不另外维护估价表。
 
 岸上小人按船上渔夫身份重绘：棕色钓鱼帽、绿外套、深蓝裤，三帧14×20像素含采样边，内容高18像素，以2倍显示为36像素，与船上人物使用同样的2像素颗粒。站立帧0；移动每6像素在接触/经过两帧间交替，停住立即回站姿。共享裁切与脚底基线，左右镜像，步态计数不进存档。详情图标复用已批准素材缩为14×14并加1像素采样边，2倍显示为28像素内容，RGB565共7168B，无新增原图发布。
 
 接岸修正v19：码头接岸段按原土路重绘，土路在世界x=0处延伸到码头下24像素，以同网格A8蒙版重叠过渡，避免竖直碎石断面。东岸镜像共用资源并有地面衬底。码头仅存56×47逻辑像素与1像素边框（58×49，RGB565/A8共8526B），运行2倍显示，替代原112×94展开数组，节省23058B像素载荷。脚底统一y=134，岸边与木板不再跳高；提示框移到放大人物头顶上方。左岸镜头最小值-336保证完整显示放大商店，门口对齐人物。43幅新PFB捕获覆盖两岸、边界移动、昼夜、上下船及商店营业/打烊比例。
+
+## 稀有变异、云层与停步 v20
+
+11种基础鱼外另有黄化土鲶、长鳍马口、红色长尾鲤、白化鳖，选中对应基础鱼后独立抽取1%；成功起鱼后记录为四个新索引11–14，单独图鉴/库存，彩色外框，出售价格为同尺寸普通鱼计算并取整后的10倍。携带时有四类专属招呼，普通进店5%提示收购线索。共14类28句台词，原稿保留；详见[稀有变异设定](rare-variants.md)。
+
+行走中反向一格先停止，第二格再反向走；停在码头后另转一格上下船，不显示顺向上船之类提示。云重绘为舒展的薄云，90×10逻辑像素加边框（3312B）整数2倍显示，以原山线裁切，始终位于山后，不占用额外整屏缓存。
+
+存档升级为v5（260B载荷、292B文件），前204B基础字段不重排，追加四种稀有进度与库存。读取v1/v2/v3/v4，V4装备保持；继续使用原密钥/UUID/目录。新V5_A/B槽与原A/B文件分开，原文件只读保留，有效V5优先加载，防止切回旧版覆盖稀有鱼记录。
+
+## 大鱼细节 v21 / Large-fish detail v21
+
+黑鱼、鲤鱼、土鲶各有48×28普通贴图与96×56细节贴图。收鱼卡和已解锁图鉴按实际显示比例选择：超过原96×56参考画布的1倍比例时使用细节版，较小时仍用原版，体型与屏幕显示尺寸不变。细节从已批准的原始母图重新采样，保留16色RGB565像素风、二值透明蒙版、原朝向和外形比例；不对低清贴图插值造细节。小鱼、鱼库和船尾保持原显示颗粒，四种稀有变异及所有数值规则不变。
+
+Snakehead, carp and catfish each have a 48×28 regular tile and a 96×56 detail tile. Catch cards and unlocked guide entries select detail art when the display scale exceeds 1× the original 96×56 reference canvas; smaller presentations retain the original pixels and all on-screen sizes stay unchanged. Detail is resampled from the approved masters, retaining the 16-color RGB565 pixel style, binary alpha, facing and proportions. Small fish, storage and stern fish retain their original pixel density; rare variants and gameplay values are unchanged.
+
+11种基础鱼取消预先展开的2倍重复像素，统一以48×28原生贴图绘制；释放133,056 B，三种细节贴图增加48,384 B，位图净节省84,672 B（约82.7 KiB），另有少量资源表与绘制代码变化。沿用Arm-2D/PFB变换操作，每帧准备一次、分块复用，不增加整屏缓冲、运行时解码或堆分配。最终Flash/RAM占用见`validation.md`。
+
+The 11 base sprites now store native 48×28 pixels instead of duplicated 2× pixels, recovering 133,056 bytes. Three detail tiles add 48,384 bytes, for a net bitmap saving of 84,672 bytes (about 82.7 KiB), plus small table/code changes. Existing Arm-2D/PFB transforms are prepared once per frame and reused across blocks, with no additional full-screen buffer, runtime decoder or heap allocation. Final Flash/RAM usage is recorded in `validation.md`.
+
+## 汉化、视差与内容核实 v22 / Localization, parallax and content audit v22
+
+收鱼卡与鱼库的鱼名、尺寸类型/长度/重量、状态/水深/钓深、售价/纪录、商店价格/已拥有和装备数值说明已补齐中文。v23统一恢复原有12像素中文字体；撤销v22新增的8像素小字库，价格、鱼获数值及状态栏通过对齐和间距调整适配，不依赖运行时字体文件。左岸使用连续有符号远景视差、原图边缘镜像延展，云每900 ms漂移一像素并保持山后遮挡，无新增背景位图。
+
+Fish names, metrics, states, depths, prices, records, ownership and tackle properties are localized using the original 12-pixel Chinese font throughout in v23. The v22 8-pixel subset is removed; price, catch metrics and HUD rows use adjusted alignment and spacing. Signed shore parallax reflects the existing panorama edge; clouds drift one pixel per 900 ms and remain behind the skyline, with no new background bitmap.
+
+11种基础鱼各20万次实际抛竿选择，共220万次，全部15个收藏项均能抽中并完成起鱼/图鉴/售价记录。趴地虎未被条件误排除：右岸浅水虾饵钓底的专门匹配条件下抽中136363次；这不是全局概率。店主14类情境、28句台词和四种立绘的逻辑与实际PFB画面均核对通过。完整鱼种抽样、线长/竿身弹性、双向挣扎与界面规则见[v22玩法与核实](v22-gameplay-and-audit.md)。
+
+The audit runs 200,000 actual cast selections for each of 11 base species (2.2 million total); all 15 collection entries are selected and pass landing, guide and price checks. Goby is reachable, with 136,363 selections under its targeted right-bank shallow/shrimp/bottom profile, rather than a general probability. All 14 merchant contexts, 28 lines and four portraits pass logic and actual PFB checks. The linked v22 audit documents complete results and current rules.
+
+## 字号与提示修正 v23 / Font and hint correction v23
+
+全部中文统一使用原有12像素字体；移除v22新增的8像素字库，紧凑栏通过对齐和间距调整适配。移除“鱼竿弯了！快收线”提示；弯竿表现、两秒弹性窗口及搏鱼规则不变。蟹的显示名改为“溪蟹”，土鲶去掉真实水域别称，地图设定不指向真实地区；物种索引和存档不变。
+
+All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is removed, with alignment and spacing adjustments for compact rows. The misleading reel-now message during rod flex is removed; rod animation, the two-second elastic window and fight rules are unchanged. Crab uses the generic display name “溪蟹” (stream crab), catfish loses its geographic alias, and the setting is a fictional wetland. Species indices and saves are preserved.
+
+## 后续规划，暂不执行 / Future plan, not implemented
+
+多地图扩展时，可将地图位图素材存放在SD卡上，进入或切换地图时花费几秒读取所需资源，再供场景绘制使用。允许显式加载等待，以减少应用Flash对地图数量的限制。后续需要核算资源缓存与RAM预算，并协调现有SD存档访问。本次只记录方案，不实现SD素材存储、加载器或加载画面。
+
+For a future multi-map expansion, store map bitmaps on the SD card and allow a few seconds to load the required assets when entering or switching maps. An explicit loading period can reduce the limit imposed by application Flash capacity. Cache/RAM budgets and coordination with SD save access will need evaluation. This is a recorded proposal only; SD asset storage, loaders and loading screens are not implemented in this update.

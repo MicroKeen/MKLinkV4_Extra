@@ -8,7 +8,7 @@ int main(void)
     for (int i=0;i<FISH_SPECIES_COUNT;i++) {
         const fish_species_t *s=&fish_species[i];
         assert(s->min_mm<=s->typical_min_mm && s->typical_min_mm<=s->typical_max_mm && s->typical_max_mm<=s->max_mm);
-        assert(s->layers && s->encounter_weight);
+        assert(s->layers && (i>=FISH_BASE_SPECIES_COUNT || s->encounter_weight));
         assert(s->mean_x2_mm>=s->min_mm*2 && s->mean_x2_mm<=s->max_mm*2);
         assert(s->stddev_x2_mm>0);
         assert(fish_species_stars(s,s->min_mm)==1 && fish_species_stars(s,s->max_mm)==5);
@@ -43,7 +43,7 @@ int main(void)
         assert(size>=fish_species[species].min_mm && size<=fish_species[species].max_mm);
         seen|=1u<<species;
     }
-    assert(seen==((1u<<FISH_SPECIES_COUNT)-1));
+    assert(seen==((1u<<FISH_BASE_SPECIES_COUNT)-1));
     /* Compare distribution shape and rarity per species, not just global averages. */
     puts("id,samples,mean_mm,star1,star2,star3,star4,star5,typical,min_endpoint,max_endpoint");
     for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {

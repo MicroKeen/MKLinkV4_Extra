@@ -1,12 +1,24 @@
 #include "fish_species.h"
 #include "fish_rules.h"
 
-static uint32_t next_random(uint32_t *state)
+uint32_t fish_random_next(uint32_t *state)
 {
     uint32_t value=*state ? *state : 0x6d2b79f5u;
     value^=value<<13; value^=value>>17; value^=value<<5;
     *state=value;
     return value;
+}
+#define next_random fish_random_next
+unsigned fish_species_parent(unsigned index)
+{
+    static const uint8_t parent[FISH_VARIANT_COUNT]={3,2,1,9};
+    return index>=FISH_BASE_SPECIES_COUNT && index<FISH_SPECIES_COUNT?parent[index-FISH_BASE_SPECIES_COUNT]:index;
+}
+unsigned fish_species_special_roll(uint32_t *state,unsigned index)
+{
+    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_SPECIES_COUNT;v++)
+        if(fish_species_parent(v)==index) return next_random(state)%100==0?v:index;
+    return index;
 }
 
 void fish_species_roll(uint32_t *state, uint8_t *index, uint16_t *size_mm)

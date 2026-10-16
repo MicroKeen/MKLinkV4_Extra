@@ -7,10 +7,10 @@
 #include <time.h>
 #include "save_long_vector.h"
 
-static uint8_t slots[2][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
-static int exists[2],read_error[2],write_result=1;
+static uint8_t slots[4][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
+static int exists[4],read_error[4],write_result=1;
 static unsigned queued_slot,writes;
-static size_t slot_lengths[2];
+static size_t slot_lengths[4];
 static const uint8_t key[32]={1,2,3};
 int fish_storage_init(uint8_t k[32]) {memcpy(k,key,32);return 0;}
 int fish_storage_read(unsigned slot,uint8_t *file,size_t len)
@@ -33,7 +33,7 @@ static void reset(void)
 {
     memset(slots,0,sizeof(slots));memset(exists,0,sizeof(exists));memset(read_error,0,sizeof(read_error));
     writes=0;write_result=1;
-    slot_lengths[0]=slot_lengths[1]=FISH_SAVE_FILE_BYTES;
+    for(unsigned i=0;i<4;i++) slot_lengths[i]=FISH_SAVE_FILE_BYTES;
 }
 static void caught(fish_game_t *g)
 {
@@ -90,64 +90,80 @@ int main(void)
     payload[18+4]=0xff;payload[19+4]=0xff;assert(!fish_save_unpack(&loaded,payload));
     fish_save_pack(&g,payload);unchanged=loaded;payload[200]=FISH_CONTAINER_COUNT;
     assert(!fish_save_unpack(&loaded,payload) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
-    /* A real v2 file has zero reserved bytes at 200..203 and gains a small
-     * bucket on migration; stored cargo and currency stay exactly unchanged. */
+    /* Exact historical v2/v3/v4 payloads remain 204 bytes, not v5 size. */
     reset();fish_game_init(&g,0);caught(&g);fish_save_pack(&g,payload);payload[201]=0;
-    memcpy(file,"FSG1",4);file[4]=2;file[5]=0;file[6]=FISH_SAVE_PAYLOAD_BYTES;file[7]=0;
+    memcpy(file,"FSG1",4);file[4]=2;file[5]=0;file[6]=204;file[7]=0;
     memset(file+8,0,8);file[8]=9;
-    fish_save_seal(key,file,16,payload,FISH_SAVE_PAYLOAD_BYTES,file+16,file+32);
-    memcpy(slots[0],file,sizeof(file));exists[0]=1;
+    fish_save_seal(key,file,16,payload,204,file+16,file+32);
+    memcpy(slots[2],file,236);slot_lengths[2]=236;exists[2]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==9 && loaded.save_requested && loaded.economy.container==0 && loaded.economy.coins==123);
     assert(loaded.economy.hanging_species==1 && fish_hold_weight(&loaded.economy)==fish_hold_weight(&g.economy));
     assert(loaded.rod_index==0 && loaded.line_index==1 && loaded.float_index==0 && loaded.bait_index==5);
-    manual(&s,&loaded,1);assert(s.sequence==10 && slots[1][4]==4 && !memcmp(slots[0],file,sizeof(file)));
-    /* Authenticated v3: reset equipment once, preserve every other field,
-     * then allow newly purchased equipment to survive the next boot. */
+    manual(&s,&loaded,1);assert(s.sequence==10 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[2],file,236));
     reset();g.economy.container=2;fish_save_pack(&g,payload);payload[201]=0;
-    file[4]=3;file[8]=11;
-    fish_save_seal(key,file,16,payload,FISH_SAVE_PAYLOAD_BYTES,file+16,file+32);
-    memcpy(slots[0],file,sizeof(file));exists[0]=1;
+    file[4]=3;file[8]=11;fish_save_seal(key,file,16,payload,204,file+16,file+32);
+    memcpy(slots[2],file,236);slot_lengths[2]=236;exists[2]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==11 && loaded.save_requested && loaded.rod_index==0 && loaded.line_index==1);
     assert(loaded.float_index==0 && loaded.bait_index==5 && loaded.depth_index==FISH_DEPTH_OPTION_COUNT-1);
     assert(loaded.economy.rods==1 && loaded.economy.lines==2 && loaded.economy.floats==1);
     assert(!memcmp(loaded.species_catches,g.species_catches,sizeof(g.species_catches)) &&
            !memcmp(loaded.species_best_size_mm,g.species_best_size_mm,sizeof(g.species_best_size_mm)));
-    assert(loaded.catches==g.catches && loaded.last_species==g.last_species && loaded.last_size_mm==g.last_size_mm);
     fish_economy_t preserved=g.economy;preserved.rods=1;preserved.lines=2;preserved.floats=1;
     assert(!memcmp(&loaded.economy,&preserved,sizeof(preserved)) && loaded.game_minute==g.game_minute);
-    manual(&s,&loaded,1);assert(s.sequence==12 && slots[1][4]==4 && !memcmp(slots[0],file,sizeof(file)));
-    /* Power-cycle after migration and after acquiring new gear. */
+    manual(&s,&loaded,1);assert(s.sequence==12 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[2],file,236));
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);assert(!loaded.save_requested && loaded.rod_index==0);
     loaded.economy.rods=7;loaded.economy.lines=7;loaded.economy.floats=7;
     loaded.rod_index=2;fish_game_equip_line(&loaded,2);loaded.float_index=2;
     manual(&s,&loaded,2);
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(loaded.rod_index==2 && loaded.line_index==2 && loaded.float_index==2 && !loaded.save_requested);
-    /* A valid v4 slot prevents another reset after older firmware writes v3. */
-    file[8]=20;fish_save_seal(key,file,16,payload,FISH_SAVE_PAYLOAD_BYTES,file+16,file+32);
-    memcpy(slots[0],file,sizeof(file));exists[0]=1;
+    file[8]=20;fish_save_seal(key,file,16,payload,204,file+16,file+32);
+    memcpy(slots[2],file,236);slot_lengths[2]=236;exists[2]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
-    assert(s.sequence==20 && loaded.rod_index==2 && loaded.economy.rods==7 && loaded.save_requested);
-    /* v4 cannot authenticate an uninitialized marker as an ordinary save. */
-    file[4]=4;fish_save_seal(key,file,16,payload,FISH_SAVE_PAYLOAD_BYTES,file+16,file+32);
-    assert(!fish_save_decode(key,file,sizeof(file),&seq,output));
+    assert(s.sequence==13 && loaded.rod_index==2 && loaded.economy.rods==7 && !loaded.save_requested);
+    file[4]=4;fish_save_seal(key,file,16,payload,204,file+16,file+32);
+    assert(!fish_save_decode(key,file,236,&seq,output));
+    /* A v4 upgrade preserves bought gear, and maps old empty sentinel11 to15. */
+    reset();fish_save_pack(&g,payload);payload[187]=11;memset(payload+188,0,10);
+    file[4]=4;file[8]=30;fish_save_seal(key,file,16,payload,204,file+16,file+32);
+    memcpy(slots[2],file,236);slot_lengths[2]=236;exists[2]=1;
+    fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
+    assert(s.sequence==30 && loaded.save_requested && loaded.rod_index==2 && loaded.line_index==2);
+    assert(loaded.economy.hanging_species==FISH_SPECIES_COUNT && loaded.economy.container==2);
+    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_SPECIES_COUNT;i++) assert(!loaded.species_catches[i] && !loaded.economy.count[i]);
+    manual(&s,&loaded,1);fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
+    assert(!loaded.save_requested && loaded.rod_index==2);
     /* Actual authenticated v1 file: exact 92 bytes, same key/indices/sequence.
      * Boot schedules v4 in inactive slot; old active file survives failed write. */
     reset();fish_save_pack(&g,payload);
     uint8_t legacy[FISH_SAVE_LEGACY_FILE_BYTES]={0};memcpy(legacy,"FSG1",4);
     legacy[4]=1;legacy[6]=FISH_SAVE_LEGACY_PAYLOAD_BYTES;legacy[8]=7;
     fish_save_seal(key,legacy,16,payload,FISH_SAVE_LEGACY_PAYLOAD_BYTES,legacy+16,legacy+32);
-    memcpy(slots[0],legacy,sizeof(legacy));slot_lengths[0]=sizeof(legacy);exists[0]=1;
+    memcpy(slots[2],legacy,sizeof(legacy));slot_lengths[2]=sizeof(legacy);exists[2]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.active_slot==0 && s.sequence==7 && loaded.catches==3 && loaded.save_requested);
     assert(loaded.rod_index==0 && loaded.bait_index==5 && loaded.economy.bait_stock[4]==5 && loaded.economy.coins==0);
     write_result=-1;fish_save_tick(&s,&loaded,1);fish_save_tick(&s,&loaded,2);
-    assert(s.sequence==7 && !memcmp(slots[0],legacy,sizeof(legacy)));
+    assert(s.sequence==7 && !memcmp(slots[2],legacy,sizeof(legacy)));
     write_result=1;manual(&s,&loaded,3);assert(s.sequence==8 && s.active_slot==1);
     fish_game_init(&loaded,9);fish_save_init(&s,&loaded,9);
     assert(s.sequence==8 && loaded.catches==3 && loaded.economy.rods==1);
+
+    /* Every rare guide/cargo record and exact x10 valuation survive v5. */
+    fish_game_init(&g,0);g.economy.container=2;
+    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_SPECIES_COUNT;i++) {
+        uint16_t size=fish_species[i].mean_x2_mm/2;g.species_catches[i]=1;g.species_best_size_mm[i]=size;
+        ++g.catches;g.last_species=i;g.last_size_mm=size;
+        assert(fish_hold_add(&g.economy,i,size,fish_species_weight_g(&fish_species[i],size))==FISH_STORED);
+    }
+    fish_save_pack(&g,payload);fish_save_encode(key,44,payload,file);
+    assert(fish_save_decode(key,file,sizeof(file),&seq,output));fish_game_init(&loaded,0);
+    assert(fish_save_unpack(&loaded,output) && loaded.last_species==14 && loaded.catches==4);
+    assert(!memcmp(g.species_catches,loaded.species_catches,sizeof(g.species_catches)));
+    assert(!memcmp(&g.economy,&loaded.economy,sizeof(g.economy)));
+    payload[208]^=1;unchanged=loaded;assert(!fish_save_unpack(&loaded,payload) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
 
     reset();fish_game_init(&g,0);fish_save_init(&s,&g,0);caught(&g);
     fish_save_tick(&s,&g,299999);assert(!writes);

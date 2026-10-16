@@ -43,7 +43,7 @@
         94,
         92
       ],
-      "distance_limit_cm": 600
+      "distance_limit_cm": 450
     },
     {
       "id": "standard",
@@ -60,7 +60,7 @@
         74,
         70
       ],
-      "distance_limit_cm": 800
+      "distance_limit_cm": 650
     },
     {
       "id": "heavy",
@@ -77,7 +77,7 @@
         50,
         62
       ],
-      "distance_limit_cm": 1000
+      "distance_limit_cm": 850
     }
   ],
   "floats": [
@@ -230,7 +230,7 @@
         7
       ],
       "short_description_zh": "大鱼吃小鱼，小鱼吃虾米",
-      "description_zh": "小块虾肉，偏向马口、趴地虎和河南华溪蟹，也兼顾黄颡鱼、斑鳜。中华鳖仍然很稀有。"
+      "description_zh": "小块虾肉，偏向马口、趴地虎和溪蟹，也兼顾黄颡鱼、斑鳜。中华鳖仍然很稀有。"
     },
     {
       "id": "plastic",

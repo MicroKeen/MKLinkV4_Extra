@@ -55,6 +55,19 @@ bool fish_game_strike_ready(const fish_game_t *g)
 }
 
 int fish_game_distance(const fish_game_t *g) { return 10000-g->reel_units; }
+unsigned fish_game_max_cast_px(const fish_game_t *g)
+{
+    unsigned rod=fish_rods[g->rod_index].max_cast_px;
+    unsigned line=fish_line_sets[g->line_index].distance_limit_cm/FISH_WORLD_CM_PER_PIXEL;
+    return rod<line?rod:line;
+}
+unsigned fish_game_rod_flex(const fish_game_t *g)
+{
+    int extra=fish_game_distance(g)-(int)g->line_capacity_units;
+    if(g->mode!=FISH_FIGHT || extra<=0)return 0;
+    unsigned room=g->line_capacity_units/10;if(!room)room=1;
+    return (unsigned)clamp(20+extra*60/(int)room+g->range_ms*20/2000,20,100);
+}
 
 /* Virtual world scale: 25 pixels per metre. Preserve normalized reel progress
  * for fixed-point motion; convert the actual cast span and physical line length. */
@@ -173,7 +186,14 @@ static void fight_update(fish_game_t *g)
             }
             burst=false;
         }
-        if (burst) g->reel_units=clamp(g->reel_units-(s->fight_style==FISH_FIGHT_SLOW?pull/35:1+pull/20),10000-(int)g->line_capacity_units,10000);
+        if (burst) {
+            if(!g->run_burst)g->run_direction=fish_random_next(&g->motion_random_state)%100<70?1:-1;
+            int run=s->fight_style==FISH_FIGHT_SLOW?pull/35:2+pull/20;
+            run=(run*s->run_percent+50)/100;
+            unsigned flex=g->line_capacity_units/10;if(!flex)flex=1;
+            g->reel_units=clamp(g->reel_units-g->run_direction*run,10000-(int)(g->line_capacity_units+flex),9999);
+        }
+        g->run_burst=burst;
         /* Bring the contact point toward the boat as line is retrieved. Filter
          * detents and burst transitions so neither can teleport the float. */
         int progress=clamp(g->reel_units,-8000,10000);
@@ -199,11 +219,12 @@ static void fight_update(fish_game_t *g)
             -(int)fish_rules.overload_recovery_per_tick_ms),0,fish_rules.overload_limit_ms);
         g->slack_ms=(uint16_t)clamp(g->slack_ms+(g->tension<=g->line_strength*12/100?(burst?40:20):
             -(int)fish_rules.slack_recovery_per_tick_ms),0,fish_rules.slack_limit_ms);
-        g->range_ms=(uint16_t)clamp(g->range_ms+(fish_game_distance(g)>=g->line_capacity_units?20:
-            -(int)fish_rules.range_recovery_per_tick_ms),0,fish_rules.range_limit_ms);
-        if (g->overload_ms>=fish_rules.overload_limit_ms) lost(g,FISH_LOSS_BREAK);
+        bool stretched=fish_game_distance(g)>g->line_capacity_units;
+        g->range_ms=stretched?(uint16_t)clamp(g->range_ms+20,0,fish_rules.range_limit_ms):0;
+        if(stretched)g->overload_ms=0; /* Rod flex provides the explicit two-second rescue window. */
+        if (g->range_ms>=fish_rules.range_limit_ms) lost(g,FISH_LOSS_BREAK);
+        else if (g->overload_ms>=fish_rules.overload_limit_ms) lost(g,FISH_LOSS_BREAK);
         else if (g->slack_ms>=fish_rules.slack_limit_ms) lost(g,FISH_LOSS_SLACK);
-        else if (g->range_ms>=fish_rules.range_limit_ms) lost(g,FISH_LOSS_RANGE);
     }
 }
 
@@ -272,7 +293,7 @@ int fish_game_power(const fish_game_t *g)
 int fish_game_camera(const fish_game_t *g)
 {
     int distance=0;
-    if (g->mode==FISH_CHARGE) distance=28+fish_game_power(g)*(fish_rods[g->rod_index].max_cast_px-28)/100;
+    if (g->mode==FISH_CHARGE) distance=28+fish_game_power(g)*(fish_game_max_cast_px(g)-28)/100;
     else if (g->mode>=FISH_CAST && g->mode<=FISH_FIGHT) distance=g->cast_distance;
     /* Pan only as a long cast grows, preserving the landing point on screen. */
     int shift=distance>92?distance-92:0;
@@ -383,12 +404,14 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             }
         } else if (g->mode==FISH_SHORE && !g->pressed && steps) {
             int dock=g->boat_x<FISH_MAP_WIDTH/2?0:1;
-            if(g->shore_x==fish_docks[dock].shore_x && (steps>0?1:-1)==(dock?-1:1)) {
+            if(!g->shore_speed && g->shore_x==fish_docks[dock].shore_x && (steps>0?1:-1)==(dock?-1:1)) {
                 g->shore_speed=0;g->shore_remainder=0;g->boat_speed=0;g->boat_motion_q8=0;
                 g->facing=dock?-1:1;phase(g,FISH_MOVE);return;
             }
-            g->shore_speed=steps>0?1:-1;g->shore_remainder=0;g->shore_walk_phase=0;
-            g->facing=g->shore_speed;
+            int direction=steps>0?1:-1;
+            g->shore_speed=g->shore_speed && g->shore_speed!=direction?0:direction;
+            g->shore_remainder=0;g->shore_walk_phase=0;
+            if(g->shore_speed) g->facing=g->shore_speed;
         } else if ((g->mode==FISH_MOVE || g->mode==FISH_AIM) && !g->pressed && steps) {
             int direction=steps>0?1:-1,previous=g->boat_speed;
             int dock=fish_map_dock(g->boat_x);
@@ -418,8 +441,10 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
                         gain=gain*75/100; /* Severe tackle mismatch loses retrieval leverage. */
                     if (fish_species[g->pending_species].fight_style==FISH_FIGHT_ACTIVE)
                         gain=gain*(75+tired*25/100)/100;
-                    if(g->tension<g->line_strength*9/10) {
-                        g->reel_units=clamp(g->reel_units+gain,10000-(int)g->line_capacity_units,10000);
+                    bool flexing=fish_game_rod_flex(g)>0;
+                    if(g->tension<g->line_strength*9/10 || flexing) {
+                        if(flexing)gain=gain>1?gain/2:1;
+                        g->reel_units=clamp(g->reel_units+gain,10000-(int)(g->line_capacity_units+g->line_capacity_units/10),10000);
                         if(g->tension>=g->line_strength*fish_rules.stamina_min_tension_percent/100)
                             spend_stamina(g,fish_rules.stamina_rest_cost);
                     }
@@ -434,7 +459,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->reel=clamp(g->reel_units/100,0,100);
             if (g->reel_units == 10000) {
                 if(g->catches<INT_MAX) ++g->catches;
-                g->last_species=g->pending_species; g->last_size_mm=g->pending_size_mm;
+                g->last_species=g->pending_variant?g->pending_variant:g->pending_species; g->last_size_mm=g->pending_size_mm;
                 g->last_weight_g=g->pending_weight_g;
                 if(g->species_catches[g->last_species]<UINT16_MAX) ++g->species_catches[g->last_species];
                 if (g->last_size_mm>g->species_best_size_mm[g->last_species])
@@ -464,10 +489,10 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->stamina_max=fish_species_stamina(&fish_species[g->pending_species],g->pending_weight_g);
             g->stamina=g->stamina_max;g->stamina_recovering=false;g->recovery_ms=0;
             if(g->cast_distance>0) {
-                /* Metric horizontal fighting range: 6/8/10m, independent of cast span. */
+                /* Metric fighting range: 4.5/6.5/8.5 m, independent of cast span. */
                 g->line_capacity_units=(uint32_t)fish_line_sets[g->line_index].distance_limit_cm*10000/initial_distance_cm(g);
             }
-            g->overload_ms=0; g->slack_ms=0; g->range_ms=0;
+            g->overload_ms=0; g->slack_ms=0; g->range_ms=0;g->run_burst=false;g->run_direction=0;
             phase(g,FISH_FIGHT); g->simulation_at=now;
         }
     } else if (event == FISH_RELEASE && g->pressed) {
@@ -491,15 +516,17 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             }
         } else if (g->mode == FISH_CHARGE) {
             if(g->bait_index<FISH_SPECIAL_BAIT_COUNT && !g->economy.bait_stock[g->bait_index]) g->bait_index=FISH_PLASTIC_BAIT;
-            g->cast_distance = 28 + fish_game_power(g) * (fish_rods[g->rod_index].max_cast_px-28) / 100;
+            g->cast_distance = 28 + fish_game_power(g) * (fish_game_max_cast_px(g)-28) / 100;
             g->cast_start_x = g->boat_x + g->facing * 12;
             g->cast_x = clamp(g->cast_start_x + g->facing * g->cast_distance, FISH_WATER_LEFT+4, FISH_WATER_RIGHT-4);
             g->cast_bottom_cm=(uint16_t)fish_map_depth(g->cast_x);
             uint16_t depth=fish_game_rig_depth(g);
             g->cast_depth_cm=depth>g->cast_bottom_cm?g->cast_bottom_cm:depth;
-            g->pending_species=FISH_SPECIES_COUNT; g->pending_size_mm=0; g->pending_weight_g=0;
+            g->pending_species=FISH_SPECIES_COUNT;g->pending_variant=0; g->pending_size_mm=0; g->pending_weight_g=0;
             g->bite_wait_ms=0;
             if (fish_map_roll_at(&g->random_state,g->cast_x,g->cast_depth_cm,g->bait_index,g->game_minute,&g->pending_species,&g->pending_size_mm)) {
+                unsigned special=fish_species_special_roll(&g->random_state,g->pending_species);
+                if(special>=FISH_BASE_SPECIES_COUNT) g->pending_variant=(uint8_t)special;
                 g->pending_weight_g=fish_species_weight_g(&fish_species[g->pending_species],g->pending_size_mm);
                 unsigned bonus=fish_floats[g->float_index].night_bite_bonus_percent*fish_game_night_opacity(g)/150;
                 g->bite_wait_ms=fish_line_bite_wait_bonus(&g->random_state,g->line_index,g->pending_weight_g,bonus);
@@ -509,7 +536,8 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             phase(g, FISH_CAST);
         } else if ((g->mode==FISH_MOVE || g->mode==FISH_AIM || g->mode==FISH_SHORE) && g->previous_mode==g->mode) {
             if(g->mode==FISH_SHORE && fish_game_at_shop(g)) {
-                if(fish_game_shop_open(g)) {g->shop_index=0;g->merchant_reply=FISH_MERCHANT_GREETING;g->merchant_line_variant^=1;phase(g,FISH_SHOP);}
+                if(fish_game_shop_open(g)) {g->shop_index=0;g->merchant_reply=FISH_MERCHANT_GREETING;g->merchant_line_variant^=1;
+                    g->merchant_hint=fish_random_next(&g->random_state)%20==0;phase(g,FISH_SHOP);}
                 else {g->merchant_reply=FISH_MERCHANT_CLOSED;g->shop_closed_notice=true;g->shop_closed_at=now;}
             }
             else {g->bag_return_mode=(uint8_t)g->mode; g->bag_editing=false; g->bag_index=0; phase(g,FISH_BAG);}
