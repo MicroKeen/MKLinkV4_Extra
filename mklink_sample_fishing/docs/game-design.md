@@ -1,4 +1,4 @@
-# 北方湿地公园：整体设定 v24 / North Wetland: Game Design v24
+# 北方湿地公园：整体设定 v25 / North Wetland: Game Design v25
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
@@ -93,7 +93,7 @@ Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actu
 
 系统单调毫秒驱动，每1秒现实时间为1分钟游戏时间，一昼夜24分钟，05–07渐亮、18–20渐暗。新游戏起始06:00加运行秒数，读档恢复游戏分钟，退出期间不快进。毫秒余量与uint32回绕安全。
 
-存档v5为292B，读取v1/v2/v3/v4，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。追加四种稀有图鉴和实物记录，V5使用独立A/B文件，原文件只读保留，避免切回旧版覆盖稀有进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
+存档v6为293B，读取v1–v5；相对v5仅在末尾增加1字节声音档位，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。包含四种稀有图鉴和实物记录；V6使用独立A/B文件，V5及原文件只读保留，避免切回旧版覆盖进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
 
 标准工程默认 `FISH_LCD_ROTATION=0`，对应ST7789由原2转向180°，240×240窗口按驱动使用Y_SHIFT=80；其他工程未指定时保持默认2。常用Embedded Studio工程在 `hpm5301evklite_flash_uf2_debug/segger_embedded_studio/mklink_sample_fishing.emProject`，选择Debug。方向与帧率仍需实板确认。
 
@@ -152,6 +152,20 @@ All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is remo
 成功提竿上钩播放160 Hz/60 ms低频短脉冲；鱼实际挣扎时播放140 Hz/30 ms，每240 ms一次，体力恢复和被动鱼种安静。成功买卖播放660→1100 Hz的上扬收银音，40 ms首音、10 ms间隔、80 ms尾音；失败交易静音。退出搏鱼或商店立即停止，使用既有PWM及单次定时器，不阻塞绘图或输入。所有音符占空比20%，详见[蜂鸣器参数](buzzer-feedback.md)，实板声音/震感待试听。
 
 Successful hooks play a 160 Hz/60 ms low-frequency pulse. Active bursts play 140 Hz/30 ms every 240 ms, with recovery and passive species silent. Successful trades play an ascending 660→1100 Hz cashier cue (40 ms, 10 ms gap, 80 ms tail); failed trades stay silent. Leaving the fight/shop stops playback. Existing PWM and one-shot timers avoid blocking drawing/input; all notes use 20% duty. See the linked parameters; physical sound/vibration audition is pending.
+
+## 声音设置与两页图鉴 v25 / Sound settings and two-page guide v25
+
+行囊底部按图鉴、声音、存档、返回排列。声音提供关闭／仅鱼讯／全部开启三档，短按进入调整、旋转选择、短按确认并请求保存；调整立即生效。声音档位写入v6认证存档末尾偏移260，文件由292增至293字节，旧v1–v5迁移默认全部开启。保留原密钥、目录、索引和所有旧文件，优先V6、其次V5，再读取更早版本。
+
+The bag footer reads guide, sound, save and return. Tap sound to edit, rotate to choose off/fish-only/all, and tap to confirm/save; changes apply immediately. Sound is authenticated in v6 at payload offset 260, increasing files from 292 to 293 bytes. v1–v5 migration defaults to all sounds. The key, directory, indices and all old files remain; loading prioritizes v6, then v5, then earlier versions.
+
+图鉴第一页保留鱼图、纪录和评语；第二页用四行12像素文字显示时段、水域、钓层和推荐鱼饵，不显示多少米的范围。内容从实际地图/鱼饵/活跃配置生成，稀有变异继承基础鱼；未收集只显示简短线索。旋转切鱼，短按翻页，长按600 ms返回来源页面；进入时默认鱼卡页。斑鳜提示全天、晨昏稍好，不偏夜间。
+
+The first guide page retains portraits, records and remarks. The second shows four 12-pixel rows: activity, area, layer and recommended bait, without numeric depth ranges, derived from actual game rules. Variants inherit their base rules; locked entries show a short hint. Rotate to select fish, tap to change pages, and hold 600 ms to return. Entry starts on the portrait page. Mandarin fish remain day/night-neutral with a mild dawn/dusk preference.
+
+本次不增加背景位图；构建检查要求至少保留64 KiB应用Flash供后续地图页面，地图页本身尚未实装。SD多地图素材仍只保留规划。
+
+No background bitmaps are added. Build checks reserve at least 64 KiB of application Flash for the future map page, which is not implemented yet. SD multi-map assets remain a recorded plan.
 
 ## 后续规划，暂不执行 / Future plan, not implemented
 

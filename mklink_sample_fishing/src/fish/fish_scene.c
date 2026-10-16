@@ -12,6 +12,7 @@
 #include "assets/player/shore_player_art.h"
 #include "fish_shop_layout.h"
 #include "fish_tackle_descriptions.h"
+#include "fish_guide_data.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -521,10 +522,11 @@ static const char *control_hint(const fish_game_t *game)
         case FISH_BITE: hint=fish_game_strike_ready(game)?"鱼咬实了！短按提竿":"还在试饵，稍等再提竿"; break;
         case FISH_FIGHT: hint="顺转收线  逆转放线"; break;
         case FISH_CAUGHT: hint="又有收获！"; break;
-        case FISH_GUIDE: hint="旋转翻页  短按返回"; break;
+        case FISH_GUIDE: hint="旋转选鱼 短按翻页 长按返回"; break;
         case FISH_SHORE: hint="旋转走动  短按打开背包"; break;
         case FISH_BAG:
             hint=game->bag_editing?"旋转调整  短按确认":"旋转选格子  短按选配件";
+            if(game->bag_index==FISH_BAG_SOUND && !game->bag_editing)hint="旋转选格子 短按设置声音";
             if(game->bag_index==FISH_BAG_SAVE) hint="";
             break;
         default: break;
@@ -607,6 +609,7 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
         ui_text(tile,122,4,48,GREEN,INK,"图鉴");
         snprintf(label,sizeof(label),"%02u/%02u",game->guide_index+1,FISH_SPECIES_COUNT);
         text(tile,177,7,GREEN,label);
+        text(tile,216,7,CREAM,game->guide_page?"2/2":"1/2");
     } else if (map_hud) {
         int depth=fish_map_depth(fish_game_actor_x(game));
         snprintf(label,sizeof(label),"水深%d.%d米",depth/100,depth%100/10);
@@ -704,6 +707,7 @@ static const char *bag_value(const fish_game_t *g,unsigned item,char *scratch,si
         case FISH_BAG_MISC:return fish_containers[g->economy.container].name;
         case FISH_BAG_GUIDE:return "图鉴";
         case FISH_BAG_SAVE:return "存档";
+        case FISH_BAG_SOUND:return "声音";
         default:return "返回";
     }
 }
@@ -739,6 +743,7 @@ static const char *bag_attributes(const fish_game_t *g,char *scratch,size_t leng
         case FISH_BAG_DEPTH:return fish_game_rig_depth(g)==FISH_BOTTOM_OPTION?"随当地水底调整":"距水面的下饵深度";
         case FISH_BAG_GUIDE:return "查看已收集的鱼种";
         case FISH_BAG_SAVE:return "每五分钟自动存档";
+        case FISH_BAG_SOUND:return fish_sound_names[g->sound_mode];
         default:return "回到湖上继续垂钓";
     }
 }
@@ -752,7 +757,7 @@ static void bag_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     /* Fixed sockets, one shared detail strip: names never compete with sprites. */
     static const int slots[FISH_BAG_COUNT][4]={
         {30,58,84,82},{121,62,40,30},{173,62,40,30},{121,108,40,32},
-        {173,108,40,32},{26,146,46,31},{0,0,0,0},{8,183,66,18},{160,183,72,18},{84,183,68,18}};
+        {173,108,40,32},{26,146,46,31},{0,0,0,0},{6,183,54,18},{180,183,54,18},{122,183,54,18},{64,183,54,18}};
     static const char *titles[]={"鱼竿","线钩","浮漂","鱼饵","钓深"};
     char label[64],scratch[48];
     arm_2d_point_float_t centre={120.0f,115.0f};
@@ -949,17 +954,28 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
     char label[48];
     static const char *tiers[]={"铜","银","金"};
     snprintf(label,sizeof(label),"%s%s",special?"稀有十倍":tiers[species->rarity],guide?"":" 收获");
-    if (known) {
+    if (known && !(guide && game->guide_page)) {
         int scale=self->portrait_scale_q8,height=species->portrait_height_px*scale/256;
         int x=120+(mirror?-1:1)*(48-species->portrait_centre_x)*scale/256;
         int y=95+(28-species->portrait_centre_y)*scale/256;
         if (height>56) y-=(height-56)/2; /* Giants grow upward, leaving captions clear. */
         scaled_species_bitmap(tile,art->sprite,art->mask,x,y,mirror,scale*96/art->sprite->tRegion.tSize.iWidth,&self->portrait_operation);
     }
-    else {
+    else if(!game->guide_page || !guide) {
         static const uint8_t question[7]={14,17,1,2,4,0,4};
         for (unsigned y=0;y<7;y++) for (unsigned x=0;x<5;x++)
             if (question[y]&(1u<<(4-x))) box(tile,112+x*3,84+y*3,3,3,HILL);
+    }
+    if(guide && game->guide_page) {
+        caption(tile,120,48,known?species->name_zh:"未收集",CREAM,INK);
+        if(known) {
+            for(unsigned i=0;i<4;i++)ui_text(tile,34,83+(int)i*27,174,i==3?SUN:CREAM,INK,fish_guide_fields[index][i]);
+        } else {
+            char hint[64];snprintf(hint,sizeof(hint),"线索：%s",fish_guide_hints[index]);
+            caption(tile,120,91,hint,SUN,INK);
+            caption(tile,120,133,"钓获后解锁习性",HILL,INK);
+        }
+        goto guide_record;
     }
     arm_2d_size_t title_size=arm_lcd_get_string_line_box(label,fish_remarks_font());
     ui_text(tile,120-title_size.iWidth/2,48,title_size.iWidth,frame_color,INK,label);
@@ -988,6 +1004,7 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
         const char *cargo=game->cargo_result==FISH_HANGING?"大鱼挂在船尾":game->cargo_result==FISH_RELEASED?"装不下，已放流":"已收入容器";
         caption(tile,120,199,cargo,game->cargo_result==FISH_RELEASED?RED:SUN,INK);
     }
+guide_record:
     if (guide) {
         snprintf(label,sizeof(label),"钓获%u次",game->species_catches[index]);
         ui_text(tile,8,24,90,HILL,INK,label);

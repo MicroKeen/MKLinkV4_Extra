@@ -21,3 +21,9 @@ Parameters are grouped in `src/fish/fish_hpm_feedback.c`. Driver durations use 1
 主机测试覆盖真实提竿和交易入口、重复帧、挣扎间隔、体力恢复、被动种、失败交易、重复交易、退出停止及毫秒计数回绕。PWM频率、真实声音和机壳震感尚未在实板试听；这版作为短促低频的初始参数。
 
 Host checks cover real strike/trade entry points, repeated frames, burst cadence, recovery, passive species, failed/repeated trades, exit cancellation and millisecond wrap. Physical PWM output, sound and enclosure vibration have not been measured or auditioned on hardware; these are initial settings for short low-frequency feedback.
+
+## 声音档位 v25 / Saved sound modes v25
+
+行囊“声音”提供关闭、仅鱼讯、全部开启，默认全部开启。短按编辑、旋转选择、短按确认，选择立即生效并在确认时请求保存。仅鱼讯保留上钩/挣扎，关闭收银音；关闭档位停止全部声音，包括正在播放的尾音。档位写入293字节v6主存档，不另建配置文件；旧v1–v5迁移默认全部开启。
+
+The bag sound control offers off, fish-only and all (default). Tap to edit, rotate to select, and tap to confirm/save. Changes apply immediately. Fish-only retains hook/burst cues and disables cashier notes; off cancels all output, including pending tails. The mode is stored in the authenticated 293-byte v6 save, with no separate settings file; v1–v5 migration defaults to all sounds.

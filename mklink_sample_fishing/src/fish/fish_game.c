@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 static int clamp(int n, int lo, int hi) { return n < lo ? lo : n > hi ? hi : n; }
+const char *const fish_sound_names[FISH_SOUND_COUNT]={"关闭","仅鱼讯","全部开启"};
 static void phase(fish_game_t *g, fish_mode_t mode) { g->mode = mode; g->phase_at = g->now; }
 
 static void lost(fish_game_t *g, fish_loss_t reason)
@@ -231,6 +232,7 @@ static void fight_update(fish_game_t *g)
 void fish_game_init(fish_game_t *g, uint32_t now)
 {
     memset(g, 0, sizeof(*g));
+    g->sound_mode=FISH_SOUND_ALL;
     g->boat_x = 150; g->facing = 1; g->now = now; g->mode = FISH_MOVE;
     g->simulation_at=now;
     g->random_state=now^0x8f235a19u;
@@ -311,6 +313,9 @@ void fish_game_update(fish_game_t *g, uint32_t now)
     g->game_minute=(uint16_t)((g->game_minute+delta/1000+remainder/1000)%1440);
     g->clock_remainder_ms=(uint16_t)(remainder%1000);
     g->now = now;
+    if(g->mode==FISH_GUIDE && g->pressed && g->previous_mode==FISH_GUIDE && now-g->pressed_at>=FISH_GUIDE_HOLD_MS) {
+        g->pressed=false;phase(g,(fish_mode_t)g->guide_return_mode);
+    }
     if(g->mode==FISH_SHORE && !g->pressed && g->shore_speed) {
         unsigned elapsed=delta>250?250:delta;
         unsigned movement=g->shore_remainder+elapsed*FISH_SHORE_SPEED;
@@ -364,6 +369,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
         if ((g->mode==FISH_MOVE || g->mode==FISH_AIM || g->mode==FISH_SHORE) && g->pressed && steps) {
             g->guide_return_mode=(uint8_t)g->mode;
             g->guide_index=g->last_species;
+            g->guide_page=0;
             phase(g,FISH_GUIDE);
         } else if (g->mode==FISH_GUIDE && steps) {
             int index=(g->guide_index+clamp(steps,-40,40))%FISH_SPECIES_COUNT;
@@ -381,22 +387,23 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             if (g->bag_editing) {
                 const int counts[]={FISH_ROD_COUNT,FISH_LINE_COUNT,FISH_FLOAT_COUNT,FISH_BAIT_COUNT,FISH_DEPTH_OPTION_COUNT};
                 uint8_t *values[]={&g->rod_index,&g->line_index,&g->float_index,&g->bait_index,&g->depth_index};
-                count=counts[g->bag_index];
-                index=*values[g->bag_index];
+                count=g->bag_index==FISH_BAG_SOUND?FISH_SOUND_COUNT:counts[g->bag_index];
+                uint8_t *value=g->bag_index==FISH_BAG_SOUND?&g->sound_mode:values[g->bag_index];
+                index=*value;
                 int direction=steps>0?1:-1;
                 for(int n=0;n<abs(clamp(steps,-40,40));n++) {
                     for(int tried=0;tried<count;tried++) {
                         index=(index+direction+count)%count;
-                        if(fish_equipment_owned(&g->economy,g->bag_index,(unsigned)index)) break;
+                        if(g->bag_index==FISH_BAG_SOUND || fish_equipment_owned(&g->economy,g->bag_index,(unsigned)index)) break;
                     }
                 }
-                *values[g->bag_index]=(uint8_t)index;
+                *value=(uint8_t)index;
                 if (g->bag_index==FISH_BAG_LINE) fish_game_equip_line(g,g->line_index);
             } else {
-                /* Bottom row reads dock, guide, save, return from left to right.
+                /* Bottom row reads guide, sound, save, return from left to right.
                  * Keep menu IDs stable while following their visible order. */
                 static const uint8_t order[FISH_BAG_VISIBLE_COUNT]={FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,
-                    FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,FISH_BAG_GUIDE,FISH_BAG_SAVE,FISH_BAG_BACK};
+                    FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,FISH_BAG_GUIDE,FISH_BAG_SOUND,FISH_BAG_SAVE,FISH_BAG_BACK};
                 count=FISH_BAG_VISIBLE_COUNT;
                 for(index=0;index<count && order[index]!=g->bag_index;index++) {}
                 index=(index+clamp(steps,-40,40))%count;
@@ -504,15 +511,15 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
         } else if(g->mode==FISH_HOLD && g->previous_mode==FISH_HOLD) {
             phase(g,g->hold_return_mode==FISH_SHOP && !fish_game_shop_open(g)?FISH_SHORE:(fish_mode_t)g->hold_return_mode);
         } else if (g->mode==FISH_GUIDE && g->previous_mode==FISH_GUIDE) {
-            phase(g,(fish_mode_t)g->guide_return_mode);
+            g->guide_page^=1;
         } else if (g->mode==FISH_BAG && g->previous_mode==FISH_BAG) {
-            if (g->bag_editing) g->bag_editing=false;
-            else if (g->bag_index<=FISH_BAG_DEPTH) g->bag_editing=true;
+            if (g->bag_editing) {g->bag_editing=false;if(g->bag_index==FISH_BAG_SOUND)g->save_requested=true;}
+            else if (g->bag_index<=FISH_BAG_DEPTH || g->bag_index==FISH_BAG_SOUND) g->bag_editing=true;
             else if (g->bag_index==FISH_BAG_MISC) {g->hold_return_mode=FISH_BAG;g->guide_index=0;phase(g,FISH_HOLD);}
             else if (g->bag_index==FISH_BAG_SAVE) g->save_requested=true;
             else if (g->bag_index==FISH_BAG_BACK) phase(g,(fish_mode_t)g->bag_return_mode);
             else if (g->bag_index==FISH_BAG_GUIDE) {
-                g->guide_return_mode=FISH_BAG; g->guide_index=g->last_species; phase(g,FISH_GUIDE);
+                g->guide_return_mode=FISH_BAG; g->guide_index=g->last_species;g->guide_page=0;phase(g,FISH_GUIDE);
             }
         } else if (g->mode == FISH_CHARGE) {
             if(g->bait_index<FISH_SPECIAL_BAIT_COUNT && !g->economy.bait_stock[g->bait_index]) g->bait_index=FISH_PLASTIC_BAIT;

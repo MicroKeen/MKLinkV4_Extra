@@ -111,6 +111,21 @@ int main(void)
     update(&g,UINT_MAX-10u);trade(&g,7,UINT_MAX-10u);
     assert(g.merchant_reply==FISH_MERCHANT_BOUGHT && last_hz==660);
     update(&g,40);assert(last_hz==1100);g.mode=FISH_AIM;update(&g,41);assert(!last_hz);
-    puts("PASS: hook/burst pulses, silent failures, rising cashier notes, repeat/exit and clock wrap");
+    /* All three saved sound modes gate the actual trade and strike paths. */
+    for(unsigned mode=0;mode<FISH_SOUND_COUNT;mode++) {
+        fish_hpm_feedback_init();fish_game_init(&g,1000);g.sound_mode=(uint8_t)mode;
+        g.mode=FISH_SHOP;g.game_minute=720;g.economy.coins=1000;update(&g,1000);before=tones;
+        trade(&g,7,1010);assert(g.merchant_reply==FISH_MERCHANT_BOUGHT);
+        assert(tones==before+(mode==FISH_SOUND_ALL));
+        update(&g,1061);assert(tones==before+2*(mode==FISH_SOUND_ALL));
+        g.mode=FISH_AIM;update(&g,1062);assert(!last_hz || mode!=FISH_SOUND_ALL);
+        g.mode=FISH_BITE;g.pending_species=1;g.pending_weight_g=1500;g.pending_size_mm=450;
+        g.phase_at=2000-fish_species[1].strike_delay_ms;before=tones;
+        fish_game_input(&g,FISH_PRESS,0,2000);assert(g.mode==FISH_FIGHT);fish_hpm_feedback_update(&g);
+        assert(tones==before+(mode!=FISH_SOUND_OFF));
+        update(&g,2000+fish_rules.hook_settle_ms);assert(tones==before+2*(mode!=FISH_SOUND_OFF));
+        g.sound_mode=FISH_SOUND_OFF;update(&g,g.now+1);assert(!last_hz);
+    }
+    puts("PASS: hook/burst pulses, cashier notes, three sound modes, exits and clock wrap");
     return 0;
 }

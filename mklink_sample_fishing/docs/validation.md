@@ -2,13 +2,13 @@
 
 HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-16 编译检查。
 
-GNU UF2 的 2944 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、281 个唯一源文件及 include 路径检查通过。
+GNU UF2 的 2958 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、281 个唯一源文件及 include 路径检查通过。
 
-独立 demo 的 13 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件、SD/背光隔离及蜂鸣器音效。
+独立 demo 的 13 项主机测试全部通过：玩法、搏鱼、两页图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1–v5 迁移及 v6 声音设置恢复、编码器事件、SD/背光隔离及蜂鸣器音效。
 
 GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。
 
-Windows主机43项检查通过，包含原42项模拟器/逻辑检查和新增蜂鸣器反馈检查。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡8,090个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。
+Windows主机44项检查通过。新增画面覆盖15种鱼已解锁/未解锁习性页和声音三档；原接岸、云层、稀有鱼、店主表情与弯竿验证保留。人物与外屋统一整数2倍显示。
 
 v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型鱼图区域逐像素不变，文字/售价在v22汉化；位图净节省84,672 B，无新增整屏缓冲。
 
@@ -24,13 +24,17 @@ v24：复用PA10/GPTMR0通道2蜂鸣器，上钩160 Hz/60 ms，挣扎140 Hz/30 m
 
 v24 uses the existing PA10/GPTMR0 channel 2 buzzer: 160 Hz/60 ms on hooking, 140 Hz/30 ms every 240 ms during bursts, and an ascending 660→1100 Hz cashier cue on successful trades. Host checks cover finite nonblocking notes, lull/exit stopping, silent failed trades and clock wrap; hardware audition is pending.
 
+v25：行囊加入关闭/仅鱼讯/全部开启三档，声音写入293字节v6存档，v1–v5文件只读迁移。图鉴保持12像素字号，两页显示鱼卡/习性，旋转选鱼、短按翻页、长按600 ms返回；36幅新增PFB画面检查通过。不新增背景位图，构建强制保留至少64 KiB Flash供后续地图页。
+
+v25 adds three saved sound modes, a 293-byte v6 save with read-only v1–v5 migration, and a two-page 12-pixel guide. Rotate to select fish, tap to change pages, hold 600 ms to return. Thirty-six new PFB frames pass. No background bitmaps are added; builds require at least 64 KiB of free Flash for the future map page.
+
 | 工具链/区域 | 占用或预留 | 容量 | 余量 |
 |---|---:|---:|---:|
-| GNU / APP_FLASH | 753,616 B | 851,968 B | 98,352 B |
+| GNU / APP_FLASH | 757,104 B | 851,968 B | 94,864 B |
 | GNU / ILM | 2,112 B | 131,072 B | 128,960 B |
 | GNU / DLM | 93,856 B | 130,304 B | 36,448 B |
 | GNU / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
-| SES / APP_FLASH | 744,340 B | 851,968 B | 107,628 B |
+| SES / APP_FLASH | 748,384 B | 851,968 B | 103,584 B |
 | SES / ILM | 27,608 B | 131,072 B | 103,464 B |
 | SES / DLM | 67,920 B | 130,304 B | 62,384 B |
 | SES / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
@@ -41,8 +45,8 @@ Flash 包含代码、只读字形/位图、初始化映像和对齐。RAM 包含
 
 验证未执行实板烧录、SD 拔插、掉电实验、帧率/栈水位测量。主机 HAL 桩证明 SD 回调不操作 PA26，不能替代实板电气验证。
 
-旧存档兼容性：保留原项目密钥、目录、UUID派生及基础鱼索引。写292字节v5并读取原92/236字节v1/v2/v3/v4。v4装备不再初始化；更早版本沿用一次初始化世代。V5使用独立命名A/B槽并保留原文件，存在有效V5时优先读取，避免旧游戏版本覆盖稀有鱼记录。密钥按作者要求公开。
+旧存档兼容性：保留原密钥、目录、UUID和物种索引。写293字节v6（仅追加1字节声音档位），读92/236/292字节v1–v5。V4及以后装备保留，更早版本沿用一次初始化世代。V6独立A/B槽保留全部旧文件，优先V6、其次V5、再原版本，避免旧固件覆盖进度。密钥按作者要求公开。
 
-仓库附带 GNU 固件 SHA-256：`2936de73afe2043979f04c049eee1be6c3621f0c2215b72f3b39bf270bf918dd`。
+仓库附带 GNU 固件 SHA-256：`488d254f0d20206c5534aaad65b8207d2a36eb9375c196ac354c32fde24c6fb4`。
 
 可重新运行 `python scripts/verify_build.py --write-report`（默认检查标准 flash_uf2 构建目录）。

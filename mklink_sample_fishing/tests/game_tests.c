@@ -80,11 +80,17 @@ int main(void)
     fish_game_input(&g, FISH_PRESS, 0, UINT32_MAX - 500);
     fish_game_input(&g, FISH_RELEASE, 0, 1000); assert(g.mode == FISH_CAST);
     fish_game_init(&g,0);g.mode=FISH_BAG;g.bag_index=FISH_BAG_GUIDE;
-    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.bag_index==FISH_BAG_SAVE);
-    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.bag_index==FISH_BAG_BACK);
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.bag_index==FISH_BAG_SOUND);
+    fish_game_input(&g,FISH_ROTATE,2,0);assert(g.bag_index==FISH_BAG_BACK);
     fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.bag_index==FISH_BAG_SAVE);
-    fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.bag_index==FISH_BAG_GUIDE);
-    fish_game_input(&g,FISH_ROTATE,3,0);assert(g.bag_index==FISH_BAG_ROD);
-    puts("PASS: move, limits, modes, charge, release, flight, bite, reel, cancel, timer wrap and bag order");
+    fish_game_input(&g,FISH_ROTATE,-2,0);assert(g.bag_index==FISH_BAG_GUIDE);
+    fish_game_input(&g,FISH_ROTATE,4,0);assert(g.bag_index==FISH_BAG_ROD);
+    g.bag_index=FISH_BAG_SOUND;g.save_requested=false;
+    fish_game_input(&g,FISH_PRESS,0,10);fish_game_input(&g,FISH_RELEASE,0,11);assert(g.bag_editing);
+    fish_game_input(&g,FISH_ROTATE,1,12);assert(g.sound_mode==FISH_SOUND_OFF);
+    fish_game_input(&g,FISH_ROTATE,1,13);assert(g.sound_mode==FISH_SOUND_FISH);
+    fish_game_input(&g,FISH_PRESS,0,14);fish_game_input(&g,FISH_RELEASE,0,15);
+    assert(!g.bag_editing && g.save_requested && g.mode==FISH_BAG);
+    puts("PASS: gameplay, bag order and sound editing/save request");
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 /* Storage owns async worker buffers. Boot reads run before the scene starts.
- * read slots0/1 are current saves; slots2/3 are read-only legacy files.
+ * read slots0/1 are V6, slots2/3 are V5, slots4/5 are V1-V4 (read-only).
  * read: 0 exact file, -2 absent, -3 wrong size, -1 IO error.
  * begin: 0 accepted; poll: 0 pending, 1 durable+readback verified, -1 failed.
  * begin must not modify the currently active slot. */
