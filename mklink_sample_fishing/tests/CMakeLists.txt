@@ -25,3 +25,8 @@ add_executable(sd_backlight_tests sd_backlight_tests.c ../lcd/adapt/spi_sd_adapt
 target_include_directories(sd_backlight_tests PRIVATE sd_hal_stubs ../lcd/adapt)
 target_compile_options(sd_backlight_tests PRIVATE -UNDEBUG)
 add_test(NAME sd_backlight_isolation COMMAND sd_backlight_tests)
+
+add_executable(feedback_tests feedback_tests.c ${CORE} ${APP}/fish_hpm_feedback.c)
+target_include_directories(feedback_tests PRIVATE feedback_stubs "${APP}")
+target_compile_options(feedback_tests PRIVATE -UNDEBUG -Wall -Wextra)
+add_test(NAME buzzer_feedback COMMAND feedback_tests)

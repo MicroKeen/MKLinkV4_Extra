@@ -1,6 +1,7 @@
 #include "fish_scene.h"
 #include "fish_save.h"
 #include "fish_hpm_input.h"
+#include "fish_hpm_feedback.h"
 #include "assets/fish_assets.h"
 #include "assets/species/species_assets.h"
 #include "assets/remarks_font.h"
@@ -1009,6 +1010,7 @@ static void frame_start(arm_2d_scene_t *s)
     fish_scene_t *self=(fish_scene_t *)s;
     fish_game_t *game=&self->game;
     fish_game_update(game,fish_hpm_millis());
+    fish_hpm_feedback_update(game);
     fish_save_tick(&self->save,game,game->now);
     self->save_box=arm_lcd_get_string_line_box(fish_save_label(&self->save),fish_remarks_font());
     self->hint_box=arm_lcd_get_string_line_box(control_hint(game),fish_remarks_font());
@@ -1153,6 +1155,7 @@ static IMPL_PFB_ON_DRAW(draw_scene)
 void fish_scene_init(arm_2d_scene_player_t *player)
 {
     fish_game_init(&scene.game,fish_hpm_millis());
+    fish_hpm_feedback_init();
     if(!fish_smoke_test) fish_save_init(&scene.save,&scene.game,scene.game.now);
     ARM_2D_OP_INIT(scene.portrait_operation);
     ARM_2D_OP_INIT(scene.backpack_operation);
@@ -1184,4 +1187,5 @@ void fish_scene_memory_layout(void)
 void fish_scene_input(fish_event_t event,int steps,uint32_t timestamp)
 {
     fish_game_input(&scene.game,event,steps,timestamp);
+    fish_hpm_feedback_update(&scene.game);
 }

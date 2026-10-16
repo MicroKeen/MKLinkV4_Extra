@@ -1,4 +1,4 @@
-# 北方湿地公园：整体设定 v23 / North Wetland: Game Design v23
+# 北方湿地公园：整体设定 v24 / North Wetland: Game Design v24
 
 2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
@@ -146,6 +146,12 @@ The audit runs 200,000 actual cast selections for each of 11 base species (2.2 m
 全部中文统一使用原有12像素字体；移除v22新增的8像素字库，紧凑栏通过对齐和间距调整适配。移除“鱼竿弯了！快收线”提示；弯竿表现、两秒弹性窗口及搏鱼规则不变。蟹的显示名改为“溪蟹”，土鲶去掉真实水域别称，地图设定不指向真实地区；物种索引和存档不变。
 
 All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is removed, with alignment and spacing adjustments for compact rows. The misleading reel-now message during rod flex is removed; rod animation, the two-second elastic window and fight rules are unchanged. Crab uses the generic display name “溪蟹” (stream crab), catfish loses its geographic alias, and the setting is a fictional wetland. Species indices and saves are preserved.
+
+## 蜂鸣器反馈 v24 / Buzzer feedback v24
+
+成功提竿上钩播放160 Hz/60 ms低频短脉冲；鱼实际挣扎时播放140 Hz/30 ms，每240 ms一次，体力恢复和被动鱼种安静。成功买卖播放660→1100 Hz的上扬收银音，40 ms首音、10 ms间隔、80 ms尾音；失败交易静音。退出搏鱼或商店立即停止，使用既有PWM及单次定时器，不阻塞绘图或输入。所有音符占空比20%，详见[蜂鸣器参数](buzzer-feedback.md)，实板声音/震感待试听。
+
+Successful hooks play a 160 Hz/60 ms low-frequency pulse. Active bursts play 140 Hz/30 ms every 240 ms, with recovery and passive species silent. Successful trades play an ascending 660→1100 Hz cashier cue (40 ms, 10 ms gap, 80 ms tail); failed trades stay silent. Leaving the fight/shop stops playback. Existing PWM and one-shot timers avoid blocking drawing/input; all notes use 20% duty. See the linked parameters; physical sound/vibration audition is pending.
 
 ## 后续规划，暂不执行 / Future plan, not implemented
 

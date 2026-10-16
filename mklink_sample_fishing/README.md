@@ -140,7 +140,7 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 
 当前左岸延伸到x=-284，商店入口在x=-260，地面连续铺到HUD底部。转动一格持续以32px/s慢走，反向转动先停住，再转一格反向走，短按停止并交互；门口、码头或边界自动停。码头停稳后再次向岸转动上岸、向水转动登船，已取消单独上下船按钮。鹅毛漂延长15%提竿窗口，夜光漂夜间咬钩加成15%。用户编辑的六条装备描述、18句店主台词已接入。
 
-最新界面：主界面持续显示金币余额，收鱼卡显示单鱼售价、已解锁图鉴显示纪录价，鱼库只分页显示当前存有鱼的鱼种并追加实际存在的船尾鱼。重绘低干扰左岸地面和有壁灯/挂具的粗像素商店背景，去掉深斜桌面及独立商品摆拍素材。当前共42项Windows模拟器检查，独立demo12项检查。
+最新界面：主界面持续显示金币余额，收鱼卡显示单鱼售价、已解锁图鉴显示纪录价，鱼库只分页显示当前存有鱼的鱼种并追加实际存在的船尾鱼。重绘低干扰左岸地面和有壁灯/挂具的粗像素商店背景，去掉深斜桌面及独立商品摆拍素材。当前共43项Windows主机检查，独立demo13项检查。
 
 商品列表保留名称与选中高亮，选中装备的大图标放在详情左下角（14像素内容整数放大2倍），右侧分名称/售价、描述、实际效果三行。岸上渔夫与船上角色同帽同装，三帧14×20像素含采样边，2倍显示36像素高，包含站立及两种按移动距离交替的步态；停止即站立，左右镜像。
 
@@ -152,9 +152,9 @@ v21：黑鱼、鲤鱼、土鲶在大体型收鱼卡/图鉴中自动使用96×56�
 
 v21: Large snakehead, carp and catfish automatically use 96×56 detail tiles in catch cards and guide entries, while small presentations retain the 48×28 originals. Base sprites now store native pixels and scale at draw time; even with three detail tiles, bitmap storage drops by 84,672 bytes without adding a full-screen buffer. The hardware platform remains MKLink V4; saves and gameplay values are unchanged.
 
-去掉未使用的浮点scanf强制链接后，GNU应用占用751,672／851,968 B，剩余100,296 B（约97.9 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
+去掉未使用的浮点scanf强制链接后，GNU应用占用753,616／851,968 B，剩余98,352 B（约96.0 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
 
-After removing unused forced floating scanf support, the GNU app uses 751,672 / 851,968 bytes, leaving 100,296 bytes (about 97.9 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
+After removing unused forced floating scanf support, the GNU app uses 753,616 / 851,968 bytes, leaving 98,352 bytes (about 96.0 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
 
 
 v22：鱼名与数值说明补齐中文，三种线长改为4.5／6.5／8.5米；最大出线后无法继续放线，鱼冲刺造成的弹性超距用弯竿显示，持续两秒后断线，收回范围即解除。冲刺两个方向都有、约70%远离玩家，鲤鱼/马口/斑鳜更积极。左岸连续视差与缓慢云漂移已修正。全部15个收藏项和店主四种表情通过实际规则/画面核实，完整记录见[当前玩法与核实 / Current gameplay audit](docs/v22-gameplay-and-audit.md)。
@@ -168,3 +168,7 @@ v23 restores the original 12-pixel Chinese font throughout and removes the v22 8
 游戏名使用通用称呼“溪蟹”“土鲶”，移除真实地区指向；地图为虚构湿地，原物种索引和旧存档兼容。
 
 Player-facing crab/catfish names use generic wording without geographic labels. The map is a fictional wetland; original species indices and save compatibility are preserved.
+
+v24：启用板载蜂鸣器，上钩160 Hz/60 ms，鱼挣扎140 Hz/30 ms、每240 ms一次；成功购买和出售播放660→1100 Hz的上扬收银音。全部使用有限时长PWM和非阻塞更新，退出即停、失败交易静音；未实板试听。参数及调节入口见[蜂鸣器说明](docs/buzzer-feedback.md)。
+
+v24 enables the board buzzer: a 160 Hz/60 ms hook pulse, 140 Hz/30 ms burst pulses every 240 ms, and an ascending 660→1100 Hz cashier cue on successful purchases/sales. Finite PWM notes and nonblocking updates stop on exit and stay silent on failed trades. Hardware audition is pending; see the linked parameters.

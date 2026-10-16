@@ -59,7 +59,7 @@ if args.write_report:
     import shutil
     shutil.copy2(build/'output/MicroLink.fish.uf2',demo/'MicroLink.uf2')
 report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x80023000',family='0x0A4D5048',
-    hardware_platform='MKLink V4',host_tests=12,simulator_tests=42,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
+    hardware_platform='MKLink V4',host_tests=13,simulator_tests=43,display_rotation=0,public_runtime_art_only=True,hardware_flashed=False,hardware_power_loss_tested=False,
     save_key_public=True,save_schema_version=5,save_bytes=292,legacy_save_versions=[1,2,3,4],legacy_save_bytes=[92,236,236,236],
     shore_actor_height=36,world_pixel_grid=2,shop_logical_size=[64,48],dock_logical_size=[56,47],dock_join_frames=43,
     base_fish_native_size=[48,28],large_fish_native_size=[96,56],large_fish_ids=['snakehead','carp','catfish'],
@@ -67,6 +67,9 @@ report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x8002300
     line_lengths_cm=[450,650,850],rod_elastic_grace_ms=2000,burst_away_percent=70,
     localization=True,chinese_font_pixel_size=12,compact_chinese_font=False,rod_flex_reel_hint=False,
     crab_display_name='溪蟹',catfish_display_name='土鲶',fictional_setting=True,
+    buzzer_feedback=dict(pin='PA10',timer='GPTMR0',channel=2,duty_percent=20,
+        hook_hz=160,hook_ms=60,burst_hz=140,burst_ms=30,burst_interval_ms=240,
+        cashier_hz=[660,1100],cashier_ms=[40,80],cashier_gap_ms=10,hardware_auditioned=False),
     all_fish_cast_audit=2200000,merchant_contexts=14,merchant_expressions=4,
     shore_parallax_pixels=240000,sd_map_asset_loader_implemented=False,
     firmware_sha256=hashlib.sha256((build/'output/MicroLink.fish.uf2').read_bytes()).hexdigest())
@@ -78,16 +81,18 @@ if ses.exists():
 if args.write_report:
     (demo/'docs/build-validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     lines=['# 标准钓鱼 demo 验证','',
-        'HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-15 编译检查。',
+        'HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-16 编译检查。',
         '',f'GNU UF2 的 {count} 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、{len(paths)} 个唯一源文件及 include 路径检查通过。',
-        '', '独立 demo 的 12 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件和 SD/背光隔离。',
+        '', '独立 demo 的 13 项主机测试全部通过：玩法、搏鱼、图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1/v2/v3/v4 迁移及 v5 恢复、编码器事件、SD/背光隔离及蜂鸣器音效。',
         '', 'GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。',
-        '', 'Windows模拟器42项检查通过。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡8,090个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。',
+        '', 'Windows主机43项检查通过，包含原42项模拟器/逻辑检查和新增蜂鸣器反馈检查。接岸修正核对15,950个边界/重叠像素、31,900次昼夜镜头对照及2,256个放大角色像素；云层48幅对照核对798,792个山体/前景像素不变并正确遮挡8,090个云像素。另有34幅稀有鱼卡/图鉴/鱼库/对白/船尾画面。人物与外屋统一整数2倍显示。',
         '', 'v21大鱼细节：黑鱼、鲤鱼、土鲶在放大收鱼卡/图鉴中使用96×56细节贴图；11种基础鱼以48×28原生像素存储。三种小体型鱼图区域逐像素不变，文字/售价在v22汉化；位图净节省84,672 B，无新增整屏缓冲。',
         '', 'v21 detail art: enlarged snakehead, carp and catfish use 96×56 detail tiles; all base sprites store native 48×28 pixels. Small portrait areas are pixel-identical; labels/prices are localized in v22. Net bitmap saving: 84,672 bytes; no additional full-screen buffer.',
         '', 'v22：中文鱼名/数值，4.5/6.5/8.5米线长、两秒弯竿缓冲、双向且70%偏远离玩家的冲刺。220万次抛竿核实全部15个收藏项；14类店主情境/28句台词/4种实际表情，24万个岸上远景像素及14幅弯竿画面通过检查。SD多地图加载仅记录。',
         '', 'v23：全部中文恢复原有12像素字体，移除v22新增的8像素小字库；商店名称/售价、鱼获尺寸/重量及线组属性调整对齐和间距。移除“鱼竿弯了！快收线”提示，显示名改为溪蟹/土鲶，地图设定不指向真实地区。42项模拟器检查通过。',
         '', 'v23 restores the original 12-pixel Chinese font throughout and removes the v22 8-pixel subset. Shop names/prices, catch metrics and line properties use adjusted alignment and spacing. The misleading rod-flex reel-now hint is removed, crab/catfish use generic names and the setting is fictional. All 42 simulator checks pass.',
+        '', 'v24：复用PA10/GPTMR0通道2蜂鸣器，上钩160 Hz/60 ms，挣扎140 Hz/30 ms（每240 ms），成功交易660→1100 Hz上扬短音。非阻塞有限时长、平静/退出停止、失败交易静音和时钟回绕已通过主机测试，尚未实板试听。',
+        '', 'v24 uses the existing PA10/GPTMR0 channel 2 buzzer: 160 Hz/60 ms on hooking, 140 Hz/30 ms every 240 ms during bursts, and an ascending 660→1100 Hz cashier cue on successful trades. Host checks cover finite nonblocking notes, lull/exit stopping, silent failed trades and clock wrap; hardware audition is pending.',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:
