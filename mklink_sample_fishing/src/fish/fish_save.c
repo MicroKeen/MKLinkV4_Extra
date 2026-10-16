@@ -28,8 +28,12 @@ void fish_save_pack(const fish_game_t *g,uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
     put32(p+190,e->hanging_grams);put32(p+194,e->hanging_value);put16(p+198,g->game_minute);
     p[200]=e->container;p[201]=FISH_SAVE_EQUIPMENT_EPOCH;
     p[FISH_SAVE_V5_PAYLOAD_BYTES]=g->sound_mode;
+    for(unsigned i=0;i<FISH_PRICE_GROUPS;i++) {
+        put16(p+FISH_SAVE_V6_PAYLOAD_BYTES+4*i,e->prices[i].price);
+        put16(p+FISH_SAVE_V6_PAYLOAD_BYTES+4*i+2,e->prices[i].count);
+    }
 }
-bool fish_save_unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
+static bool unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
 {
     if(p[0]>=FISH_ROD_COUNT || p[1]>=FISH_LINE_COUNT || p[2]>=FISH_FLOAT_COUNT ||
        p[3]>=FISH_BAIT_COUNT || p[4]>=FISH_DEPTH_OPTION_COUNT || p[5]>=FISH_SPECIES_COUNT ||
@@ -72,6 +76,21 @@ bool fish_save_unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
            e.hanging_grams!=fish_species_weight_g(s,e.hanging_size_mm) ||
            e.hanging_value!=fish_catch_price(e.hanging_species,e.hanging_size_mm)) return false;
     }
+    uint64_t detailed=0;uint32_t detailed_count=0,cargo_count=0;bool end=false;
+    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) cargo_count+=e.count[i];
+    for(unsigned i=0;i<FISH_PRICE_GROUPS;i++) {
+        fish_price_group_t *r=&e.prices[i];
+        r->price=get16(p+FISH_SAVE_V6_PAYLOAD_BYTES+4*i);r->count=get16(p+FISH_SAVE_V6_PAYLOAD_BYTES+4*i+2);
+        if(!r->count) {if(r->price) return false;end=true;continue;}
+        if(end || !r->price) return false;
+        for(unsigned j=0;j<i;j++) if(e.prices[j].price==r->price) return false;
+        detailed+=(uint32_t)r->price*r->count;detailed_count+=r->count;
+    }
+    if(detailed>value || detailed_count>cargo_count ||
+       (detailed_count==cargo_count && detailed!=value) || value-detailed<cargo_count-detailed_count) return false;
+    /* NULL is the boot candidate validation path; avoid a second full game on
+     * the scene thread's stack now that cargo has an exact-price journal. */
+    if(!g) return true;
     /* Apply only after all validation; transient fishing/input state stays reset. */
     g->rod_index=p[0];fish_game_equip_line(g,p[1]);g->float_index=p[2];g->bait_index=p[3];g->depth_index=p[4];
     g->last_species=p[5];g->last_size_mm=(uint16_t)last;g->catches=(int)get32(p+8);
@@ -92,6 +111,7 @@ bool fish_save_unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
     }
     return true;
 }
+bool fish_save_unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES]) {return unpack(g,p);}
 void fish_save_encode(const uint8_t key[32],uint64_t seq,const uint8_t *p,uint8_t *file)
 {
     memcpy(file,"FSG1",4);put16(file+4,FISH_SAVE_VERSION);put16(file+6,FISH_SAVE_PAYLOAD_BYTES);
@@ -100,9 +120,9 @@ void fish_save_encode(const uint8_t key[32],uint64_t seq,const uint8_t *p,uint8_
 }
 bool fish_save_decode(const uint8_t key[32],const uint8_t *file,size_t len,uint64_t *seq,uint8_t *p)
 {
-    if(len!=FISH_SAVE_LEGACY_FILE_BYTES && len!=FISH_SAVE_PREVIOUS_FILE_BYTES && len!=FISH_SAVE_V5_FILE_BYTES && len!=FISH_SAVE_FILE_BYTES) return false;
+    if(len!=FISH_SAVE_LEGACY_FILE_BYTES && len!=FISH_SAVE_PREVIOUS_FILE_BYTES && len!=FISH_SAVE_V5_FILE_BYTES && len!=FISH_SAVE_V6_FILE_BYTES && len!=FISH_SAVE_FILE_BYTES) return false;
     unsigned version=get16(file+4);bool legacy=version==1;
-    size_t bytes=legacy?FISH_SAVE_LEGACY_PAYLOAD_BYTES:version<5?FISH_SAVE_PREVIOUS_PAYLOAD_BYTES:version==5?FISH_SAVE_V5_PAYLOAD_BYTES:FISH_SAVE_PAYLOAD_BYTES;
+    size_t bytes=legacy?FISH_SAVE_LEGACY_PAYLOAD_BYTES:version<5?FISH_SAVE_PREVIOUS_PAYLOAD_BYTES:version==5?FISH_SAVE_V5_PAYLOAD_BYTES:version==6?FISH_SAVE_V6_PAYLOAD_BYTES:FISH_SAVE_PAYLOAD_BYTES;
     if(version<1 || version>FISH_SAVE_VERSION || len!=bytes+32 || memcmp(file,"FSG1",4) || get16(file+6)!=bytes) return false;
     memset(p,0,FISH_SAVE_PAYLOAD_BYTES);
     if(!fish_save_open(key,file,16,file+16,file+32,bytes,p)) return false;
@@ -129,20 +149,23 @@ void fish_save_init(fish_save_t *s,fish_game_t *g,uint32_t now)
     if(fish_storage_init(s->key)!=0) {s->status=s->blocked_status=FISH_SAVE_ERROR;s->blocked=true;return;}
     bool invalid=false,io=false,migrated=false,equipment_initialized=false;
     unsigned best_priority=0;
-    for(unsigned slot=0;slot<6;slot++) {
-        if((slot==2 && best_priority==2) || (slot==4 && best_priority>=1)) break;
+    for(unsigned slot=0;slot<8;slot++) {
+        if(slot==2 && best_priority==3) break;
+        if(slot==4 && best_priority>=2) break;
+        if(slot==6 && best_priority>=1) break;
         int result=fish_storage_read(slot,s->file,sizeof(s->file));
         size_t length=sizeof(s->file);
+        if(result==-3) {length=FISH_SAVE_V6_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_V5_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_PREVIOUS_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_LEGACY_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-2) continue;
         if(result==-1) {io=true;continue;}
-        uint64_t seq;fish_game_t checked=*g;
+        uint64_t seq;
         if(result || !fish_save_decode(s->key,s->file,length,&seq,s->pending) ||
-           !fish_save_unpack(&checked,s->pending)) {invalid=true;continue;}
+           !unpack(NULL,s->pending)) {invalid=true;continue;}
         equipment_initialized|=s->pending[201]==FISH_SAVE_EQUIPMENT_EPOCH;
-        unsigned version=get16(s->file+4),priority=version==6?2:version==5?1:0;
+        unsigned version=get16(s->file+4),priority=version>=5?version-4:0;
         bool current=version==FISH_SAVE_VERSION;
         if(s->active_slot<0 || priority>best_priority || (priority==best_priority && seq>s->sequence)) {
             s->sequence=seq;s->active_slot=(int)(slot&1);memcpy(s->saved,s->pending,sizeof(s->saved));

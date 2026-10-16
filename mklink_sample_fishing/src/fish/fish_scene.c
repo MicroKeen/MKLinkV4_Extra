@@ -924,6 +924,24 @@ static void hold_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     snprintf(label,sizeof(label),"%02u/%02u 总价%lu金币",pages?g->guide_index+1:0,pages,(unsigned long)fish_hold_value(e));
     ui_text(tile,27,185,207,SUN,RPG_DARK,label);
 }
+static void money_feedback(const arm_2d_tile_t *tile,const fish_game_t *g)
+{
+    if(g->mode!=FISH_SHOP) return;
+    for(unsigned i=0;i<FISH_MONEY_POPUPS;i++) {
+        const fish_money_popup_t *p=&g->money.popup[i];
+        uint32_t age=g->now-p->at;
+        if(!p->amount || age>=FISH_MONEY_LIFETIME_MS) continue;
+        char label[24];snprintf(label,sizeof(label),"%+ldG",(long)p->amount);
+        arm_2d_size_t size=arm_lcd_get_string_line_box(label,fish_remarks_font());
+        int x=184-size.iWidth/2,y=143-(int)(age*48/FISH_MONEY_LIFETIME_MS);
+        uint8_t opacity=age<650?255:(uint8_t)((FISH_MONEY_LIFETIME_MS-age)*255/250);
+        arm_lcd_text_set_opacity(opacity);
+        ui_text(tile,x+1,y+1,104,RPG_DARK,RPG_DARK,label);
+        ui_text(tile,x,y,104,p->amount>0?RGB(169,235,142):RGB(255,192,130),RPG_DARK,label);
+        if(p->aggregate) ui_text(tile,154,y-14,76,RPG_LIGHT,RPG_DARK,"旧鱼获合计");
+        arm_lcd_text_set_opacity(255);
+    }
+}
 static void hanging_fish(const arm_2d_tile_t *tile,const fish_scene_t *self)
 {
     const fish_game_t *g=&self->game;if(fish_game_ashore(g) || g->economy.hanging_species>=FISH_SPECIES_COUNT) return;
@@ -1157,6 +1175,7 @@ static IMPL_PFB_ON_DRAW(draw_scene)
     }
     hud(ptTile,self); bag_panel(ptTile,self);
     shop_panel(ptTile,self);hold_panel(ptTile,self);
+    money_feedback(ptTile,game);
     catch_card(ptTile,self,fish_smoke_test==4 && self->smoke_frame%3==1);
     const char *save_label=fish_save_label(&self->save);
     if(*save_label) {

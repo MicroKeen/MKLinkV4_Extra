@@ -65,6 +65,7 @@ typedef struct fish_game {
     uint16_t species_catches[FISH_SPECIES_COUNT];
     uint16_t species_best_size_mm[FISH_SPECIES_COUNT];
     fish_economy_t economy;
+    fish_money_feedback_t money; /* Visual feedback only; never saved. */
     uint32_t clock_at;
     uint16_t game_minute,clock_remainder_ms;
     uint8_t shop_index,hold_return_mode,merchant_line_variant;

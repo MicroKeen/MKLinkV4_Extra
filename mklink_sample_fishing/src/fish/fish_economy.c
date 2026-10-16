@@ -64,7 +64,14 @@ fish_cargo_result_t fish_hold_add(fish_economy_t *e,unsigned species,uint16_t si
         e->hanging_grams=grams;e->hanging_value=price;return FISH_HANGING;
     }
     if(grams>capacity-fish_hold_weight(e) || e->count[species]==UINT16_MAX) return FISH_RELEASED;
-    ++e->count[species];e->grams[species]+=grams;e->value[species]+=price;return FISH_STORED;
+    ++e->count[species];e->grams[species]+=grams;e->value[species]+=price;
+    for(unsigned i=0;i<FISH_PRICE_GROUPS;i++) if(!e->prices[i].count || e->prices[i].price==price) {
+        if(price<=UINT16_MAX && e->prices[i].count<UINT16_MAX) {
+            e->prices[i].price=(uint16_t)price;++e->prices[i].count;
+        }
+        break;
+    }
+    return FISH_STORED;
 }
 bool fish_equipment_owned(const fish_economy_t *e,unsigned slot,unsigned index)
 {
@@ -92,6 +99,34 @@ uint32_t fish_shop_price(unsigned item)
 }
 unsigned fish_shop_kind(unsigned item) {return item<FISH_SHOP_COUNT?items[item].slot:FISH_SHOP_SERVICE;}
 unsigned fish_shop_item_index(unsigned item) {return item<FISH_SHOP_COUNT?items[item].index:2;}
+static void money_popup(struct fish_game *g,int32_t amount,bool aggregate)
+{
+    unsigned slot=0;uint32_t oldest=0;
+    for(unsigned i=0;i<FISH_MONEY_POPUPS;i++) {
+        fish_money_popup_t *p=&g->money.popup[i];
+        if(!p->amount) {slot=i;break;}
+        uint32_t age=g->now-p->at;if(age>=oldest) {oldest=age;slot=i;}
+    }
+    g->money.popup[slot]=(fish_money_popup_t){amount,g->now,aggregate};
+}
+void fish_money_update(struct fish_game *g)
+{
+    fish_money_feedback_t *m=&g->money;
+    /* Leaving the shop cancels cosmetic feedback, never an economic action. */
+    if(g->mode!=FISH_SHOP) {memset(m,0,sizeof(*m));return;}
+    for(unsigned i=0;i<FISH_MONEY_POPUPS;i++)
+        if(m->popup[i].amount && g->now-m->popup[i].at>=FISH_MONEY_LIFETIME_MS) m->popup[i].amount=0;
+    if(g->now-m->at<FISH_MONEY_INTERVAL_MS) return;
+    uint32_t amount=0;bool aggregate=false;
+    if(m->legacy_value) {amount=m->legacy_value;m->legacy_value=0;aggregate=true;}
+    else {
+        while(m->next<FISH_PRICE_GROUPS && !m->sale[m->next].count) ++m->next;
+        if(m->next<FISH_PRICE_GROUPS) {
+            fish_price_group_t *s=&m->sale[m->next];amount=s->price;--s->count;
+        } else {amount=m->hanging_value;m->hanging_value=0;}
+    }
+    if(amount) {money_popup(g,(int32_t)amount,aggregate);m->at=g->now;}
+}
 fish_merchant_reply_t fish_shop_trade(struct fish_game *g,unsigned item)
 {
     if(!fish_game_shop_open(g)) return FISH_MERCHANT_CLOSED;
@@ -101,8 +136,15 @@ fish_merchant_reply_t fish_shop_trade(struct fish_game *g,unsigned item)
         uint32_t value=fish_hold_value(e);
         if(!value) return FISH_MERCHANT_EMPTY;
         if(value>FISH_COIN_LIMIT-e->coins) return FISH_MERCHANT_FULL;
+        fish_money_feedback_t *m=&g->money;
+        memcpy(m->sale,e->prices,sizeof(m->sale));m->next=0;
+        uint32_t detailed=0;for(unsigned i=0;i<FISH_PRICE_GROUPS;i++) detailed+=(uint32_t)e->prices[i].price*e->prices[i].count;
+        m->legacy_value=value-e->hanging_value-detailed;m->hanging_value=e->hanging_value;
+        m->at=g->now-FISH_MONEY_INTERVAL_MS;
+        /* First popup is immediate; following fish are paced by the frame clock. */
+        fish_money_update(g);
         e->coins+=value;memset(e->count,0,sizeof(e->count));memset(e->grams,0,sizeof(e->grams));
-        memset(e->value,0,sizeof(e->value));e->hanging_species=FISH_SPECIES_COUNT;
+        memset(e->value,0,sizeof(e->value));memset(e->prices,0,sizeof(e->prices));e->hanging_species=FISH_SPECIES_COUNT;
         e->hanging_size_mm=0;e->hanging_grams=0;e->hanging_value=0;
         g->save_requested=true;return FISH_MERCHANT_SOLD;
     }
@@ -113,6 +155,7 @@ fish_merchant_reply_t fish_shop_trade(struct fish_game *g,unsigned item)
     uint32_t price=fish_shop_price(item);
     if(e->coins<price) return FISH_MERCHANT_POOR;
     e->coins-=price;
+    money_popup(g,-(int32_t)price,false);
     if(s->slot==0) {e->rods|=(uint8_t)(1u<<s->index);g->rod_index=s->index;}
     else if(s->slot==1) {e->lines|=(uint8_t)(1u<<s->index);fish_game_equip_line(g,s->index);}
     else if(s->slot==2) {e->floats|=(uint8_t)(1u<<s->index);g->float_index=s->index;}

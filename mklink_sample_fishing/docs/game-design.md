@@ -1,6 +1,6 @@
-# 北方湿地公园：整体设定 v25 / North Wetland: Game Design v25
+# 北方湿地公园：整体设定 v26 / North Wetland: Game Design v26
 
-2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
+2026-10-16。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
 ## 功能概述 / Feature overview
 
@@ -93,7 +93,7 @@ Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actu
 
 系统单调毫秒驱动，每1秒现实时间为1分钟游戏时间，一昼夜24分钟，05–07渐亮、18–20渐暗。新游戏起始06:00加运行秒数，读档恢复游戏分钟，退出期间不快进。毫秒余量与uint32回绕安全。
 
-存档v6为293B，读取v1–v5；相对v5仅在末尾增加1字节声音档位，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。包含四种稀有图鉴和实物记录；V6使用独立A/B文件，V5及原文件只读保留，避免切回旧版覆盖进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
+存档v7为1317B，读取v1–v6；声音字段保持偏移260，新增1024B单鱼售价分组记录，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。包含四种稀有图鉴和实物记录；V7使用独立A/B文件，V6、V5及原文件只读保留，避免切回旧版覆盖进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
 
 标准工程默认 `FISH_LCD_ROTATION=0`，对应ST7789由原2转向180°，240×240窗口按驱动使用Y_SHIFT=80；其他工程未指定时保持默认2。常用Embedded Studio工程在 `hpm5301evklite_flash_uf2_debug/segger_embedded_studio/mklink_sample_fishing.emProject`，选择Debug。方向与帧率仍需实板确认。
 
@@ -172,3 +172,13 @@ No background bitmaps are added. Build checks reserve at least 64 KiB of applica
 多地图扩展时，可将地图位图素材存放在SD卡上，进入或切换地图时花费几秒读取所需资源，再供场景绘制使用。允许显式加载等待，以减少应用Flash对地图数量的限制。后续需要核算资源缓存与RAM预算，并协调现有SD存档访问。本次只记录方案，不实现SD素材存储、加载器或加载画面。
 
 For a future multi-map expansion, store map bitmaps on the SD card and allow a few seconds to load the required assets when entering or switching maps. An explicit loading period can reduce the limit imposed by application Flash capacity. Cache/RAM budgets and coordination with SD save access will need evaluation. This is a recorded proposal only; SD asset storage, loaders and loading screens are not implemented in this update.
+
+## 交易金币浮字 v26 / Transaction popups v26
+
+成功购买立即显示暖色 `-550G` 等扣款，成功出售显示浅绿色 `+11G` 等收入。出售第一条立即弹出，其余每250 ms一条；每条向上移动48像素、存续900 ms，末250 ms淡出，最多同时显示四条，放在商店柜台右侧。余额和鱼获在交易成功时一次结算并请求保存，动画不延迟结算；空鱼库、余额不足、已拥有、库存满或打烊时没有金币浮字。旋转和购买可继续操作，购买不清掉待显示的出售明细；离店清除剩余视觉队列。
+
+新鱼获按真实单条售价记录，等价售价合并计数以节省RAM与SD空间，出售时仍按条弹出，包含稀有鱼和船尾大鱼。最多256种不同售价；枚举当前全部合法尺寸，即使为每种售价选择最轻鱼，35 kg容器最多219种，不减少鱼库容量。扩容后船尾鱼入库也保留单价。售价记录保存于v7，重启后继续准确显示。旧v1–v6鱼库只有物种合计，迁移时保留全部数量/重量/金额；缺失的明细显示一次“旧鱼获合计”，不虚构单价，新鱼和已知船尾鱼仍逐条显示。
+
+Successful purchases immediately show a warm `-550G` charge; sales show pale-green `+11G` income per fish. The first sale popup is immediate, followed by one every 250 ms. Each rises 48 pixels over 900 ms, fading over its last 250 ms, with at most four visible over the right counter. Balances and cargo settle atomically and request a save before the animation finishes. Failed transactions produce no popup. Inputs remain active, purchases preserve the pending sale sequence, and leaving the shop clears only cosmetic feedback.
+
+New catches retain exact individual prices, with equal prices sharing a count. Selling expands these counts into individual popups, including rare and stern catches. All valid sizes give a conservative maximum of 219 different prices in the 35 kg hold, below the 256-group capacity. The v7 save persists these records. v1–v6 cargo has only species totals: migration preserves all cargo and money, and clearly labels its unrecoverable details as one legacy total. New catches and the known stern fish still show exact individual amounts. No bitmap, heap allocation or framebuffer is added.

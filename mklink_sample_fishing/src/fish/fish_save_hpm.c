@@ -15,13 +15,16 @@ static struct rt_thread worker;
 static struct rt_semaphore request;
 static char worker_stack[4096] __attribute__((aligned(8)));
 static uint8_t queued[FISH_SAVE_FILE_BYTES];
+static uint8_t checked[FISH_SAVE_FILE_BYTES]; /* Single worker; keep journal off its stack. */
 static unsigned queued_slot;
 static int completion;
 static bool busy,ready;
 static uint32_t started_at;
 extern int64_t get_system_time_ms(void);
 #define SAVE_DIRECTORY "3:/FishingGame_Saves_DO_NOT_DELETE"
-static const char *paths[]={SAVE_DIRECTORY "/NorthWetland_V6_Save_A_DO_NOT_DELETE.sav",
+static const char *paths[]={SAVE_DIRECTORY "/NorthWetland_V7_Save_A_DO_NOT_DELETE.sav",
+    SAVE_DIRECTORY "/NorthWetland_V7_Save_B_DO_NOT_DELETE.sav",
+    SAVE_DIRECTORY "/NorthWetland_V6_Save_A_DO_NOT_DELETE.sav",
     SAVE_DIRECTORY "/NorthWetland_V6_Save_B_DO_NOT_DELETE.sav",
     SAVE_DIRECTORY "/NorthWetland_V5_Save_A_DO_NOT_DELETE.sav",
     SAVE_DIRECTORY "/NorthWetland_V5_Save_B_DO_NOT_DELETE.sav",
@@ -30,7 +33,7 @@ static const char *paths[]={SAVE_DIRECTORY "/NorthWetland_V6_Save_A_DO_NOT_DELET
 
 int fish_storage_read(unsigned slot,uint8_t *data,size_t len)
 {
-    if(!ready || slot>5) return -1;
+    if(!ready || slot>7) return -1;
     FIL f;UINT count=0;FRESULT result=f_open(&f,paths[slot],FA_READ);
     if(result==FR_NO_FILE || result==FR_NO_PATH) return -2;
     if(result!=FR_OK) return -1;
@@ -51,7 +54,6 @@ static void save_worker(void *arg)
             r=f_write(&f,queued,sizeof(queued),&count);
             if(r==FR_OK && count==sizeof(queued)) r=f_truncate(&f);
             FRESULT synced=f_sync(&f),closed=f_close(&f);
-            uint8_t checked[FISH_SAVE_FILE_BYTES];
             if(r==FR_OK && count==sizeof(queued) && synced==FR_OK && closed==FR_OK &&
                !fish_storage_read(queued_slot,checked,sizeof(checked)) &&
                !memcmp(queued,checked,sizeof(queued))) result=1;
@@ -75,10 +77,10 @@ int fish_storage_init(uint8_t key[32])
     FRESULT made=f_mkdir(SAVE_DIRECTORY);if(made!=FR_OK && made!=FR_EXIST) return -1;
     /* A visible, human-readable ownership note; never replace an existing note. */
     FIL note;
-    if(f_open(&note,SAVE_DIRECTORY "/README_V6_DO_NOT_DELETE.txt",FA_WRITE|FA_CREATE_NEW)==FR_OK) {
+    if(f_open(&note,SAVE_DIRECTORY "/README_V7_DO_NOT_DELETE.txt",FA_WRITE|FA_CREATE_NEW)==FR_OK) {
         static const char info[]="钓鱼游戏存档，请勿删除 / Fishing game saves: DO NOT DELETE.\r\n"
-            "V6_A、V6_B 是本版存档，V5和原 A、B 保留用于旧版。所有文件请保留。\r\n"
-            "切回旧版不会覆盖 V6 进度和声音设置。不要格式化 SD 卡。\r\n"
+            "V7_A、V7_B 是本版存档，V6、V5和原 A、B 保留用于旧版。所有文件请保留。\r\n"
+            "切回旧版不会覆盖 V7 进度、声音设置和单鱼售价。不要格式化 SD 卡。\r\n"
             "建议定期把整个目录复制到电脑备份，恢复到同一块板卡。\r\n";
         UINT count;f_write(&note,info,sizeof(info)-1,&count);f_sync(&note);f_close(&note);
     }

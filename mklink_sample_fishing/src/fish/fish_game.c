@@ -313,6 +313,7 @@ void fish_game_update(fish_game_t *g, uint32_t now)
     g->game_minute=(uint16_t)((g->game_minute+delta/1000+remainder/1000)%1440);
     g->clock_remainder_ms=(uint16_t)(remainder%1000);
     g->now = now;
+    fish_money_update(g);
     if(g->mode==FISH_GUIDE && g->pressed && g->previous_mode==FISH_GUIDE && now-g->pressed_at>=FISH_GUIDE_HOLD_MS) {
         g->pressed=false;phase(g,(fish_mode_t)g->guide_return_mode);
     }
