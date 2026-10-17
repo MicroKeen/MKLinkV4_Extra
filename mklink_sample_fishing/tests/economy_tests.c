@@ -3,8 +3,76 @@
 #include <stdio.h>
 #include <string.h>
 static void tap(fish_game_t *g,uint32_t t) {fish_game_input(g,FISH_PRESS,0,t);fish_game_input(g,FISH_RELEASE,0,t+1);}
+static void money_feedback_test(void)
+{
+    fish_game_t g;fish_game_init(&g,100);g.mode=FISH_SHOP;g.game_minute=720;
+    fish_hold_add(&g.economy,0,200,160);fish_hold_add(&g.economy,0,235,260);
+    fish_hold_add(&g.economy,0,200,160);fish_hold_add(&g.economy,12,120,20);
+    fish_hold_add(&g.economy,1,1000,fish_species_weight_g(&fish_species[1],1000));
+    uint32_t total=fish_hold_value(&g.economy);
+    assert(g.economy.prices[0].count==2 && g.economy.prices[1].price==11);
+    assert(fish_shop_trade(&g,0)==FISH_MERCHANT_SOLD && g.economy.coins==total && g.save_requested);
+    assert(g.money.popup[0].amount==8 && !g.economy.prices[0].count);
+    /* Failed sales and purchases cannot erase the pending sale sequence. */
+    fish_money_feedback_t pending=g.money;
+    assert(fish_shop_trade(&g,0)==FISH_MERCHANT_EMPTY && !memcmp(&pending,&g.money,sizeof(pending)));
+    assert(fish_shop_trade(&g,2)==FISH_MERCHANT_POOR && !memcmp(&pending,&g.money,sizeof(pending)));
+    assert(fish_shop_trade(&g,7)==FISH_MERCHANT_BOUGHT);
+    assert(g.money.popup[1].amount==-8 && g.money.sale[0].count==1);
+    uint32_t sum=8;unsigned count=1;
+    for(unsigned i=1;i<5;i++) {
+        fish_game_update(&g,100+i*FISH_MONEY_INTERVAL_MS);
+        unsigned born=0;
+        for(unsigned j=0;j<FISH_MONEY_POPUPS;j++) if(g.money.popup[j].at==g.now && g.money.popup[j].amount>0) {
+            sum+=(uint32_t)g.money.popup[j].amount;++count;++born;
+        }
+        assert(born==1);
+    }
+    assert(sum==total && count==5 && g.economy.coins==total-8);
+    fish_game_update(&g,g.now+FISH_MONEY_LIFETIME_MS);
+    for(unsigned j=0;j<FISH_MONEY_POPUPS;j++) assert(!g.money.popup[j].amount);
+    /* Old aggregate cargo is clearly marked, while new catches stay exact. */
+    g.economy.count[0]=3;g.economy.grams[0]=600;g.economy.value[0]=29;
+    fish_hold_add(&g.economy,0,235,260);
+    assert(fish_shop_trade(&g,0)==FISH_MERCHANT_SOLD);
+    bool legacy=false;for(unsigned j=0;j<FISH_MONEY_POPUPS;j++)
+        legacy|=g.money.popup[j].amount==29 && g.money.popup[j].aggregate;
+    assert(legacy);fish_game_update(&g,g.now+FISH_MONEY_INTERVAL_MS);
+    assert(g.money.popup[1].amount==11 && !g.money.popup[1].aggregate);
+    g.mode=FISH_SHORE;fish_game_update(&g,g.now+1);
+    fish_money_feedback_t zero={0};assert(!memcmp(&zero,&g.money,sizeof(zero)));
+    /* Repeated bait purchases and timestamps across the uint32 wrap. */
+    fish_game_init(&g,UINT32_MAX-200);g.mode=FISH_SHOP;g.game_minute=720;g.economy.coins=500;
+    for(unsigned i=0;i<4;i++) {
+        fish_game_update(&g,UINT32_MAX-200+i*100);
+        assert(fish_shop_trade(&g,7)==FISH_MERCHANT_BOUGHT);
+        bool found=false;for(unsigned j=0;j<FISH_MONEY_POPUPS;j++) found|=g.money.popup[j].amount==-8 && g.money.popup[j].at==g.now;
+        assert(found);
+    }
+    fish_game_update(&g,g.now+FISH_MONEY_LIFETIME_MS);
+    for(unsigned j=0;j<FISH_MONEY_POPUPS;j++) assert(!g.money.popup[j].amount);
+    /* Capacity proof: even buying the lightest fish for each different price,
+     * 257 distinct prices cannot fit in the largest container. */
+    unsigned max_price=0;
+    for(unsigned s=0;s<FISH_SPECIES_COUNT;s++) {
+        unsigned p=fish_catch_price(s,fish_species[s].max_mm);if(p>max_price) max_price=p;
+    }
+    assert(max_price<=UINT16_MAX);
+    uint32_t cheapest[max_price+1];for(unsigned p=0;p<=max_price;p++) cheapest[p]=UINT32_MAX;
+    for(unsigned s=0;s<FISH_SPECIES_COUNT;s++) for(unsigned mm=fish_species[s].min_mm;mm<=fish_species[s].max_mm;mm++) {
+        unsigned price=fish_catch_price(s,(uint16_t)mm);uint32_t grams=fish_species_weight_g(&fish_species[s],(uint16_t)mm);
+        if(grams<cheapest[price]) cheapest[price]=grams;
+    }
+    uint32_t weight=0;
+    for(unsigned i=0;i<=FISH_PRICE_GROUPS;i++) {
+        unsigned best=0;for(unsigned p=1;p<=max_price;p++) if(cheapest[p]<cheapest[best]) best=p;
+        assert(cheapest[best]!=UINT32_MAX);weight+=cheapest[best];cheapest[best]=UINT32_MAX;
+    }
+    assert(weight>fish_containers[FISH_CONTAINER_COUNT-1].capacity_g);
+}
 int main(void)
 {
+    money_feedback_test();
     fish_game_t g;fish_game_init(&g,0);g.game_minute=720;
     assert(g.rod_index==0 && g.line_index==1 && g.bait_index==FISH_PLASTIC_BAIT && g.economy.coins==0);
     assert(!fish_hold_page_count(&g.economy) && fish_hold_page_index(&g.economy,0)==FISH_SPECIES_COUNT+1);

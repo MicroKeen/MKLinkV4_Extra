@@ -24,7 +24,7 @@ const fish_zone_t fish_map_zones[] = {
 };
 const fish_dock_t fish_docks[] = {
     {40, 108, 132, 96, 8, 108},
-    {852, 920, 828, 864, 852, 952},
+    {852, 920, 828, 864, 852, 1240},
 };
 const uint16_t fish_depth_options[] = {0, 50, 100, 200, 300, 450, 600, 65535};
 const fish_distribution_t fish_distributions[] = {

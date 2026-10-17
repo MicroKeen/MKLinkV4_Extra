@@ -110,7 +110,7 @@
       "boat_x": 828,
       "shore_x": 864,
       "walk_left": 852,
-      "walk_right": 952
+      "walk_right": 1240
     }
   ],
   "dock_reach_px": 12,
@@ -133,6 +133,10 @@
     "shore_camera_left": -336,
     "shop_x": -260,
     "shop_reach": 16,
-    "shore_speed": 32
+    "shore_speed": 32,
+    "shore_right": 1240,
+    "shore_camera_right": 1088,
+    "station_x": 1216,
+    "station_reach": 16
   }
 }

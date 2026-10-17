@@ -1,5 +1,18 @@
 # 容器、商店与游戏时间 v17
 
+## 最新 v29：路线与城市 / Latest v29: route and city
+
+右岸车站现可短按进入路线图。“湿地湖泊”与“城市江河”之间以道路表示远距离，局部场景图随选中变清晰；旋转选择，短按乘车，长按600 ms返回。**每程180G、5个游戏小时，往返相同**，加载失败不扣费、不推进时间。城市采用选定的现代天际线、远处轮渡、气垫筏、独立窗灯/霓虹/倒影层和动态射灯，原有鱼种、装备与鱼库规则保留。
+
+The east-bank station opens a schematic road route. Scene-backed anchors become clearer when selected. Rotate to choose, tap to travel, hold 600 ms to return. **Every trip costs 180G and five game hours in either direction**; failed loads do not charge or advance time. The city uses the selected skyline/ferry, raft, aligned emission layer and sweeping spotlights, with existing fish/tackle/cargo rules.
+
+背景、世界与鱼类贴图改为SD资源包，切图时写入独立460 KiB Flash缓存；应用限制在0x80023000–0x80080000，缓存0x80080000–0x800F3000。先完整校验源文件，最后提交缓存头；路线页和加载人物留在固件。首次运行请先复制SD资源目录，原存档目录保留。v8独立A/B存档新增所在地，保留v1–v7与已购装备、声音、图鉴和鱼获。
+
+World/fish art is loaded from SD packs into a dedicated 460 KiB Flash cache. Source preflight and a last-written commit header protect interrupted loading; route/loading art remains in firmware. Copy the SD resource directory before first boot and keep the original saves. Independent v8 A/B files add location while preserving v1–v7, gear, sound and catches.
+
+完整部署、分区、协议与验证限制见 [地图与SD资源 / Maps and SD resources](maps-and-sd-resources.md)。下方带版本的章节为历史记录，以本节v29为准。
+
+
 2026-10-14 根据用户文档实现。规则由平台无关 C 模块 `app/fish_economy.c`、`app/fish_game.c` 维护，JSON 契约位于 `data/economy.json`。Windows 模拟器、HPM 移植 overlay 和标准 `mklink_sample_fishing` 使用同一份规则。
 
 ## 鱼库与船尾
@@ -63,7 +76,14 @@ MCU 支持硬件浮点，但时间、价格、容量及路径仍用整数，只�
 
 Android/微信适配只需传入单调毫秒与 ROTATE/PRESS/RELEASE 边沿，再用 Canvas 或平台绘制消费状态。规则无 SDL、Arm-2D、RT-Thread 依赖。JS 价格中间值远低于 2^53，整除用 `Math.floor`，毫秒差先 `>>>0`；所有价格、g/mm、uint32 和稳定数组索引见 JSON。平台持久化可复用小端 v3 编解码；UUID/密钥来源需由平台自行定义，不能声称跨设备密文直接可读。目前未创建 Android 或小程序运行工程。
 
+新原图在 `assets/source/shop/` 和 `assets/source/lake-timebase-v2.png`，导出 PNG、图集与来源哈希在 `assets/processed/shop/`、`assets/shop-provenance.json`。实际提示词见 [shop-prompts.md](../assets/shop-prompts.md)，C 数组是派生产物。归档入口见 [cross-platform-assets.md](cross-platform-assets.md)。
 
 商店采用五行滚动商品列表，选中后在底部查看价格与属性/描述；粗像素背景含壁灯和挂具，使用窄正面柜台。布局、扩容和v4兼容细节见 [bucket-and-display-rack.md](bucket-and-display-rack.md)。
 
 当前余额在各主要页面持续显示；单鱼收获卡显示SELL售价，已解锁图鉴显示BEST纪录价，鱼库按实际存货紧凑分页。码头停稳后再次向岸旋转上岸、向水旋转登船；已取消行囊中的上下船按钮。完整当前规则以 [game-design.md](game-design.md) 为准。
+
+## v26 金币反馈 / Coin feedback
+
+购买成功显示 `-价格G`；出售成功按每条真实售价显示 `+售价G`，第一条立即出现，其后每250 ms一条，900 ms内上浮并淡出，最多四条。新鱼的售价记录随主存档保存；旧版只有合计的部分标明“旧鱼获合计”。交易立即结算，动画不阻塞旋转/购买，失败交易无扣款或收入浮字。完整规则见[整体设定](game-design.md)与[存档格式](save-system.md)。
+
+Successful purchases show a negative amount, and sales emit one positive popup per fish every 250 ms. Popups rise/fade over 900 ms, with up to four visible. Exact new prices persist in the main save; aggregate-only legacy cargo is clearly labeled. Settlement is immediate and input remains responsive.

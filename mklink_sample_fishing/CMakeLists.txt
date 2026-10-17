@@ -40,6 +40,7 @@ sdk_app_inc(.)
 sdk_inc(config)
 sdk_app_inc(src)
 sdk_app_inc(src/fish)
+sdk_app_inc(../common/beep_control)
 sdk_app_inc(src/fish/crypto/include)
 sdk_app_inc(lcd/adapt)
 sdk_app_inc(lcd/fatfs)
@@ -72,6 +73,7 @@ sdk_app_src(../external/perf_counter/perfc_task_coroutine.c)
 sdk_app_src(config/perfc_port_user.c)
 sdk_app_src(src/main.c)
 sdk_app_src(src/scene/scene_app.c)
+sdk_app_src(../common/beep_control/beep_control.c)
 sdk_app_src_glob(src/key_module/*.c)
 # sdk_app_src_glob is recursive. Keep the core shallow and add the assets once;
 # CMake deduplicates sources but the HPM SES generator does not.
@@ -88,8 +90,9 @@ sdk_app_src(lcd/fatfs/spi_sd/hpm_spi_sd_disk.c)
 file(GLOB FISH_CRYPTO_SOURCES CONFIGURE_DEPENDS src/fish/crypto/source/*.c)
 set_source_files_properties(${FISH_CRYPTO_SOURCES}
     src/fish/fish_save.c src/fish/fish_save_crypto.c src/fish/fish_save_key.c
+    src/fish/fish_resources.c src/fish/fish_resources_hpm.c src/fish/fish_fs_hpm.c
     src/fish/fish_save_hpm.c lcd/adapt/spi_sd_adapt.c lcd/fatfs/ff.c
-    src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
+    src/fish/fish_game.c src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
     lcd/fatfs/ffunicode.c lcd/fatfs/diskio.c lcd/fatfs/spi_sd/hpm_spi_sd_disk.c
     PROPERTIES COMPILE_OPTIONS "-Os")
 set_source_files_properties(src/fish/fish_scene.c PROPERTIES COMPILE_OPTIONS "-Os")
@@ -101,7 +104,7 @@ sdk_app_src(../common/lcd/arm2d_port/lcd_spi_port_hpm.c)
 sdk_app_src_glob(../common/lcd/arm2d_port/math/*.c)
 
 sdk_compile_definitions(-D_RTE_ -DCONFIG_NDEBUG_CONSOLE=1)
-sdk_compile_definitions(-DSD_FATFS_ENABLE=1)
+sdk_compile_definitions(-DSD_FATFS_ENABLE=1 -DFISH_EXTERNAL_ASSETS=1)
 sdk_compile_definitions(-D__REF_GUI_APP_CFG_HEADER_H__="rg_app_cfg.h")
 sdk_compile_definitions(-D__NGY_APP_CFG_HEADER_H__="rg_app_cfg.h")
 sdk_compile_definitions(-D__PERFC_CFG_PORTING_INCLUDE__="perfc_port_user.h")
@@ -121,6 +124,7 @@ sdk_compile_options("-O3")
 sdk_compile_options("-fms-extensions")
 sdk_link_libraries(m)
 add_custom_command(TARGET ${APP_ELF_NAME} POST_BUILD
+    COMMAND ${FISH_PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/verify_map_packs.py
     COMMAND ${CMAKE_OBJCOPY} -O binary -S
         --remove-section=.nor_cfg_option --remove-section=.boot_header
         $<TARGET_FILE:${APP_ELF_NAME}> ${EXECUTABLE_OUTPUT_PATH}/MicroLink.app.bin

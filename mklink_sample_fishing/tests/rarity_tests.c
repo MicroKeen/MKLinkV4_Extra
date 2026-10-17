@@ -41,29 +41,30 @@ int main(void)
     fish_game_update(&g,5000); assert(g.mode==FISH_GUIDE);
     assert(g.random_state==before && g.boat_x==x && g.catches==0);
     fish_game_input(&g,FISH_PRESS,0,5010);
-    fish_game_input(&g,FISH_RELEASE,0,5020); assert(g.mode==FISH_MOVE);
+    fish_game_input(&g,FISH_RELEASE,0,5020); assert(g.mode==FISH_GUIDE && g.guide_page==1);
+    fish_game_input(&g,FISH_PRESS,0,5030);fish_game_input(&g,FISH_RELEASE,0,5630);assert(g.mode==FISH_MOVE);
     /* Restore FISH mode when the guide was opened while aiming. */
-    g.mode=FISH_AIM;
+    fish_game_init(&g,0);g.mode=FISH_AIM;
     fish_game_input(&g,FISH_PRESS,0,5100); fish_game_input(&g,FISH_ROTATE,1,5120);
     fish_game_input(&g,FISH_RELEASE,0,5130); assert(g.mode==FISH_GUIDE);
-    fish_game_input(&g,FISH_PRESS,0,5200); fish_game_input(&g,FISH_RELEASE,0,5210);
+    fish_game_input(&g,FISH_PRESS,0,5200); fish_game_input(&g,FISH_RELEASE,0,5800);
     assert(g.mode==FISH_AIM);
     /* Existing records remain until a larger catch is landed. */
     g.pending_species=0; g.pending_size_mm=200;
     g.pending_weight_g=fish_species_weight_g(&fish_species[0],200);
     g.species_best_size_mm[0]=250;
-    g.mode=FISH_BITE; g.phase_at=5300;
+    g.mode=FISH_BITE; g.phase_at=6300;
     g.phase_at-=fish_species[0].strike_delay_ms;
-    fish_game_input(&g,FISH_PRESS,0,5300); fish_game_input(&g,FISH_RELEASE,0,5300);
+    fish_game_input(&g,FISH_PRESS,0,6300); fish_game_input(&g,FISH_RELEASE,0,6300);
     g.reel_units=9900; g.tension=20;g.stamina=0;
-    fish_game_input(&g,FISH_ROTATE,1,5300);
+    fish_game_input(&g,FISH_ROTATE,1,6300);
     assert(g.mode==FISH_CAUGHT && g.species_best_size_mm[0]==250);
-    g.mode=FISH_BITE; g.phase_at=5400; g.pending_size_mm=300;
+    g.mode=FISH_BITE; g.phase_at=6400; g.pending_size_mm=300;
     g.phase_at-=fish_species[0].strike_delay_ms;
     g.pending_weight_g=fish_species_weight_g(&fish_species[0],300);
-    fish_game_input(&g,FISH_PRESS,0,5400); fish_game_input(&g,FISH_RELEASE,0,5400);
+    fish_game_input(&g,FISH_PRESS,0,6400); fish_game_input(&g,FISH_RELEASE,0,6400);
     g.reel_units=9900; g.tension=20;g.stamina=0;
-    fish_game_input(&g,FISH_ROTATE,1,5400);
+    fish_game_input(&g,FISH_ROTATE,1,6400);
     assert(g.mode==FISH_CAUGHT && g.species_best_size_mm[0]==300 && g.species_catches[0]==2);
     puts("PASS: corrected tiers, 1M encounter rolls, guide chord/navigation/return/no-RNG, best-size records");
 }

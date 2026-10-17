@@ -9,7 +9,7 @@ define memory with size = 4G;
 /* Regions */
 define region NOR_CFG_OPTION = [ from 0x80020400 size 0xc00 ];
 define region BOOT_HEADER = [ from 0x80021000 size 0x2000 ];
-define region FLASH = [from 0x80023000 size 0xD0000 ];   /* XPI0 */
+define region FLASH = [from 0x80023000 size 0x5D000 ];   /* XPI0 */
 define region ILM = [from 0x00000000 size 128k];    /* ILM */
 define region DLM = [from 0x00080300 size (128k - 768)];    /* DLM */
 define region AHB_SRAM = [from 0xf0400000 size 32k]; /* AHB_SRAM */

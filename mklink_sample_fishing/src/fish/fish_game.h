@@ -8,23 +8,27 @@
 #include "fish_equipment.h"
 #include "fish_economy.h"
 
-enum { FISH_WORLD_WIDTH = FISH_MAP_WIDTH, FISH_HOLD_MS = 280, FISH_FULL_CHARGE_MS = 1400,
+enum { FISH_WORLD_WIDTH = FISH_MAP_WIDTH, FISH_HOLD_MS = 280, FISH_GUIDE_HOLD_MS=600, FISH_FULL_CHARGE_MS = 1400,
        FISH_WORLD_CM_PER_PIXEL = 4, FISH_LOSS_ANIMATION_MS = 1200 };
 typedef enum { FISH_MOVE, FISH_AIM, FISH_CHARGE, FISH_CAST,
                FISH_WAIT, FISH_BITE, FISH_FIGHT, FISH_CAUGHT, FISH_GUIDE,
-               FISH_BAG, FISH_SHORE, FISH_LOST, FISH_SHOP, FISH_HOLD } fish_mode_t;
+               FISH_BAG, FISH_SHORE, FISH_LOST, FISH_SHOP, FISH_HOLD, FISH_ROUTE, FISH_LOADING } fish_mode_t;
 enum {FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,
-      FISH_BAG_DOCK,FISH_BAG_GUIDE,FISH_BAG_BACK,FISH_BAG_SAVE,FISH_BAG_COUNT};
+      FISH_BAG_DOCK,FISH_BAG_GUIDE,FISH_BAG_BACK,FISH_BAG_SAVE,FISH_BAG_SOUND,FISH_BAG_COUNT};
 enum {FISH_BAG_VISIBLE_COUNT=FISH_BAG_COUNT-1}; /* Dock ID reserved, no menu entry. */
 typedef enum { FISH_LOSS_NONE, FISH_LOSS_MISSED, FISH_LOSS_BREAK,
                FISH_LOSS_SLACK, FISH_LOSS_RANGE, FISH_LOSS_EARLY } fish_loss_t;
 typedef enum { FISH_ROTATE, FISH_PRESS, FISH_RELEASE } fish_event_t;
+typedef enum {FISH_SOUND_OFF,FISH_SOUND_FISH,FISH_SOUND_ALL,FISH_SOUND_COUNT} fish_sound_t;
+extern const char *const fish_sound_names[FISH_SOUND_COUNT];
 typedef struct fish_game {
     fish_mode_t mode, previous_mode;
     int boat_x, facing, cast_x, cast_start_x, cast_distance, reel, catches;
     uint32_t now, pressed_at, phase_at;
     bool pressed;
-    uint8_t guide_index, guide_return_mode;
+    uint8_t map_index,route_index,travel_target,travel_error;
+    bool travel_requested,travel_paid;
+    uint8_t guide_index, guide_return_mode,guide_page,sound_mode;
     uint8_t rod_index,line_index,float_index,bait_index,depth_index;
     uint8_t bag_index,bag_return_mode;
     bool bag_editing;
@@ -63,6 +67,7 @@ typedef struct fish_game {
     uint16_t species_catches[FISH_SPECIES_COUNT];
     uint16_t species_best_size_mm[FISH_SPECIES_COUNT];
     fish_economy_t economy;
+    fish_money_feedback_t money; /* Visual feedback only; never saved. */
     uint32_t clock_at;
     uint16_t game_minute,clock_remainder_ms;
     uint8_t shop_index,hold_return_mode,merchant_line_variant;
@@ -72,6 +77,9 @@ typedef struct fish_game {
     fish_cargo_result_t cargo_result;
 } fish_game_t;
 
+enum {FISH_MAP_COUNT=2,FISH_TRAVEL_FARE=180,FISH_TRAVEL_MINUTES=300};
+extern const char *const fish_map_names[FISH_MAP_COUNT];
+void fish_game_travel_complete(fish_game_t *g,bool success);
 void fish_game_init(fish_game_t *g, uint32_t now);
 void fish_game_update(fish_game_t *g, uint32_t now);
 void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now);
@@ -81,6 +89,7 @@ int fish_game_actor_x(const fish_game_t *g);
 unsigned fish_game_shore_pose(const fish_game_t *g);
 bool fish_game_ashore(const fish_game_t *g);
 bool fish_game_at_shop(const fish_game_t *g);
+bool fish_game_at_station(const fish_game_t *g);
 bool fish_game_shop_open(const fish_game_t *g);
 unsigned fish_game_night_opacity(const fish_game_t *g);
 int fish_game_dock_action(const fish_game_t *g);

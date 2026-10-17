@@ -5,6 +5,15 @@
 enum {FISH_HOLD_CAPACITY_G=10000,FISH_COIN_LIMIT=1000000000,FISH_BAIT_STOCK_LIMIT=999,
       FISH_SHOP_COUNT=16,FISH_SHOP_CONTAINER_FIRST=12,FISH_SHOP_CARGO=14,FISH_SHOP_BACK=15,
       FISH_CONTAINER_COUNT=3,FISH_PLASTIC_BAIT=5,FISH_SPECIAL_BAIT_COUNT=5};
+enum {FISH_PRICE_GROUPS=256,FISH_MONEY_POPUPS=4,FISH_MONEY_INTERVAL_MS=250,FISH_MONEY_LIFETIME_MS=900};
+typedef struct {uint16_t price,count;} fish_price_group_t;
+typedef struct {int32_t amount;uint32_t at;bool aggregate;} fish_money_popup_t;
+typedef struct {
+    fish_price_group_t sale[FISH_PRICE_GROUPS];
+    uint16_t next;
+    uint32_t legacy_value,hanging_value,at;
+    fish_money_popup_t popup[FISH_MONEY_POPUPS];
+} fish_money_feedback_t;
 enum {FISH_SHOP_OPEN_MINUTE=420,FISH_SHOP_CLOSE_MINUTE=1080};
 enum {FISH_SHOP_ROD,FISH_SHOP_LINE,FISH_SHOP_FLOAT,FISH_SHOP_BAIT,FISH_SHOP_CONTAINER,FISH_SHOP_SERVICE};
 typedef struct {const char *name;uint32_t capacity_g;uint16_t price;} fish_container_t;
@@ -21,6 +30,8 @@ typedef struct {
     uint8_t hanging_species; /* FISH_SPECIES_COUNT means no hanging fish. */
     uint16_t hanging_size_mm;
     uint32_t hanging_grams,hanging_value;
+    /* Equal prices share a count. Existing aggregate-only cargo stays intact. */
+    fish_price_group_t prices[FISH_PRICE_GROUPS];
 } fish_economy_t;
 struct fish_game;
 extern const uint16_t fish_base_prices[FISH_SPECIES_COUNT];
@@ -39,6 +50,7 @@ uint32_t fish_shop_price(unsigned item);
 unsigned fish_shop_kind(unsigned item);
 unsigned fish_shop_item_index(unsigned item);
 fish_merchant_reply_t fish_shop_trade(struct fish_game *g,unsigned item);
+void fish_money_update(struct fish_game *g);
 const char *fish_merchant_says(const struct fish_game *g);
 unsigned fish_merchant_pose(const struct fish_game *g);
 #endif

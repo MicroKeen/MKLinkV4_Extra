@@ -1,6 +1,19 @@
-# 北方湿地公园：整体设定 v23 / North Wetland: Game Design v23
+# 北方湿地公园：整体设定 v28 / North Wetland: Game Design v28
 
-2026-10-15。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
+## 最新 v29：路线与城市 / Latest v29: route and city
+
+右岸车站现可短按进入路线图。“湿地湖泊”与“城市江河”之间以道路表示远距离，局部场景图随选中变清晰；旋转选择，短按乘车，长按600 ms返回。**每程180G、5个游戏小时，往返相同**，加载失败不扣费、不推进时间。城市采用选定的现代天际线、远处轮渡、气垫筏、独立窗灯/霓虹/倒影层和动态射灯，原有鱼种、装备与鱼库规则保留。
+
+The east-bank station opens a schematic road route. Scene-backed anchors become clearer when selected. Rotate to choose, tap to travel, hold 600 ms to return. **Every trip costs 180G and five game hours in either direction**; failed loads do not charge or advance time. The city uses the selected skyline/ferry, raft, aligned emission layer and sweeping spotlights, with existing fish/tackle/cargo rules.
+
+背景、世界与鱼类贴图改为SD资源包，切图时写入独立460 KiB Flash缓存；应用限制在0x80023000–0x80080000，缓存0x80080000–0x800F3000。先完整校验源文件，最后提交缓存头；路线页和加载人物留在固件。首次运行请先复制SD资源目录，原存档目录保留。v8独立A/B存档新增所在地，保留v1–v7与已购装备、声音、图鉴和鱼获。
+
+World/fish art is loaded from SD packs into a dedicated 460 KiB Flash cache. Source preflight and a last-written commit header protect interrupted loading; route/loading art remains in firmware. Copy the SD resource directory before first boot and keep the original saves. Independent v8 A/B files add location while preserving v1–v7, gear, sound and catches.
+
+完整部署、分区、协议与验证限制见 [地图与SD资源 / Maps and SD resources](maps-and-sd-resources.md)。下方带版本的章节为历史记录，以本节v29为准。
+
+
+2026-10-17。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
 ## 功能概述 / Feature overview
 
@@ -93,7 +106,7 @@ Line lengths are 4.5/6.5/8.5 m for fine/general/heavy tackle, limiting both actu
 
 系统单调毫秒驱动，每1秒现实时间为1分钟游戏时间，一昼夜24分钟，05–07渐亮、18–20渐暗。新游戏起始06:00加运行秒数，读档恢复游戏分钟，退出期间不快进。毫秒余量与uint32回绕安全。
 
-存档v5为292B，读取v1/v2/v3/v4，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。追加四种稀有图鉴和实物记录，V5使用独立A/B文件，原文件只读保留，避免切回旧版覆盖稀有进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
+存档v7为1317B，读取v1–v6；声音字段保持偏移260，新增1024B单鱼售价分组记录，保持原基础字段、密钥、UUID派生与目录。V4装备保留，更早版本沿用一次初始化标记。包含四种稀有图鉴和实物记录；V7使用独立A/B文件，V6、V5及原文件只读保留，避免切回旧版覆盖进度。后台写非活动槽、同步并读回确认，不操作背光PA26。完整布局和文件名见[存档说明](save-system.md)。
 
 标准工程默认 `FISH_LCD_ROTATION=0`，对应ST7789由原2转向180°，240×240窗口按驱动使用Y_SHIFT=80；其他工程未指定时保持默认2。常用Embedded Studio工程在 `hpm5301evklite_flash_uf2_debug/segger_embedded_studio/mklink_sample_fishing.emProject`，选择Debug。方向与帧率仍需实板确认。
 
@@ -147,8 +160,54 @@ The audit runs 200,000 actual cast selections for each of 11 base species (2.2 m
 
 All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is removed, with alignment and spacing adjustments for compact rows. The misleading reel-now message during rod flex is removed; rod animation, the two-second elastic window and fight rules are unchanged. Crab uses the generic display name “溪蟹” (stream crab), catfish loses its geographic alias, and the setting is a fictional wetland. Species indices and saves are preserved.
 
-## 后续规划，暂不执行 / Future plan, not implemented
+## 蜂鸣器反馈 v24 / Buzzer feedback v24
 
-多地图扩展时，可将地图位图素材存放在SD卡上，进入或切换地图时花费几秒读取所需资源，再供场景绘制使用。允许显式加载等待，以减少应用Flash对地图数量的限制。后续需要核算资源缓存与RAM预算，并协调现有SD存档访问。本次只记录方案，不实现SD素材存储、加载器或加载画面。
+成功提竿上钩播放160 Hz/60 ms低频短脉冲；鱼实际挣扎时播放110–170 Hz不规则低频短震，每次20–50 ms、静音间隙20–70 ms，体力恢复和被动鱼种安静。成功买卖播放660→1100 Hz的上扬收银音，40 ms首音、10 ms间隔、80 ms尾音；失败交易静音。退出搏鱼或商店立即停止，使用既有PWM及单次定时器，不阻塞绘图或输入。所有音符占空比20%，详见[蜂鸣器参数](buzzer-feedback.md)，实板声音/震感待试听。
 
-For a future multi-map expansion, store map bitmaps on the SD card and allow a few seconds to load the required assets when entering or switching maps. An explicit loading period can reduce the limit imposed by application Flash capacity. Cache/RAM budgets and coordination with SD save access will need evaluation. This is a recorded proposal only; SD asset storage, loaders and loading screens are not implemented in this update.
+Successful hooks play a 160 Hz/60 ms low-frequency pulse. Active bursts play irregular 110–170 Hz pulses lasting 20–50 ms with 20–70 ms silent gaps, with recovery and passive species silent. Successful trades play an ascending 660→1100 Hz cashier cue (40 ms, 10 ms gap, 80 ms tail); failed trades stay silent. Leaving the fight/shop stops playback. Existing PWM and one-shot timers avoid blocking drawing/input; all notes use 20% duty. See the linked parameters; physical sound/vibration audition is pending.
+
+## 声音设置与两页图鉴 v25 / Sound settings and two-page guide v25
+
+行囊底部按图鉴、声音、存档、返回排列。声音提供关闭／仅鱼讯／全部开启三档，短按进入调整、旋转选择、短按确认并请求保存；调整立即生效。声音档位写入v6认证存档末尾偏移260，文件由292增至293字节，旧v1–v5迁移默认全部开启。保留原密钥、目录、索引和所有旧文件，优先V6、其次V5，再读取更早版本。
+
+The bag footer reads guide, sound, save and return. Tap sound to edit, rotate to choose off/fish-only/all, and tap to confirm/save; changes apply immediately. Sound is authenticated in v6 at payload offset 260, increasing files from 292 to 293 bytes. v1–v5 migration defaults to all sounds. The key, directory, indices and all old files remain; loading prioritizes v6, then v5, then earlier versions.
+
+图鉴第一页保留鱼图、纪录和评语；第二页用四行12像素文字显示时段、水域、钓层和推荐鱼饵，不显示多少米的范围。内容从实际地图/鱼饵/活跃配置生成，稀有变异继承基础鱼；未收集只显示简短线索。旋转切鱼，短按翻页，长按600 ms返回来源页面；进入时默认鱼卡页。斑鳜提示全天、晨昏稍好，不偏夜间。
+
+The first guide page retains portraits, records and remarks. The second shows four 12-pixel rows: activity, area, layer and recommended bait, without numeric depth ranges, derived from actual game rules. Variants inherit their base rules; locked entries show a short hint. Rotate to select fish, tap to change pages, and hold 600 ms to return. Entry starts on the portrait page. Mandarin fish remain day/night-neutral with a mild dawn/dusk preference.
+
+本次不增加背景位图；构建检查要求至少保留64 KiB应用Flash供后续地图页面，地图页本身尚未实装。SD多地图素材仍只保留规划。
+
+No background bitmaps are added. Build checks reserve at least 64 KiB of application Flash for the future map page, which is not implemented yet. SD multi-map assets remain a recorded plan.
+
+## 多地图资源方案已在v29实现 / SD map resources implemented in v29
+
+此前暂存的SD资源方案已由v29实现，详见本页顶部和[资源协议](maps-and-sd-resources.md)。
+
+## 交易金币浮字 v26 / Transaction popups v26
+
+成功购买立即显示暖色 `-550G` 等扣款，成功出售显示浅绿色 `+11G` 等收入。出售第一条立即弹出，其余每250 ms一条；每条向上移动48像素、存续900 ms，末250 ms淡出，最多同时显示四条，放在商店柜台右侧。余额和鱼获在交易成功时一次结算并请求保存，动画不延迟结算；空鱼库、余额不足、已拥有、库存满或打烊时没有金币浮字。旋转和购买可继续操作，购买不清掉待显示的出售明细；离店清除剩余视觉队列。
+
+新鱼获按真实单条售价记录，等价售价合并计数以节省RAM与SD空间，出售时仍按条弹出，包含稀有鱼和船尾大鱼。最多256种不同售价；枚举当前全部合法尺寸，即使为每种售价选择最轻鱼，35 kg容器最多219种，不减少鱼库容量。扩容后船尾鱼入库也保留单价。售价记录保存于v7，重启后继续准确显示。旧v1–v6鱼库只有物种合计，迁移时保留全部数量/重量/金额；缺失的明细显示一次“旧鱼获合计”，不虚构单价，新鱼和已知船尾鱼仍逐条显示。
+
+Successful purchases immediately show a warm `-550G` charge; sales show pale-green `+11G` income per fish. The first sale popup is immediate, followed by one every 250 ms. Each rises 48 pixels over 900 ms, fading over its last 250 ms, with at most four visible over the right counter. Balances and cargo settle atomically and request a save before the animation finishes. Failed transactions produce no popup. Inputs remain active, purchases preserve the pending sale sequence, and leaving the shop clears only cosmetic feedback.
+
+New catches retain exact individual prices, with equal prices sharing a count. Selling expands these counts into individual popups, including rare and stern catches. All valid sizes give a conservative maximum of 219 different prices in the 35 kg hold, below the 256-group capacity. The v7 save persists these records. v1–v6 cargo has only species totals: migration preserves all cargo and money, and clearly labels its unrecoverable details as one legacy total. New catches and the known stern fish still show exact individual amounts. No bitmap, heap allocation or framebuffer is added.
+
+## 不规则挣扎反馈 v27 / Irregular struggle feedback v27
+
+挣扎音效改为私有随机短脉冲，起音间距40–120 ms（受线程更新延迟影响），每一下同时改变频率、时长和间隙，避免机械节拍。音效随机数与鱼种、尺寸、搏鱼和运动随机数独立，存档格式仍为v7/1317 B。实际冲刺以外安静、卡顿不补播、收银与上钩提示保留；细节见[蜂鸣器反馈](buzzer-feedback.md)。当前重量理论上限为1米鲤鱼／红色长尾鲤16,461 g；1.2米土鲶／黄化土鲶15,170 g。
+
+Struggle feedback now varies pitch, duration and silence using a private random state. Pulse onsets are 40–120 ms apart before thread delays. Fishing/size/fight/motion randomness and the v7/1317-byte save remain unchanged. Actual lulls stay silent and stalls do not queue audio. The current theoretical weight maximum is 16,461 g for a 1 m carp/red longtail carp, followed by 15,170 g for a 1.2 m catfish/xanthic catfish.
+
+## 右岸小火车站 v28 / Small east-bank railway station v28
+
+新地图扩展的第一步是在当前地图右侧增加小型火车站外景。右码头船位仍为828、上岸点864；继续向右走，经过原岸边与生成式草地小路，到1216的车站停住。右侧步行边界1240，岸上镜头上限1088。靠站后再旋转可继续至边界或返回；回到864码头先停住，再向湖面旋转才回船，与左岸一致。短按仍是原背包操作，本次尚未加入目的地选择、火车运行或地图切换。
+
+车站为正立面瓦顶、木梁与暖砖墙的小站房，右侧候车棚、站钟、长椅与行李箱；ImageGen参考现有渔具店和草地生成。原图仅作本地源素材，运行时使用110×54 RGB565/A8贴图、整数2倍显示、24色，像素数组17,820 B。人物保持原36像素高度，站房底座落在同一地面。候车站台前方的简化轨道位于行走路线下方，列车尚未实装。
+
+右岸地面复用原生成式草地贴图，96屏幕像素为一段连续拼接，原码头羽化重叠保留。超出原湖面宽度的远山/天空沿右缘镜像延续，云、月、夜色仍使用对应山脊遮挡；没有新增整屏背景。小地图标记限制在屏幕范围，靠站时位置显示“车站”。实际湖区、钓点、鱼种权重与存档格式v7不变，SD多地图位图加载仍仅记录。
+
+The first map-expansion step adds a small railway-station exterior on the current east bank. Boat position 828 and landing 864 remain; continuing right reaches the station at 1216 and stops. Walking ends at 1240, with an onshore camera limit of 1088. Returning stops at landing 864 before another turn boards the boat. Tap keeps the existing bag action. Destination selection, train movement and map switching are not implemented in this step.
+
+The frontal tiled-roof station has a waiting shelter, clock, bench and suitcase. Built-in ImageGen used the existing shop and path as style references. A 110×54 RGB565/A8 tile displays at exactly 2× with 24 colors (17,820 pixel-array bytes), preserving the 36-pixel actor. The existing generated meadow repeats continuously with the original dock blend. Right-edge reflection extends the original panorama and matching sky occlusion without another full-screen image. Lake geometry, encounter weights, save v7 and the deferred SD bitmap-loader plan remain unchanged.
