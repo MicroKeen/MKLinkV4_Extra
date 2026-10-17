@@ -38,7 +38,7 @@ typedef struct {
     arm_2d_tile_t counter_front_tile;
     arm_2d_op_trans_msk_t merchant_operation,hanging_operation;
     arm_2d_op_trans_msk_t container_operation;
-    arm_2d_op_trans_msk_t footpath_operation,exterior_operation,shore_player_operation;
+    arm_2d_op_trans_msk_t footpath_operation,exterior_operation,shore_player_operation,station_operation;
     arm_2d_op_trans_msk_t dock_operation[2];
     arm_2d_op_trans_msk_t hold_portrait_operation;
     arm_2d_op_trans_msk_t cloud_operation;
@@ -144,7 +144,9 @@ static int floor_divide(int value,int divisor)
 { return value>=0?value/divisor:-((-value+divisor-1)/divisor); }
 static int horizon_at(int source_column)
 {
-    if(source_column<0) source_column=-source_column-1;
+    int width=c_tileLakeRGB565.tRegion.tSize.iWidth;
+    source_column%=2*width;if(source_column<0) source_column+=2*width;
+    if(source_column>=width) source_column=2*width-1-source_column;
     return fish_sky_horizon[source_column/2];
 }
 
@@ -231,6 +233,18 @@ static void landscape(const arm_2d_tile_t *tile, const fish_game_t *game)
         arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
         target.tLocation.iX=left;target.tSize.iWidth=240-left;
         arm_2d_rgb16_tile_copy(&view,tile,&target,ARM_2D_CP_MODE_COPY);ARM_2D_OP_WAIT_ASYNC();
+    } else if(source_x+240>c_tileLakeRGB565.tRegion.tSize.iWidth) {
+        /* Continue the right skyline by reflection, matching the left bank.
+         * The second child selects the opposite root window for copy-mirror. */
+        int right=source_x+240-c_tileLakeRGB565.tRegion.tSize.iWidth,left=240-right;
+        source_region.tSize.iWidth=left;
+        arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
+        arm_2d_region_t target={.tLocation={0,0},.tSize={left,240}};
+        arm_2d_rgb16_tile_copy(&view,tile,&target,ARM_2D_CP_MODE_COPY);ARM_2D_OP_WAIT_ASYNC();
+        source_region.tLocation.iX=0;source_region.tSize.iWidth=right;
+        arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
+        target.tLocation.iX=left;target.tSize.iWidth=right;
+        arm_2d_rgb16_tile_copy_with_x_mirror(&view,tile,&target);ARM_2D_OP_WAIT_ASYNC();
     } else {
         arm_2d_tile_generate_child(&c_tileLakeRGB565,&source_region,&view,false);
         arm_2d_rgb16_tile_copy(&view,tile,NULL,ARM_2D_CP_MODE_COPY);ARM_2D_OP_WAIT_ASYNC();
@@ -309,10 +323,26 @@ static void banks_and_docks(const arm_2d_tile_t *tile,const fish_game_t *game)
         }
     }
     if(camera>FISH_MAP_WIDTH-280) {
-        arm_2d_region_t land={.tLocation={FISH_MAP_WIDTH-24-camera,0},.tSize={240,240}};
-        arm_2d_point_float_t centre={FISH_MAP_WIDTH+24-camera,156};
-        arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.footpath_operation,tile,&land,&centre);
-        ARM_2D_OP_WAIT_ASYNC(&scene.footpath_operation);
+        arm_2d_region_t land={.tLocation={FISH_MAP_WIDTH-24-camera,0},
+            .tSize={FISH_SHORE_CAMERA_RIGHT+240-(FISH_MAP_WIDTH-24),240}};
+        for(int left=FISH_MAP_WIDTH-24;left<FISH_SHORE_CAMERA_RIGHT+240;left+=96) {
+            arm_2d_point_float_t centre={left+48-camera,156};
+            arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.footpath_operation,tile,&land,&centre);
+            ARM_2D_OP_WAIT_ASYNC(&scene.footpath_operation);
+        }
+        /* Low foreground rails sit below the walking path/platform. All
+         * geometry uses the same two-screen-pixel grid as the native tiles. */
+        int rail_left=FISH_MAP_WIDTH+28,rail_right=FISH_SHORE_CAMERA_RIGHT+240;
+        for(int x=rail_left;x<rail_right;x+=16) {
+            box(tile,x-camera,150,6,16,RPG_DARK);box(tile,x-camera,150,4,14,RPG_WOOD);
+        }
+        box(tile,rail_left-camera,152,rail_right-rail_left,2,SHADOW);
+        box(tile,rail_left-camera,150,rail_right-rail_left,2,FAR);
+        box(tile,rail_left-camera,162,rail_right-rail_left,2,SHADOW);
+        box(tile,rail_left-camera,160,rail_right-rail_left,2,FAR);
+        arm_2d_point_float_t centre={FISH_STATION_X-camera,90};
+        arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&scene.station_operation,tile,NULL,&centre);
+        ARM_2D_OP_WAIT_ASYNC(&scene.station_operation);
     }
     for (unsigned side=0;side<2;side++) {
         arm_2d_point_float_t centre={ (side?FISH_MAP_WIDTH-57:56)-camera,158 };
@@ -562,6 +592,7 @@ static void position_and_depth(const arm_2d_tile_t *tile,const fish_game_t *game
     if (!arm_2d_helper_pfb_is_region_active(tile,&region,true)) return;
     int actor=fish_game_actor_x(game),marker=12+actor*215/FISH_MAP_WIDTH;
     if(marker<12) marker=12;
+    if(marker>227) marker=227;
     box(tile,12,19,216,3,DARK_PINE);
     for (unsigned i=0;i<2;i++) box(tile,12+fish_docks[i].boat_x*215/FISH_MAP_WIDTH,18,1,5,WOOD_LIGHT);
     box(tile,marker-1,17,3,7,SUN);
@@ -624,6 +655,7 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
     if ((game->mode==FISH_MOVE || game->mode==FISH_AIM) && game->boat_speed)
         mode=game->boat_speed==1 || game->boat_speed==-1?"慢行":"快行";
     if(game->mode==FISH_SHORE && game->shore_speed) mode="步行";
+    if(game->mode==FISH_SHORE && fish_game_at_station(game)) mode="车站";
     if (game->mode==FISH_BITE && !fish_game_strike_ready(game)) mode="试饵";
     ui_text(tile,9,204,52,game->mode==FISH_LOST?RED:game->mode==FISH_BITE?SUN:GREEN,INK,mode);
     snprintf(label,sizeof(label),"鱼获%d",game->catches); ui_text(tile,180,204,60,CREAM,INK,label);
@@ -1058,6 +1090,8 @@ static void frame_start(arm_2d_scene_t *s)
         &c_tileFootpathRGB565,&c_tileFootpathAlphaGRAY8,(arm_2d_point_float_t){25,24},0,2,2);
     arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->exterior_operation,
         &c_tileShopExteriorRGB565,&c_tileShopExteriorAlphaGRAY8,(arm_2d_point_float_t){33,25},0,2,2);
+    arm_2dp_rgb565_tile_transform_xy_with_src_mask_prepare(&self->station_operation,
+        &c_tileStationRGB565,&c_tileStationAlphaGRAY8,(arm_2d_point_float_t){55,27},0,2,2);
     arm_2dp_rgb565_tile_transform_xy_only_prepare(&self->exterior_closed_operation,
         &c_tileShopExteriorClosedPatchRGB565,(arm_2d_point_float_t){20,11.5f},0,2,2);
     for(unsigned side=0;side<2;side++)
@@ -1150,7 +1184,7 @@ static IMPL_PFB_ON_DRAW(draw_scene)
     fish_scene_t *self=(fish_scene_t *)pTarget;
     const fish_game_t *game=&self->game;
     (void)bIsNewFrame;
-    if(fish_smoke_test==28) {landscape(ptTile,game);return arm_fsm_rt_cpl;}
+    if(fish_smoke_test==28 || (fish_smoke_test==32 && self->smoke_frame>=36)) {landscape(ptTile,game);return arm_fsm_rt_cpl;}
     if (game->mode==FISH_BAG || game->mode==FISH_SHOP || game->mode==FISH_HOLD) box(ptTile,0,0,240,240,RPG_DARK);
     else {
         landscape(ptTile,game); banks_and_docks(ptTile,game); fisherman(ptTile,game);
@@ -1204,6 +1238,7 @@ void fish_scene_init(arm_2d_scene_player_t *player)
     ARM_2D_OP_INIT(scene.container_operation);
     ARM_2D_OP_INIT(scene.footpath_operation);
     ARM_2D_OP_INIT(scene.exterior_operation);
+    ARM_2D_OP_INIT(scene.station_operation);
     ARM_2D_OP_INIT(scene.shore_player_operation);
     for(unsigned side=0;side<2;side++) ARM_2D_OP_INIT(scene.dock_operation[side]);
     ARM_2D_OP_INIT(scene.hold_portrait_operation);

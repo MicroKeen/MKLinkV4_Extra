@@ -4,7 +4,7 @@
 
 An independent fishing demo based on this repository's `mklink_sample_fire` project. The hardware platform is **MKLink V4**, with an HPM5301 MCU, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button.
 
-## 当前玩法 v27 / Current gameplay v27
+## 当前玩法 v28 / Current gameplay v28
 
 1. **鱼饵吸引力与装备效果 / Bait attraction and tackle effects**
 
@@ -140,7 +140,7 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 
 当前左岸延伸到x=-284，商店入口在x=-260，地面连续铺到HUD底部。转动一格持续以32px/s慢走，反向转动先停住，再转一格反向走，短按停止并交互；门口、码头或边界自动停。码头停稳后再次向岸转动上岸、向水转动登船，已取消单独上下船按钮。鹅毛漂延长15%提竿窗口，夜光漂夜间咬钩加成15%。用户编辑的六条装备描述、18句店主台词已接入。
 
-最新界面：主界面持续显示金币余额，收鱼卡显示单鱼售价、已解锁图鉴显示纪录价，鱼库只分页显示当前存有鱼的鱼种并追加实际存在的船尾鱼。重绘低干扰左岸地面和有壁灯/挂具的粗像素商店背景，去掉深斜桌面及独立商品摆拍素材。当前共45项Windows主机检查，独立demo13项检查。
+最新界面：主界面持续显示金币余额，收鱼卡显示单鱼售价、已解锁图鉴显示纪录价，鱼库只分页显示当前存有鱼的鱼种并追加实际存在的船尾鱼。重绘低干扰左岸地面和有壁灯/挂具的粗像素商店背景，去掉深斜桌面及独立商品摆拍素材。当前共46项Windows主机检查，独立demo13项检查。
 
 商品列表保留名称与选中高亮，选中装备的大图标放在详情左下角（14像素内容整数放大2倍），右侧分名称/售价、描述、实际效果三行。岸上渔夫与船上角色同帽同装，三帧14×20像素含采样边，2倍显示36像素高，包含站立及两种按移动距离交替的步态；停止即站立，左右镜像。
 
@@ -152,9 +152,9 @@ v21：黑鱼、鲤鱼、土鲶在大体型收鱼卡/图鉴中自动使用96×56�
 
 v21: Large snakehead, carp and catfish automatically use 96×56 detail tiles in catch cards and guide entries, while small presentations retain the 48×28 originals. Base sprites now store native pixels and scale at draw time; even with three detail tiles, bitmap storage drops by 84,672 bytes without adding a full-screen buffer. The hardware platform remains MKLink V4; saves and gameplay values are unchanged.
 
-去掉未使用的浮点scanf强制链接后，GNU应用占用759,036／851,968 B，剩余92,932 B（约90.8 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
+去掉未使用的浮点scanf强制链接后，GNU应用占用777,608／851,968 B，剩余74,360 B（约72.6 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
 
-After removing unused forced floating scanf support, the GNU app uses 759,036 / 851,968 bytes, leaving 92,932 bytes (about 90.8 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
+After removing unused forced floating scanf support, the GNU app uses 777,608 / 851,968 bytes, leaving 74,360 bytes (about 72.6 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
 
 
 v22：鱼名与数值说明补齐中文，三种线长改为4.5／6.5／8.5米；最大出线后无法继续放线，鱼冲刺造成的弹性超距用弯竿显示，持续两秒后断线，收回范围即解除。冲刺两个方向都有、约70%远离玩家，鲤鱼/马口/斑鳜更积极。左岸连续视差与缓慢云漂移已修正。全部15个收藏项和店主四种表情通过实际规则/画面核实，完整记录见[当前玩法与核实 / Current gameplay audit](docs/v22-gameplay-and-audit.md)。
@@ -188,3 +188,13 @@ Successful purchases immediately show a warm `-550G` charge. Sales emit pale-gre
 鱼实际挣扎时改为110–170 Hz低频短震，每下20–50 ms、随机静音20–70 ms，起音间距40–120 ms（受游戏线程更新延迟影响），比原固定240 ms更密集且不规律。独立声音随机数不影响鱼种、体型或搏鱼；重复回调不连发、卡顿不补播，平静/体力恢复/离开搏鱼立即安静。上钩提示、收银音和声音三档沿用。实板声音和机壳震感待试听。
 
 Active struggles use 110–170 Hz pulses lasting 20–50 ms, followed by random 20–70 ms silent gaps. Onsets are 40–120 ms apart before game-thread delays, replacing the regular 240 ms cadence. Private sound randomness cannot affect catches, size or fighting. Repeated callbacks cannot double-play, stalls never queue sounds, and lulls/recovery/exits stop playback. Hook/cashier cues and all sound settings remain. Hardware audition is pending.
+
+## 右岸小火车站 v28 / East-bank railway station v28
+
+右码头上岸后向右慢走，可沿连续草地步道抵达小型火车站并自动停下。车站使用与渔具店相同的正立面像素风格：瓦顶、暖砖木梁、候车棚、长椅、行李箱、站钟和前方轨道；人物仍为36像素高。新素材为110×54原生像素、整数2倍显示，仅新增运行时C贴图；原图和生成提示词留在本地。远景向右延伸并保持昼夜/云层的山脊遮挡，码头/地面衔接经过逐像素核对。
+
+本站是后续新地图接入的第一步；本次实现站外场景和步道，尚无乘车、目的地菜单或地图切换。原湖面、鱼种权重和v7存档格式保留。
+
+Disembark at the east dock and walk right along the continuous meadow path to stop at a small railway station. The frontal pixel-art building matches the shop: tiled roof, aged brick/timber, waiting shelter, bench, suitcase and clock, with foreground rails. Actor height stays at 36 pixels. The 110×54 native tile displays at exactly 2×, and only runtime C art is published. Source art/prompts stay local. A reflected panorama extends the skyline while retaining day/night mountain occlusion; dock/ground joins are checked against actual PFB pixels.
+
+This is the first step toward new-map access: the exterior and path are implemented; train travel, destination selection and map switching remain for later. Lake geometry, fish weights and save v7 are preserved.

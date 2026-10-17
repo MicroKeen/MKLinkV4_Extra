@@ -84,6 +84,7 @@ int fish_game_actor_x(const fish_game_t *g);
 unsigned fish_game_shore_pose(const fish_game_t *g);
 bool fish_game_ashore(const fish_game_t *g);
 bool fish_game_at_shop(const fish_game_t *g);
+bool fish_game_at_station(const fish_game_t *g);
 bool fish_game_shop_open(const fish_game_t *g);
 unsigned fish_game_night_opacity(const fish_game_t *g);
 int fish_game_dock_action(const fish_game_t *g);

@@ -1,4 +1,4 @@
-# 北方湿地公园：整体设定 v27 / North Wetland: Game Design v27
+# 北方湿地公园：整体设定 v28 / North Wetland: Game Design v28
 
 2026-10-17。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
@@ -188,3 +188,15 @@ New catches retain exact individual prices, with equal prices sharing a count. S
 挣扎音效改为私有随机短脉冲，起音间距40–120 ms（受线程更新延迟影响），每一下同时改变频率、时长和间隙，避免机械节拍。音效随机数与鱼种、尺寸、搏鱼和运动随机数独立，存档格式仍为v7/1317 B。实际冲刺以外安静、卡顿不补播、收银与上钩提示保留；细节见[蜂鸣器反馈](buzzer-feedback.md)。当前重量理论上限为1米鲤鱼／红色长尾鲤16,461 g；1.2米土鲶／黄化土鲶15,170 g。
 
 Struggle feedback now varies pitch, duration and silence using a private random state. Pulse onsets are 40–120 ms apart before thread delays. Fishing/size/fight/motion randomness and the v7/1317-byte save remain unchanged. Actual lulls stay silent and stalls do not queue audio. The current theoretical weight maximum is 16,461 g for a 1 m carp/red longtail carp, followed by 15,170 g for a 1.2 m catfish/xanthic catfish.
+
+## 右岸小火车站 v28 / Small east-bank railway station v28
+
+新地图扩展的第一步是在当前地图右侧增加小型火车站外景。右码头船位仍为828、上岸点864；继续向右走，经过原岸边与生成式草地小路，到1216的车站停住。右侧步行边界1240，岸上镜头上限1088。靠站后再旋转可继续至边界或返回；回到864码头先停住，再向湖面旋转才回船，与左岸一致。短按仍是原背包操作，本次尚未加入目的地选择、火车运行或地图切换。
+
+车站为正立面瓦顶、木梁与暖砖墙的小站房，右侧候车棚、站钟、长椅与行李箱；ImageGen参考现有渔具店和草地生成。原图仅作本地源素材，运行时使用110×54 RGB565/A8贴图、整数2倍显示、24色，像素数组17,820 B。人物保持原36像素高度，站房底座落在同一地面。候车站台前方的简化轨道位于行走路线下方，列车尚未实装。
+
+右岸地面复用原生成式草地贴图，96屏幕像素为一段连续拼接，原码头羽化重叠保留。超出原湖面宽度的远山/天空沿右缘镜像延续，云、月、夜色仍使用对应山脊遮挡；没有新增整屏背景。小地图标记限制在屏幕范围，靠站时位置显示“车站”。实际湖区、钓点、鱼种权重与存档格式v7不变，SD多地图位图加载仍仅记录。
+
+The first map-expansion step adds a small railway-station exterior on the current east bank. Boat position 828 and landing 864 remain; continuing right reaches the station at 1216 and stops. Walking ends at 1240, with an onshore camera limit of 1088. Returning stops at landing 864 before another turn boards the boat. Tap keeps the existing bag action. Destination selection, train movement and map switching are not implemented in this step.
+
+The frontal tiled-roof station has a waiting shelter, clock, bench and suitcase. Built-in ImageGen used the existing shop and path as style references. A 110×54 RGB565/A8 tile displays at exactly 2× with 24 colors (17,820 pixel-array bytes), preserving the 36-pixel actor. The existing generated meadow repeats continuously with the original dock blend. Right-edge reflection extends the original panorama and matching sky occlusion without another full-screen image. Lake geometry, encounter weights, save v7 and the deferred SD bitmap-loader plan remain unchanged.

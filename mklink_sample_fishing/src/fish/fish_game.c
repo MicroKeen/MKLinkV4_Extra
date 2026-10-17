@@ -264,6 +264,7 @@ bool fish_game_ashore(const fish_game_t *g)
     return mode==FISH_SHORE || mode==FISH_SHOP;
 }
 bool fish_game_at_shop(const fish_game_t *g) {return fish_game_ashore(g) && abs(g->shore_x-FISH_SHOP_X)<=FISH_SHOP_REACH;}
+bool fish_game_at_station(const fish_game_t *g) {return fish_game_ashore(g) && abs(g->shore_x-FISH_STATION_X)<=FISH_STATION_REACH;}
 bool fish_game_shop_open(const fish_game_t *g) {return g->game_minute>=FISH_SHOP_OPEN_MINUTE && g->game_minute<FISH_SHOP_CLOSE_MINUTE;}
 unsigned fish_game_night_opacity(const fish_game_t *g)
 {
@@ -303,7 +304,8 @@ int fish_game_camera(const fish_game_t *g)
         unsigned t=g->now-g->phase_at;
         shift=(g->cast_distance-92)*(t<600?600: t<FISH_LOSS_ANIMATION_MS?FISH_LOSS_ANIMATION_MS-t:0)/600;
     }
-    return clamp(fish_game_actor_x(g)-120+g->facing*shift,fish_game_ashore(g)?FISH_SHORE_CAMERA_LEFT:0,FISH_WORLD_WIDTH-240);
+    bool ashore=fish_game_ashore(g);
+    return clamp(fish_game_actor_x(g)-120+g->facing*shift,ashore?FISH_SHORE_CAMERA_LEFT:0,ashore?FISH_SHORE_CAMERA_RIGHT:FISH_WORLD_WIDTH-240);
 }
 
 void fish_game_update(fish_game_t *g, uint32_t now)
@@ -325,12 +327,13 @@ void fish_game_update(fish_game_t *g, uint32_t now)
         g->shore_remainder=(uint16_t)(movement%1000);
         next=clamp(next,dock?fish_docks[dock].walk_left:FISH_SHORE_LEFT,fish_docks[dock].walk_right);
         if(!dock && ((prior>FISH_SHOP_X && next<=FISH_SHOP_X) || (prior<FISH_SHOP_X && next>=FISH_SHOP_X))) next=FISH_SHOP_X;
+        if(dock && ((prior>FISH_STATION_X && next<=FISH_STATION_X) || (prior<FISH_STATION_X && next>=FISH_STATION_X))) next=FISH_STATION_X;
         int landing=fish_docks[dock].shore_x;
         if((prior<landing && next>=landing) || (prior>landing && next<=landing)) next=landing;
         g->shore_walk_phase=(uint8_t)((g->shore_walk_phase+abs(next-prior))%12);
         g->shore_x=(int16_t)next;
         if(movement>=1000 && (next==(dock?fish_docks[dock].walk_left:FISH_SHORE_LEFT) || next==fish_docks[dock].walk_right ||
-           next==landing || (!dock && next==FISH_SHOP_X))) g->shore_speed=0;
+           next==landing || (!dock && next==FISH_SHOP_X) || (dock && next==FISH_STATION_X))) g->shore_speed=0;
     }
     if(g->shop_closed_notice && now-g->shop_closed_at>=1600) g->shop_closed_notice=false;
     if(g->mode==FISH_SHOP && !fish_game_shop_open(g)) {
