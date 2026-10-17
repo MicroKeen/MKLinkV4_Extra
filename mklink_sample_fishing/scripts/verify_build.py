@@ -74,7 +74,8 @@ report=dict(gnu=gnu,uf2_blocks=count,source_count=len(paths),uf2_base='0x8002300
     localization=True,chinese_font_pixel_size=12,compact_chinese_font=False,rod_flex_reel_hint=False,
     crab_display_name='溪蟹',catfish_display_name='土鲶',fictional_setting=True,
     buzzer_feedback=dict(pin='PA10',timer='GPTMR0',channel=2,duty_percent=20,
-        hook_hz=160,hook_ms=60,burst_hz=140,burst_ms=30,burst_interval_ms=240,
+        hook_hz=160,hook_ms=60,burst_hz_range=[110,170],burst_ms_range=[20,50],burst_silent_gap_ms_range=[20,70],
+        burst_onset_interval_ms_range=[40,120],private_sound_rng=True,burst_seed_tests=32,
         cashier_hz=[660,1100],cashier_ms=[40,80],cashier_gap_ms=10,hardware_auditioned=False),
     all_fish_cast_audit=2200000,merchant_contexts=14,merchant_expressions=4,
     shore_parallax_pixels=240000,sd_map_asset_loader_implemented=False,
@@ -88,7 +89,7 @@ if ses.exists():
 if args.write_report:
     (demo/'docs/build-validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     lines=['# 标准钓鱼 demo 验证','',
-        'HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-16 编译检查。',
+        'HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-17 编译检查。',
         '',f'GNU UF2 的 {count} 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、{len(paths)} 个唯一源文件及 include 路径检查通过。',
         '', '独立 demo 的 13 项主机测试全部通过：玩法、搏鱼、两页图鉴、地图装备、尺寸、经济/扩容/时钟、稀有变异概率/价格/对白、存档 v1–v6 迁移、声音与单鱼售价恢复、编码器事件、SD/背光隔离及蜂鸣器音效。',
         '', 'GNU 和 SEGGER flash_uf2/debug 编译成功；GNU flash_xip/debug 也构建并校验通过。编译器仍报告原 Arm-2D/perf_counter/RT-Thread/board 的宏或未使用变量警告，未更改第三方库以消除它们。',
@@ -104,6 +105,8 @@ if args.write_report:
         '', 'v25 adds three saved sound modes, a 293-byte v6 save with read-only v1–v5 migration, and a two-page 12-pixel guide. Rotate to select fish, tap to change pages, hold 600 ms to return. Thirty-six new PFB frames pass. No background bitmaps are added; builds require at least 64 KiB of free Flash for the future map page.',
         '', 'v26：成功购买显示扣款，出售按真实单鱼售价每250 ms连续弹出收入，最多四条，900 ms上浮淡出。新售价分组持久化到1317字节v7，完整保留v1–v6。旧档缺失明细标注旧鱼获合计；15幅交易PFB画面验证，原收银音继续通过测试。',
         '', 'v26 shows purchase charges and exact per-fish sale income every 250 ms, with four rising/fading popups lasting 900 ms. A compact journal persists in the 1317-byte v7 save while v1–v6 remain read-only. Legacy aggregate cargo is labeled, and 15 transaction PFB frames are checked.',
+        '', 'v27：挣扎使用独立随机数产生110–170 Hz、20–50 ms短脉冲，静音间隔20–70 ms（起音间距40–120 ms，受线程延迟影响）；32次不同上钩时刻、16 ms更新、卡顿不补播、回绕与状态只读检查通过。未实板试听，原上钩/收银音、声音档位和v7存档格式保留。',
+        '', 'v27 adds dense irregular struggle pulses (110–170 Hz, 20–50 ms) with random 20–70 ms silence and private sound randomness. Checks cover 32 hook times, 16 ms updates, stalls without catch-up, clock wrap and unchanged game state. Thread delays can lengthen cadence; hardware audition is pending. Hook/cashier cues, sound modes and the v7 save remain.',
         '', '| 工具链/区域 | 占用或预留 | 容量 | 余量 |','|---|---:|---:|---:|']
     for tool in ('gnu','ses'):
         if tool in report:

@@ -1,4 +1,4 @@
-# MKLink V4 组件与容量 v26 / Component and capacity audit v26
+# MKLink V4 组件与容量 v27 / Component and capacity audit v27
 
 应用分区为851,968 B（832 KiB），不扩大分区。下表以GNU ELF应用净载荷为准，包含代码、只读资源、初始化映像和对齐。
 
@@ -14,6 +14,7 @@ The application partition remains 851,968 bytes (832 KiB). Values below are meas
 | v24 蜂鸣器与收银音 / Buzzer pulses and cashier cue | 753,616 | 98,352 |
 | v25 声音存档与两页图鉴 / Saved sound settings and two-page guide | 757,104 | 94,864 |
 | v26 逐鱼金币浮字与售价存档 / Per-fish coin popups and price journal | 758,916 | 93,052 |
+| v27 不规则挣扎短震 / Irregular struggle pulses | 759,036 | 92,932 |
 
 11种基础鱼从96×56展开数组改为48×28原生像素，恢复133,056 B；黑鱼、鲤鱼、土鲶各增加96×56细节图，共48,384 B，位图净减少84,672 B。大体型卡面/图鉴自动切换细节图，小尺寸画面保持原像素；没有新增整屏缓冲、运行时解码或堆分配。
 
@@ -46,3 +47,7 @@ v25 adds saved sound modes and a four-row habitat page, adding 3,488 bytes of GN
 v26新增交易浮字与256组售价表，GNU Flash比v25增加1,812 B，DLM增加7,520 B至101,376 B（余28,928 B）。Flash占用758,916 B，剩余93,052 B（90.9 KiB），仍超过后续地图页的64 KiB保留量。存档从293增至1317 B；复用原AES-SIV、PFB和12像素字库，仅补充4个缺失字形，没有新增位图或整屏缓冲。单鱼售价表与浮字队列为固定内存。
 
 v26 adds coin feedback and a 256-group price journal, costing 1,812 bytes of GNU Flash and 7,520 bytes of DLM over v25. Flash uses 758,916 bytes with 93,052 bytes free (90.9 KiB); DLM uses 101,376 bytes with 28,928 free. The 64 KiB map-page reserve remains enforced. Saves grow from 293 to 1317 bytes, reusing AES-SIV, PFB and the 12-pixel font with four missing glyphs added. No bitmap, full-screen buffer or dynamic allocation is introduced. Hardware latency and stack watermarks remain unmeasured.
+
+v27将固定挣扎节拍改为密集的随机短脉冲。GNU Flash比v26增加120 B，DLM占用不变101,376 B；当前Flash占用759,036 B、余92,932 B（90.8 KiB），仍超过64 KiB地图页保留量。复用原伪随机函数但使用独立声音状态，不新增声音素材、线程或存档字段。
+
+v27 replaces the regular struggle cadence with dense irregular pulses, adding 120 bytes of GNU Flash while DLM stays at 101,376 bytes. Flash uses 759,036 bytes with 92,932 bytes free (90.8 KiB), retaining the 64 KiB map-page reserve. Existing random-number code is reused with private sound state; no audio assets, threads or save fields are added.

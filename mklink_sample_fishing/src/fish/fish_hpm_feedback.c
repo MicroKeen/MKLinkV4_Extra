@@ -1,17 +1,29 @@
 #include "fish_hpm_feedback.h"
 #include "beep_control.h"
 
-enum { HOOK_HZ=160, HOOK_10MS=6, BURST_HZ=140, BURST_10MS=3,
-       BURST_INTERVAL_MS=240, DUTY_PERCENT=20,
+enum { HOOK_HZ=160, HOOK_10MS=6, BURST_MIN_HZ=110, BURST_HZ_RANGE=61,
+       BURST_MIN_10MS=2, BURST_10MS_RANGE=4, BURST_MIN_GAP_MS=20, BURST_GAP_RANGE_MS=51,
+       DUTY_PERCENT=20,
        CASH_HZ=660, CASH_TAIL_HZ=1100, CASH_10MS=4, CASH_TAIL_10MS=8, CASH_TAIL_AT_MS=50 };
 static bool fighting,bursting,shopping;
 static uint8_t cash_note,sound_mode;
-static uint32_t pulse_at,cash_at,coins;
+static uint16_t pulse_interval_ms;
+static uint32_t pulse_at,cash_at,coins,feedback_random;
+
+static void burst_pulse(uint32_t now)
+{
+    /* Private sound RNG: enabling sound never advances fishing/loot/motion RNGs. */
+    uint32_t noise=fish_random_next(&feedback_random);
+    unsigned duration=BURST_MIN_10MS+(noise>>8)%BURST_10MS_RANGE;
+    unsigned gap=BURST_MIN_GAP_MS+(noise>>16)%BURST_GAP_RANGE_MS;
+    Beep_PWM_frequency(BURST_MIN_HZ+noise%BURST_HZ_RANGE,DUTY_PERCENT,(uint16_t)duration);
+    pulse_at=now;pulse_interval_ms=(uint16_t)(duration*10+gap);
+}
 
 void fish_hpm_feedback_init(void)
 {
     fighting=false;bursting=false;shopping=false;cash_note=0;
-    pulse_at=0;cash_at=0;coins=0;sound_mode=FISH_SOUND_ALL;
+    pulse_at=0;cash_at=0;coins=0;feedback_random=0;pulse_interval_ms=0;sound_mode=FISH_SOUND_ALL;
     Beep_PWM_Init();
     Beep_PWM_frequency(0,0,0);
 }
@@ -47,10 +59,10 @@ void fish_hpm_feedback_update(const fish_game_t *game)
     bool burst=fish_game_burst_active(game);
     if(!fighting) {
         Beep_PWM_frequency(HOOK_HZ,DUTY_PERCENT,HOOK_10MS);
+        feedback_random=game->now+game->random_state+game->pending_weight_g;
         pulse_at=game->now;
-    } else if(burst && (!bursting || game->now-pulse_at>=BURST_INTERVAL_MS)) {
-        Beep_PWM_frequency(BURST_HZ,DUTY_PERCENT,BURST_10MS);
-        pulse_at=game->now;
+    } else if(burst && (!bursting || game->now-pulse_at>=pulse_interval_ms)) {
+        burst_pulse(game->now);
     } else if(!burst && bursting) {
         Beep_PWM_frequency(0,0,0);
     }

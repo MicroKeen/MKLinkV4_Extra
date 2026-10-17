@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>
+#include <string.h>
 
 static unsigned initialized,events,tones;
 static uint32_t last_hz;
@@ -37,6 +38,32 @@ static void trade(fish_game_t *g,unsigned item,uint32_t now)
     fish_game_input(g,FISH_PRESS,0,now);fish_hpm_feedback_update(g);
     fish_game_input(g,FISH_RELEASE,0,now+1);fish_hpm_feedback_update(g);
 }
+static uint32_t burst_sequence(fish_game_t *g,uint32_t at)
+{
+    bool frequencies[61]={0},durations[4]={0},intervals[121]={0};
+    unsigned pulses=0,frequency_count=0,duration_count=0,interval_count=0;
+    uint32_t previous=at,hash=0;unsigned previous_duration=0;
+    for(unsigned ms=0;ms<fish_species[g->pending_species].burst_ms;ms++) {
+        unsigned count=events;g->now=at+ms;fish_game_t unchanged=*g;
+        fish_hpm_feedback_update(g);assert(!memcmp(g,&unchanged,sizeof(*g)));
+        if(events==count) continue;
+        assert(events==count+1 && last_hz>=110 && last_hz<=170 && last_time>=2 && last_time<=5);
+        if(pulses) {
+            unsigned interval=g->now-previous;
+            assert(interval>=40 && interval<=120);
+            assert(interval>=previous_duration+20 && interval<=previous_duration+70);
+            if(!intervals[interval]) {intervals[interval]=true;++interval_count;}
+            hash=hash*33+interval;
+        } else assert(!ms); /* Immediate first pulse on actual burst entry. */
+        if(!frequencies[last_hz-110]) {frequencies[last_hz-110]=true;++frequency_count;}
+        if(!durations[last_time-2]) {durations[last_time-2]=true;++duration_count;}
+        previous=g->now;previous_duration=last_time*10;++pulses;
+        hash=hash*33+last_hz+last_time;
+        count=events;fish_hpm_feedback_update(g);assert(events==count);
+    }
+    assert(pulses>=9 && frequency_count>=3 && duration_count>=2 && interval_count>=3);
+    return hash;
+}
 int main(void)
 {
     fish_game_t g;fish_game_init(&g,1000);fish_hpm_feedback_init();
@@ -51,16 +78,13 @@ int main(void)
     assert(events==count); /* Frame/input callbacks cannot replay the hook cue. */
     uint32_t burst_at=g.phase_at+fish_rules.hook_settle_ms;
     update(&g,burst_at-1);assert(events==count);
-    update(&g,burst_at);assert(events==++count && last_hz==140 && last_time==3);
-    update(&g,burst_at+239);assert(events==count);
-    update(&g,burst_at+240);assert(events==++count && last_hz==140);
-    update(&g,burst_at+241);assert(events==count);
+    burst_sequence(&g,burst_at);count=events;
     update(&g,burst_at+fish_species[1].burst_ms);assert(events==++count && !last_hz);
     /* Exhausted fish and normal lulls must not keep pulsing. */
     g.stamina_recovering=true;update(&g,burst_at+fish_species[1].fight_cycle_ms);
     assert(events==count);
     g.stamina_recovering=false;update(&g,burst_at+fish_species[1].fight_cycle_ms+1);
-    assert(events==++count && last_hz==140);
+    assert(events==++count && last_hz>=110 && last_hz<=170);
     g.mode=FISH_CAUGHT;update(&g,g.now+1);assert(events==++count && !last_hz);
     update(&g,g.now+1);assert(events==count);
     /* Real early strikes produce no hook tone. */
@@ -78,8 +102,7 @@ int main(void)
     }
     /* Unsigned elapsed time handles the millisecond counter wrap. */
     hook(&g,UINT_MAX-1000u,1);burst_at=g.phase_at+fish_rules.hook_settle_ms;
-    update(&g,burst_at);count=events;update(&g,burst_at+239);assert(events==count);
-    update(&g,burst_at+240);assert(events==count+1 && last_hz==140);
+    burst_sequence(&g,burst_at);
     fish_hpm_feedback_init();assert(initialized==2 && !last_hz);
     /* Real purchases/sales trigger an ascending two-note cashier cue. */
     fish_game_init(&g,1000);g.mode=FISH_SHOP;g.game_minute=720;g.economy.coins=1000;
@@ -126,6 +149,38 @@ int main(void)
         update(&g,2000+fish_rules.hook_settle_ms);assert(tones==before+2*(mode!=FISH_SOUND_OFF));
         g.sound_mode=FISH_SOUND_OFF;update(&g,g.now+1);assert(!last_hz);
     }
-    puts("PASS: hook/burst pulses, cashier notes, three sound modes, exits and clock wrap");
+    /* Irregular timing survives real frame quantization and stalls. Missed
+     * pulses never accumulate; frame and input callbacks cannot double-play. */
+    uint32_t previous_hash=0;unsigned changed=0;
+    for(unsigned seed=0;seed<32;seed++) {
+        fish_hpm_feedback_init();hook(&g,10000+seed*371,1);
+        burst_at=g.phase_at+fish_rules.hook_settle_ms;
+        uint32_t hash=burst_sequence(&g,burst_at);
+        changed+=seed && hash!=previous_hash;previous_hash=hash;
+        update(&g,burst_at+fish_species[1].burst_ms);assert(!last_hz);
+    }
+    assert(changed==31);
+    fish_hpm_feedback_init();hook(&g,2000,1);burst_at=g.phase_at+fish_rules.hook_settle_ms;
+    update(&g,burst_at);count=events;
+    update(&g,burst_at+500);assert(events==count+1);
+    count=events;update(&g,g.now);assert(events==count);
+    g.stamina_recovering=true;update(&g,g.now+1);assert(!last_hz);
+    before=tones;for(unsigned ms=2;ms<400;ms+=16) update(&g,burst_at+500+ms);
+    assert(tones==before);
+    fish_hpm_feedback_init();hook(&g,4000,1);burst_at=g.phase_at+fish_rules.hook_settle_ms;
+    unsigned pulse_count=0,shortest=UINT_MAX,longest=0;uint32_t prior=burst_at;
+    for(unsigned ms=0;ms<1100;ms+=16) {
+        before=tones;update(&g,burst_at+ms);
+        if(tones!=before) {
+            if(pulse_count) {
+                unsigned interval=g.now-prior;assert(interval>=40 && interval<=135);
+                if(interval<shortest) shortest=interval;
+                if(interval>longest) longest=interval;
+            }
+            prior=g.now;++pulse_count;
+        }
+    }
+    assert(pulse_count>=9 && longest>shortest);
+    puts("PASS: irregular dense burst pulses, private RNG, repeated callbacks/stalls, cashier notes, three sound modes, exits and clock wrap");
     return 0;
 }

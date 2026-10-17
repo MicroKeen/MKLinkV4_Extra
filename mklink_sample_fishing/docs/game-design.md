@@ -1,6 +1,6 @@
-# 北方湿地公园：整体设定 v26 / North Wetland: Game Design v26
+# 北方湿地公园：整体设定 v27 / North Wetland: Game Design v27
 
-2026-10-16。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
+2026-10-17。适用 Windows 模拟器与标准 `mklink_sample_fishing`，以下为当前实现，价格和规则覆盖旧版说明。
 
 ## 功能概述 / Feature overview
 
@@ -149,9 +149,9 @@ All Chinese text uses the original 12-pixel font. The v22 8-pixel subset is remo
 
 ## 蜂鸣器反馈 v24 / Buzzer feedback v24
 
-成功提竿上钩播放160 Hz/60 ms低频短脉冲；鱼实际挣扎时播放140 Hz/30 ms，每240 ms一次，体力恢复和被动鱼种安静。成功买卖播放660→1100 Hz的上扬收银音，40 ms首音、10 ms间隔、80 ms尾音；失败交易静音。退出搏鱼或商店立即停止，使用既有PWM及单次定时器，不阻塞绘图或输入。所有音符占空比20%，详见[蜂鸣器参数](buzzer-feedback.md)，实板声音/震感待试听。
+成功提竿上钩播放160 Hz/60 ms低频短脉冲；鱼实际挣扎时播放110–170 Hz不规则低频短震，每次20–50 ms、静音间隙20–70 ms，体力恢复和被动鱼种安静。成功买卖播放660→1100 Hz的上扬收银音，40 ms首音、10 ms间隔、80 ms尾音；失败交易静音。退出搏鱼或商店立即停止，使用既有PWM及单次定时器，不阻塞绘图或输入。所有音符占空比20%，详见[蜂鸣器参数](buzzer-feedback.md)，实板声音/震感待试听。
 
-Successful hooks play a 160 Hz/60 ms low-frequency pulse. Active bursts play 140 Hz/30 ms every 240 ms, with recovery and passive species silent. Successful trades play an ascending 660→1100 Hz cashier cue (40 ms, 10 ms gap, 80 ms tail); failed trades stay silent. Leaving the fight/shop stops playback. Existing PWM and one-shot timers avoid blocking drawing/input; all notes use 20% duty. See the linked parameters; physical sound/vibration audition is pending.
+Successful hooks play a 160 Hz/60 ms low-frequency pulse. Active bursts play irregular 110–170 Hz pulses lasting 20–50 ms with 20–70 ms silent gaps, with recovery and passive species silent. Successful trades play an ascending 660→1100 Hz cashier cue (40 ms, 10 ms gap, 80 ms tail); failed trades stay silent. Leaving the fight/shop stops playback. Existing PWM and one-shot timers avoid blocking drawing/input; all notes use 20% duty. See the linked parameters; physical sound/vibration audition is pending.
 
 ## 声音设置与两页图鉴 v25 / Sound settings and two-page guide v25
 
@@ -182,3 +182,9 @@ For a future multi-map expansion, store map bitmaps on the SD card and allow a f
 Successful purchases immediately show a warm `-550G` charge; sales show pale-green `+11G` income per fish. The first sale popup is immediate, followed by one every 250 ms. Each rises 48 pixels over 900 ms, fading over its last 250 ms, with at most four visible over the right counter. Balances and cargo settle atomically and request a save before the animation finishes. Failed transactions produce no popup. Inputs remain active, purchases preserve the pending sale sequence, and leaving the shop clears only cosmetic feedback.
 
 New catches retain exact individual prices, with equal prices sharing a count. Selling expands these counts into individual popups, including rare and stern catches. All valid sizes give a conservative maximum of 219 different prices in the 35 kg hold, below the 256-group capacity. The v7 save persists these records. v1–v6 cargo has only species totals: migration preserves all cargo and money, and clearly labels its unrecoverable details as one legacy total. New catches and the known stern fish still show exact individual amounts. No bitmap, heap allocation or framebuffer is added.
+
+## 不规则挣扎反馈 v27 / Irregular struggle feedback v27
+
+挣扎音效改为私有随机短脉冲，起音间距40–120 ms（受线程更新延迟影响），每一下同时改变频率、时长和间隙，避免机械节拍。音效随机数与鱼种、尺寸、搏鱼和运动随机数独立，存档格式仍为v7/1317 B。实际冲刺以外安静、卡顿不补播、收银与上钩提示保留；细节见[蜂鸣器反馈](buzzer-feedback.md)。当前重量理论上限为1米鲤鱼／红色长尾鲤16,461 g；1.2米土鲶／黄化土鲶15,170 g。
+
+Struggle feedback now varies pitch, duration and silence using a private random state. Pulse onsets are 40–120 ms apart before thread delays. Fishing/size/fight/motion randomness and the v7/1317-byte save remain unchanged. Actual lulls stay silent and stalls do not queue audio. The current theoretical weight maximum is 16,461 g for a 1 m carp/red longtail carp, followed by 15,170 g for a 1.2 m catfish/xanthic catfish.

@@ -1,12 +1,12 @@
 {
   "gnu": {
-    "sha256": "6ac13ce0b64b210a52b4a9e2c287f499735e26c06f76b27859e82a747ea6d4e9",
+    "sha256": "2bc254a6c6062e061ebd767f3c13a0a32a50dd2b9f9787856e133489b32286e0",
     "regions": [
       {
         "name": "APP_FLASH",
-        "used": 758916,
+        "used": 759036,
         "capacity": 851968,
-        "free": 93052
+        "free": 92932
       },
       {
         "name": "ILM",
@@ -43,1464 +43,1464 @@
       {
         "name": ".text",
         "address": 2147628652,
-        "bytes": 204780,
+        "bytes": 204900,
         "nobits": false
       },
       {
         "name": ".eh_frame",
-        "address": 2147833432,
+        "address": 2147833552,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileWhiteDotRGB565",
-        "address": 2147833492,
+        "address": 2147833612,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpWhiteDotRGB565",
-        "address": 2147833508,
+        "address": 2147833628,
         "bytes": 392,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBoatRGB565",
-        "address": 2147833900,
+        "address": 2147834020,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpBoatRGB565",
-        "address": 2147833916,
+        "address": 2147834036,
         "bytes": 4608,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBoatAlphaGRAY8",
-        "address": 2147838524,
+        "address": 2147838644,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpBoatAlphaGRAY8",
-        "address": 2147838540,
+        "address": 2147838660,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileCloudsRGB565",
-        "address": 2147840844,
+        "address": 2147840964,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpCloudsRGB565",
-        "address": 2147840860,
+        "address": 2147840980,
         "bytes": 2208,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileCloudsAlphaGRAY8",
-        "address": 2147843068,
+        "address": 2147843188,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpCloudsAlphaGRAY8",
-        "address": 2147843084,
+        "address": 2147843204,
         "bytes": 1104,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBackpackOpenRGB565",
-        "address": 2147844188,
+        "address": 2147844308,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpBackpackOpenRGB565",
-        "address": 2147844204,
+        "address": 2147844324,
         "bytes": 21120,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGBambooRodAlphaGRAY8",
-        "address": 2147865324,
+        "address": 2147865444,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGBambooRodAlphaGRAY8",
-        "address": 2147865340,
+        "address": 2147865460,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGBambooRodRGB565",
-        "address": 2147866252,
+        "address": 2147866372,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGBambooRodRGB565",
-        "address": 2147866268,
+        "address": 2147866388,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGCarbonRodAlphaGRAY8",
-        "address": 2147868092,
+        "address": 2147868212,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGCarbonRodAlphaGRAY8",
-        "address": 2147868108,
+        "address": 2147868228,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGCarbonRodRGB565",
-        "address": 2147869020,
+        "address": 2147869140,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGCarbonRodRGB565",
-        "address": 2147869036,
+        "address": 2147869156,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDepthAlphaGRAY8",
-        "address": 2147870860,
+        "address": 2147870980,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDepthAlphaGRAY8",
-        "address": 2147870876,
+        "address": 2147870996,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDepthRGB565",
-        "address": 2147871276,
+        "address": 2147871396,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDepthRGB565",
-        "address": 2147871292,
+        "address": 2147871412,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDoughAlphaGRAY8",
-        "address": 2147872092,
+        "address": 2147872212,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDoughAlphaGRAY8",
-        "address": 2147872108,
+        "address": 2147872228,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDoughRGB565",
-        "address": 2147872508,
+        "address": 2147872628,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDoughRGB565",
-        "address": 2147872524,
+        "address": 2147872644,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFeatherFloatAlphaGRAY8",
-        "address": 2147873324,
+        "address": 2147873444,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFeatherFloatAlphaGRAY8",
-        "address": 2147873340,
+        "address": 2147873460,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFeatherFloatRGB565",
-        "address": 2147873740,
+        "address": 2147873860,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFeatherFloatRGB565",
-        "address": 2147873756,
+        "address": 2147873876,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFiberglassRodAlphaGRAY8",
-        "address": 2147874556,
+        "address": 2147874676,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFiberglassRodAlphaGRAY8",
-        "address": 2147874572,
+        "address": 2147874692,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFiberglassRodRGB565",
-        "address": 2147875484,
+        "address": 2147875604,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFiberglassRodRGB565",
-        "address": 2147875500,
+        "address": 2147875620,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGGlowFloatAlphaGRAY8",
-        "address": 2147877324,
+        "address": 2147877444,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGGlowFloatAlphaGRAY8",
-        "address": 2147877340,
+        "address": 2147877460,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGGlowFloatRGB565",
-        "address": 2147877740,
+        "address": 2147877860,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGGlowFloatRGB565",
-        "address": 2147877756,
+        "address": 2147877876,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGHeavyLineAlphaGRAY8",
-        "address": 2147878556,
+        "address": 2147878676,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGHeavyLineAlphaGRAY8",
-        "address": 2147878572,
+        "address": 2147878692,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGHeavyLineRGB565",
-        "address": 2147878972,
+        "address": 2147879092,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGHeavyLineRGB565",
-        "address": 2147878988,
+        "address": 2147879108,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGLightLineAlphaGRAY8",
-        "address": 2147879788,
+        "address": 2147879908,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGLightLineAlphaGRAY8",
-        "address": 2147879804,
+        "address": 2147879924,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGLightLineRGB565",
-        "address": 2147880204,
+        "address": 2147880324,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGLightLineRGB565",
-        "address": 2147880220,
+        "address": 2147880340,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRedWhiteFloatAlphaGRAY8",
-        "address": 2147881020,
+        "address": 2147881140,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRedWhiteFloatAlphaGRAY8",
-        "address": 2147881036,
+        "address": 2147881156,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRedWhiteFloatRGB565",
-        "address": 2147881436,
+        "address": 2147881556,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRedWhiteFloatRGB565",
-        "address": 2147881452,
+        "address": 2147881572,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRiceAlphaGRAY8",
-        "address": 2147882252,
+        "address": 2147882372,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRiceAlphaGRAY8",
-        "address": 2147882268,
+        "address": 2147882388,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRiceRGB565",
-        "address": 2147882668,
+        "address": 2147882788,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRiceRGB565",
-        "address": 2147882684,
+        "address": 2147882804,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSatchelAlphaGRAY8",
-        "address": 2147883484,
+        "address": 2147883604,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSatchelAlphaGRAY8",
-        "address": 2147883500,
+        "address": 2147883620,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSatchelRGB565",
-        "address": 2147883900,
+        "address": 2147884020,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSatchelRGB565",
-        "address": 2147883916,
+        "address": 2147884036,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGShrimpAlphaGRAY8",
-        "address": 2147884716,
+        "address": 2147884836,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGShrimpAlphaGRAY8",
-        "address": 2147884732,
+        "address": 2147884852,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGShrimpRGB565",
-        "address": 2147885132,
+        "address": 2147885252,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGShrimpRGB565",
-        "address": 2147885148,
+        "address": 2147885268,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSmallFishAlphaGRAY8",
-        "address": 2147885948,
+        "address": 2147886068,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSmallFishAlphaGRAY8",
-        "address": 2147885964,
+        "address": 2147886084,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSmallFishRGB565",
-        "address": 2147886364,
+        "address": 2147886484,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSmallFishRGB565",
-        "address": 2147886380,
+        "address": 2147886500,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGStandardLineAlphaGRAY8",
-        "address": 2147887180,
+        "address": 2147887300,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGStandardLineAlphaGRAY8",
-        "address": 2147887196,
+        "address": 2147887316,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGStandardLineRGB565",
-        "address": 2147887596,
+        "address": 2147887716,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGStandardLineRGB565",
-        "address": 2147887612,
+        "address": 2147887732,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGWormAlphaGRAY8",
-        "address": 2147888412,
+        "address": 2147888532,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGWormAlphaGRAY8",
-        "address": 2147888428,
+        "address": 2147888548,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGWormRGB565",
-        "address": 2147888828,
+        "address": 2147888948,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGWormRGB565",
-        "address": 2147888844,
+        "address": 2147888964,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFootpathAlphaGRAY8",
-        "address": 2147889644,
+        "address": 2147889764,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFootpathAlphaGRAY8",
-        "address": 2147889660,
+        "address": 2147889780,
         "bytes": 2400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFootpathRGB565",
-        "address": 2147892060,
+        "address": 2147892180,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFootpathRGB565",
-        "address": 2147892076,
+        "address": 2147892196,
         "bytes": 4800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileLakeRGB565",
-        "address": 2147896876,
+        "address": 2147896996,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpLakeRGB565",
-        "address": 2147896892,
+        "address": 2147897012,
         "bytes": 230400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer0AlphaGRAY8",
-        "address": 2148127292,
+        "address": 2148127412,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer0AlphaGRAY8",
-        "address": 2148127308,
+        "address": 2148127428,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer0RGB565",
-        "address": 2148127588,
+        "address": 2148127708,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer0RGB565",
-        "address": 2148127604,
+        "address": 2148127724,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer1AlphaGRAY8",
-        "address": 2148128164,
+        "address": 2148128284,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer1AlphaGRAY8",
-        "address": 2148128180,
+        "address": 2148128300,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer1RGB565",
-        "address": 2148128460,
+        "address": 2148128580,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer1RGB565",
-        "address": 2148128476,
+        "address": 2148128596,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer2AlphaGRAY8",
-        "address": 2148129036,
+        "address": 2148129156,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer2AlphaGRAY8",
-        "address": 2148129052,
+        "address": 2148129172,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer2RGB565",
-        "address": 2148129332,
+        "address": 2148129452,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer2RGB565",
-        "address": 2148129348,
+        "address": 2148129468,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileReedsRGB565",
-        "address": 2148129908,
+        "address": 2148130028,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpReedsRGB565",
-        "address": 2148129924,
+        "address": 2148130044,
         "bytes": 28800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileReedsAlphaGRAY8",
-        "address": 2148158724,
+        "address": 2148158844,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpReedsAlphaGRAY8",
-        "address": 2148158740,
+        "address": 2148158860,
         "bytes": 14400,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.ARM_2D_FONT_Remarks_A1",
-        "address": 2148173140,
+        "address": 2148173260,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileUTF8RemarksA1Mask",
-        "address": 2148173184,
+        "address": 2148173304,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.c_tUTF8RemarksLookUpTableA1",
-        "address": 2148173200,
+        "address": 2148173320,
         "bytes": 8658,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.c_bmpUTF8RemarksA1Font",
-        "address": 2148181860,
+        "address": 2148181980,
         "bytes": 13417,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFishCoolerAlphaGRAY8",
-        "address": 2148195280,
+        "address": 2148195400,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFishCoolerAlphaGRAY8",
-        "address": 2148195296,
+        "address": 2148195416,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFishCoolerRGB565",
-        "address": 2148196448,
+        "address": 2148196568,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFishCoolerRGB565",
-        "address": 2148196464,
+        "address": 2148196584,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorClosedPatchRGB565",
-        "address": 2148198768,
+        "address": 2148198888,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopExteriorClosedPatchRGB565",
-        "address": 2148198784,
+        "address": 2148198904,
         "bytes": 1840,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorAlphaGRAY8",
-        "address": 2148200624,
+        "address": 2148200744,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopExteriorAlphaGRAY8",
-        "address": 2148200640,
+        "address": 2148200760,
         "bytes": 3300,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorRGB565",
-        "address": 2148203940,
+        "address": 2148204060,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopExteriorRGB565",
-        "address": 2148203956,
+        "address": 2148204076,
         "bytes": 6600,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopInteriorRGB565",
-        "address": 2148210556,
+        "address": 2148210676,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopInteriorRGB565",
-        "address": 2148210572,
+        "address": 2148210692,
         "bytes": 17280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileLargeBucketAlphaGRAY8",
-        "address": 2148227852,
+        "address": 2148227972,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpLargeBucketAlphaGRAY8",
-        "address": 2148227868,
+        "address": 2148227988,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileLargeBucketRGB565",
-        "address": 2148229020,
+        "address": 2148229140,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpLargeBucketRGB565",
-        "address": 2148229036,
+        "address": 2148229156,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods0RGB565",
-        "address": 2148231340,
+        "address": 2148231460,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods0RGB565",
-        "address": 2148231356,
+        "address": 2148231476,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods1RGB565",
-        "address": 2148231868,
+        "address": 2148231988,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods1RGB565",
-        "address": 2148231884,
+        "address": 2148232004,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods2RGB565",
-        "address": 2148232396,
+        "address": 2148232516,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods2RGB565",
-        "address": 2148232412,
+        "address": 2148232532,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods3RGB565",
-        "address": 2148232924,
+        "address": 2148233044,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods3RGB565",
-        "address": 2148232940,
+        "address": 2148233060,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods4RGB565",
-        "address": 2148233452,
+        "address": 2148233572,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods4RGB565",
-        "address": 2148233468,
+        "address": 2148233588,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods5RGB565",
-        "address": 2148233980,
+        "address": 2148234100,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods5RGB565",
-        "address": 2148233996,
+        "address": 2148234116,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods6RGB565",
-        "address": 2148234508,
+        "address": 2148234628,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods6RGB565",
-        "address": 2148234524,
+        "address": 2148234644,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods7RGB565",
-        "address": 2148235036,
+        "address": 2148235156,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods7RGB565",
-        "address": 2148235052,
+        "address": 2148235172,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods8RGB565",
-        "address": 2148235564,
+        "address": 2148235684,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods8RGB565",
-        "address": 2148235580,
+        "address": 2148235700,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods9RGB565",
-        "address": 2148236092,
+        "address": 2148236212,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods9RGB565",
-        "address": 2148236108,
+        "address": 2148236228,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods10RGB565",
-        "address": 2148236620,
+        "address": 2148236740,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods10RGB565",
-        "address": 2148236636,
+        "address": 2148236756,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods11RGB565",
-        "address": 2148237148,
+        "address": 2148237268,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods11RGB565",
-        "address": 2148237164,
+        "address": 2148237284,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods12RGB565",
-        "address": 2148237676,
+        "address": 2148237796,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods12RGB565",
-        "address": 2148237692,
+        "address": 2148237812,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods13RGB565",
-        "address": 2148238204,
+        "address": 2148238324,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods13RGB565",
-        "address": 2148238220,
+        "address": 2148238340,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantBoughtAlphaGRAY8",
-        "address": 2148238732,
+        "address": 2148238852,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantBoughtAlphaGRAY8",
-        "address": 2148238748,
+        "address": 2148238868,
         "bytes": 2000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantBoughtRGB565",
-        "address": 2148240748,
+        "address": 2148240868,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantBoughtRGB565",
-        "address": 2148240764,
+        "address": 2148240884,
         "bytes": 4000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantGreetingAlphaGRAY8",
-        "address": 2148244764,
+        "address": 2148244884,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantGreetingAlphaGRAY8",
-        "address": 2148244780,
+        "address": 2148244900,
         "bytes": 2000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantGreetingRGB565",
-        "address": 2148246780,
+        "address": 2148246900,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantGreetingRGB565",
-        "address": 2148246796,
+        "address": 2148246916,
         "bytes": 4000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantSoldAlphaGRAY8",
-        "address": 2148250796,
+        "address": 2148250916,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantSoldAlphaGRAY8",
-        "address": 2148250812,
+        "address": 2148250932,
         "bytes": 2000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantSoldRGB565",
-        "address": 2148252812,
+        "address": 2148252932,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantSoldRGB565",
-        "address": 2148252828,
+        "address": 2148252948,
         "bytes": 4000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantSurprisedAlphaGRAY8",
-        "address": 2148256828,
+        "address": 2148256948,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantSurprisedAlphaGRAY8",
-        "address": 2148256844,
+        "address": 2148256964,
         "bytes": 2000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileMerchantSurprisedRGB565",
-        "address": 2148258844,
+        "address": 2148258964,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpMerchantSurprisedRGB565",
-        "address": 2148258860,
+        "address": 2148258980,
         "bytes": 4000,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSmallBucketAlphaGRAY8",
-        "address": 2148262860,
+        "address": 2148262980,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSmallBucketAlphaGRAY8",
-        "address": 2148262876,
+        "address": 2148262996,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSmallBucketRGB565",
-        "address": 2148264028,
+        "address": 2148264148,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSmallBucketRGB565",
-        "address": 2148264044,
+        "address": 2148264164,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShoreDockAlphaGRAY8",
-        "address": 2148266348,
+        "address": 2148266468,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShoreDockAlphaGRAY8",
-        "address": 2148266364,
+        "address": 2148266484,
         "bytes": 2842,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShoreDockRGB565",
-        "address": 2148269208,
+        "address": 2148269328,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShoreDockRGB565",
-        "address": 2148269224,
+        "address": 2148269344,
         "bytes": 5684,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpAlphaGRAY8",
-        "address": 2148274908,
+        "address": 2148275028,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpAlphaGRAY8",
-        "address": 2148274924,
+        "address": 2148275044,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpLargeAlphaGRAY8",
-        "address": 2148276268,
+        "address": 2148276388,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpLargeAlphaGRAY8",
-        "address": 2148276284,
+        "address": 2148276404,
         "bytes": 5376,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpLargeRGB565",
-        "address": 2148281660,
+        "address": 2148281780,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpLargeRGB565",
-        "address": 2148281676,
+        "address": 2148281796,
         "bytes": 10752,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpRedLongfinAlphaGRAY8",
-        "address": 2148292428,
+        "address": 2148292548,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpRedLongfinAlphaGRAY8",
-        "address": 2148292444,
+        "address": 2148292564,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpRedLongfinRGB565",
-        "address": 2148293788,
+        "address": 2148293908,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpRedLongfinRGB565",
-        "address": 2148293804,
+        "address": 2148293924,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCarpRGB565",
-        "address": 2148296492,
+        "address": 2148296612,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCarpRGB565",
-        "address": 2148296508,
+        "address": 2148296628,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishAlphaGRAY8",
-        "address": 2148299196,
+        "address": 2148299316,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishAlphaGRAY8",
-        "address": 2148299212,
+        "address": 2148299332,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishLargeAlphaGRAY8",
-        "address": 2148300556,
+        "address": 2148300676,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishLargeAlphaGRAY8",
-        "address": 2148300572,
+        "address": 2148300692,
         "bytes": 5376,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishLargeRGB565",
-        "address": 2148305948,
+        "address": 2148306068,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishLargeRGB565",
-        "address": 2148305964,
+        "address": 2148306084,
         "bytes": 10752,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishRGB565",
-        "address": 2148316716,
+        "address": 2148316836,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishRGB565",
-        "address": 2148316732,
+        "address": 2148316852,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishXanthicAlphaGRAY8",
-        "address": 2148319420,
+        "address": 2148319540,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishXanthicAlphaGRAY8",
-        "address": 2148319436,
+        "address": 2148319556,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCatfishXanthicRGB565",
-        "address": 2148320780,
+        "address": 2148320900,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCatfishXanthicRGB565",
-        "address": 2148320796,
+        "address": 2148320916,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCrucianAlphaGRAY8",
-        "address": 2148323484,
+        "address": 2148323604,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCrucianAlphaGRAY8",
-        "address": 2148323500,
+        "address": 2148323620,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesCrucianRGB565",
-        "address": 2148324844,
+        "address": 2148324964,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesCrucianRGB565",
-        "address": 2148324860,
+        "address": 2148324980,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesGobyAlphaGRAY8",
-        "address": 2148327548,
+        "address": 2148327668,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesGobyAlphaGRAY8",
-        "address": 2148327564,
+        "address": 2148327684,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesGobyRGB565",
-        "address": 2148328908,
+        "address": 2148329028,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesGobyRGB565",
-        "address": 2148328924,
+        "address": 2148329044,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHenanCrabAlphaGRAY8",
-        "address": 2148331612,
+        "address": 2148331732,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHenanCrabAlphaGRAY8",
-        "address": 2148331628,
+        "address": 2148331748,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHenanCrabRGB565",
-        "address": 2148332972,
+        "address": 2148333092,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHenanCrabRGB565",
-        "address": 2148332988,
+        "address": 2148333108,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHooksnoutAlphaGRAY8",
-        "address": 2148335676,
+        "address": 2148335796,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHooksnoutAlphaGRAY8",
-        "address": 2148335692,
+        "address": 2148335812,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHooksnoutLongfinAlphaGRAY8",
-        "address": 2148337036,
+        "address": 2148337156,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHooksnoutLongfinAlphaGRAY8",
-        "address": 2148337052,
+        "address": 2148337172,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHooksnoutLongfinRGB565",
-        "address": 2148338396,
+        "address": 2148338516,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHooksnoutLongfinRGB565",
-        "address": 2148338412,
+        "address": 2148338532,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesHooksnoutRGB565",
-        "address": 2148341100,
+        "address": 2148341220,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesHooksnoutRGB565",
-        "address": 2148341116,
+        "address": 2148341236,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesMandarinAlphaGRAY8",
-        "address": 2148343804,
+        "address": 2148343924,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesMandarinAlphaGRAY8",
-        "address": 2148343820,
+        "address": 2148343940,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesMandarinRGB565",
-        "address": 2148345164,
+        "address": 2148345284,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesMandarinRGB565",
-        "address": 2148345180,
+        "address": 2148345300,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSharpbellyAlphaGRAY8",
-        "address": 2148347868,
+        "address": 2148347988,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSharpbellyAlphaGRAY8",
-        "address": 2148347884,
+        "address": 2148348004,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSharpbellyRGB565",
-        "address": 2148349228,
+        "address": 2148349348,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSharpbellyRGB565",
-        "address": 2148349244,
+        "address": 2148349364,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSnakeheadAlphaGRAY8",
-        "address": 2148351932,
+        "address": 2148352052,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSnakeheadAlphaGRAY8",
-        "address": 2148351948,
+        "address": 2148352068,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSnakeheadLargeAlphaGRAY8",
-        "address": 2148353292,
+        "address": 2148353412,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSnakeheadLargeAlphaGRAY8",
-        "address": 2148353308,
+        "address": 2148353428,
         "bytes": 5376,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSnakeheadLargeRGB565",
-        "address": 2148358684,
+        "address": 2148358804,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSnakeheadLargeRGB565",
-        "address": 2148358700,
+        "address": 2148358820,
         "bytes": 10752,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSnakeheadRGB565",
-        "address": 2148369452,
+        "address": 2148369572,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSnakeheadRGB565",
-        "address": 2148369468,
+        "address": 2148369588,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSoftshellAlbinoAlphaGRAY8",
-        "address": 2148372156,
+        "address": 2148372276,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSoftshellAlbinoAlphaGRAY8",
-        "address": 2148372172,
+        "address": 2148372292,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSoftshellAlbinoRGB565",
-        "address": 2148373516,
+        "address": 2148373636,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSoftshellAlbinoRGB565",
-        "address": 2148373532,
+        "address": 2148373652,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSoftshellAlphaGRAY8",
-        "address": 2148376220,
+        "address": 2148376340,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSoftshellAlphaGRAY8",
-        "address": 2148376236,
+        "address": 2148376356,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesSoftshellRGB565",
-        "address": 2148377580,
+        "address": 2148377700,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesSoftshellRGB565",
-        "address": 2148377596,
+        "address": 2148377716,
         "bytes": 2688,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesYellowCatfishAlphaGRAY8",
-        "address": 2148380284,
+        "address": 2148380404,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesYellowCatfishAlphaGRAY8",
-        "address": 2148380300,
+        "address": 2148380420,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSpeciesYellowCatfishRGB565",
-        "address": 2148381644,
+        "address": 2148381764,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSpeciesYellowCatfishRGB565",
-        "address": 2148381660,
+        "address": 2148381780,
         "bytes": 2688,
         "nobits": false
       },
@@ -1519,35 +1519,35 @@
       {
         "name": ".bss",
         "address": 526080,
-        "bytes": 68840,
+        "bytes": 68848,
         "nobits": true
       },
       {
         "name": ".noncacheable",
-        "address": 594920,
+        "address": 594928,
         "bytes": 512,
         "nobits": true
       },
       {
         "name": ".fast_ram",
-        "address": 595432,
+        "address": 595440,
         "bytes": 2320,
         "nobits": true
       },
       {
         "name": ".heap",
-        "address": 597752,
+        "address": 597760,
         "bytes": 24576,
         "nobits": true
       },
       {
         "name": ".stack",
-        "address": 622328,
-        "bytes": 4104,
+        "address": 622336,
+        "bytes": 4096,
         "nobits": true
       }
     ],
-    "flash_end": "0x800dc484"
+    "flash_end": "0x800dc4fc"
   },
   "uf2_blocks": 2965,
   "source_count": 281,
@@ -1641,9 +1641,24 @@
     "duty_percent": 20,
     "hook_hz": 160,
     "hook_ms": 60,
-    "burst_hz": 140,
-    "burst_ms": 30,
-    "burst_interval_ms": 240,
+    "burst_hz_range": [
+      110,
+      170
+    ],
+    "burst_ms_range": [
+      20,
+      50
+    ],
+    "burst_silent_gap_ms_range": [
+      20,
+      70
+    ],
+    "burst_onset_interval_ms_range": [
+      40,
+      120
+    ],
+    "private_sound_rng": true,
+    "burst_seed_tests": 32,
     "cashier_hz": [
       660,
       1100
@@ -1660,15 +1675,15 @@
   "merchant_expressions": 4,
   "shore_parallax_pixels": 240000,
   "sd_map_asset_loader_implemented": false,
-  "firmware_sha256": "35bf4030f9fc3ba377c4f0aaad1112b27bd2cb0126cdaf51681e4493723a2fd7",
+  "firmware_sha256": "cba63b7a818311a681333ab2deae3c5f2a4bc9ea5e8f648d98054f1f4511a6ba",
   "ses": {
-    "sha256": "32321b9876d2a643ac18bfdca49f34a354cc6ebde4a2821382da9566083303cc",
+    "sha256": "6e8df8b692462f246fcbd71da68585b766a75695148630a13563cde15aab15a8",
     "regions": [
       {
         "name": "APP_FLASH",
-        "used": 750664,
+        "used": 750760,
         "capacity": 851968,
-        "free": 101304
+        "free": 101208
       },
       {
         "name": "ILM",
@@ -1901,7 +1916,7 @@
         "nobits": true
       },
       {
-        "name": ".sbss.previous_wheel.0",
+        "name": ".sbss.pulse_interval_ms",
         "address": 567438,
         "bytes": 2,
         "nobits": true
@@ -2135,200 +2150,212 @@
         "nobits": true
       },
       {
-        "name": ".sbss.double_click.3",
+        "name": ".sbss.feedback_random",
         "address": 570460,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".sbss.completion",
+        "name": ".sbss.double_click.3",
         "address": 570464,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".sbss.coins",
+        "name": ".sbss.completion",
         "address": 570468,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".sbss.cash_at",
+        "name": ".sbss.coins",
         "address": 570472,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".sbss.__SEGGER_RTL_stdout_file",
+        "name": ".sbss.cash_at",
         "address": 570476,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".bss.libc.en",
+        "name": ".sbss.__SEGGER_RTL_stdout_file",
         "address": 570480,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".bss.libc.__SEGGER_RTL_locale_ptr",
+        "name": ".bss.libc.en",
         "address": 570484,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".bss.libc.__SEGGER_RTL_heap_globals",
+        "name": ".bss.libc.__SEGGER_RTL_locale_ptr",
         "address": 570488,
         "bytes": 4,
         "nobits": true
       },
       {
-        "name": ".sbss.iY.0",
+        "name": ".bss.libc.__SEGGER_RTL_heap_globals",
         "address": 570492,
+        "bytes": 4,
+        "nobits": true
+      },
+      {
+        "name": ".sbss.previous_wheel.0",
+        "address": 570496,
+        "bytes": 2,
+        "nobits": true
+      },
+      {
+        "name": ".sbss.iY.0",
+        "address": 570498,
         "bytes": 2,
         "nobits": true
       },
       {
         "name": ".sbss.Fsid",
-        "address": 570494,
+        "address": 570500,
         "bytes": 2,
         "nobits": true
       },
       {
         "name": ".sbss.sdcard_init_status",
-        "address": 570496,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.rt_interrupt_nest",
-        "address": 570497,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.rt_current_priority",
-        "address": 570498,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.ready",
-        "address": 570499,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.init_flag",
-        "address": 570500,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.g_card_type",
-        "address": 570501,
-        "bytes": 1,
-        "nobits": true
-      },
-      {
-        "name": ".sbss.fighting",
         "address": 570502,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.dummy_read_byte",
+        "name": ".sbss.rt_interrupt_nest",
         "address": 570503,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.chState.1",
+        "name": ".sbss.rt_current_priority",
         "address": 570504,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.cash_note",
+        "name": ".sbss.ready",
         "address": 570505,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.busy",
+        "name": ".sbss.init_flag",
         "address": 570506,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.bursting",
+        "name": ".sbss.g_card_type",
         "address": 570507,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sbss.beep_initialized",
+        "name": ".sbss.fighting",
         "address": 570508,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sdata.dummy_write_byte",
+        "name": ".sbss.dummy_read_byte",
         "address": 570509,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".sdata._soft_timer_status",
+        "name": ".sbss.chState.1",
         "address": 570510,
         "bytes": 1,
         "nobits": true
       },
       {
-        "name": ".bss.noinit",
+        "name": ".sbss.cash_note",
+        "address": 570511,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sbss.busy",
         "address": 570512,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sbss.bursting",
+        "address": 570513,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sbss.beep_initialized",
+        "address": 570514,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sdata.dummy_write_byte",
+        "address": 570515,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sdata.stdout",
+        "address": 570516,
+        "bytes": 4,
+        "nobits": true
+      },
+      {
+        "name": ".bss.noinit",
+        "address": 570520,
         "bytes": 568,
         "nobits": true
       },
       {
         "name": ".bss.noinit",
-        "address": 571080,
+        "address": 571088,
         "bytes": 172,
         "nobits": true
       },
       {
         "name": ".bss.noinit",
-        "address": 571252,
+        "address": 571260,
         "bytes": 40,
         "nobits": true
       },
       {
         "name": ".sdata.key_driver",
-        "address": 571292,
-        "bytes": 8,
-        "nobits": true
-      },
-      {
-        "name": ".sdata._rt_thread_defunct",
         "address": 571300,
         "bytes": 8,
         "nobits": true
       },
       {
-        "name": ".sdata.stdout",
+        "name": ".sdata._rt_thread_defunct",
         "address": 571308,
-        "bytes": 4,
+        "bytes": 8,
         "nobits": true
       },
       {
         "name": ".sdata.ARM_2D_RUNTIME_FEATURE",
-        "address": 571312,
+        "address": 571316,
+        "bytes": 1,
+        "nobits": true
+      },
+      {
+        "name": ".sdata._soft_timer_status",
+        "address": 571317,
         "bytes": 1,
         "nobits": true
       },
       {
         "name": ".noncacheable",
-        "address": 571316,
+        "address": 571320,
         "bytes": 512,
         "nobits": true
       },
@@ -6517,3130 +6544,3130 @@
       {
         "name": ".text.fish_hpm_feedback_update",
         "address": 2148241098,
-        "bytes": 514,
+        "bytes": 602,
         "nobits": false
       },
       {
         "name": ".text.fish_hpm_millis",
-        "address": 2148241612,
+        "address": 2148241700,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.fish_hpm_handle_message",
-        "address": 2148241630,
+        "address": 2148241718,
         "bytes": 150,
         "nobits": false
       },
       {
         "name": ".text.fish_map_dock",
-        "address": 2148241780,
+        "address": 2148241868,
         "bytes": 46,
         "nobits": false
       },
       {
         "name": ".text.get32",
-        "address": 2148241826,
+        "address": 2148241914,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.unpack",
-        "address": 2148241860,
+        "address": 2148241948,
         "bytes": 1402,
         "nobits": false
       },
       {
         "name": ".text.fish_save_pack",
-        "address": 2148243262,
+        "address": 2148243350,
         "bytes": 490,
         "nobits": false
       },
       {
         "name": ".text.fish_save_encode",
-        "address": 2148243752,
+        "address": 2148243840,
         "bytes": 140,
         "nobits": false
       },
       {
         "name": ".text.fish_save_decode",
-        "address": 2148243892,
+        "address": 2148243980,
         "bytes": 528,
         "nobits": false
       },
       {
         "name": ".text.fish_save_init",
-        "address": 2148244420,
+        "address": 2148244508,
         "bytes": 582,
         "nobits": false
       },
       {
         "name": ".text.fish_save_tick",
-        "address": 2148245002,
+        "address": 2148245090,
         "bytes": 382,
         "nobits": false
       },
       {
         "name": ".text.fish_save_label",
-        "address": 2148245384,
+        "address": 2148245472,
         "bytes": 42,
         "nobits": false
       },
       {
         "name": ".text.double_block",
-        "address": 2148245426,
+        "address": 2148245514,
         "bytes": 58,
         "nobits": false
       },
       {
         "name": ".text.mac",
-        "address": 2148245484,
+        "address": 2148245572,
         "bytes": 82,
         "nobits": false
       },
       {
         "name": ".text.fish_save_seal",
-        "address": 2148245566,
+        "address": 2148245654,
         "bytes": 58,
         "nobits": false
       },
       {
         "name": ".text.fish_save_open",
-        "address": 2148245624,
+        "address": 2148245712,
         "bytes": 114,
         "nobits": false
       },
       {
         "name": ".text.fish_storage_read",
-        "address": 2148245738,
+        "address": 2148245826,
         "bytes": 198,
         "nobits": false
       },
       {
         "name": ".text.fish_storage_init",
-        "address": 2148245936,
+        "address": 2148246024,
         "bytes": 382,
         "nobits": false
       },
       {
         "name": ".text.bag_attributes",
-        "address": 2148246318,
+        "address": 2148246406,
         "bytes": 346,
         "nobits": false
       },
       {
         "name": ".text.line",
-        "address": 2148246664,
+        "address": 2148246752,
         "bytes": 222,
         "nobits": false
       },
       {
         "name": ".text.landscape",
-        "address": 2148246886,
+        "address": 2148246974,
         "bytes": 1426,
         "nobits": false
       },
       {
         "name": ".text.coin_count",
-        "address": 2148248312,
+        "address": 2148248400,
         "bytes": 414,
         "nobits": false
       },
       {
         "name": ".text.hud",
-        "address": 2148248726,
+        "address": 2148248814,
         "bytes": 4108,
         "nobits": false
       },
       {
         "name": ".text.fisherman",
-        "address": 2148252834,
+        "address": 2148252922,
         "bytes": 2878,
         "nobits": false
       },
       {
         "name": ".text.fish_scene_init",
-        "address": 2148255712,
+        "address": 2148255800,
         "bytes": 386,
         "nobits": false
       },
       {
         "name": ".text.fish_scene_input",
-        "address": 2148256098,
+        "address": 2148256186,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.fish_random_next",
-        "address": 2148256136,
+        "address": 2148256224,
         "bytes": 42,
         "nobits": false
       },
       {
         "name": ".text.fish_species_parent",
-        "address": 2148256178,
+        "address": 2148256266,
         "bytes": 22,
         "nobits": false
       },
       {
         "name": ".text.fish_species_special_roll",
-        "address": 2148256200,
+        "address": 2148256288,
         "bytes": 90,
         "nobits": false
       },
       {
         "name": ".text.fish_species_stamina",
-        "address": 2148256290,
+        "address": 2148256378,
         "bytes": 106,
         "nobits": false
       },
       {
         "name": ".text.fish_species_pull",
-        "address": 2148256396,
+        "address": 2148256484,
         "bytes": 114,
         "nobits": false
       },
       {
         "name": ".text.add_round_key",
-        "address": 2148256510,
+        "address": 2148256598,
         "bytes": 218,
         "nobits": false
       },
       {
         "name": ".text.sub_bytes",
-        "address": 2148256728,
+        "address": 2148256816,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.mult_row_column",
-        "address": 2148256758,
+        "address": 2148256846,
         "bytes": 214,
         "nobits": false
       },
       {
         "name": ".text.tc_aes128_set_encrypt_key",
-        "address": 2148256972,
+        "address": 2148257060,
         "bytes": 210,
         "nobits": false
       },
       {
         "name": ".text.gf_double",
-        "address": 2148257182,
+        "address": 2148257270,
         "bytes": 50,
         "nobits": false
       },
       {
         "name": ".text.tc_cmac_update",
-        "address": 2148257232,
+        "address": 2148257320,
         "bytes": 246,
         "nobits": false
       },
       {
         "name": ".text._compare",
-        "address": 2148257478,
+        "address": 2148257566,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.__utf8_a1_font_get_char_descriptor",
-        "address": 2148257516,
+        "address": 2148257604,
         "bytes": 274,
         "nobits": false
       },
       {
         "name": ".text.fish_remarks_font",
-        "address": 2148257790,
+        "address": 2148257878,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.write_read_byte",
-        "address": 2148257800,
+        "address": 2148257888,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.write_cmd_data",
-        "address": 2148257818,
+        "address": 2148257906,
         "bytes": 46,
         "nobits": false
       },
       {
         "name": ".text.ld_dword",
-        "address": 2148257864,
+        "address": 2148257952,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.st_qword",
-        "address": 2148257894,
+        "address": 2148257982,
         "bytes": 54,
         "nobits": false
       },
       {
         "name": ".text.clst2sect",
-        "address": 2148257948,
+        "address": 2148258036,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.sum_sfn",
-        "address": 2148257978,
+        "address": 2148258066,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.get_ldnumber",
-        "address": 2148258012,
+        "address": 2148258100,
         "bytes": 74,
         "nobits": false
       },
       {
         "name": ".text.xname_sum",
-        "address": 2148258086,
+        "address": 2148258174,
         "bytes": 78,
         "nobits": false
       },
       {
         "name": ".text.st_clust",
-        "address": 2148258164,
+        "address": 2148258252,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.move_window",
-        "address": 2148258202,
+        "address": 2148258290,
         "bytes": 62,
         "nobits": false
       },
       {
         "name": ".text.change_bitmap",
-        "address": 2148258264,
+        "address": 2148258352,
         "bytes": 160,
         "nobits": false
       },
       {
         "name": ".text.get_fat",
-        "address": 2148258424,
+        "address": 2148258512,
         "bytes": 360,
         "nobits": false
       },
       {
         "name": ".text.dir_sdi",
-        "address": 2148258784,
+        "address": 2148258872,
         "bytes": 206,
         "nobits": false
       },
       {
         "name": ".text.put_fat",
-        "address": 2148258990,
+        "address": 2148259078,
         "bytes": 324,
         "nobits": false
       },
       {
         "name": ".text.fill_last_frag",
-        "address": 2148259314,
+        "address": 2148259402,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.remove_chain",
-        "address": 2148259386,
+        "address": 2148259474,
         "bytes": 320,
         "nobits": false
       },
       {
         "name": ".text.dir_clear",
-        "address": 2148259706,
+        "address": 2148259794,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.create_chain",
-        "address": 2148259814,
+        "address": 2148259902,
         "bytes": 522,
         "nobits": false
       },
       {
         "name": ".text.dir_next",
-        "address": 2148260336,
+        "address": 2148260424,
         "bytes": 232,
         "nobits": false
       },
       {
         "name": ".text.store_xdir",
-        "address": 2148260568,
+        "address": 2148260656,
         "bytes": 130,
         "nobits": false
       },
       {
         "name": ".text.init_alloc_info.isra.0",
-        "address": 2148260698,
+        "address": 2148260786,
         "bytes": 58,
         "nobits": false
       },
       {
         "name": ".text.follow_path",
-        "address": 2148260756,
+        "address": 2148260844,
         "bytes": 910,
         "nobits": false
       },
       {
         "name": ".text.f_read",
-        "address": 2148261666,
+        "address": 2148261754,
         "bytes": 444,
         "nobits": false
       },
       {
         "name": ".text.f_write",
-        "address": 2148262110,
+        "address": 2148262198,
         "bytes": 524,
         "nobits": false
       },
       {
         "name": ".text.f_truncate",
-        "address": 2148262634,
+        "address": 2148262722,
         "bytes": 204,
         "nobits": false
       },
       {
         "name": ".text.f_mkdir",
-        "address": 2148262838,
+        "address": 2148262926,
         "bytes": 462,
         "nobits": false
       },
       {
         "name": ".text.ff_oem2uni",
-        "address": 2148263300,
+        "address": 2148263388,
         "bytes": 46,
         "nobits": false
       },
       {
         "name": ".text.ff_wtoupper",
-        "address": 2148263346,
+        "address": 2148263434,
         "bytes": 162,
         "nobits": false
       },
       {
         "name": ".text.disk_status",
-        "address": 2148263508,
+        "address": 2148263596,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.disk_initialize",
-        "address": 2148263520,
+        "address": 2148263608,
         "bytes": 14,
         "nobits": false
       },
       {
         "name": ".text.disk_ioctl",
-        "address": 2148263534,
+        "address": 2148263622,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.disk_read",
-        "address": 2148263546,
+        "address": 2148263634,
         "bytes": 212,
         "nobits": false
       },
       {
         "name": ".text.disk_write",
-        "address": 2148263758,
+        "address": 2148263846,
         "bytes": 204,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_disk_status",
-        "address": 2148263962,
+        "address": 2148264050,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_disk_read",
-        "address": 2148263996,
+        "address": 2148264084,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_disk_write",
-        "address": 2148264030,
+        "address": 2148264118,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_disk_ioctl",
-        "address": 2148264064,
+        "address": 2148264152,
         "bytes": 78,
         "nobits": false
       },
       {
         "name": ".text._clean_up",
-        "address": 2148264142,
+        "address": 2148264230,
         "bytes": 66,
         "nobits": false
       },
       {
         "name": ".text.system_init",
-        "address": 2148264208,
+        "address": 2148264296,
         "bytes": 54,
         "nobits": false
       },
       {
         "name": ".text.sysctl_enable_group_resource",
-        "address": 2148264262,
+        "address": 2148264350,
         "bytes": 78,
         "nobits": false
       },
       {
         "name": ".text.sysctl_check_group_resource_enable",
-        "address": 2148264340,
+        "address": 2148264428,
         "bytes": 46,
         "nobits": false
       },
       {
         "name": ".text.sysctl_config_cpu0_domain_clock",
-        "address": 2148264386,
+        "address": 2148264474,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.clock_get_frequency",
-        "address": 2148264494,
+        "address": 2148264582,
         "bytes": 586,
         "nobits": false
       },
       {
         "name": ".text.clock_cpu_delay_us",
-        "address": 2148265080,
+        "address": 2148265168,
         "bytes": 186,
         "nobits": false
       },
       {
         "name": ".text.clock_update_core_clock",
-        "address": 2148265266,
+        "address": 2148265354,
         "bytes": 250,
         "nobits": false
       },
       {
         "name": ".text.rt_hw_context_switch_interrupt",
-        "address": 2148265516,
+        "address": 2148265604,
         "bytes": 22,
         "nobits": false
       },
       {
         "name": ".text",
-        "address": 2148265538,
+        "address": 2148265626,
         "bytes": 354,
         "nobits": false
       },
       {
         "name": ".text.rt_tick_get",
-        "address": 2148265892,
+        "address": 2148265980,
         "bytes": 6,
         "nobits": false
       },
       {
         "name": ".text.main_thread_entry",
-        "address": 2148265898,
+        "address": 2148265986,
         "bytes": 54,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_idle_entry",
-        "address": 2148265952,
+        "address": 2148266040,
         "bytes": 130,
         "nobits": false
       },
       {
         "name": ".text.rt_sem_take",
-        "address": 2148266082,
+        "address": 2148266170,
         "bytes": 452,
         "nobits": false
       },
       {
         "name": ".text.rt_mutex_take",
-        "address": 2148266534,
+        "address": 2148266622,
         "bytes": 556,
         "nobits": false
       },
       {
         "name": ".text.rt_mutex_release",
-        "address": 2148267090,
+        "address": 2148267178,
         "bytes": 330,
         "nobits": false
       },
       {
         "name": ".text.rt_interrupt_enter",
-        "address": 2148267420,
+        "address": 2148267508,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.rt_interrupt_leave",
-        "address": 2148267446,
+        "address": 2148267534,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.rt_vsnprintf",
-        "address": 2148267472,
+        "address": 2148267560,
         "bytes": 1222,
         "nobits": false
       },
       {
         "name": ".text.rt_sprintf",
-        "address": 2148268694,
+        "address": 2148268782,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".text.rt_system_heap_init",
-        "address": 2148268730,
+        "address": 2148268818,
         "bytes": 128,
         "nobits": false
       },
       {
         "name": ".text.rt_free",
-        "address": 2148268858,
+        "address": 2148268946,
         "bytes": 124,
         "nobits": false
       },
       {
         "name": ".text.__rt_ffs",
-        "address": 2148268982,
+        "address": 2148269070,
         "bytes": 118,
         "nobits": false
       },
       {
         "name": ".text.rt_assert_handler",
-        "address": 2148269100,
+        "address": 2148269188,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.plug_holes",
-        "address": 2148269126,
+        "address": 2148269214,
         "bytes": 166,
         "nobits": false
       },
       {
         "name": ".text.rt_smem_init",
-        "address": 2148269292,
+        "address": 2148269380,
         "bytes": 188,
         "nobits": false
       },
       {
         "name": ".text.rt_object_init",
-        "address": 2148269480,
+        "address": 2148269568,
         "bytes": 352,
         "nobits": false
       },
       {
         "name": ".text.rt_object_detach",
-        "address": 2148269832,
+        "address": 2148269920,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.rt_object_delete",
-        "address": 2148269900,
+        "address": 2148269988,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.rt_object_is_systemobject",
-        "address": 2148270004,
+        "address": 2148270092,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.rt_object_get_type",
-        "address": 2148270064,
+        "address": 2148270152,
         "bytes": 64,
         "nobits": false
       },
       {
         "name": ".text.rt_schedule",
-        "address": 2148270128,
+        "address": 2148270216,
         "bytes": 388,
         "nobits": false
       },
       {
         "name": ".text.rt_enter_critical",
-        "address": 2148270516,
+        "address": 2148270604,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.rt_exit_critical",
-        "address": 2148270546,
+        "address": 2148270634,
         "bytes": 64,
         "nobits": false
       },
       {
         "name": ".text.rt_critical_level",
-        "address": 2148270610,
+        "address": 2148270698,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text._thread_timeout",
-        "address": 2148270620,
+        "address": 2148270708,
         "bytes": 148,
         "nobits": false
       },
       {
         "name": ".text._thread_exit",
-        "address": 2148270768,
+        "address": 2148270856,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_init",
-        "address": 2148270828,
+        "address": 2148270916,
         "bytes": 272,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_self",
-        "address": 2148271100,
+        "address": 2148271188,
         "bytes": 6,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_detach",
-        "address": 2148271106,
+        "address": 2148271194,
         "bytes": 168,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_delete",
-        "address": 2148271274,
+        "address": 2148271362,
         "bytes": 170,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_control",
-        "address": 2148271444,
+        "address": 2148271532,
         "bytes": 232,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_init",
-        "address": 2148271676,
+        "address": 2148271764,
         "bytes": 182,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_start",
-        "address": 2148271858,
+        "address": 2148271946,
         "bytes": 302,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_check",
-        "address": 2148272160,
+        "address": 2148272248,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text._timer_thread_entry",
-        "address": 2148272384,
+        "address": 2148272472,
         "bytes": 76,
         "nobits": false
       },
       {
         "name": ".text.rt_system_timer_init",
-        "address": 2148272460,
+        "address": 2148272548,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.rt_system_timer_thread_init",
-        "address": 2148272470,
+        "address": 2148272558,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.sdcard_read_r1_status",
-        "address": 2148272538,
+        "address": 2148272626,
         "bytes": 78,
         "nobits": false
       },
       {
         "name": ".text.sdcard_spi_status",
-        "address": 2148272616,
+        "address": 2148272704,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.sdcard_spi_init",
-        "address": 2148272626,
+        "address": 2148272714,
         "bytes": 2416,
         "nobits": false
       },
       {
         "name": ".text.sdcard_spi_read_multi_block",
-        "address": 2148275042,
+        "address": 2148275130,
         "bytes": 494,
         "nobits": false
       },
       {
         "name": ".text.sdcard_spi_write_multi_block",
-        "address": 2148275536,
+        "address": 2148275624,
         "bytes": 538,
         "nobits": false
       },
       {
         "name": ".text.l1c_ic_enable",
-        "address": 2148276074,
+        "address": 2148276162,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.l1c_dc_invalidate",
-        "address": 2148276092,
+        "address": 2148276180,
         "bytes": 122,
         "nobits": false
       },
       {
         "name": ".text.l1c_dc_writeback",
-        "address": 2148276214,
+        "address": 2148276302,
         "bytes": 122,
         "nobits": false
       },
       {
         "name": ".text.init_py_pins_as_pgpio",
-        "address": 2148276336,
+        "address": 2148276424,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.board_init_usb_dp_dm_pins",
-        "address": 2148276366,
+        "address": 2148276454,
         "bytes": 258,
         "nobits": false
       },
       {
         "name": ".text.board_init_clock",
-        "address": 2148276624,
+        "address": 2148276712,
         "bytes": 350,
         "nobits": false
       },
       {
         "name": ".text.board_init_key_pins",
-        "address": 2148276974,
+        "address": 2148277062,
         "bytes": 42,
         "nobits": false
       },
       {
         "name": ".text.gpio_config_pin_interrupt",
-        "address": 2148277016,
+        "address": 2148277104,
         "bytes": 94,
         "nobits": false
       },
       {
         "name": ".text.gptmr_channel_get_default_config",
-        "address": 2148277110,
+        "address": 2148277198,
         "bytes": 46,
         "nobits": false
       },
       {
         "name": ".text.pllctlv2_get_pll_freq_in_hz.part.0",
-        "address": 2148277156,
+        "address": 2148277244,
         "bytes": 206,
         "nobits": false
       },
       {
         "name": ".text.pllctlv2_get_pll_postdiv_freq_in_hz",
-        "address": 2148277362,
+        "address": 2148277450,
         "bytes": 92,
         "nobits": false
       },
       {
         "name": ".text.ewdg_get_default_config",
-        "address": 2148277454,
+        "address": 2148277542,
         "bytes": 86,
         "nobits": false
       },
       {
         "name": ".text.ewdg_init",
-        "address": 2148277540,
+        "address": 2148277628,
         "bytes": 862,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_transfer_init",
-        "address": 2148278402,
+        "address": 2148278490,
         "bytes": 162,
         "nobits": false
       },
       {
         "name": ".text.write_read_data_together",
-        "address": 2148278564,
+        "address": 2148278652,
         "bytes": 650,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_initialize",
-        "address": 2148279214,
+        "address": 2148279302,
         "bytes": 122,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_set_sclk_frequency",
-        "address": 2148279336,
+        "address": 2148279424,
         "bytes": 578,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_transmit_receive_blocking",
-        "address": 2148279914,
+        "address": 2148280002,
         "bytes": 556,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_transmit_blocking",
-        "address": 2148280470,
+        "address": 2148280558,
         "bytes": 530,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_transmit_nonblocking",
-        "address": 2148281000,
+        "address": 2148281088,
         "bytes": 288,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_init",
-        "address": 2148281288,
+        "address": 2148281376,
         "bytes": 22,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_request_resource",
-        "address": 2148281310,
+        "address": 2148281398,
         "bytes": 194,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_enable_dma_irq_with_priority",
-        "address": 2148281504,
+        "address": 2148281592,
         "bytes": 118,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_setup_channel",
-        "address": 2148281622,
+        "address": 2148281710,
         "bytes": 202,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_enable_channel",
-        "address": 2148281824,
+        "address": 2148281912,
         "bytes": 106,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_enable_chn_irq",
-        "address": 2148281930,
+        "address": 2148282018,
         "bytes": 90,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_set_chn_src_width",
-        "address": 2148282020,
+        "address": 2148282108,
         "bytes": 102,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_set_chn_dst_width",
-        "address": 2148282122,
+        "address": 2148282210,
         "bytes": 102,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_xtoa",
-        "address": 2148282224,
+        "address": 2148282312,
         "bytes": 106,
         "nobits": false
       },
       {
         "name": ".text.libc.itoa",
-        "address": 2148282330,
+        "address": 2148282418,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.libc.fwrite",
-        "address": 2148282358,
+        "address": 2148282446,
         "bytes": 70,
         "nobits": false
       },
       {
         "name": ".text.libc.__ledf2",
-        "address": 2148282428,
+        "address": 2148282516,
         "bytes": 70,
         "nobits": false
       },
       {
         "name": ".text.libc.__floatundisf",
-        "address": 2148282498,
+        "address": 2148282586,
         "bytes": 182,
         "nobits": false
       },
       {
         "name": ".text.libc.__floatundidf",
-        "address": 2148282680,
+        "address": 2148282768,
         "bytes": 186,
         "nobits": false
       },
       {
         "name": ".text.libc.__extendsfdf2",
-        "address": 2148282866,
+        "address": 2148282954,
         "bytes": 74,
         "nobits": false
       },
       {
         "name": ".text.libc.__truncdfsf2",
-        "address": 2148282940,
+        "address": 2148283028,
         "bytes": 150,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ldouble_to_double",
-        "address": 2148283090,
+        "address": 2148283178,
         "bytes": 122,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_float32_isnan",
-        "address": 2148283212,
+        "address": 2148283300,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_float32_isinf",
-        "address": 2148283222,
+        "address": 2148283310,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_float32_isnormal",
-        "address": 2148283232,
+        "address": 2148283320,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.libc.ldexpf",
-        "address": 2148283242,
+        "address": 2148283330,
         "bytes": 74,
         "nobits": false
       },
       {
         "name": ".text.libc.frexpf",
-        "address": 2148283316,
+        "address": 2148283404,
         "bytes": 54,
         "nobits": false
       },
       {
         "name": ".text.libc.fabs",
-        "address": 2148283370,
+        "address": 2148283458,
         "bytes": 14,
         "nobits": false
       },
       {
         "name": ".text.libc.__ashldi3",
-        "address": 2148283384,
+        "address": 2148283472,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.libc.__lshrdi3",
-        "address": 2148283422,
+        "address": 2148283510,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.libc.__udivdi3",
-        "address": 2148283460,
+        "address": 2148283548,
         "bytes": 1056,
         "nobits": false
       },
       {
         "name": ".text.libc.__umoddi3",
-        "address": 2148284516,
+        "address": 2148284604,
         "bytes": 1084,
         "nobits": false
       },
       {
         "name": ".text.libc.abs",
-        "address": 2148285600,
+        "address": 2148285688,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.libc.memcpy",
-        "address": 2148285610,
+        "address": 2148285698,
         "bytes": 134,
         "nobits": false
       },
       {
         "name": ".text.libc.strchr",
-        "address": 2148285744,
+        "address": 2148285832,
         "bytes": 114,
         "nobits": false
       },
       {
         "name": ".text.libc.strncmp",
-        "address": 2148285858,
+        "address": 2148285946,
         "bytes": 286,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_prin_flush",
-        "address": 2148286144,
+        "address": 2148286232,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_pre_padding",
-        "address": 2148286178,
+        "address": 2148286266,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_init_prin_l",
-        "address": 2148286204,
+        "address": 2148286292,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_init_prin",
-        "address": 2148286238,
+        "address": 2148286326,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.libc.snprintf",
-        "address": 2148286262,
+        "address": 2148286350,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.libc.vfprintf",
-        "address": 2148286322,
+        "address": 2148286410,
         "bytes": 38,
         "nobits": false
       },
       {
         "name": ".text.libc.printf",
-        "address": 2148286360,
+        "address": 2148286448,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".segger.init.__SEGGER_init_heap",
-        "address": 2148286396,
+        "address": 2148286484,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_init_heap",
-        "address": 2148286416,
+        "address": 2148286504,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.libc.malloc",
-        "address": 2148286434,
+        "address": 2148286522,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ascii_toupper",
-        "address": 2148286464,
+        "address": 2148286552,
         "bytes": 14,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ascii_towupper",
-        "address": 2148286478,
+        "address": 2148286566,
         "bytes": 14,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ascii_mbtowc",
-        "address": 2148286492,
+        "address": 2148286580,
         "bytes": 42,
         "nobits": false
       },
       {
         "name": ".text.__load_virtual_resource",
-        "address": 2148286534,
+        "address": 2148286622,
         "bytes": 152,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_sub_task_depose",
-        "address": 2148286686,
+        "address": 2148286774,
         "bytes": 456,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_tile_process",
-        "address": 2148287142,
+        "address": 2148287230,
         "bytes": 516,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_tile_mask_process",
-        "address": 2148287658,
+        "address": 2148287746,
         "bytes": 604,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_fill",
-        "address": 2148288262,
+        "address": 2148288350,
         "bytes": 604,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_fill_with_mask",
-        "address": 2148288866,
+        "address": 2148288954,
         "bytes": 316,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_copy",
-        "address": 2148289182,
+        "address": 2148289270,
         "bytes": 640,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_copy_origin",
-        "address": 2148289822,
+        "address": 2148289910,
         "bytes": 236,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_issue_sub_task_copy_origin_masks",
-        "address": 2148290058,
+        "address": 2148290146,
         "bytes": 380,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_op_ensure_resource",
-        "address": 2148290438,
+        "address": 2148290526,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_op_depose",
-        "address": 2148290442,
+        "address": 2148290530,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_op_frontend_on_leave",
-        "address": 2148290470,
+        "address": 2148290558,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_op_wait_async",
-        "address": 2148290498,
+        "address": 2148290586,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_set_default_frame_buffer",
-        "address": 2148290502,
+        "address": 2148290590,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_copy",
-        "address": 2148290534,
+        "address": 2148290622,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb16_sw_tile_copy_only",
-        "address": 2148290622,
+        "address": 2148290710,
         "bytes": 154,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_region_get_minimal_enclosure",
-        "address": 2148290776,
+        "address": 2148290864,
         "bytes": 204,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_tile_get_virtual_screen_or_root",
-        "address": 2148290980,
+        "address": 2148291068,
         "bytes": 916,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_tile_region_caculator",
-        "address": 2148291896,
+        "address": 2148291984,
         "bytes": 278,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_tile_get_absolute_location",
-        "address": 2148292174,
+        "address": 2148292262,
         "bytes": 112,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_tile_generate_child",
-        "address": 2148292286,
+        "address": 2148292374,
         "bytes": 312,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_region_calculator.constprop.0",
-        "address": 2148292598,
+        "address": 2148292686,
         "bytes": 1908,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_op_frontend_op_decoder",
-        "address": 2148294506,
+        "address": 2148294594,
         "bytes": 1876,
         "nobits": false
       },
       {
         "name": ".text.arm_2dp_rgb16_tile_copy_only",
-        "address": 2148296382,
+        "address": 2148296470,
         "bytes": 136,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_allocate_scratch_memory",
-        "address": 2148296518,
+        "address": 2148296606,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_src_chn_msk_copy",
-        "address": 2148296626,
+        "address": 2148296714,
         "bytes": 300,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_with_opacity",
-        "address": 2148296926,
+        "address": 2148297014,
         "bytes": 204,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_mask",
-        "address": 2148297130,
+        "address": 2148297218,
         "bytes": 272,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_a1_mask_opacity",
-        "address": 2148297402,
+        "address": 2148297490,
         "bytes": 336,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb565_sw_colour_filling_with_a1_mask_and_opacity",
-        "address": 2148297738,
+        "address": 2148297826,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_mask_opacity",
-        "address": 2148297826,
+        "address": 2148297914,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb565_sw_colour_filling_with_mask_and_opacity",
-        "address": 2148298106,
+        "address": 2148298194,
         "bytes": 116,
         "nobits": false
       },
       {
         "name": ".text.arm_2dp_rgb565_fill_colour_with_opacity",
-        "address": 2148298222,
+        "address": 2148298310,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_ccca8888_tile_copy_to_rgb565_with_src_mask",
-        "address": 2148298326,
+        "address": 2148298414,
         "bytes": 368,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_c8bit_colour_filling",
-        "address": 2148298694,
+        "address": 2148298782,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_c8bit_sw_colour_filling",
-        "address": 2148298918,
+        "address": 2148299006,
         "bytes": 86,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_colour_filling",
-        "address": 2148299004,
+        "address": 2148299092,
         "bytes": 168,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb16_sw_colour_filling",
-        "address": 2148299172,
+        "address": 2148299260,
         "bytes": 86,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_draw_pattern_fg_only",
-        "address": 2148299258,
+        "address": 2148299346,
         "bytes": 100,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_draw_pattern_no_bg_comp",
-        "address": 2148299358,
+        "address": 2148299446,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_draw_pattern_bg_only",
-        "address": 2148299466,
+        "address": 2148299554,
         "bytes": 100,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb16_draw_pattern_bg_fg",
-        "address": 2148299566,
+        "address": 2148299654,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb16_sw_draw_pattern",
-        "address": 2148299670,
+        "address": 2148299758,
         "bytes": 120,
         "nobits": false
       },
       {
         "name": ".text.arm_2dp_c8bit_fill_colour",
-        "address": 2148299790,
+        "address": 2148299878,
         "bytes": 92,
         "nobits": false
       },
       {
         "name": ".text.arm_2dp_rgb16_fill_colour",
-        "address": 2148299882,
+        "address": 2148299970,
         "bytes": 92,
         "nobits": false
       },
       {
         "name": ".text.arm_2dp_rgb16_draw_pattern",
-        "address": 2148299974,
+        "address": 2148300062,
         "bytes": 144,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_transform_only",
-        "address": 2148300118,
+        "address": 2148300206,
         "bytes": 916,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_transform_with_src_mask",
-        "address": 2148301034,
+        "address": 2148301122,
         "bytes": 1344,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_rgb565_sw_transform_only",
-        "address": 2148302378,
+        "address": 2148302466,
         "bytes": 116,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_mask_opacity_transform",
-        "address": 2148302494,
+        "address": 2148302582,
         "bytes": 1356,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_impl_rgb565_colour_filling_chn_mask_opacity_transform",
-        "address": 2148303850,
+        "address": 2148303938,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_init",
-        "address": 2148304650,
+        "address": 2148304738,
         "bytes": 116,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_convert_ticks_to_ms",
-        "address": 2148304766,
+        "address": 2148304854,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_is_time_out",
-        "address": 2148304790,
+        "address": 2148304878,
         "bytes": 100,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_draw_box",
-        "address": 2148304890,
+        "address": 2148304978,
         "bytes": 268,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_port_new_semaphore",
-        "address": 2148305158,
+        "address": 2148305246,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_port_wait_for_semaphore",
-        "address": 2148305162,
+        "address": 2148305250,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_dirty_region_pool_new",
-        "address": 2148305166,
+        "address": 2148305254,
         "bytes": 148,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_pfb_enable_drawing_canvas_colour",
-        "address": 2148305314,
+        "address": 2148305402,
         "bytes": 40,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_perf_counter_start",
-        "address": 2148305354,
+        "address": 2148305442,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_perf_counter_stop",
-        "address": 2148305422,
+        "address": 2148305510,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_pfb_task",
-        "address": 2148305490,
+        "address": 2148305578,
         "bytes": 6206,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_dirty_region_init",
-        "address": 2148311696,
+        "address": 2148311784,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_dirty_region_on_frame_start",
-        "address": 2148311800,
+        "address": 2148311888,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_helper_pfb_is_region_active0",
-        "address": 2148311836,
+        "address": 2148311924,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.__pfb_draw_scene_background_handler",
-        "address": 2148311940,
+        "address": 2148312028,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_scene_player_task",
-        "address": 2148311948,
+        "address": 2148312036,
         "bytes": 1354,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_scene_player_is_switching",
-        "address": 2148313302,
+        "address": 2148313390,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.arm_lcd_text_init",
-        "address": 2148313314,
+        "address": 2148313402,
         "bytes": 184,
         "nobits": false
       },
       {
         "name": ".text.arm_lcd_text_set_target_framebuffer",
-        "address": 2148313498,
+        "address": 2148313586,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.arm_lcd_text_set_draw_region",
-        "address": 2148313522,
+        "address": 2148313610,
         "bytes": 112,
         "nobits": false
       },
       {
         "name": ".text.ARM_2D_A1_FONT_GET_CHAR_DESCRIPTOR_HANDLER",
-        "address": 2148313634,
+        "address": 2148313722,
         "bytes": 192,
         "nobits": false
       },
       {
         "name": ".text.__arm_2d_lcd_text_default_a1_font_draw_char",
-        "address": 2148313826,
+        "address": 2148313914,
         "bytes": 200,
         "nobits": false
       },
       {
         "name": ".text.arm_lcd_puts",
-        "address": 2148314026,
+        "address": 2148314114,
         "bytes": 344,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_helper_built_in_init",
-        "address": 2148314370,
+        "address": 2148314458,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.busy_wheel_init",
-        "address": 2148314374,
+        "address": 2148314462,
         "bytes": 232,
         "nobits": false
       },
       {
         "name": ".text.__msg_key_frontend_stage1_wait_key_up_only",
-        "address": 2148314606,
+        "address": 2148314694,
         "bytes": 240,
         "nobits": false
       },
       {
         "name": ".text.__msg_key_frontend_process",
-        "address": 2148314846,
+        "address": 2148314934,
         "bytes": 2570,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_key_frontend_init",
-        "address": 2148317416,
+        "address": 2148317504,
         "bytes": 204,
         "nobits": false
       },
       {
         "name": ".text.__msg_pointer_frontend_process",
-        "address": 2148317620,
+        "address": 2148317708,
         "bytes": 1944,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_pointer_frontend_init",
-        "address": 2148319564,
+        "address": 2148319652,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": ".text.__ngy_helper_msg_read_input_fifo",
-        "address": 2148319844,
+        "address": 2148319932,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.__ngy_helper_msg_read_pointer_input_fifo",
-        "address": 2148319924,
+        "address": 2148320012,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.__ngy_helper_msg_read_key_input_fifo",
-        "address": 2148320004,
+        "address": 2148320092,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_pool_add_items.part.0",
-        "address": 2148320084,
+        "address": 2148320172,
         "bytes": 140,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_fifo_is_empty",
-        "address": 2148320224,
+        "address": 2148320312,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_fifo_peek",
-        "address": 2148320232,
+        "address": 2148320320,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_fifo_get",
-        "address": 2148320256,
+        "address": 2148320344,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_pool_new",
-        "address": 2148320300,
+        "address": 2148320388,
         "bytes": 116,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_pool_free",
-        "address": 2148320416,
+        "address": 2148320504,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_task",
-        "address": 2148320520,
+        "address": 2148320608,
         "bytes": 504,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_add_items_to_pool",
-        "address": 2148321024,
+        "address": 2148321112,
         "bytes": 6,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_free",
-        "address": 2148321030,
+        "address": 2148321118,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_get",
-        "address": 2148321134,
+        "address": 2148321222,
         "bytes": 140,
         "nobits": false
       },
       {
         "name": ".text.ngy_helper_msg_send_gesture_event",
-        "address": 2148321274,
+        "address": 2148321362,
         "bytes": 166,
         "nobits": false
       },
       {
         "name": ".text.perfc_delay_us_user_code_in_loop",
-        "address": 2148321440,
+        "address": 2148321528,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rg_get_disp_adapter",
-        "address": 2148321444,
+        "address": 2148321532,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__rg_default_message_handler",
-        "address": 2148321448,
+        "address": 2148321536,
         "bytes": 78,
         "nobits": false
       },
       {
         "name": ".text.rg_task",
-        "address": 2148321526,
+        "address": 2148321614,
         "bytes": 282,
         "nobits": false
       },
       {
         "name": ".text.ST7789_SetAddressWindow",
-        "address": 2148321808,
+        "address": 2148321896,
         "bytes": 260,
         "nobits": false
       },
       {
         "name": ".text.ST7789_Init",
-        "address": 2148322068,
+        "address": 2148322156,
         "bytes": 1070,
         "nobits": false
       },
       {
         "name": ".text.ST7789_DrawDMAImage",
-        "address": 2148323138,
+        "address": 2148323226,
         "bytes": 122,
         "nobits": false
       },
       {
         "name": ".text.spi_txdma_complete_callback",
-        "address": 2148323260,
+        "address": 2148323348,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.lcd_spi_init",
-        "address": 2148323264,
+        "address": 2148323352,
         "bytes": 140,
         "nobits": false
       },
       {
         "name": ".text.__disp_adapter0_request_async_flushing",
-        "address": 2148323404,
+        "address": 2148323492,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.arm_cos_q31",
-        "address": 2148323430,
+        "address": 2148323518,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.beep_time_out",
-        "address": 2148323498,
+        "address": 2148323586,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.Beep_PWM_Init",
-        "address": 2148323566,
+        "address": 2148323654,
         "bytes": 148,
         "nobits": false
       },
       {
         "name": ".text.Beep_PWM_frequency",
-        "address": 2148323714,
+        "address": 2148323802,
         "bytes": 564,
         "nobits": false
       },
       {
         "name": ".text.perfc_port_get_system_timer_freq",
-        "address": 2148324278,
+        "address": 2148324366,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.perfc_port_is_system_timer_ovf_pending",
-        "address": 2148324286,
+        "address": 2148324374,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__disp_adapter0_pfb_render_handler",
-        "address": 2148324290,
+        "address": 2148324378,
         "bytes": 26,
         "nobits": false
       },
       {
         "name": ".text.__on_each_frame_complete",
-        "address": 2148324316,
+        "address": 2148324404,
         "bytes": 412,
         "nobits": false
       },
       {
         "name": ".text.__disp_adapter0_task",
-        "address": 2148324728,
+        "address": 2148324816,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.rt_hw_board_init",
-        "address": 2148324736,
+        "address": 2148324824,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_thread_entry",
-        "address": 2148324760,
+        "address": 2148324848,
         "bytes": 174,
         "nobits": false
       },
       {
         "name": ".text.arm_2d_scene_app_player_init",
-        "address": 2148324934,
+        "address": 2148325022,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.key_module_update",
-        "address": 2148325006,
+        "address": 2148325094,
         "bytes": 312,
         "nobits": false
       },
       {
         "name": ".text.key_module_set_event_handler",
-        "address": 2148325318,
+        "address": 2148325406,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.on_single_click_handler",
-        "address": 2148325362,
+        "address": 2148325450,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.on_double_click_handler",
-        "address": 2148325374,
+        "address": 2148325462,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.on_long_press_handler",
-        "address": 2148325386,
+        "address": 2148325474,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.on_release_handler",
-        "address": 2148325398,
+        "address": 2148325486,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.on_press_handler",
-        "address": 2148325418,
+        "address": 2148325506,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.fish_hold_page_count",
-        "address": 2148325438,
+        "address": 2148325526,
         "bytes": 160,
         "nobits": false
       },
       {
         "name": ".text.fish_hold_weight",
-        "address": 2148325598,
+        "address": 2148325686,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.fish_hold_add",
-        "address": 2148325658,
+        "address": 2148325746,
         "bytes": 472,
         "nobits": false
       },
       {
         "name": ".text.fish_shop_price",
-        "address": 2148326130,
+        "address": 2148326218,
         "bytes": 56,
         "nobits": false
       },
       {
         "name": ".text.fish_shop_kind",
-        "address": 2148326186,
+        "address": 2148326274,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.fish_shop_item_index",
-        "address": 2148326210,
+        "address": 2148326298,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.fish_money_update",
-        "address": 2148326234,
+        "address": 2148326322,
         "bytes": 404,
         "nobits": false
       },
       {
         "name": ".text.fish_merchant_pose",
-        "address": 2148326638,
+        "address": 2148326726,
         "bytes": 396,
         "nobits": false
       },
       {
         "name": ".text.fish_game_burst_active",
-        "address": 2148327034,
+        "address": 2148327122,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.fish_game_max_cast_px",
-        "address": 2148327122,
+        "address": 2148327210,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.fish_game_distance_cm",
-        "address": 2148327166,
+        "address": 2148327254,
         "bytes": 112,
         "nobits": false
       },
       {
         "name": ".text.fish_game_splash",
-        "address": 2148327278,
+        "address": 2148327366,
         "bytes": 128,
         "nobits": false
       },
       {
         "name": ".text.fish_game_init",
-        "address": 2148327406,
+        "address": 2148327494,
         "bytes": 144,
         "nobits": false
       },
       {
         "name": ".text.fish_game_ashore",
-        "address": 2148327550,
+        "address": 2148327638,
         "bytes": 96,
         "nobits": false
       },
       {
         "name": ".text.fish_game_at_shop",
-        "address": 2148327646,
+        "address": 2148327734,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.fish_game_update",
-        "address": 2148327754,
+        "address": 2148327842,
         "bytes": 2742,
         "nobits": false
       },
       {
         "name": ".text.fish_hpm_feedback_init",
-        "address": 2148330496,
-        "bytes": 60,
+        "address": 2148330584,
+        "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.fish_map_depth",
-        "address": 2148330556,
+        "address": 2148330652,
         "bytes": 208,
         "nobits": false
       },
       {
         "name": ".text.fish_map_roll_at",
-        "address": 2148330764,
+        "address": 2148330860,
         "bytes": 976,
         "nobits": false
       },
       {
         "name": ".text.put32",
-        "address": 2148331740,
+        "address": 2148331836,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.progress_offset",
-        "address": 2148331768,
+        "address": 2148331864,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.fish_save_unpack",
-        "address": 2148331792,
+        "address": 2148331888,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.wipe",
-        "address": 2148331796,
+        "address": 2148331892,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": ".text.s2v",
-        "address": 2148331812,
+        "address": 2148331908,
         "bytes": 344,
         "nobits": false
       },
       {
         "name": ".text.crypt",
-        "address": 2148332156,
+        "address": 2148332252,
         "bytes": 202,
         "nobits": false
       },
       {
         "name": ".text.save_worker",
-        "address": 2148332358,
+        "address": 2148332454,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text.fish_storage_begin",
-        "address": 2148332582,
+        "address": 2148332678,
         "bytes": 128,
         "nobits": false
       },
       {
         "name": ".text.fish_storage_poll",
-        "address": 2148332710,
+        "address": 2148332806,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.fish_save_device_key",
-        "address": 2148332782,
+        "address": 2148332878,
         "bytes": 164,
         "nobits": false
       },
       {
         "name": ".text.bag_value",
-        "address": 2148332946,
+        "address": 2148333042,
         "bytes": 372,
         "nobits": false
       },
       {
         "name": ".text.sky_rect",
-        "address": 2148333318,
+        "address": 2148333414,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text.control_hint",
-        "address": 2148333542,
+        "address": 2148333638,
         "bytes": 820,
         "nobits": false
       },
       {
         "name": ".text.frame_start",
-        "address": 2148334362,
+        "address": 2148334458,
         "bytes": 1786,
         "nobits": false
       },
       {
         "name": ".text.float_pose",
-        "address": 2148336148,
+        "address": 2148336244,
         "bytes": 340,
         "nobits": false
       },
       {
         "name": ".text.bag_panel",
-        "address": 2148336488,
+        "address": 2148336584,
         "bytes": 2092,
         "nobits": false
       },
       {
         "name": ".text.draw_scene",
-        "address": 2148338580,
+        "address": 2148338676,
         "bytes": 10924,
         "nobits": false
       },
       {
         "name": ".text.fish_species_roll_weights",
-        "address": 2148349504,
+        "address": 2148349600,
         "bytes": 968,
         "nobits": false
       },
       {
         "name": ".text.fish_species_stars",
-        "address": 2148350472,
+        "address": 2148350568,
         "bytes": 64,
         "nobits": false
       },
       {
         "name": ".text.fish_species_scale_q8",
-        "address": 2148350536,
+        "address": 2148350632,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.fish_species_weight_g",
-        "address": 2148350604,
+        "address": 2148350700,
         "bytes": 92,
         "nobits": false
       },
       {
         "name": ".text.shift_rows",
-        "address": 2148350696,
+        "address": 2148350792,
         "bytes": 146,
         "nobits": false
       },
       {
         "name": ".text.tc_aes_encrypt",
-        "address": 2148350842,
+        "address": 2148350938,
         "bytes": 170,
         "nobits": false
       },
       {
         "name": ".text.tc_cmac_erase",
-        "address": 2148351012,
+        "address": 2148351108,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.tc_cmac_init",
-        "address": 2148351040,
+        "address": 2148351136,
         "bytes": 56,
         "nobits": false
       },
       {
         "name": ".text.tc_cmac_setup",
-        "address": 2148351096,
+        "address": 2148351192,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.tc_cmac_final",
-        "address": 2148351204,
+        "address": 2148351300,
         "bytes": 128,
         "nobits": false
       },
       {
         "name": ".text._copy",
-        "address": 2148351332,
+        "address": 2148351428,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": ".text._set",
-        "address": 2148351364,
+        "address": 2148351460,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text._double_byte",
-        "address": 2148351368,
+        "address": 2148351464,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.fish_species_portrait_art",
-        "address": 2148351388,
+        "address": 2148351484,
         "bytes": 40,
         "nobits": false
       },
       {
         "name": ".text.sdcard_is_present",
-        "address": 2148351428,
+        "address": 2148351524,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.set_spi_speed",
-        "address": 2148351432,
+        "address": 2148351528,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".text.read",
-        "address": 2148351468,
+        "address": 2148351564,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.write",
-        "address": 2148351488,
+        "address": 2148351584,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_init",
-        "address": 2148351504,
+        "address": 2148351600,
         "bytes": 236,
         "nobits": false
       },
       {
         "name": ".text.ld_qword",
-        "address": 2148351740,
+        "address": 2148351836,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.st_dword",
-        "address": 2148351800,
+        "address": 2148351896,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.xdir_sum",
-        "address": 2148351828,
+        "address": 2148351924,
         "bytes": 56,
         "nobits": false
       },
       {
         "name": ".text.validate",
-        "address": 2148351884,
+        "address": 2148351980,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.sync_window",
-        "address": 2148351952,
+        "address": 2148352048,
         "bytes": 96,
         "nobits": false
       },
       {
         "name": ".text.check_fs",
-        "address": 2148352048,
+        "address": 2148352144,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": ".text.fill_first_frag",
-        "address": 2148352328,
+        "address": 2148352424,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.sync_fs",
-        "address": 2148352400,
+        "address": 2148352496,
         "bytes": 178,
         "nobits": false
       },
       {
         "name": ".text.mount_volume",
-        "address": 2148352578,
+        "address": 2148352674,
         "bytes": 1094,
         "nobits": false
       },
       {
         "name": ".text.dir_alloc",
-        "address": 2148353672,
+        "address": 2148353768,
         "bytes": 124,
         "nobits": false
       },
       {
         "name": ".text.load_xdir",
-        "address": 2148353796,
+        "address": 2148353892,
         "bytes": 296,
         "nobits": false
       },
       {
         "name": ".text.dir_read.constprop.0",
-        "address": 2148354092,
+        "address": 2148354188,
         "bytes": 398,
         "nobits": false
       },
       {
         "name": ".text.dir_find",
-        "address": 2148354490,
+        "address": 2148354586,
         "bytes": 606,
         "nobits": false
       },
       {
         "name": ".text.dir_register",
-        "address": 2148355096,
+        "address": 2148355192,
         "bytes": 1030,
         "nobits": false
       },
       {
         "name": ".text.ld_clust.isra.0",
-        "address": 2148356126,
+        "address": 2148356222,
         "bytes": 40,
         "nobits": false
       },
       {
         "name": ".text.f_mount",
-        "address": 2148356166,
+        "address": 2148356262,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.f_open",
-        "address": 2148356254,
+        "address": 2148356350,
         "bytes": 794,
         "nobits": false
       },
       {
         "name": ".text.f_sync",
-        "address": 2148357048,
+        "address": 2148357144,
         "bytes": 420,
         "nobits": false
       },
       {
         "name": ".text.f_close",
-        "address": 2148357468,
+        "address": 2148357564,
         "bytes": 34,
         "nobits": false
       },
       {
         "name": ".text.ff_uni2oem",
-        "address": 2148357502,
+        "address": 2148357598,
         "bytes": 76,
         "nobits": false
       },
       {
         "name": ".text.spi_sd_disk_initialize",
-        "address": 2148357578,
+        "address": 2148357674,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".text.reset_handler",
-        "address": 2148357614,
+        "address": 2148357710,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.exception_handler",
-        "address": 2148357632,
+        "address": 2148357728,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.sysctl_config_clock",
-        "address": 2148357636,
+        "address": 2148357732,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.get_frequency_for_source",
-        "address": 2148357704,
+        "address": 2148357800,
         "bytes": 120,
         "nobits": false
       },
       {
         "name": ".text.clock_set_source_divider",
-        "address": 2148357824,
+        "address": 2148357920,
         "bytes": 184,
         "nobits": false
       },
       {
         "name": ".text.clock_add_to_group",
-        "address": 2148358008,
+        "address": 2148358104,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.clock_remove_from_group",
-        "address": 2148358036,
+        "address": 2148358132,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.clock_check_in_group",
-        "address": 2148358064,
+        "address": 2148358160,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": ".text.clock_connect_group_to_cpu",
-        "address": 2148358080,
+        "address": 2148358176,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": ".text.clock_get_core_clock_ticks_per_us",
-        "address": 2148358096,
+        "address": 2148358192,
         "bytes": 200,
         "nobits": false
       },
       {
         "name": ".text.clock_get_core_clock_ticks_per_ms",
-        "address": 2148358296,
+        "address": 2148358392,
         "bytes": 208,
         "nobits": false
       },
       {
         "name": ".text.clock_cpu_delay_ms",
-        "address": 2148358504,
+        "address": 2148358600,
         "bytes": 174,
         "nobits": false
       },
       {
         "name": ".text.otp_read_from_shadow",
-        "address": 2148358678,
+        "address": 2148358774,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.rt_hw_stack_init",
-        "address": 2148358702,
+        "address": 2148358798,
         "bytes": 68,
         "nobits": false
       },
       {
         "name": ".text.rt_tick_increase",
-        "address": 2148358770,
+        "address": 2148358866,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.rt_tick_from_millisecond",
-        "address": 2148358858,
+        "address": 2148358954,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.rti_start",
-        "address": 2148358902,
+        "address": 2148358998,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rti_end",
-        "address": 2148358906,
+        "address": 2148359002,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rti_board_start",
-        "address": 2148358910,
+        "address": 2148359006,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rti_board_end",
-        "address": 2148358914,
+        "address": 2148359010,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rt_components_board_init",
-        "address": 2148358918,
+        "address": 2148359014,
         "bytes": 52,
         "nobits": false
       },
       {
         "name": ".text.entry",
-        "address": 2148358970,
+        "address": 2148359066,
         "bytes": 114,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_defunct_enqueue",
-        "address": 2148359084,
+        "address": 2148359180,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_idle_init",
-        "address": 2148359104,
+        "address": 2148359200,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.rt_sem_init",
-        "address": 2148359176,
+        "address": 2148359272,
         "bytes": 152,
         "nobits": false
       },
       {
         "name": ".text.rt_sem_release",
-        "address": 2148359328,
+        "address": 2148359424,
         "bytes": 152,
         "nobits": false
       },
       {
         "name": ".text.rt_mutex_init",
-        "address": 2148359480,
+        "address": 2148359576,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.rt_interrupt_get_nest",
-        "address": 2148359568,
+        "address": 2148359664,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": ".text.print_number",
-        "address": 2148359600,
+        "address": 2148359696,
         "bytes": 1132,
         "nobits": false
       },
       {
         "name": ".text.rt_memset",
-        "address": 2148360732,
+        "address": 2148360828,
         "bytes": 368,
         "nobits": false
       },
       {
         "name": ".text.rt_strncpy",
-        "address": 2148361100,
+        "address": 2148361196,
         "bytes": 200,
         "nobits": false
       },
       {
         "name": ".text.rt_malloc",
-        "address": 2148361300,
+        "address": 2148361396,
         "bytes": 120,
         "nobits": false
       },
       {
         "name": ".text.rt_smem_alloc",
-        "address": 2148361420,
+        "address": 2148361516,
         "bytes": 432,
         "nobits": false
       },
       {
         "name": ".text.rt_smem_free",
-        "address": 2148361852,
+        "address": 2148361948,
         "bytes": 352,
         "nobits": false
       },
       {
         "name": ".text.rt_object_allocate",
-        "address": 2148362204,
+        "address": 2148362300,
         "bytes": 306,
         "nobits": false
       },
       {
         "name": ".text.rt_system_scheduler_init",
-        "address": 2148362510,
+        "address": 2148362606,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": ".text.rt_system_scheduler_start",
-        "address": 2148362542,
+        "address": 2148362638,
         "bytes": 112,
         "nobits": false
       },
       {
         "name": ".text.rt_schedule_insert_thread",
-        "address": 2148362654,
+        "address": 2148362750,
         "bytes": 156,
         "nobits": false
       },
       {
         "name": ".text.rt_schedule_remove_thread",
-        "address": 2148362810,
+        "address": 2148362906,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_startup",
-        "address": 2148362918,
+        "address": 2148363014,
         "bytes": 232,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_create",
-        "address": 2148363150,
+        "address": 2148363246,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_suspend",
-        "address": 2148363374,
+        "address": 2148363470,
         "bytes": 168,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_sleep",
-        "address": 2148363542,
+        "address": 2148363638,
         "bytes": 148,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_delay",
-        "address": 2148363690,
+        "address": 2148363786,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_mdelay",
-        "address": 2148363694,
+        "address": 2148363790,
         "bytes": 14,
         "nobits": false
       },
       {
         "name": ".text.rt_thread_resume",
-        "address": 2148363708,
+        "address": 2148363804,
         "bytes": 140,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_detach",
-        "address": 2148363848,
+        "address": 2148363944,
         "bytes": 156,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_stop",
-        "address": 2148364004,
+        "address": 2148364100,
         "bytes": 128,
         "nobits": false
       },
       {
         "name": ".text.rt_timer_control",
-        "address": 2148364132,
+        "address": 2148364228,
         "bytes": 244,
         "nobits": false
       },
       {
         "name": ".text.rt_soft_timer_check",
-        "address": 2148364376,
+        "address": 2148364472,
         "bytes": 224,
         "nobits": false
       },
       {
         "name": ".text.rtt_base_init",
-        "address": 2148364600,
+        "address": 2148364696,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.sdcard_spi_get_card_info",
-        "address": 2148364672,
+        "address": 2148364768,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.l1c_dc_enable",
-        "address": 2148364752,
+        "address": 2148364848,
         "bytes": 24,
         "nobits": false
       },
       {
         "name": ".text.l1c_dc_invalidate_all",
-        "address": 2148364776,
+        "address": 2148364872,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.init_gpio_pins",
-        "address": 2148364784,
+        "address": 2148364880,
         "bytes": 52,
         "nobits": false
       },
       {
         "name": ".text.init_spi_pins_with_gpio_as_cs",
-        "address": 2148364836,
+        "address": 2148364932,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.board_print_clock_freq",
-        "address": 2148364916,
+        "address": 2148365012,
         "bytes": 156,
         "nobits": false
       },
       {
         "name": ".text.board_init",
-        "address": 2148365072,
+        "address": 2148365168,
         "bytes": 22,
         "nobits": false
       },
       {
         "name": ".text.board_delay_us",
-        "address": 2148365094,
+        "address": 2148365190,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.board_delay_ms",
-        "address": 2148365098,
+        "address": 2148365194,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.board_init_gpio_pins",
-        "address": 2148365102,
+        "address": 2148365198,
         "bytes": 58,
         "nobits": false
       },
       {
         "name": ".text.board_init_spi_clock",
-        "address": 2148365160,
+        "address": 2148365256,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": ".text.board_init_spi_pins_with_gpio_as_cs",
-        "address": 2148365240,
+        "address": 2148365336,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.gpio_set_pin_output_with_initial",
-        "address": 2148365244,
+        "address": 2148365340,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.gptmr_channel_config",
-        "address": 2148365288,
+        "address": 2148365384,
         "bytes": 404,
         "nobits": false
       },
       {
         "name": ".text.pllctlv2_init_pll_with_freq",
-        "address": 2148365692,
+        "address": 2148365788,
         "bytes": 116,
         "nobits": false
       },
       {
         "name": ".text.pllctlv2_set_postdiv",
-        "address": 2148365808,
+        "address": 2148365904,
         "bytes": 76,
         "nobits": false
       },
       {
         "name": ".text.pcfg_dcdc_set_voltage",
-        "address": 2148365884,
+        "address": 2148365980,
         "bytes": 40,
         "nobits": false
       },
       {
         "name": ".text.mchtmr_init_counter",
-        "address": 2148365924,
+        "address": 2148366020,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".text.dma_setup_channel",
-        "address": 2148365952,
+        "address": 2148366048,
         "bytes": 368,
         "nobits": false
       },
       {
         "name": ".text.ewdg_refresh",
-        "address": 2148366320,
+        "address": 2148366416,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.__SEGGER_RTL_X_file_write",
-        "address": 2148366424,
+        "address": 2148366520,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__SEGGER_RTL_X_file_stat",
-        "address": 2148366428,
+        "address": 2148366524,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.__SEGGER_RTL_X_file_bufsize",
-        "address": 2148366432,
+        "address": 2148366528,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".text.write_data_single",
-        "address": 2148366436,
+        "address": 2148366532,
         "bytes": 508,
         "nobits": false
       },
       {
         "name": ".text.dma_channel_tc_callback",
-        "address": 2148366944,
+        "address": 2148367040,
         "bytes": 72,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_get_default_init_config",
-        "address": 2148367016,
+        "address": 2148367112,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": ".text.hpm_spi_dma_mgr_install_callback",
-        "address": 2148367048,
+        "address": 2148367144,
         "bytes": 334,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_install_chn_tc_callback",
-        "address": 2148367382,
+        "address": 2148367478,
         "bytes": 84,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_get_default_chn_config",
-        "address": 2148367466,
+        "address": 2148367562,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_set_chn_transize",
-        "address": 2148367510,
+        "address": 2148367606,
         "bytes": 88,
         "nobits": false
       },
       {
         "name": ".text.dma_mgr_set_chn_src_addr",
-        "address": 2148367598,
+        "address": 2148367694,
         "bytes": 84,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_puts_no_nl",
-        "address": 2148367682,
+        "address": 2148367778,
         "bytes": 30,
         "nobits": false
       },
       {
         "name": ".text.libc.signal",
-        "address": 2148367712,
+        "address": 2148367808,
         "bytes": 48,
         "nobits": false
       },
       {
         "name": ".text.libc.raise",
-        "address": 2148367760,
+        "address": 2148367856,
         "bytes": 92,
         "nobits": false
       },
       {
         "name": ".text.libc.abort",
-        "address": 2148367852,
+        "address": 2148367948,
         "bytes": 10,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_X_assert",
-        "address": 2148367862,
+        "address": 2148367958,
         "bytes": 66,
         "nobits": false
       },
       {
         "name": ".text.libc.__divdf3",
-        "address": 2148367928,
+        "address": 2148368024,
         "bytes": 448,
         "nobits": false
       },
       {
         "name": ".text.libc.__fixunssfdi",
-        "address": 2148368376,
+        "address": 2148368472,
         "bytes": 100,
         "nobits": false
       },
       {
         "name": ".text.libc.__floatdidf",
-        "address": 2148368476,
+        "address": 2148368572,
         "bytes": 208,
         "nobits": false
       },
       {
         "name": ".text.libc.__trunctfsf2",
-        "address": 2148368684,
+        "address": 2148368780,
         "bytes": 36,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_float32_signbit",
-        "address": 2148368720,
+        "address": 2148368816,
         "bytes": 8,
         "nobits": false
       },
       {
         "name": ".text.libc.fmodf",
-        "address": 2148368728,
+        "address": 2148368824,
         "bytes": 284,
         "nobits": false
       },
       {
         "name": ".text.libc.floorf",
-        "address": 2148369012,
+        "address": 2148369108,
         "bytes": 108,
         "nobits": false
       },
       {
         "name": ".text.libc.__divdi3",
-        "address": 2148369120,
+        "address": 2148369216,
         "bytes": 1128,
         "nobits": false
       },
       {
         "name": ".text.libc.memset",
-        "address": 2148370248,
+        "address": 2148370344,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.libc.strlen",
-        "address": 2148370352,
+        "address": 2148370448,
         "bytes": 104,
         "nobits": false
       },
       {
         "name": ".text.libc.memcmp",
-        "address": 2148370456,
+        "address": 2148370552,
         "bytes": 268,
         "nobits": false
       },
       {
         "name": ".text.libc.strnlen",
-        "address": 2148370724,
+        "address": 2148370820,
         "bytes": 152,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_pow10f",
-        "address": 2148370876,
+        "address": 2148370972,
         "bytes": 60,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_stream_write",
-        "address": 2148370936,
+        "address": 2148371032,
         "bytes": 12,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_putc",
-        "address": 2148370948,
+        "address": 2148371044,
         "bytes": 156,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_print_padding",
-        "address": 2148371104,
+        "address": 2148371200,
         "bytes": 42,
         "nobits": false
       },
       {
         "name": ".text.libc.vfprintf_l",
-        "address": 2148371146,
+        "address": 2148371242,
         "bytes": 118,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_vfprintf_short_float_long",
-        "address": 2148371264,
+        "address": 2148371360,
         "bytes": 3194,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_alloc",
-        "address": 2148374458,
+        "address": 2148374554,
         "bytes": 84,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_free",
-        "address": 2148374542,
+        "address": 2148374638,
         "bytes": 136,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_X_heap_lock",
-        "address": 2148374678,
+        "address": 2148374774,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_X_heap_unlock",
-        "address": 2148374698,
+        "address": 2148374794,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".text.libc.free",
-        "address": 2148374718,
+        "address": 2148374814,
         "bytes": 18,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ascii_isctype",
-        "address": 2148374736,
+        "address": 2148374832,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": ".text.libc.__SEGGER_RTL_ascii_tolower",
-        "address": 2148374780,
-        "bytes": 16,
-        "nobits": false
-      },
-      {
-        "name": ".text.libc.__SEGGER_RTL_ascii_iswctype",
-        "address": 2148374796,
-        "bytes": 44,
-        "nobits": false
-      },
-      {
-        "name": ".text.libc.__SEGGER_RTL_ascii_towlower",
-        "address": 2148374840,
-        "bytes": 16,
-        "nobits": false
-      },
-      {
-        "name": ".text.libc.__SEGGER_RTL_ascii_wctomb",
-        "address": 2148374856,
-        "bytes": 20,
-        "nobits": false
-      },
-      {
-        "name": ".text.libc.__SEGGER_RTL_current_locale",
         "address": 2148374876,
         "bytes": 16,
         "nobits": false
       },
       {
-        "name": ".init_array",
+        "name": ".text.libc.__SEGGER_RTL_ascii_iswctype",
         "address": 2148374892,
+        "bytes": 44,
+        "nobits": false
+      },
+      {
+        "name": ".text.libc.__SEGGER_RTL_ascii_towlower",
+        "address": 2148374936,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": ".text.libc.__SEGGER_RTL_ascii_wctomb",
+        "address": 2148374952,
+        "bytes": 20,
+        "nobits": false
+      },
+      {
+        "name": ".text.libc.__SEGGER_RTL_current_locale",
+        "address": 2148374972,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": ".init_array",
+        "address": 2148374988,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".rti_fn.0",
-        "address": 2148374896,
+        "address": 2148374992,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".rti_fn.0.end",
-        "address": 2148374900,
+        "address": 2148374996,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".rti_fn.1.end",
-        "address": 2148374904,
+        "address": 2148375000,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".rti_fn.6.end",
-        "address": 2148374908,
+        "address": 2148375004,
         "bytes": 4,
         "nobits": false
       },
       {
         "name": ".segger.init.table",
-        "address": 2148374912,
+        "address": 2148375008,
         "bytes": 144,
         "nobits": false
       },
       {
         "name": ".segger.init.data",
-        "address": 2148375056,
+        "address": 2148375152,
         "bytes": 2440,
         "nobits": false
       },
       {
         "name": ".segger.init.__SEGGER_init_lzss",
-        "address": 2148377496,
+        "address": 2148377592,
         "bytes": 96,
         "nobits": false
       },
       {
         "name": ".segger.init.__SEGGER_init_zero",
-        "address": 2148377592,
+        "address": 2148377688,
         "bytes": 20,
         "nobits": false
       },
       {
         "name": ".segger.init.__SEGGER_init_copy",
-        "address": 2148377612,
+        "address": 2148377708,
         "bytes": 28,
         "nobits": false
       },
       {
         "name": ".segger.init.__SEGGER_init_ctors",
-        "address": 2148377640,
+        "address": 2148377736,
         "bytes": 32,
         "nobits": false
       }
     ],
-    "flash_end": "0x800da448"
+    "flash_end": "0x800da4a8"
   }
 }

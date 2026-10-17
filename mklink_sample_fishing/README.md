@@ -4,7 +4,7 @@
 
 An independent fishing demo based on this repository's `mklink_sample_fire` project. The hardware platform is **MKLink V4**, with an HPM5301 MCU, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button.
 
-## 当前玩法 v26 / Current gameplay v26
+## 当前玩法 v27 / Current gameplay v27
 
 1. **鱼饵吸引力与装备效果 / Bait attraction and tackle effects**
 
@@ -152,9 +152,9 @@ v21：黑鱼、鲤鱼、土鲶在大体型收鱼卡/图鉴中自动使用96×56�
 
 v21: Large snakehead, carp and catfish automatically use 96×56 detail tiles in catch cards and guide entries, while small presentations retain the 48×28 originals. Base sprites now store native pixels and scale at draw time; even with three detail tiles, bitmap storage drops by 84,672 bytes without adding a full-screen buffer. The hardware platform remains MKLink V4; saves and gameplay values are unchanged.
 
-去掉未使用的浮点scanf强制链接后，GNU应用占用758,916／851,968 B，剩余93,052 B（约90.9 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
+去掉未使用的浮点scanf强制链接后，GNU应用占用759,036／851,968 B，剩余92,932 B（约90.8 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
 
-After removing unused forced floating scanf support, the GNU app uses 758,916 / 851,968 bytes, leaving 93,052 bytes (about 90.9 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
+After removing unused forced floating scanf support, the GNU app uses 759,036 / 851,968 bytes, leaving 92,932 bytes (about 90.8 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
 
 
 v22：鱼名与数值说明补齐中文，三种线长改为4.5／6.5／8.5米；最大出线后无法继续放线，鱼冲刺造成的弹性超距用弯竿显示，持续两秒后断线，收回范围即解除。冲刺两个方向都有、约70%远离玩家，鲤鱼/马口/斑鳜更积极。左岸连续视差与缓慢云漂移已修正。全部15个收藏项和店主四种表情通过实际规则/画面核实，完整记录见[当前玩法与核实 / Current gameplay audit](docs/v22-gameplay-and-audit.md)。
@@ -182,3 +182,9 @@ v25 adds off/fish-only/all sound modes saved inside authenticated 293-byte v6 fi
 购买成功立即显示暖色 `-550G`，出售鱼获按真实单鱼售价连续显示浅绿色 `+11G`，每250 ms一条，900 ms内上浮淡出，最多四条同时可见。金币与鱼获立即结算，旋转和购买保持可用。稀有鱼与船尾鱼逐条结算反馈，失败交易不冒金币浮字。新鱼的准确售价随1317字节v7存档保存；v1–v6文件只读保留，原鱼获中缺少单鱼明细的部分明确显示“旧鱼获合计”，所有金额保留。没有新增位图；仍为后续地图页预留至少64 KiB Flash。
 
 Successful purchases immediately show a warm `-550G` charge. Sales emit pale-green exact per-fish `+11G` income every 250 ms, rising/fading over 900 ms, with up to four visible at once. Settlement is immediate and inputs remain active. Rare and stern catches are included; failed trades produce no popup. Exact prices persist in the 1317-byte v7 save. All v1–v6 files remain read-only, and aggregate-only legacy cargo is clearly labeled without losing money. No bitmap is added; at least 64 KiB of Flash remains reserved for the future map page.
+
+## 不规则挣扎短震 v27 / Irregular struggle pulses v27
+
+鱼实际挣扎时改为110–170 Hz低频短震，每下20–50 ms、随机静音20–70 ms，起音间距40–120 ms（受游戏线程更新延迟影响），比原固定240 ms更密集且不规律。独立声音随机数不影响鱼种、体型或搏鱼；重复回调不连发、卡顿不补播，平静/体力恢复/离开搏鱼立即安静。上钩提示、收银音和声音三档沿用。实板声音和机壳震感待试听。
+
+Active struggles use 110–170 Hz pulses lasting 20–50 ms, followed by random 20–70 ms silent gaps. Onsets are 40–120 ms apart before game-thread delays, replacing the regular 240 ms cadence. Private sound randomness cannot affect catches, size or fighting. Repeated callbacks cannot double-play, stalls never queue sounds, and lulls/recovery/exits stop playback. Hook/cashier cues and all sound settings remain. Hardware audition is pending.

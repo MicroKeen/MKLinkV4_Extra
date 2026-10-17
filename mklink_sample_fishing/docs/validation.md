@@ -1,6 +1,6 @@
 # 标准钓鱼 demo 验证
 
-HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-16 编译检查。
+HPM SDK 1.11.0；GNU RISC-V GCC 13.2；SEGGER Embedded Studio 8.24。2026-10-17 编译检查。
 
 GNU UF2 的 2965 个块、地址、Family ID 和应用净载荷逐块校验通过；SES XML、281 个唯一源文件及 include 路径检查通过。
 
@@ -32,13 +32,17 @@ v26：成功购买显示扣款，出售按真实单鱼售价每250 ms连续弹�
 
 v26 shows purchase charges and exact per-fish sale income every 250 ms, with four rising/fading popups lasting 900 ms. A compact journal persists in the 1317-byte v7 save while v1–v6 remain read-only. Legacy aggregate cargo is labeled, and 15 transaction PFB frames are checked.
 
+v27：挣扎使用独立随机数产生110–170 Hz、20–50 ms短脉冲，静音间隔20–70 ms（起音间距40–120 ms，受线程延迟影响）；32次不同上钩时刻、16 ms更新、卡顿不补播、回绕与状态只读检查通过。未实板试听，原上钩/收银音、声音档位和v7存档格式保留。
+
+v27 adds dense irregular struggle pulses (110–170 Hz, 20–50 ms) with random 20–70 ms silence and private sound randomness. Checks cover 32 hook times, 16 ms updates, stalls without catch-up, clock wrap and unchanged game state. Thread delays can lengthen cadence; hardware audition is pending. Hook/cashier cues, sound modes and the v7 save remain.
+
 | 工具链/区域 | 占用或预留 | 容量 | 余量 |
 |---|---:|---:|---:|
-| GNU / APP_FLASH | 758,916 B | 851,968 B | 93,052 B |
+| GNU / APP_FLASH | 759,036 B | 851,968 B | 92,932 B |
 | GNU / ILM | 2,112 B | 131,072 B | 128,960 B |
 | GNU / DLM | 101,376 B | 130,304 B | 28,928 B |
 | GNU / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
-| SES / APP_FLASH | 750,664 B | 851,968 B | 101,304 B |
+| SES / APP_FLASH | 750,760 B | 851,968 B | 101,208 B |
 | SES / ILM | 27,608 B | 131,072 B | 103,464 B |
 | SES / DLM | 75,448 B | 130,304 B | 54,856 B |
 | SES / AHB_SRAM | 0 B | 32,768 B | 32,768 B |
@@ -51,6 +55,6 @@ Flash 包含代码、只读字形/位图、初始化映像和对齐。RAM 包含
 
 旧存档兼容性：保留原密钥、目录、UUID和物种索引。写1317字节v7（新增单鱼售价表），读92/236/292/293字节v1–v6。V4及以后装备保留，更早版本沿用一次初始化世代。V7独立A/B槽保留全部旧文件，优先V7、其次V6、V5、再原版本，避免旧固件覆盖进度。密钥按作者要求公开。
 
-仓库附带 GNU 固件 SHA-256：`35bf4030f9fc3ba377c4f0aaad1112b27bd2cb0126cdaf51681e4493723a2fd7`。
+仓库附带 GNU 固件 SHA-256：`cba63b7a818311a681333ab2deae3c5f2a4bc9ea5e8f648d98054f1f4511a6ba`。
 
 可重新运行 `python scripts/verify_build.py --write-report`（默认检查标准 flash_uf2 构建目录）。
