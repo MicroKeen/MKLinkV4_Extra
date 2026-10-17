@@ -1,5 +1,18 @@
 # MKLink V4 组件与容量 v28 / Component and capacity audit v28
 
+## 最新 v29：路线与城市 / Latest v29: route and city
+
+右岸车站现可短按进入路线图。“湿地湖泊”与“城市江河”之间以道路表示远距离，局部场景图随选中变清晰；旋转选择，短按乘车，长按600 ms返回。**每程180G、5个游戏小时，往返相同**，加载失败不扣费、不推进时间。城市采用选定的现代天际线、远处轮渡、气垫筏、独立窗灯/霓虹/倒影层和动态射灯，原有鱼种、装备与鱼库规则保留。
+
+The east-bank station opens a schematic road route. Scene-backed anchors become clearer when selected. Rotate to choose, tap to travel, hold 600 ms to return. **Every trip costs 180G and five game hours in either direction**; failed loads do not charge or advance time. The city uses the selected skyline/ferry, raft, aligned emission layer and sweeping spotlights, with existing fish/tackle/cargo rules.
+
+背景、世界与鱼类贴图改为SD资源包，切图时写入独立460 KiB Flash缓存；应用限制在0x80023000–0x80080000，缓存0x80080000–0x800F3000。先完整校验源文件，最后提交缓存头；路线页和加载人物留在固件。首次运行请先复制SD资源目录，原存档目录保留。v8独立A/B存档新增所在地，保留v1–v7与已购装备、声音、图鉴和鱼获。
+
+World/fish art is loaded from SD packs into a dedicated 460 KiB Flash cache. Source preflight and a last-written commit header protect interrupted loading; route/loading art remains in firmware. Copy the SD resource directory before first boot and keep the original saves. Independent v8 A/B files add location while preserving v1–v7, gear, sound and catches.
+
+完整部署、分区、协议与验证限制见 [地图与SD资源 / Maps and SD resources](maps-and-sd-resources.md)。下方带版本的章节为历史记录，以本节v29为准。
+
+
 应用分区为851,968 B（832 KiB），不扩大分区。下表以GNU ELF应用净载荷为准，包含代码、只读资源、初始化映像和对齐。
 
 The application partition remains 851,968 bytes (832 KiB). Values below are measured from the GNU ELF application payload, including code, read-only assets, initialization images and alignment.
@@ -56,3 +69,9 @@ v27 replaces the regular struggle cadence with dense irregular pulses, adding 12
 v28新增110×54车站RGB565/A8贴图，像素数组17,820 B，连同镜头/道路/轨道和2个新字形，GNU Flash较v27增加18,572 B至777,608 B；余74,360 B（72.6 KiB），继续满足64 KiB地图页保留量。DLM增加128 B至101,504 B，余28,800 B；没有新增整屏缓冲、音频素材或运行时堆分配。右岸地面与背景复用原图，仅以原坐标网格拼接和反射延续。
 
 v28 adds a 110×54 RGB565/A8 station tile (17,820 pixel-array bytes). With the path/camera/rail geometry and two glyphs, GNU Flash grows by 18,572 bytes to 777,608, leaving 74,360 bytes (72.6 KiB), above the enforced 64 KiB map-page reserve. DLM grows by 128 bytes to 101,504 with 28,800 free. No full-screen buffer, audio asset or runtime heap allocation is added; existing meadow/panorama tiles extend by repetition/reflection on the same world grid.
+
+## v29 最终容量 / Final v29 capacity
+
+GNU应用 370,528 / 380,928 B；代码区余 10,400 B。地图缓存另占460 KiB，数据455,404 B＋4 KiB提交扇区，余11,540 B。DLM占用107,632 B、余22,672 B；加载缓冲4 KiB，夜景两行缓冲960 B，没有新增整屏缓冲。背景/鱼类移到SD包，非像素的游戏分发与存储使用尺寸优化，Arm-2D像素内核保持原优化。
+
+The application has its own 372 KiB region; the separate 460 KiB map cache holds the 455,404-byte payload and a 4 KiB commit sector. The loader stages 4 KiB; the indexed night layer decodes in 960 bytes. No full-screen buffer is added. Game dispatch/storage favor code size; Arm-2D pixel kernels retain their original optimization.

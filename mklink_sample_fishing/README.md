@@ -4,7 +4,17 @@
 
 An independent fishing demo based on this repository's `mklink_sample_fire` project. The hardware platform is **MKLink V4**, with an HPM5301 MCU, a 240×240 RGB565 ST7789 display and one rotary encoder with a push button.
 
-## 当前玩法 v28 / Current gameplay v28
+## v29 首次运行 / First boot
+
+将 `sdcard/FishingGame_Resources_DO_NOT_DELETE/` 整个目录复制到SD卡根目录，再安装本目录 `MicroLink.uf2`。保留原 `FishingGame_Saves_DO_NOT_DELETE/` 存档目录。背景和鱼类贴图已移入SD资源包，首次启动与切换固件后缓存失效时需读卡加载；有效缓存启动只校验、不擦写。
+
+Copy the complete `sdcard/FishingGame_Resources_DO_NOT_DELETE/` directory to the SD root, then install `MicroLink.uf2`. Keep the existing save directory. Background/fish art now uses SD packs; first boot and invalidated caches require an SD reload. Valid caches are checked and reused without erasing.
+
+右岸靠近车站短按打开路线图，旋转选湿地湖泊/城市江河，短按乘车，长按600 ms返回。**每程180G，耗时5个游戏小时**，加载失败不扣费。城市有现代天际线、远处轮渡、气垫筏、夜间灯光层与动态射灯；完整说明见 [地图与SD资源 / Maps and SD resources](docs/maps-and-sd-resources.md)。
+
+Tap at the east-bank station to open the route, rotate to choose a location, tap to travel and hold 600 ms to return. **Each trip costs 180G and five in-game hours, both directions.** Failed loads are free. The city has a modern skyline/ferry, raft, emission layer and moving spotlights.
+
+## 当前玩法 v29 / Current gameplay v29
 
 1. **鱼饵吸引力与装备效果 / Bait attraction and tackle effects**
 
@@ -79,18 +89,20 @@ SD 卡文件目录为：
 
 ```text
 FishingGame_Saves_DO_NOT_DELETE/
-  NorthWetland_V5_Save_A_DO_NOT_DELETE.sav
-  NorthWetland_V5_Save_B_DO_NOT_DELETE.sav
-  NorthWetland_Save_A_DO_NOT_DELETE.sav  # 原文件保留
-  NorthWetland_Save_B_DO_NOT_DELETE.sav  # 原文件保留
-  README_V5_DO_NOT_DELETE.txt
+  NorthWetland_V8_Save_A_DO_NOT_DELETE.sav
+  NorthWetland_V8_Save_B_DO_NOT_DELETE.sav
+  NorthWetland_V7_Save_A/B_DO_NOT_DELETE.sav  # 旧版保留 / keep older files
+  NorthWetland_V6_Save_A/B_DO_NOT_DELETE.sav
+  NorthWetland_V5_Save_A/B_DO_NOT_DELETE.sav
+  NorthWetland_Save_A/B_DO_NOT_DELETE.sav
+  README_V8_DO_NOT_DELETE.txt
 ```
 
-保存15个收藏项（11种基础鱼＋4种稀有变异）的图鉴次数/最佳尺寸、最近鱼获、装备、金币、库存、鱼库、船尾和时间。当前写v5，每槽292B；兼容原92B v1和236B v2/v3/v4。AES-SIV认证及设备UUID派生保持原样，写非活动槽并同步、关闭、读回校验后才确认成功。
+当前写v8，每槽1318B，独立A/B，保存当前地图、图鉴、装备、金币、鱼库、单鱼售价、时间和声音。兼容v1–v7，全部旧文件只读保留，优先当前版本。旧档默认为湿地，已初始化的高级装备不再重置。**按作者要求，保留并公开原密钥、设备UUID派生与目录。** 写非活动槽并同步、关闭、读回校验后才确认成功；切换固件前手动保存并等待“已存档”。
 
-**按作者要求，保留并公开原项目密钥与目录。** V5使用独立命名A/B文件，原A/B只读保留迁移。有有效V5时优先读取，切回旧游戏不会覆盖稀有鱼记录。V4装备不再初始化，更早版本沿用原一次初始化标记；后续购买正常保留。字段布局、文件名和迁移规则见[存档说明](docs/save-system.md)。切换固件前手动保存并等待“已存档”。
+Version 8 uses separate 1318-byte A/B files and saves location, collection, gear, coins, cargo/prices, time and sound. Older v1–v7 files remain read-only. The existing key, UUID derivation and directory are preserved and public as requested. An inactive slot is synced, closed and read back before success is shown. Save before switching firmware.
 
-密钥已公开，了解源码的玩家可以生成合法认证的修改存档。本 demo 的加密主要避免明文编辑、识别损坏文件及限制跨板使用，不提供强防作弊或防旧存档回退。SD 卡被格式化、删除或物理损坏无法靠游戏避免；建议备份整个目录。默认不启用 USB MSC/CDC，让存档线程独占 SD 文件系统，避免电脑和游戏同时修改 FAT 元数据。
+默认不启用USB MSC/CDC；存档线程和资源加载器通过递归互斥锁共享FatFS。密钥公开后不能提供强防作弊；建议定期备份整个存档目录。细节见[存档说明](docs/save-system.md)。
 
 SD 使用 SPI1，LCD 使用 SPI0。**PA26 是 LCD 背光，不能当软件 SD 片选切换。** 通用 board.h 将 `BOARD_SPI_CS_PIN` 定义为 PA26，但 MKLink 原 SD 适配器的片选回调为空；此 demo 沿用该行为，不配置或切换 PA26，修复了存档时背光频闪。
 
@@ -104,7 +116,7 @@ cmake --build mklink_sample_fishing/build-tests
 ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 ```
 
-12 项测试覆盖玩法、搏鱼平衡、地图装备、图鉴、尺寸采样、存档认证/v1/v2/v3/v4迁移/v5稀有库存与原文件保留/容器/鱼获/库存恢复/自动周期/计时回绕、经济系统/时钟、实际输入适配及 SD 读写时的背光电平隔离。测试中的 HAL/GUI 桩不代表实板运行。链接占用、GNU/SEGGER 构建及 UF2 校验记录见 [验证报告](docs/validation.md)；本次移植未执行实板烧录或断电测试。
+14项独立主机测试与48项模拟器检查通过，覆盖原玩法、声音/图鉴/交易/存档，以及SD资源CRC/版本/布局/长度、预检失败不擦写、中断与重试、双向车费/5小时时钟和输入。GNU与SEGGER构建、Flash分区和UF2校验见[验证报告](docs/validation.md)。未执行实板烧录、拔卡或掉电测试。
 
 `src/fish/` 包含游戏逻辑与已生成的 RGB565/A8/A1 素材，常规构建不需要素材转换工具。`data/` 和 `docs/` 保存数值/说明；运行使用已生成的 `fish_*_data.c`、`fish_rules.h` 和 `fish_map_config.h`，修改 JSON 后需同步这些 C 数据。新增文字需要重新导出中文字体子集。
 
@@ -118,7 +130,7 @@ ctest --test-dir mklink_sample_fishing/build-tests --output-on-failure
 
 游戏时间由系统单调毫秒驱动，每秒折算一分钟，一昼夜 24 分钟；日夜渐变、太阳/月亮移动和 12 条水面反光不增加整屏缓冲。读取存档恢复游戏分钟，退出期间不快进，尚未实测硬件帧率。
 
-公开仓库只提供 `src/fish/assets/` 中实际链接的 C 位图/蒙版/字形和必需的 OFL 许可。生成原图、未采用版本、PNG/图集、字体源文件、提示词和截图不随仓库提供。正常构建无需素材转换工具，执行 `python scripts/verify_public_assets.py` 可校验发布范围。
+公开仓库只提供 `src/fish/assets/` 中使用的共享C位图/蒙版/字形、地图tile描述、`sdcard/`中的实际运行资源包和必需的OFL许可。生成原图、未采用版本、PNG/图集、字体源文件、提示词和截图不随仓库提供。正常构建无需素材转换工具，执行 `python scripts/verify_public_assets.py` 可校验发布范围。
 
 ## 柜台、夜景和操作 v17
 
@@ -152,7 +164,7 @@ v21：黑鱼、鲤鱼、土鲶在大体型收鱼卡/图鉴中自动使用96×56�
 
 v21: Large snakehead, carp and catfish automatically use 96×56 detail tiles in catch cards and guide entries, while small presentations retain the 48×28 originals. Base sprites now store native pixels and scale at draw time; even with three detail tiles, bitmap storage drops by 84,672 bytes without adding a full-screen buffer. The hardware platform remains MKLink V4; saves and gameplay values are unchanged.
 
-去掉未使用的浮点scanf强制链接后，GNU应用占用777,608／851,968 B，剩余74,360 B（约72.6 KiB）。保留浮点绘图与诊断输出，组件检查见[容量记录 / Capacity audit](docs/component-budget.md)。SD多地图位图加载只记入后续规划，本次未实现。
+v29已实装SD地图缓存，应用与缓存分区独立；旧64 KiB地图页预留已用于路线UI与加载器。当前容量见[验证报告](docs/validation.md)，资源协议见[地图说明](docs/maps-and-sd-resources.md)。
 
 After removing unused forced floating scanf support, the GNU app uses 777,608 / 851,968 bytes, leaving 74,360 bytes (about 72.6 KiB). Floating drawing and diagnostic output remain available. The future SD multi-map bitmap loading proposal is recorded only and is not implemented in this version.
 
@@ -193,7 +205,7 @@ Active struggles use 110–170 Hz pulses lasting 20–50 ms, followed by random 
 
 右码头上岸后向右慢走，可沿连续草地步道抵达小型火车站并自动停下。车站使用与渔具店相同的正立面像素风格：瓦顶、暖砖木梁、候车棚、长椅、行李箱、站钟和前方轨道；人物仍为36像素高。新素材为110×54原生像素、整数2倍显示，仅新增运行时C贴图；原图和生成提示词留在本地。远景向右延伸并保持昼夜/云层的山脊遮挡，码头/地面衔接经过逐像素核对。
 
-本站是后续新地图接入的第一步；本次实现站外场景和步道，尚无乘车、目的地菜单或地图切换。原湖面、鱼种权重和v7存档格式保留。
+v28历史记录：当时只实现站外场景和步道；v29已加入乘车、目的地菜单和地图切换。原湖面、鱼种权重和v7存档格式保留。
 
 Disembark at the east dock and walk right along the continuous meadow path to stop at a small railway station. The frontal pixel-art building matches the shop: tiled roof, aged brick/timber, waiting shelter, bench, suitcase and clock, with foreground rails. Actor height stays at 36 pixels. The 110×54 native tile displays at exactly 2×, and only runtime C art is published. Source art/prompts stay local. A reflected panorama extends the skyline while retaining day/night mountain occlusion; dock/ground joins are checked against actual PFB pixels.
 

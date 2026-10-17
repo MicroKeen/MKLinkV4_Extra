@@ -7,10 +7,10 @@
 #include <time.h>
 #include "save_long_vector.h"
 
-static uint8_t slots[8][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
-static int exists[8],read_error[8],write_result=1;
+static uint8_t slots[10][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
+static int exists[10],read_error[10],write_result=1;
 static unsigned queued_slot,writes;
-static size_t slot_lengths[8];
+static size_t slot_lengths[10];
 static const uint8_t key[32]={1,2,3};
 int fish_storage_init(uint8_t k[32]) {memcpy(k,key,32);return 0;}
 int fish_storage_read(unsigned slot,uint8_t *file,size_t len)
@@ -33,7 +33,7 @@ static void reset(void)
 {
     memset(slots,0,sizeof(slots));memset(exists,0,sizeof(exists));memset(read_error,0,sizeof(read_error));
     writes=0;write_result=1;
-    for(unsigned i=0;i<8;i++) slot_lengths[i]=FISH_SAVE_FILE_BYTES;
+    for(unsigned i=0;i<10;i++) slot_lengths[i]=FISH_SAVE_FILE_BYTES;
 }
 static void caught(fish_game_t *g)
 {
@@ -95,15 +95,15 @@ int main(void)
     memcpy(file,"FSG1",4);file[4]=2;file[5]=0;file[6]=204;file[7]=0;
     memset(file+8,0,8);file[8]=9;
     fish_save_seal(key,file,16,payload,204,file+16,file+32);
-    memcpy(slots[6],file,236);slot_lengths[6]=236;exists[6]=1;
+    memcpy(slots[8],file,236);slot_lengths[8]=236;exists[8]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==9 && loaded.save_requested && loaded.economy.container==0 && loaded.economy.coins==123);
     assert(loaded.economy.hanging_species==1 && fish_hold_weight(&loaded.economy)==fish_hold_weight(&g.economy));
     assert(loaded.rod_index==0 && loaded.line_index==1 && loaded.float_index==0 && loaded.bait_index==5);
-    manual(&s,&loaded,1);assert(s.sequence==10 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[6],file,236));
+    manual(&s,&loaded,1);assert(s.sequence==10 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[8],file,236));
     reset();g.economy.container=2;fish_save_pack(&g,payload);payload[201]=0;
     file[4]=3;file[8]=11;fish_save_seal(key,file,16,payload,204,file+16,file+32);
-    memcpy(slots[6],file,236);slot_lengths[6]=236;exists[6]=1;
+    memcpy(slots[8],file,236);slot_lengths[8]=236;exists[8]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==11 && loaded.save_requested && loaded.rod_index==0 && loaded.line_index==1);
     assert(loaded.float_index==0 && loaded.bait_index==5 && loaded.depth_index==FISH_DEPTH_OPTION_COUNT-1);
@@ -112,7 +112,7 @@ int main(void)
            !memcmp(loaded.species_best_size_mm,g.species_best_size_mm,sizeof(g.species_best_size_mm)));
     fish_economy_t preserved=g.economy;memset(preserved.prices,0,sizeof(preserved.prices));preserved.rods=1;preserved.lines=2;preserved.floats=1;
     assert(!memcmp(&loaded.economy,&preserved,sizeof(preserved)) && loaded.game_minute==g.game_minute);
-    manual(&s,&loaded,1);assert(s.sequence==12 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[6],file,236));
+    manual(&s,&loaded,1);assert(s.sequence==12 && slots[1][4]==FISH_SAVE_VERSION && !memcmp(slots[8],file,236));
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);assert(!loaded.save_requested && loaded.rod_index==0);
     loaded.economy.rods=7;loaded.economy.lines=7;loaded.economy.floats=7;
     loaded.rod_index=2;fish_game_equip_line(&loaded,2);loaded.float_index=2;
@@ -120,7 +120,7 @@ int main(void)
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(loaded.rod_index==2 && loaded.line_index==2 && loaded.float_index==2 && !loaded.save_requested);
     file[8]=20;fish_save_seal(key,file,16,payload,204,file+16,file+32);
-    memcpy(slots[6],file,236);slot_lengths[6]=236;exists[6]=1;
+    memcpy(slots[8],file,236);slot_lengths[8]=236;exists[8]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==13 && loaded.rod_index==2 && loaded.economy.rods==7 && !loaded.save_requested);
     file[4]=4;fish_save_seal(key,file,16,payload,204,file+16,file+32);
@@ -128,7 +128,7 @@ int main(void)
     /* A v4 upgrade preserves bought gear, and maps old empty sentinel11 to15. */
     reset();fish_save_pack(&g,payload);payload[187]=11;memset(payload+188,0,10);
     file[4]=4;file[8]=30;fish_save_seal(key,file,16,payload,204,file+16,file+32);
-    memcpy(slots[6],file,236);slot_lengths[6]=236;exists[6]=1;
+    memcpy(slots[8],file,236);slot_lengths[8]=236;exists[8]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.sequence==30 && loaded.save_requested && loaded.rod_index==2 && loaded.line_index==2);
     assert(loaded.economy.hanging_species==FISH_SPECIES_COUNT && loaded.economy.container==2);
@@ -141,12 +141,12 @@ int main(void)
     uint8_t legacy[FISH_SAVE_LEGACY_FILE_BYTES]={0};memcpy(legacy,"FSG1",4);
     legacy[4]=1;legacy[6]=FISH_SAVE_LEGACY_PAYLOAD_BYTES;legacy[8]=7;
     fish_save_seal(key,legacy,16,payload,FISH_SAVE_LEGACY_PAYLOAD_BYTES,legacy+16,legacy+32);
-    memcpy(slots[6],legacy,sizeof(legacy));slot_lengths[6]=sizeof(legacy);exists[6]=1;
+    memcpy(slots[8],legacy,sizeof(legacy));slot_lengths[8]=sizeof(legacy);exists[8]=1;
     fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.active_slot==0 && s.sequence==7 && loaded.catches==3 && loaded.save_requested);
     assert(loaded.rod_index==0 && loaded.bait_index==5 && loaded.economy.bait_stock[4]==5 && loaded.economy.coins==0);
     write_result=-1;fish_save_tick(&s,&loaded,1);fish_save_tick(&s,&loaded,2);
-    assert(s.sequence==7 && !memcmp(slots[6],legacy,sizeof(legacy)));
+    assert(s.sequence==7 && !memcmp(slots[8],legacy,sizeof(legacy)));
     write_result=1;manual(&s,&loaded,3);assert(s.sequence==8 && s.active_slot==1);
     fish_game_init(&loaded,9);fish_save_init(&s,&loaded,9);
     assert(s.sequence==8 && loaded.catches==3 && loaded.economy.rods==1);
@@ -220,18 +220,18 @@ int main(void)
     fish_save_pack(&g,payload);fish_save_encode(key,7,payload,file);
     file[4]=5;file[6]=(uint8_t)FISH_SAVE_V5_PAYLOAD_BYTES;file[7]=(uint8_t)(FISH_SAVE_V5_PAYLOAD_BYTES>>8);
     fish_save_seal(key,file,16,payload,FISH_SAVE_V5_PAYLOAD_BYTES,file+16,file+32);
-    memcpy(slots[4],file,FISH_SAVE_V5_FILE_BYTES);slot_lengths[4]=FISH_SAVE_V5_FILE_BYTES;exists[4]=1;
+    memcpy(slots[6],file,FISH_SAVE_V5_FILE_BYTES);slot_lengths[6]=FISH_SAVE_V5_FILE_BYTES;exists[6]=1;
     uint8_t legacy_v4[236];memcpy(legacy_v4,file,16);legacy_v4[4]=4;legacy_v4[6]=204;legacy_v4[7]=0;
     memset(legacy_v4+8,0,8);legacy_v4[8]=0xff;legacy_v4[9]=0x7f;
     fish_save_seal(key,legacy_v4,16,payload,204,legacy_v4+16,legacy_v4+32);
-    memcpy(slots[6],legacy_v4,sizeof(legacy_v4));slot_lengths[6]=sizeof(legacy_v4);exists[6]=1;
+    memcpy(slots[8],legacy_v4,sizeof(legacy_v4));slot_lengths[8]=sizeof(legacy_v4);exists[8]=1;
     fish_game_init(&loaded,1);fish_save_init(&s,&loaded,1);
     assert(!s.blocked && s.sequence==7 && loaded.sound_mode==FISH_SOUND_ALL && loaded.save_requested);
     fish_economy_t old_cargo=g.economy;memset(old_cargo.prices,0,sizeof(old_cargo.prices));
     assert(loaded.catches==g.catches && !memcmp(&loaded.economy,&old_cargo,sizeof(old_cargo)));
     assert(!memcmp(loaded.species_catches,g.species_catches,sizeof(g.species_catches)));
     loaded.sound_mode=FISH_SOUND_OFF;manual(&s,&loaded,2);
-    assert(!memcmp(slots[4],file,FISH_SAVE_V5_FILE_BYTES));
+    assert(!memcmp(slots[6],file,FISH_SAVE_V5_FILE_BYTES));
     fish_game_init(&loaded,3);fish_save_init(&s,&loaded,3);assert(loaded.sound_mode==FISH_SOUND_OFF && s.sequence==8);
     /* Historical v6 retains equipment, sound, rare cargo and its original file.
      * Its aggregate-only fish cannot acquire invented individual prices. */
@@ -239,12 +239,12 @@ int main(void)
     fish_save_pack(&g,payload);fish_save_encode(key,12,payload,file);
     file[4]=6;file[6]=(uint8_t)FISH_SAVE_V6_PAYLOAD_BYTES;file[7]=(uint8_t)(FISH_SAVE_V6_PAYLOAD_BYTES>>8);
     fish_save_seal(key,file,16,payload,FISH_SAVE_V6_PAYLOAD_BYTES,file+16,file+32);
-    memcpy(slots[2],file,FISH_SAVE_V6_FILE_BYTES);slot_lengths[2]=FISH_SAVE_V6_FILE_BYTES;exists[2]=1;
+    memcpy(slots[4],file,FISH_SAVE_V6_FILE_BYTES);slot_lengths[4]=FISH_SAVE_V6_FILE_BYTES;exists[4]=1;
     fish_game_init(&loaded,1);fish_save_init(&s,&loaded,1);
     assert(loaded.sound_mode==FISH_SOUND_FISH && loaded.rod_index==2 && loaded.save_requested && !s.blocked);
     assert(fish_hold_value(&loaded.economy)==fish_hold_value(&g.economy) && !loaded.economy.prices[0].count);
     fish_hold_add(&loaded.economy,0,235,fish_species_weight_g(&fish_species[0],235));
-    manual(&s,&loaded,2);assert(!memcmp(slots[2],file,FISH_SAVE_V6_FILE_BYTES));
+    manual(&s,&loaded,2);assert(!memcmp(slots[4],file,FISH_SAVE_V6_FILE_BYTES));
     fish_game_init(&g,3);fish_save_init(&s,&g,3);
     assert(g.economy.prices[0].price==11 && g.economy.prices[0].count==1 && g.sound_mode==FISH_SOUND_FISH);
     g.mode=FISH_SHOP;g.game_minute=720;uint32_t coins_before=g.economy.coins;
@@ -259,6 +259,19 @@ int main(void)
     assert(!fish_save_unpack(&loaded,payload));
     fish_save_pack(&g,payload);payload[journal+2]=255;assert(!fish_save_unpack(&loaded,payload));
     fish_save_pack(&g,payload);payload[journal]=255;payload[journal+1]=255;assert(!fish_save_unpack(&loaded,payload));
+    /* v7 read-only migration; map defaults to the wetland, all gear and prices survive. */
+    reset();fish_game_init(&g,0);caught(&g);g.map_index=1;g.sound_mode=FISH_SOUND_FISH;
+    fish_save_pack(&g,payload);memcpy(file,"FSG1",4);file[4]=7;file[5]=0;
+    file[6]=(uint8_t)FISH_SAVE_V7_PAYLOAD_BYTES;file[7]=(uint8_t)(FISH_SAVE_V7_PAYLOAD_BYTES>>8);
+    memset(file+8,0,8);file[8]=33;
+    fish_save_seal(key,file,16,payload,FISH_SAVE_V7_PAYLOAD_BYTES,file+16,file+32);
+    memcpy(slots[2],file,FISH_SAVE_V7_FILE_BYTES);slot_lengths[2]=FISH_SAVE_V7_FILE_BYTES;exists[2]=1;
+    fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
+    assert(loaded.map_index==0 && loaded.sound_mode==FISH_SOUND_FISH && loaded.rod_index==g.rod_index);
+    loaded.map_index=1;manual(&s,&loaded,2);
+    assert(!memcmp(slots[2],file,FISH_SAVE_V7_FILE_BYTES));
+    fish_game_init(&g,0);fish_save_init(&s,&g,0);assert(g.map_index==1);
+    fish_save_pack(&g,payload);payload[FISH_SAVE_V7_PAYLOAD_BYTES]=2;assert(!fish_save_unpack(&g,payload));
     /* Compute benchmark; excludes SD/filesystem latency and debug IO. */
     fish_game_init(&g,0);caught(&g);fish_save_pack(&g,payload);
     clock_t start=clock();for(unsigned i=0;i<10000;i++) fish_save_encode(key,i+1,payload,file);

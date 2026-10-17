@@ -17,6 +17,11 @@
 
 
 
+/* SD_PACK_ARRAY */
+#if defined(FISH_EXTERNAL_ASSETS)
+#include "fish_asset_layout.h"
+#define c_bmpSpeciesCarpLargeRGB565 ((uint16_t *)FISH_ASSET_POINTER(FISH_OFFSET_c_bmpSpeciesCarpLargeRGB565))
+#else
 ARM_SECTION("arm2d.asset.c_bmpSpeciesCarpLargeRGB565")
 const uint16_t c_bmpSpeciesCarpLargeRGB565[96*56] = {
 /* -0- */
@@ -468,6 +473,7 @@ const uint16_t c_bmpSpeciesCarpLargeRGB565[96*56] = {
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
 
 };
+#endif
 
 
 extern const arm_2d_tile_t c_tileSpeciesCarpLargeRGB565;

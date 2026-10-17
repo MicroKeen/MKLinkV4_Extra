@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 static int clamp(int n, int lo, int hi) { return n < lo ? lo : n > hi ? hi : n; }
+const char *const fish_map_names[FISH_MAP_COUNT]={"湿地湖泊","城市江河"};
 const char *const fish_sound_names[FISH_SOUND_COUNT]={"关闭","仅鱼讯","全部开启"};
 static void phase(fish_game_t *g, fish_mode_t mode) { g->mode = mode; g->phase_at = g->now; }
 
@@ -261,7 +262,7 @@ bool fish_game_ashore(const fish_game_t *g)
     if(mode==FISH_HOLD) mode=(fish_mode_t)g->hold_return_mode;
     if (mode==FISH_GUIDE) mode=(fish_mode_t)g->guide_return_mode;
     if (mode==FISH_BAG) mode=(fish_mode_t)g->bag_return_mode;
-    return mode==FISH_SHORE || mode==FISH_SHOP;
+    return mode==FISH_SHORE || mode==FISH_SHOP || mode==FISH_ROUTE;
 }
 bool fish_game_at_shop(const fish_game_t *g) {return fish_game_ashore(g) && abs(g->shore_x-FISH_SHOP_X)<=FISH_SHOP_REACH;}
 bool fish_game_at_station(const fish_game_t *g) {return fish_game_ashore(g) && abs(g->shore_x-FISH_STATION_X)<=FISH_STATION_REACH;}
@@ -310,12 +311,15 @@ int fish_game_camera(const fish_game_t *g)
 
 void fish_game_update(fish_game_t *g, uint32_t now)
 {
-    uint32_t delta=now-g->clock_at;g->clock_at=now;
+    uint32_t delta=g->mode==FISH_LOADING?0:now-g->clock_at;g->clock_at=now;
     unsigned remainder=delta%1000+g->clock_remainder_ms;
     g->game_minute=(uint16_t)((g->game_minute+delta/1000+remainder/1000)%1440);
     g->clock_remainder_ms=(uint16_t)(remainder%1000);
     g->now = now;
     fish_money_update(g);
+    if(g->mode==FISH_ROUTE && g->pressed && now-g->pressed_at>=FISH_GUIDE_HOLD_MS) {
+        g->pressed=false;g->travel_error=0;phase(g,FISH_SHORE);
+    }
     if(g->mode==FISH_GUIDE && g->pressed && g->previous_mode==FISH_GUIDE && now-g->pressed_at>=FISH_GUIDE_HOLD_MS) {
         g->pressed=false;phase(g,(fish_mode_t)g->guide_return_mode);
     }
@@ -369,7 +373,9 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
     fish_mode_t before=g->mode;
     fish_game_update(g, now);
     if(g->mode==FISH_LOST || (before==FISH_LOST && event==FISH_RELEASE)) return;
+    if(g->mode==FISH_LOADING) return;
     if (event == FISH_ROTATE) {
+        if(g->mode==FISH_ROUTE) {if(steps) {g->route_index^=(unsigned)steps&1u;g->travel_error=0;}return;}
         if ((g->mode==FISH_MOVE || g->mode==FISH_AIM || g->mode==FISH_SHORE) && g->pressed && steps) {
             g->guide_return_mode=(uint8_t)g->mode;
             g->guide_index=g->last_species;
@@ -508,7 +514,12 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
         }
     } else if (event == FISH_RELEASE && g->pressed) {
         g->pressed = false;
-        if(g->mode==FISH_SHOP && g->previous_mode==FISH_SHOP) {
+        if(g->mode==FISH_ROUTE && g->previous_mode==FISH_ROUTE) {
+            if(g->route_index==g->map_index) {phase(g,FISH_SHORE);return;}
+            if(g->economy.coins<FISH_TRAVEL_FARE) {g->travel_error=1;return;}
+            g->travel_target=g->route_index;g->travel_requested=true;g->travel_paid=true;g->travel_error=0;
+            phase(g,FISH_LOADING);
+        } else if(g->mode==FISH_SHOP && g->previous_mode==FISH_SHOP) {
             if(g->shop_index==FISH_SHOP_BACK) phase(g,FISH_SHORE);
             else if(g->shop_index==FISH_SHOP_CARGO) {g->hold_return_mode=FISH_SHOP;g->guide_index=0;phase(g,FISH_HOLD);}
             else {g->merchant_line_variant^=1;g->merchant_reply=fish_shop_trade(g,g->shop_index);}
@@ -546,7 +557,9 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->loss=FISH_LOSS_NONE;
             phase(g, FISH_CAST);
         } else if ((g->mode==FISH_MOVE || g->mode==FISH_AIM || g->mode==FISH_SHORE) && g->previous_mode==g->mode) {
-            if(g->mode==FISH_SHORE && fish_game_at_shop(g)) {
+            if(g->mode==FISH_SHORE && fish_game_at_station(g)) {
+                g->route_index=g->map_index;g->travel_error=0;phase(g,FISH_ROUTE);
+            } else if(g->mode==FISH_SHORE && fish_game_at_shop(g)) {
                 if(fish_game_shop_open(g)) {g->shop_index=0;g->merchant_reply=FISH_MERCHANT_GREETING;g->merchant_line_variant^=1;
                     g->merchant_hint=fish_random_next(&g->random_state)%20==0;phase(g,FISH_SHOP);}
                 else {g->merchant_reply=FISH_MERCHANT_CLOSED;g->shop_closed_notice=true;g->shop_closed_at=now;}
@@ -555,4 +568,20 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
         }
         else if (g->mode == FISH_WAIT || g->mode == FISH_BITE) phase(g, FISH_AIM);
     }
+}
+
+void fish_game_travel_complete(fish_game_t *g,bool success)
+{
+    if(g->mode!=FISH_LOADING || !g->travel_requested) return;
+    g->travel_requested=false;g->pressed=false;
+    if(!success) {g->travel_paid=false;g->travel_error=2;phase(g,FISH_ROUTE);return;}
+    if(g->travel_paid) {
+        /* Funds were checked at departure; all controls are locked during loading. */
+        g->economy.coins-=FISH_TRAVEL_FARE;
+        g->game_minute=(g->game_minute+FISH_TRAVEL_MINUTES)%1440;
+    }
+    g->map_index=g->travel_target;g->travel_paid=false;
+    g->shore_x=FISH_STATION_X;g->boat_x=FISH_BOAT_RIGHT;g->facing=-1;
+    g->shore_speed=0;g->boat_speed=0;g->simulation_at=g->now;g->clock_at=g->now;
+    g->save_requested=true;g->travel_error=0;phase(g,FISH_SHORE);
 }

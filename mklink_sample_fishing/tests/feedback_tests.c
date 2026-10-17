@@ -69,7 +69,7 @@ int main(void)
     fish_game_t g;fish_game_init(&g,1000);fish_hpm_feedback_init();
     assert(initialized==1 && events==1 && !last_hz && !last_duty);
     /* Waiting/probing and all menus stay silent. No species hint before hooking. */
-    for(unsigned mode=0;mode<=FISH_HOLD;mode++)if(mode!=FISH_FIGHT) {
+    for(unsigned mode=0;mode<=FISH_LOADING;mode++)if(mode!=FISH_FIGHT) {
         g.mode=(fish_mode_t)mode;update(&g,1000+mode);
     }
     assert(tones==0 && events==1);
@@ -96,7 +96,7 @@ int main(void)
     for(unsigned ms=1;ms<6000;ms+=20)update(&g,6000+ms);
     assert(tones==before);g.mode=FISH_AIM;update(&g,g.now+1);assert(!last_hz);
     /* Every exit stops immediately, including failure, menus and restart. */
-    for(unsigned mode=0;mode<=FISH_HOLD;mode++)if(mode!=FISH_FIGHT) {
+    for(unsigned mode=0;mode<=FISH_LOADING;mode++)if(mode!=FISH_FIGHT) {
         hook(&g,10000+mode*10,1);g.mode=(fish_mode_t)mode;
         update(&g,g.now+1);assert(!last_hz);
     }

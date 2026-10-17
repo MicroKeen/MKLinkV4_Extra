@@ -17,6 +17,11 @@
 
 
 
+/* SD_PACK_ARRAY */
+#if defined(FISH_EXTERNAL_ASSETS)
+#include "fish_asset_layout.h"
+#define c_bmpLakeRGB565 ((uint16_t *)FISH_ASSET_POINTER(FISH_OFFSET_c_bmpLakeRGB565))
+#else
 ARM_SECTION("arm2d.asset.c_bmpLakeRGB565")
 const uint16_t c_bmpLakeRGB565[480*240] = {
 /* -0- */
@@ -7700,6 +7705,7 @@ const uint16_t c_bmpLakeRGB565[480*240] = {
 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b, 0x022b,
 
 };
+#endif
 
 
 extern const arm_2d_tile_t c_tileLakeRGB565;

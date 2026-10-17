@@ -1,0 +1,366 @@
+{
+  "schema": 1,
+  "layout_crc": "fb2e2774",
+  "payload_bytes": 455404,
+  "cache_base": "0x80080000",
+  "cache_end_exclusive": "0x800f3000",
+  "entries": [
+    {
+      "symbol": "c_bmpBoatRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/boat.c",
+      "offset": 0,
+      "bytes": 4608
+    },
+    {
+      "symbol": "c_bmpBoatAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/boat_alpha.c",
+      "offset": 4608,
+      "bytes": 2304
+    },
+    {
+      "symbol": "c_bmpCloudsRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/clouds.c",
+      "offset": 6912,
+      "bytes": 2208
+    },
+    {
+      "symbol": "c_bmpCloudsAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/clouds_alpha.c",
+      "offset": 9120,
+      "bytes": 1104
+    },
+    {
+      "symbol": "c_bmpFootpathAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/footpath_alpha.c",
+      "offset": 10224,
+      "bytes": 2400
+    },
+    {
+      "symbol": "c_bmpFootpathRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/footpath_rgb.c",
+      "offset": 12624,
+      "bytes": 4800
+    },
+    {
+      "symbol": "c_bmpLakeRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/lake.c",
+      "offset": 17424,
+      "bytes": 230400
+    },
+    {
+      "symbol": "c_bmpReedsRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/reeds.c",
+      "offset": 247824,
+      "bytes": 28800
+    },
+    {
+      "symbol": "c_bmpReedsAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/reeds_alpha.c",
+      "offset": 276624,
+      "bytes": 14400
+    },
+    {
+      "symbol": "c_bmpShoreDockAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/shore_dock_alpha.c",
+      "offset": 291024,
+      "bytes": 2842
+    },
+    {
+      "symbol": "c_bmpShoreDockRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/shore_dock_rgb.c",
+      "offset": 293868,
+      "bytes": 5684
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/carp_alpha.c",
+      "offset": 299552,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpLargeAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/carp_large_alpha.c",
+      "offset": 300896,
+      "bytes": 5376
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpLargeRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/carp_large_rgb.c",
+      "offset": 306272,
+      "bytes": 10752
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpRedLongfinAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/carp_red_longfin_alpha.c",
+      "offset": 317024,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpRedLongfinRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/carp_red_longfin_rgb.c",
+      "offset": 318368,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesCarpRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/carp_rgb.c",
+      "offset": 321056,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/catfish_alpha.c",
+      "offset": 323744,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishLargeAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/catfish_large_alpha.c",
+      "offset": 325088,
+      "bytes": 5376
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishLargeRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/catfish_large_rgb.c",
+      "offset": 330464,
+      "bytes": 10752
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/catfish_rgb.c",
+      "offset": 341216,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishXanthicAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/catfish_xanthic_alpha.c",
+      "offset": 343904,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesCatfishXanthicRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/catfish_xanthic_rgb.c",
+      "offset": 345248,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesCrucianAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/crucian_alpha.c",
+      "offset": 347936,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesCrucianRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/crucian_rgb.c",
+      "offset": 349280,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesGobyAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/goby_alpha.c",
+      "offset": 351968,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesGobyRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/goby_rgb.c",
+      "offset": 353312,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesHenanCrabAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/henan_crab_alpha.c",
+      "offset": 356000,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesHenanCrabRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/henan_crab_rgb.c",
+      "offset": 357344,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesHooksnoutAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/hooksnout_alpha.c",
+      "offset": 360032,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesHooksnoutLongfinAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/hooksnout_longfin_alpha.c",
+      "offset": 361376,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesHooksnoutLongfinRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/hooksnout_longfin_rgb.c",
+      "offset": 362720,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesHooksnoutRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/hooksnout_rgb.c",
+      "offset": 365408,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesMandarinAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/mandarin_alpha.c",
+      "offset": 368096,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesMandarinRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/mandarin_rgb.c",
+      "offset": 369440,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesSharpbellyAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/sharpbelly_alpha.c",
+      "offset": 372128,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesSharpbellyRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/sharpbelly_rgb.c",
+      "offset": 373472,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesSnakeheadAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/snakehead_alpha.c",
+      "offset": 376160,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesSnakeheadLargeAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/snakehead_large_alpha.c",
+      "offset": 377504,
+      "bytes": 5376
+    },
+    {
+      "symbol": "c_bmpSpeciesSnakeheadLargeRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/snakehead_large_rgb.c",
+      "offset": 382880,
+      "bytes": 10752
+    },
+    {
+      "symbol": "c_bmpSpeciesSnakeheadRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/snakehead_rgb.c",
+      "offset": 393632,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesSoftshellAlbinoAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/softshell_albino_alpha.c",
+      "offset": 396320,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesSoftshellAlbinoRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/softshell_albino_rgb.c",
+      "offset": 397664,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesSoftshellAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/softshell_alpha.c",
+      "offset": 400352,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesSoftshellRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/softshell_rgb.c",
+      "offset": 401696,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpSpeciesYellowCatfishAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/species/yellow_catfish_alpha.c",
+      "offset": 404384,
+      "bytes": 1344
+    },
+    {
+      "symbol": "c_bmpSpeciesYellowCatfishRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/species/yellow_catfish_rgb.c",
+      "offset": 405728,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpStationAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/station_alpha.c",
+      "offset": 408416,
+      "bytes": 5940
+    },
+    {
+      "symbol": "c_bmpStationRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/station_rgb.c",
+      "offset": 414356,
+      "bytes": 11880
+    }
+  ],
+  "maps": [
+    {
+      "id": 0,
+      "file": "maps/0_wetland.fgpk",
+      "bytes": 455468,
+      "sha256": "582028cf526f3cc5fb6b73ce0a62f92e18797fbdb0fece23b32468a0a71eb558"
+    },
+    {
+      "id": 1,
+      "file": "maps/1_city_river.fgpk",
+      "bytes": 455468,
+      "sha256": "5a9614836756055974e9bc2ac1c7ab606fd0bad47417ace3192b9781316cfdb7"
+    }
+  ]
+}

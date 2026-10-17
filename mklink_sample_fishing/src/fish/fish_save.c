@@ -27,6 +27,7 @@ void fish_save_pack(const fish_game_t *g,uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
     p[187]=e->hanging_species;put16(p+188,e->hanging_size_mm);
     put32(p+190,e->hanging_grams);put32(p+194,e->hanging_value);put16(p+198,g->game_minute);
     p[200]=e->container;p[201]=FISH_SAVE_EQUIPMENT_EPOCH;
+    p[FISH_SAVE_V7_PAYLOAD_BYTES]=g->map_index;
     p[FISH_SAVE_V5_PAYLOAD_BYTES]=g->sound_mode;
     for(unsigned i=0;i<FISH_PRICE_GROUPS;i++) {
         put16(p+FISH_SAVE_V6_PAYLOAD_BYTES+4*i,e->prices[i].price);
@@ -37,7 +38,7 @@ static bool unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
 {
     if(p[0]>=FISH_ROD_COUNT || p[1]>=FISH_LINE_COUNT || p[2]>=FISH_FLOAT_COUNT ||
        p[3]>=FISH_BAIT_COUNT || p[4]>=FISH_DEPTH_OPTION_COUNT || p[5]>=FISH_SPECIES_COUNT ||
-       get32(p+8)>INT_MAX || get32(p+12) || p[FISH_SAVE_V5_PAYLOAD_BYTES]>=FISH_SOUND_COUNT) return false;
+       p[FISH_SAVE_V7_PAYLOAD_BYTES]>=FISH_MAP_COUNT || get32(p+8)>INT_MAX || get32(p+12) || p[FISH_SAVE_V5_PAYLOAD_BYTES]>=FISH_SOUND_COUNT) return false;
     uint32_t total=0;
     for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
         unsigned at=progress_offset(i),count=get16(p+at),best=get16(p+at+2);total+=count;
@@ -99,6 +100,7 @@ static bool unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
         unsigned at=progress_offset(i);g->species_catches[i]=get16(p+at);g->species_best_size_mm[i]=get16(p+at+2);
     }
     g->economy=e;g->game_minute=get16(p+198);g->clock_remainder_ms=0;
+    g->map_index=p[FISH_SAVE_V7_PAYLOAD_BYTES];
     g->sound_mode=p[FISH_SAVE_V5_PAYLOAD_BYTES];
     if(!p[201]) {
         /* This release resets legacy equipment once; progress and cargo stay. */
@@ -120,9 +122,9 @@ void fish_save_encode(const uint8_t key[32],uint64_t seq,const uint8_t *p,uint8_
 }
 bool fish_save_decode(const uint8_t key[32],const uint8_t *file,size_t len,uint64_t *seq,uint8_t *p)
 {
-    if(len!=FISH_SAVE_LEGACY_FILE_BYTES && len!=FISH_SAVE_PREVIOUS_FILE_BYTES && len!=FISH_SAVE_V5_FILE_BYTES && len!=FISH_SAVE_V6_FILE_BYTES && len!=FISH_SAVE_FILE_BYTES) return false;
+    if(len!=FISH_SAVE_LEGACY_FILE_BYTES && len!=FISH_SAVE_PREVIOUS_FILE_BYTES && len!=FISH_SAVE_V5_FILE_BYTES && len!=FISH_SAVE_V7_FILE_BYTES && len!=FISH_SAVE_V6_FILE_BYTES && len!=FISH_SAVE_FILE_BYTES) return false;
     unsigned version=get16(file+4);bool legacy=version==1;
-    size_t bytes=legacy?FISH_SAVE_LEGACY_PAYLOAD_BYTES:version<5?FISH_SAVE_PREVIOUS_PAYLOAD_BYTES:version==5?FISH_SAVE_V5_PAYLOAD_BYTES:version==6?FISH_SAVE_V6_PAYLOAD_BYTES:FISH_SAVE_PAYLOAD_BYTES;
+    size_t bytes=legacy?FISH_SAVE_LEGACY_PAYLOAD_BYTES:version<5?FISH_SAVE_PREVIOUS_PAYLOAD_BYTES:version==5?FISH_SAVE_V5_PAYLOAD_BYTES:version==6?FISH_SAVE_V6_PAYLOAD_BYTES:version==7?FISH_SAVE_V7_PAYLOAD_BYTES:FISH_SAVE_PAYLOAD_BYTES;
     if(version<1 || version>FISH_SAVE_VERSION || len!=bytes+32 || memcmp(file,"FSG1",4) || get16(file+6)!=bytes) return false;
     memset(p,0,FISH_SAVE_PAYLOAD_BYTES);
     if(!fish_save_open(key,file,16,file+16,file+32,bytes,p)) return false;
@@ -149,12 +151,11 @@ void fish_save_init(fish_save_t *s,fish_game_t *g,uint32_t now)
     if(fish_storage_init(s->key)!=0) {s->status=s->blocked_status=FISH_SAVE_ERROR;s->blocked=true;return;}
     bool invalid=false,io=false,migrated=false,equipment_initialized=false;
     unsigned best_priority=0;
-    for(unsigned slot=0;slot<8;slot++) {
-        if(slot==2 && best_priority==3) break;
-        if(slot==4 && best_priority>=2) break;
-        if(slot==6 && best_priority>=1) break;
+    for(unsigned slot=0;slot<10;slot++) {
+        if(slot>=2 && best_priority>=5-slot/2) break;
         int result=fish_storage_read(slot,s->file,sizeof(s->file));
         size_t length=sizeof(s->file);
+        if(result==-3) {length=FISH_SAVE_V7_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_V6_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_V5_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
         if(result==-3) {length=FISH_SAVE_PREVIOUS_FILE_BYTES;result=fish_storage_read(slot,s->file,length);}
