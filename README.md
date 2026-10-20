@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 示例工程使用 HPM SDK，构建前需要配置 `HPM_SDK_BASE`。
 
-钓鱼示例的构建、操作、旧存档兼容性与验证记录见 [mklink_sample_fishing](mklink_sample_fishing/README.md)。其 SD 适配保留 PA26 为屏幕背光；运行期间不启用 USB 磁盘，以避免与游戏同时写 SD 卡。
+钓鱼示例见 [mklink_sample_fishing](mklink_sample_fishing/README.md)：MKLink V4双地图钓鱼、城市鱼种、商店经济、独立天气及兼容旧档的V13存档。D12经作者实测基本稳定；配套SD资源2026.10.19.5，缺包时检查原文件系统后开放复制，校验后隐藏。The MKLink V4 fishing demo includes two regions, city fish, shops, regional weather and compatible V13 saves. D12 is published after the author reported basic stability; matching packs are imported through guarded SD handoff.
 
 ## 火焰示例与 USB 日志
 

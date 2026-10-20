@@ -3,6 +3,7 @@
 
 uint8_t fish_line_bite_percent(unsigned index,uint32_t weight_g)
 {
+    if(index==FISH_PE_LINE)return weight_g<=1000?4:weight_g<=5000?18:weight_g<=15000?60:90;
     return fish_line_sets[index].bite_percent[weight_g<=100?0:weight_g<=1000?1:2];
 }
 

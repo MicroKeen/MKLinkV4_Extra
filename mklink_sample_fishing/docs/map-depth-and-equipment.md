@@ -100,6 +100,7 @@ python tools/memory_report.py
 
 微信/Canvas可复用地图/装备JSON、稳定ID、同样的整数规则和原始PNG。全局数组下标只用于原生查表，不应作为跨版本存档ID。设计和素材快照为`dist/wetland-assets-v7.zip`，保存app、assets、data、docs、tools、tests及构建入口；不含vendor/toolchain，不是独立微信工程。
 
+预览：[装备背包](previews/map-bag-rod-3x.png)、[水深调整](previews/map-bag-depth-3x.png)、[码头与地形](previews/map-docks-and-depth.png)。
 
 搏鱼v3进一步加入三种线径的隐蔽性、超重响应与实际咬钩频率：细线/均衡/粗线分别0.18/0.28/0.45mm，均衡参照体重1500g，四星鲤鱼也有高压力。当前线组详情展示线径/基础反应/隐蔽性；新增规则与独立调参说明见[balance-tuning-guide.md](balance-tuning-guide.md)。最新16项CTest通过，快照更新为dist/wetland-assets-v8.zip；原型仍无商店/持久化。
 
@@ -108,3 +109,9 @@ v9视觉修正：岸与码头由1像素图元改为与湖景同网格的112×94 
 ## v15 装备与库存
 
 默认改为竹竿、通用线钩、红白漂、无限普通假饵。竿/线钩/漂需商店永久解锁，五种特殊饵料每包五份、按抛竿消耗；行囊跳过未解锁项。原通用格为鱼库入口。规则/价格/迁移见 [economy-time-and-shop.md](economy-time-and-shop.md)。下面旧调参数值仍适用于已购买装备。
+
+## v28 右岸车站 / East-bank station
+
+右码头上岸点864不变，向右连续步行至1216车站自动停下，右边界1240、岸上镜头最大1088。返回864码头先停，再向湖面转动回船。原960像素湖区、56–904水面、深度和落点权重保持；只扩展岸上步道。车站和人物均按原2像素世界网格显示，地面沿用原草地与码头重叠，远景右缘镜像延伸。本站外景是新地图接入的第一步，暂无乘车/目的地菜单与地图切换。
+
+The east landing stays at 864. Walking right reaches and stops at station 1216; the shore ends at 1240 and its camera at 1088. Returning stops at 864 before another turn boards. Only the land path extends; the 960-pixel lake, water bounds 56–904 and all encounter/depth rules remain. The station shares the existing 2-pixel world grid and meadow/dock blend, with a reflected skyline extension. Travel and destination selection are future steps.

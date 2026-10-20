@@ -78,6 +78,37 @@
         62
       ],
       "distance_limit_cm": 850
+    },
+    {
+      "id": "pe8",
+      "name_zh": "八编PE线组",
+      "hook_zh": "大钩",
+      "strength": 200,
+      "capacity_units": 32000,
+      "strike_window_percent": 90,
+      "diameter_hundredths_mm": 60,
+      "response_percent": 45,
+      "comfortable_weight_g": 30000,
+      "bite_percent": [
+        4,
+        4,
+        90
+      ],
+      "distance_limit_cm": 1050,
+      "description_zh": "像一条钢缆，会吓跑小鱼",
+      "price": 600,
+      "city_only_purchase": true,
+      "bite_weight_bands_g": [
+        1000,
+        5000,
+        15000
+      ],
+      "bite_weight_band_percent": [
+        4,
+        18,
+        60,
+        90
+      ]
     }
   ],
   "floats": [

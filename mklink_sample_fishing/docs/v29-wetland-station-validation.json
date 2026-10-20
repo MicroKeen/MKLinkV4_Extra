@@ -1,0 +1,21 @@
+{
+  "version": 29,
+  "pfb_frames": 48,
+  "reflected_panorama_pixels": 57600,
+  "ground_pixels": 6912,
+  "actor_pixels": 3916,
+  "station_pixels": 8792,
+  "actor_visible_height": 36,
+  "station_sprite": [
+    110,
+    54
+  ],
+  "world_scale": 2,
+  "station_pixel_bytes": 17820,
+  "station_x": 1216,
+  "shore_right": 1240,
+  "right_camera_limit": 1088,
+  "night_and_dawn_frames": 24,
+  "station_travel_implemented": true,
+  "sd_map_loader_implemented": true
+}

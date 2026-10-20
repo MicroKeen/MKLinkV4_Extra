@@ -1,0 +1,1758 @@
+{
+  "gnu": {
+    "ram_flash_writer": [
+      {
+        "name": "cache_configure_critical",
+        "address": "0x680",
+        "bytes": 94,
+        "fence_i": true
+      },
+      {
+        "name": "cache_write_critical",
+        "address": "0x6de",
+        "bytes": 124,
+        "fence_i": true
+      }
+    ],
+    "usb_entrypoints": [
+      "usbd_msc_sector_read",
+      "usbd_initialize",
+      "usbd_msc_init_intf",
+      "usbd_msc_sector_write"
+    ],
+    "sd_guard_present": true,
+    "watchdog_runtime": [
+      "fish_hpm_capture_reset",
+      "fish_hpm_watchdog_reset",
+      "fish_hpm_storage_heartbeat"
+    ],
+    "fault_capture": [
+      {
+        "name": "exception_handler",
+        "address": "0x670",
+        "bytes": 16
+      },
+      {
+        "name": "fish_hpm_record_fault",
+        "address": "0x628",
+        "bytes": 72
+      }
+    ],
+    "sha256": "3c1060bba64b55a0f32916469b3cc31cb363eae4347c35b071047a7c4cd02b88",
+    "regions": [
+      {
+        "name": "APP_FLASH",
+        "used": 366652,
+        "capacity": 380928,
+        "free": 14276
+      },
+      {
+        "name": "ILM",
+        "used": 2440,
+        "capacity": 131072,
+        "free": 128632
+      },
+      {
+        "name": "DLM",
+        "used": 126480,
+        "capacity": 130304,
+        "free": 3824
+      },
+      {
+        "name": "AHB_SRAM",
+        "used": 28,
+        "capacity": 32768,
+        "free": 32740
+      }
+    ],
+    "sections": [
+      {
+        "name": ".start",
+        "address": 2147627008,
+        "bytes": 92,
+        "nobits": false
+      },
+      {
+        "name": ".vectors",
+        "address": 0,
+        "bytes": 1576,
+        "nobits": false
+      },
+      {
+        "name": ".text",
+        "address": 2147628676,
+        "bytes": 243684,
+        "nobits": false
+      },
+      {
+        "name": ".eh_frame",
+        "address": 2147872360,
+        "bytes": 60,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileWhiteDotRGB565",
+        "address": 2147872420,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpWhiteDotRGB565",
+        "address": 2147872436,
+        "bytes": 392,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileBoatRGB565",
+        "address": 2147872828,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileBoatAlphaGRAY8",
+        "address": 2147872844,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileCloudsRGB565",
+        "address": 2147872860,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileCloudsAlphaGRAY8",
+        "address": 2147872876,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileBackpackOpenRGB565",
+        "address": 2147872892,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpBackpackOpenRGB565",
+        "address": 2147872908,
+        "bytes": 21120,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGBambooRodAlphaGRAY8",
+        "address": 2147894028,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGBambooRodAlphaGRAY8",
+        "address": 2147894044,
+        "bytes": 912,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGBambooRodRGB565",
+        "address": 2147894956,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGBambooRodRGB565",
+        "address": 2147894972,
+        "bytes": 1824,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGCarbonRodAlphaGRAY8",
+        "address": 2147896796,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGCarbonRodAlphaGRAY8",
+        "address": 2147896812,
+        "bytes": 912,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGCarbonRodRGB565",
+        "address": 2147897724,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGCarbonRodRGB565",
+        "address": 2147897740,
+        "bytes": 1824,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGDepthAlphaGRAY8",
+        "address": 2147899564,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGDepthAlphaGRAY8",
+        "address": 2147899580,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGDepthRGB565",
+        "address": 2147899980,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGDepthRGB565",
+        "address": 2147899996,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGDoughAlphaGRAY8",
+        "address": 2147900796,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGDoughAlphaGRAY8",
+        "address": 2147900812,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGDoughRGB565",
+        "address": 2147901212,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGDoughRGB565",
+        "address": 2147901228,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGFeatherFloatAlphaGRAY8",
+        "address": 2147902028,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGFeatherFloatAlphaGRAY8",
+        "address": 2147902044,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGFeatherFloatRGB565",
+        "address": 2147902444,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGFeatherFloatRGB565",
+        "address": 2147902460,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGFiberglassRodAlphaGRAY8",
+        "address": 2147903260,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGFiberglassRodAlphaGRAY8",
+        "address": 2147903276,
+        "bytes": 912,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGFiberglassRodRGB565",
+        "address": 2147904188,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGFiberglassRodRGB565",
+        "address": 2147904204,
+        "bytes": 1824,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGGlowFloatAlphaGRAY8",
+        "address": 2147906028,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGGlowFloatAlphaGRAY8",
+        "address": 2147906044,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGGlowFloatRGB565",
+        "address": 2147906444,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGGlowFloatRGB565",
+        "address": 2147906460,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGHeavyLineAlphaGRAY8",
+        "address": 2147907260,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGHeavyLineAlphaGRAY8",
+        "address": 2147907276,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGHeavyLineRGB565",
+        "address": 2147907676,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGHeavyLineRGB565",
+        "address": 2147907692,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGLightLineAlphaGRAY8",
+        "address": 2147908492,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGLightLineAlphaGRAY8",
+        "address": 2147908508,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGLightLineRGB565",
+        "address": 2147908908,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGLightLineRGB565",
+        "address": 2147908924,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGRedWhiteFloatAlphaGRAY8",
+        "address": 2147909724,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGRedWhiteFloatAlphaGRAY8",
+        "address": 2147909740,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGRedWhiteFloatRGB565",
+        "address": 2147910140,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGRedWhiteFloatRGB565",
+        "address": 2147910156,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGRiceAlphaGRAY8",
+        "address": 2147910956,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGRiceAlphaGRAY8",
+        "address": 2147910972,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGRiceRGB565",
+        "address": 2147911372,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGRiceRGB565",
+        "address": 2147911388,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGSatchelAlphaGRAY8",
+        "address": 2147912188,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGSatchelAlphaGRAY8",
+        "address": 2147912204,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGSatchelRGB565",
+        "address": 2147912604,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGSatchelRGB565",
+        "address": 2147912620,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGShrimpAlphaGRAY8",
+        "address": 2147913420,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGShrimpAlphaGRAY8",
+        "address": 2147913436,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGShrimpRGB565",
+        "address": 2147913836,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGShrimpRGB565",
+        "address": 2147913852,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGSmallFishAlphaGRAY8",
+        "address": 2147914652,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGSmallFishAlphaGRAY8",
+        "address": 2147914668,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGSmallFishRGB565",
+        "address": 2147915068,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGSmallFishRGB565",
+        "address": 2147915084,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGStandardLineAlphaGRAY8",
+        "address": 2147915884,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGStandardLineAlphaGRAY8",
+        "address": 2147915900,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGStandardLineRGB565",
+        "address": 2147916300,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGStandardLineRGB565",
+        "address": 2147916316,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGWormAlphaGRAY8",
+        "address": 2147917116,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGWormAlphaGRAY8",
+        "address": 2147917132,
+        "bytes": 400,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRPGWormRGB565",
+        "address": 2147917532,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRPGWormRGB565",
+        "address": 2147917548,
+        "bytes": 800,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileFootpathAlphaGRAY8",
+        "address": 2147918348,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileFootpathRGB565",
+        "address": 2147918364,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpGameIconIndices",
+        "address": 2147918380,
+        "bytes": 461,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpGameIconPalette",
+        "address": 2147918844,
+        "bytes": 64,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer0AlphaGRAY8",
+        "address": 2147918908,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer0AlphaGRAY8",
+        "address": 2147918924,
+        "bytes": 280,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer0RGB565",
+        "address": 2147919204,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer0RGB565",
+        "address": 2147919220,
+        "bytes": 560,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer1AlphaGRAY8",
+        "address": 2147919780,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer1AlphaGRAY8",
+        "address": 2147919796,
+        "bytes": 280,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer1RGB565",
+        "address": 2147920076,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer1RGB565",
+        "address": 2147920092,
+        "bytes": 560,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer2AlphaGRAY8",
+        "address": 2147920652,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer2AlphaGRAY8",
+        "address": 2147920668,
+        "bytes": 280,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShorePlayer2RGB565",
+        "address": 2147920948,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShorePlayer2RGB565",
+        "address": 2147920964,
+        "bytes": 560,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileReedsRGB565",
+        "address": 2147921524,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileReedsAlphaGRAY8",
+        "address": 2147921540,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.FONT.ARM_2D_FONT_Remarks_A1",
+        "address": 2147921556,
+        "bytes": 44,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileUTF8RemarksA1Mask",
+        "address": 2147921600,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.FONT.c_tUTF8RemarksLookUpTableA1",
+        "address": 2147921616,
+        "bytes": 12438,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.FONT.c_bmpUTF8RemarksA1Font",
+        "address": 2147934056,
+        "bytes": 19169,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRouteCityRGB565",
+        "address": 2147953228,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRouteCityRGB565",
+        "address": 2147953244,
+        "bytes": 4096,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileRouteWetlandRGB565",
+        "address": 2147957340,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpRouteWetlandRGB565",
+        "address": 2147957356,
+        "bytes": 4096,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileCityShopClosedRGB565",
+        "address": 2147961452,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileFishCoolerAlphaGRAY8",
+        "address": 2147961468,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpFishCoolerAlphaGRAY8",
+        "address": 2147961484,
+        "bytes": 1152,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileFishCoolerRGB565",
+        "address": 2147962636,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpFishCoolerRGB565",
+        "address": 2147962652,
+        "bytes": 2304,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopExteriorClosedPatchRGB565",
+        "address": 2147964956,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopExteriorClosedPatchRGB565",
+        "address": 2147964972,
+        "bytes": 1840,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopExteriorAlphaGRAY8",
+        "address": 2147966812,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopExteriorRGB565",
+        "address": 2147966828,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileLargeBucketAlphaGRAY8",
+        "address": 2147966844,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpLargeBucketAlphaGRAY8",
+        "address": 2147966860,
+        "bytes": 1152,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileLargeBucketRGB565",
+        "address": 2147968012,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpLargeBucketRGB565",
+        "address": 2147968028,
+        "bytes": 2304,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods0RGB565",
+        "address": 2147970332,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods0RGB565",
+        "address": 2147970348,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods1RGB565",
+        "address": 2147970860,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods1RGB565",
+        "address": 2147970876,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods2RGB565",
+        "address": 2147971388,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods2RGB565",
+        "address": 2147971404,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods3RGB565",
+        "address": 2147971916,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods3RGB565",
+        "address": 2147971932,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods4RGB565",
+        "address": 2147972444,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods4RGB565",
+        "address": 2147972460,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods5RGB565",
+        "address": 2147972972,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods5RGB565",
+        "address": 2147972988,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods6RGB565",
+        "address": 2147973500,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods6RGB565",
+        "address": 2147973516,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods7RGB565",
+        "address": 2147974028,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods7RGB565",
+        "address": 2147974044,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods8RGB565",
+        "address": 2147974556,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods8RGB565",
+        "address": 2147974572,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods9RGB565",
+        "address": 2147975084,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods9RGB565",
+        "address": 2147975100,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods10RGB565",
+        "address": 2147975612,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods10RGB565",
+        "address": 2147975628,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods11RGB565",
+        "address": 2147976140,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods11RGB565",
+        "address": 2147976156,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods12RGB565",
+        "address": 2147976668,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods12RGB565",
+        "address": 2147976684,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods13RGB565",
+        "address": 2147977196,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods13RGB565",
+        "address": 2147977212,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods16RGB565",
+        "address": 2147977724,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods16RGB565",
+        "address": 2147977740,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods17RGB565",
+        "address": 2147978252,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods17RGB565",
+        "address": 2147978268,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods18RGB565",
+        "address": 2147978780,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods18RGB565",
+        "address": 2147978796,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShopGoods19RGB565",
+        "address": 2147979308,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpShopGoods19RGB565",
+        "address": 2147979324,
+        "bytes": 512,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileParkLampOnRGB565",
+        "address": 2147979836,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpParkLampOnRGB565",
+        "address": 2147979852,
+        "bytes": 1408,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileParkLampAlphaGRAY8",
+        "address": 2147981260,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpParkLampAlphaGRAY8",
+        "address": 2147981276,
+        "bytes": 704,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileParkLampRGB565",
+        "address": 2147981980,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpParkLampRGB565",
+        "address": 2147981996,
+        "bytes": 1408,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileParkLightAlphaGRAY8",
+        "address": 2147983404,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpParkLightAlphaGRAY8",
+        "address": 2147983420,
+        "bytes": 1296,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileParkLightRGB565",
+        "address": 2147984716,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpParkLightRGB565",
+        "address": 2147984732,
+        "bytes": 2592,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSmallBucketAlphaGRAY8",
+        "address": 2147987324,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpSmallBucketAlphaGRAY8",
+        "address": 2147987340,
+        "bytes": 1152,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSmallBucketRGB565",
+        "address": 2147988492,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.asset.c_bmpSmallBucketRGB565",
+        "address": 2147988508,
+        "bytes": 2304,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShoreDockAlphaGRAY8",
+        "address": 2147990812,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileShoreDockRGB565",
+        "address": 2147990828,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesBigheadCarpAlphaGRAY8",
+        "address": 2147990844,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesBigheadCarpRGB565",
+        "address": 2147990860,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesBlackCarpAlphaGRAY8",
+        "address": 2147990876,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesBlackCarpRGB565",
+        "address": 2147990892,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpAlphaGRAY8",
+        "address": 2147990908,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpLargeAlphaGRAY8",
+        "address": 2147990924,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpLargeRGB565",
+        "address": 2147990940,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpRedLongfinAlphaGRAY8",
+        "address": 2147990956,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpRedLongfinRGB565",
+        "address": 2147990972,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCarpRGB565",
+        "address": 2147990988,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishAlphaGRAY8",
+        "address": 2147991004,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishLargeAlphaGRAY8",
+        "address": 2147991020,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishLargeRGB565",
+        "address": 2147991036,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishRGB565",
+        "address": 2147991052,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishXanthicAlphaGRAY8",
+        "address": 2147991068,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCatfishXanthicRGB565",
+        "address": 2147991084,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCrucianAlphaGRAY8",
+        "address": 2147991100,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCrucianRGB565",
+        "address": 2147991116,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCulterAlburnusAlphaGRAY8",
+        "address": 2147991132,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesCulterAlburnusRGB565",
+        "address": 2147991148,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesGobyAlphaGRAY8",
+        "address": 2147991164,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesGobyRGB565",
+        "address": 2147991180,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesGrassCarpAlphaGRAY8",
+        "address": 2147991196,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesGrassCarpRGB565",
+        "address": 2147991212,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHenanCrabAlphaGRAY8",
+        "address": 2147991228,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHenanCrabRGB565",
+        "address": 2147991244,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHooksnoutAlphaGRAY8",
+        "address": 2147991260,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHooksnoutLongfinAlphaGRAY8",
+        "address": 2147991276,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHooksnoutLongfinRGB565",
+        "address": 2147991292,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesHooksnoutRGB565",
+        "address": 2147991308,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesLongsnoutCatfishAlphaGRAY8",
+        "address": 2147991324,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesLongsnoutCatfishRGB565",
+        "address": 2147991340,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesMandarinAlphaGRAY8",
+        "address": 2147991356,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesMandarinRGB565",
+        "address": 2147991372,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesMongolianCulterAlphaGRAY8",
+        "address": 2147991388,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesMongolianCulterRGB565",
+        "address": 2147991404,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesObscurePufferAlphaGRAY8",
+        "address": 2147991420,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesObscurePufferRGB565",
+        "address": 2147991436,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesRedeyeAlphaGRAY8",
+        "address": 2147991452,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesRedeyeRGB565",
+        "address": 2147991468,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSharpbellyAlphaGRAY8",
+        "address": 2147991484,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSharpbellyRGB565",
+        "address": 2147991500,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSilverCarpAlphaGRAY8",
+        "address": 2147991516,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSilverCarpRGB565",
+        "address": 2147991532,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSnakeheadAlphaGRAY8",
+        "address": 2147991548,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSnakeheadLargeAlphaGRAY8",
+        "address": 2147991564,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSnakeheadLargeRGB565",
+        "address": 2147991580,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSnakeheadRGB565",
+        "address": 2147991596,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSoftshellAlbinoAlphaGRAY8",
+        "address": 2147991612,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSoftshellAlbinoRGB565",
+        "address": 2147991628,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSoftshellAlphaGRAY8",
+        "address": 2147991644,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesSoftshellRGB565",
+        "address": 2147991660,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesYellowCatfishAlphaGRAY8",
+        "address": 2147991676,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesYellowCatfishRGB565",
+        "address": 2147991692,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesYellowcheekAlphaGRAY8",
+        "address": 2147991708,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileSpeciesYellowcheekRGB565",
+        "address": 2147991724,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileStationAlphaGRAY8",
+        "address": 2147991740,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": "arm2d.tile.c_tileStationRGB565",
+        "address": 2147991756,
+        "bytes": 16,
+        "nobits": false
+      },
+      {
+        "name": ".data",
+        "address": 525056,
+        "bytes": 1024,
+        "nobits": false
+      },
+      {
+        "name": ".fast",
+        "address": 1576,
+        "bytes": 864,
+        "nobits": false
+      },
+      {
+        "name": ".bss",
+        "address": 526080,
+        "bytes": 77352,
+        "nobits": true
+      },
+      {
+        "name": ".noncacheable",
+        "address": 604160,
+        "bytes": 16384,
+        "nobits": true
+      },
+      {
+        "name": ".fast_ram",
+        "address": 620544,
+        "bytes": 2320,
+        "nobits": true
+      },
+      {
+        "name": ".heap",
+        "address": 622864,
+        "bytes": 24576,
+        "nobits": true
+      },
+      {
+        "name": ".stack",
+        "address": 647440,
+        "bytes": 4096,
+        "nobits": true
+      },
+      {
+        "name": ".ahb_sram",
+        "address": 4030726144,
+        "bytes": 28,
+        "nobits": true
+      }
+    ],
+    "flash_end": "0x8007c83c"
+  },
+  "uf2_blocks": 1433,
+  "source_count": 322,
+  "uf2_base": "0x80023000",
+  "family": "0x0A4D5048",
+  "build_date": "2026-10-19",
+  "resource_version": "2026.10.19.5",
+  "resource_version_id": 2026101905,
+  "resource_pack_format": 2,
+  "conditional_usb_recovery": true,
+  "original_usb_test_build_withdrawn": true,
+  "normal_boot_usb_hidden": true,
+  "usb_msc_buffer_bytes": 1024,
+  "sdk_normalized_sector_count": true,
+  "existing_fs_mount_required": true,
+  "mbr_bpb_bounds_checked": true,
+  "copy_received_bytes_displayed": true,
+  "copy_progress_percentage_fabricated": false,
+  "crc_probe_progress_linear": true,
+  "missing_file_and_version_diagnostics": true,
+  "watchdog_reset_flag_displayed": true,
+  "game_icon_rom_resident": true,
+  "game_icon_size": [
+    48,
+    40
+  ],
+  "game_icon_bitmap_bytes": 525,
+  "game_icon_codec": "row_rle_5bpp",
+  "game_icon_pixels_unchanged": true,
+  "game_icon_index_bits": 5,
+  "game_icon_display_scale": 2,
+  "game_icon_in_sd_pack": false,
+  "sd_transaction_budget_ms": 2000,
+  "sd_spi_call_timeout_ms": 100,
+  "watchdog_timeout_us": 10000000,
+  "watchdog_refresh_at_transaction_boundaries": true,
+  "watchdog_refresh_inside_response_poll": false,
+  "watchdog_refresh_keys_irq_atomic": true,
+  "usb_and_scene_share_same_clock": true,
+  "nor_configuration_ilm_resident": true,
+  "nor_configuration_masks_interrupts": true,
+  "nor_configuration_watchdog_boundary_refresh": true,
+  "nor_write_watchdog_boundary_refresh": true,
+  "boot_verification_settle_ms": 0,
+  "destination_frame_before_nor_initialization": true,
+  "nor_configuration_after_source_preflight": true,
+  "valid_cache_reconfigures_xpi": false,
+  "nor_configuration_instruction_sync": true,
+  "watchdog_reset_stage_best_effort": true,
+  "cache_crc_bytes_per_tick": 16384,
+  "source_read_bytes_per_tick": 4096,
+  "watchdog_reset_stage_bytes": 28,
+  "watchdog_diagnostics_write_sd": false,
+  "diagnostic_revision": "D10",
+  "cpu_fault_register_capture": true,
+  "diagnostic_pause_before_sd": true,
+  "diagnostic_retry_by_encoder_release": true,
+  "hardware_root_cause_confirmed": false,
+  "exported_scene_loading_early_return_preserved": true,
+  "software_root_cause_reproduced": true,
+  "prior_d3_boot_confirmed_by_user": true,
+  "loading_icon": "resident_seated_fisherman_boat",
+  "loading_icon_size": [
+    96,
+    80
+  ],
+  "loading_icon_position": [
+    72,
+    74
+  ],
+  "loading_icon_requires_transform": false,
+  "loading_common_tips": [
+    "正在整理钓具",
+    "正在前往码头"
+  ],
+  "loading_tip_interval_ms": 7000,
+  "prior_fault_pc": "0x80029f96",
+  "prior_fault_cause": 5,
+  "prior_fault_value": "0x008781e6",
+  "poll_advances_settle_state": true,
+  "stock_plus_capacity_preserved_when_layout_fits": true,
+  "sd_cpu_pointers_preserved": true,
+  "sd_cpu_rx_cache_invalidation": false,
+  "usb_disk_io_in_isr": false,
+  "usb_scene_thread_polling": true,
+  "usb_detach_after_full_pack_validation": true,
+  "usb_copy_quiet_ms": 3000,
+  "usb_final_quiet_ms": 1500,
+  "usb_waits_for_command_status": true,
+  "read_only_two_pack_preflight": true,
+  "lossless_indexed_shop_in_sd": true,
+  "hardware_usb_tested": false,
+  "ses_rebuilt": false,
+  "hardware_platform": "MKLink V4",
+  "test_counts_not_inferred_from_build": true,
+  "display_rotation": 0,
+  "distribution_status": "local_only_not_for_release",
+  "original_sd_integrity": "unknown",
+  "git_push_allowed": false,
+  "public_runtime_art_only": true,
+  "hardware_flashed": false,
+  "hardware_power_loss_tested": false,
+  "save_manual_io_retry": true,
+  "save_preflight_validation": true,
+  "save_error_stage_codes": true,
+  "city_raft_seated_sprite": true,
+  "common_wetland_player_pixels": true,
+  "world_foreground_shift_px": 8,
+  "hold_collection_frame": true,
+  "hold_container_icon_only": true,
+  "night_road_darkening": true,
+  "sd_writes_single_sector_cmd24": true,
+  "sd_write_clock_hz": 4000000,
+  "sd_read_clock_restored": true,
+  "large_fish_control_threshold_g": 6500,
+  "large_fish_landing_stamina_percent": 20,
+  "giant_additional_force_above_g": 20000,
+  "save_key_public": true,
+  "save_schema_version": 11,
+  "save_bytes": 1495,
+  "legacy_save_versions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "legacy_save_bytes": [
+    92,
+    236,
+    236,
+    236,
+    292,
+    293,
+    1317,
+    1318,
+    1470
+  ],
+  "map_page_implemented": true,
+  "station_travel_implemented": true,
+  "city_fish_implemented": true,
+  "city_fish_count": 12,
+  "new_fish_count": 9,
+  "collection_count": 24,
+  "internal_species_slots": 25,
+  "retired_redtail_slot": 21,
+  "bighead_slot": 24,
+  "silver_carp_limit_cm_kg": [
+    100,
+    40
+  ],
+  "bighead_carp_limit_cm_kg": [
+    145,
+    60
+  ],
+  "silver_carp_layer": "surface",
+  "silver_carp_rarity": "bronze",
+  "bighead_carp_layers": [
+    "middle",
+    "lower"
+  ],
+  "bighead_carp_rarity": "silver",
+  "city_depth_max_cm": 1600,
+  "city_nearshore_depth_cm": [
+    360,
+    420
+  ],
+  "old_v9_silver_profile_preserved": true,
+  "city_independent_profiles": true,
+  "cross_map_catch_origin_preserved": true,
+  "city_shop_implemented": true,
+  "city_shop_hours": [
+    9,
+    21
+  ],
+  "wetland_shop_hours": [
+    7,
+    18
+  ],
+  "city_clerk_expressions": 4,
+  "city_clerk_dialogue_contexts": 14,
+  "city_atmospheric_panorama": true,
+  "weight_kg_above_grams": 1000,
+  "weight_kg_decimal_places": 1,
+  "hold_portraits_fit_visible_alpha_bounds": true,
+  "hold_portrait_area": [
+    160,
+    56
+  ],
+  "moon_before_foreground_buildings": true,
+  "city_ground_solid_at_y": 136,
+  "generated_park_lamp_bitmaps": true,
+  "independent_soft_light_texture": [
+    36,
+    36
+  ],
+  "park_light_hours": [
+    18,
+    6
+  ],
+  "park_light_alpha_upper_bound": 96,
+  "park_light_behind_actor": true,
+  "sd_map_asset_loader_implemented": true,
+  "travel_fare_each_direction": 180,
+  "travel_minutes_each_direction": 300,
+  "application_end_exclusive": "0x80080000",
+  "cache_base": "0x80080000",
+  "cache_end_exclusive": "0x800f3000",
+  "cache_bytes": 471040,
+  "cache_header_bytes": 4096,
+  "cache_payload_bytes": 447884,
+  "cache_free_bytes": 19060,
+  "external_bitmap_arrays": 91,
+  "maps": [
+    {
+      "id": 0,
+      "file": "maps/0_wetland.fgpk",
+      "bytes": 447948,
+      "sha256": "594305f1589d367e8067a68727f2cd439b96cd18ee7e46011f0c2076c59c0fa1"
+    },
+    {
+      "id": 1,
+      "file": "maps/1_city_river.fgpk",
+      "bytes": 447948,
+      "sha256": "0609f08affc235ad4cba4e513f7e98eb61933f6bc5a3bcd76e80c36c655143b7"
+    }
+  ],
+  "boot_cache_crc_checked": true,
+  "source_preflight_before_erase": true,
+  "cache_header_committed_last": true,
+  "source_and_cache_content_identity_checked": true,
+  "readback_verified": true,
+  "shared_filesystem_mutex": true,
+  "loader_staging_bytes": 4096,
+  "shared_day_night_decode_buffer_bytes": 960,
+  "panorama_palette_colors": 64,
+  "loading_flavor_text": true,
+  "new_full_framebuffer_bytes": 0,
+  "route_ui_rom_resident": true,
+  "virtual_route_size": [
+    640,
+    480
+  ],
+  "route_viewport": [
+    8,
+    40,
+    224,
+    136
+  ],
+  "route_pan_ms": 360,
+  "route_view_state_bytes": 16,
+  "route_thumbnail_size": [
+    64,
+    32
+  ],
+  "route_selected_alpha": 255,
+  "route_unselected_alpha": 192,
+  "route_compact_overview": true,
+  "route_pan_only_when_network_outgrows_viewport": true,
+  "route_terrain_symbols": [
+    "river",
+    "bridge",
+    "mountains",
+    "forest",
+    "pond",
+    "reeds",
+    "city_blocks"
+  ],
+  "route_terrain_bitmap_bytes": 0,
+  "city_neon_layer": true,
+  "city_sweeping_spotlights": true,
+  "city_inflatable_raft": true,
+  "line_lengths_cm": [
+    450,
+    650,
+    850
+  ],
+  "rod_elastic_grace_ms": 2000,
+  "burst_away_percent": 70,
+  "chinese_font_pixel_size": 12,
+  "sound_setting_in_save": true,
+  "guide_pages": 2,
+  "guide_hold_ms": 600,
+  "firmware_sha256": "141104bd45a389140488564c5f1cabd800fddb4fd7ceae751adab50e29522232"
+}

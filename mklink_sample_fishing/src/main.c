@@ -5,10 +5,11 @@
 #include "rtt_port.h"
 #include "rtthread.h"
 #include "key_task.h"
+#include "fish_hpm_runtime.h"
 
 void rt_hw_board_init(void)
 {
-    board_init();dma_mgr_init();board_init_gpio_pins();rtt_base_init();
+    fish_hpm_capture_reset();board_init();dma_mgr_init();board_init_gpio_pins();rtt_base_init();
 }
 extern int arm_2d_scene_app_player_init(void);
 int main(void)

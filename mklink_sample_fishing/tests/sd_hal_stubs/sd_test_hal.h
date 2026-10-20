@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 typedef int hpm_stat_t;
-enum {status_success=0,status_fail=-1,SPI_SD_BLOCK_SIZE=512};
+enum {status_success=0,status_fail=-1,status_timeout=-2,SPI_SD_BLOCK_SIZE=512};
 #define ATTR_PLACE_AT_NONCACHEABLE
 typedef struct {unsigned marker;} SPI_Type;
 extern SPI_Type sd_test_spi[2];

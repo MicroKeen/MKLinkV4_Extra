@@ -125,7 +125,7 @@ int main(void)
         }
     }
     /* Casting, preview camera and physical length share the same gear limit. */
-    static const unsigned line_cm[]={450,650,850};
+    static const unsigned line_cm[]={450,650,850,1050};
     for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++)
     for(int facing=-1;facing<=1;facing+=2) {
         fish_game_init(&g,0);g.boat_x=480;g.rod_index=rod;g.facing=facing;fish_game_equip_line(&g,line);
@@ -176,6 +176,31 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,1,0);
     for(unsigned t=16;t<=12000;t+=16) fish_game_update(&g,t);
     assert(g.shore_x==96 && !g.shore_speed && fish_game_dock_action(&g)==0);
+    /* East shore extends to the station without moving the lake or changing
+     * the stop-at-dock, then rotate-again boarding gesture. */
+    fish_game_init(&g,0);g.boat_x=FISH_BOAT_RIGHT;
+    fish_game_input(&g,FISH_ROTATE,1,0);
+    assert(g.mode==FISH_SHORE && g.shore_x==fish_docks[1].shore_x && g.shore_speed==1);
+    int prior_camera=fish_game_camera(&g);
+    for(unsigned t=16;t<=16000;t+=16) {
+        fish_game_update(&g,t);int camera=fish_game_camera(&g);
+        assert(camera>=prior_camera && camera-prior_camera<=1);prior_camera=camera;
+        assert(g.shore_x<=FISH_STATION_X && g.boat_x==FISH_BOAT_RIGHT);
+    }
+    assert(g.shore_x==FISH_STATION_X && !g.shore_speed && fish_game_at_station(&g));
+    assert(fish_game_camera(&g)==FISH_SHORE_CAMERA_RIGHT);
+    fish_game_input(&g,FISH_ROTATE,1,16000);
+    for(unsigned t=16016;t<=18000;t+=16) fish_game_update(&g,t);
+    assert(g.shore_x==FISH_SHORE_RIGHT && !g.shore_speed);
+    fish_game_input(&g,FISH_ROTATE,-1,18000);
+    for(unsigned t=18016;t<=20000;t+=16) fish_game_update(&g,t);
+    assert(g.shore_x==FISH_STATION_X && !g.shore_speed);
+    fish_game_input(&g,FISH_ROTATE,-1,20000);
+    for(unsigned t=20016;t<=36000;t+=16) fish_game_update(&g,t);
+    assert(g.shore_x==fish_docks[1].shore_x && !g.shore_speed && fish_game_dock_action(&g)==1);
+    fish_game_input(&g,FISH_ROTATE,-1,36000);assert(g.mode==FISH_MOVE && !g.boat_speed);
+    g.boat_x=FISH_BOAT_RIGHT;assert(fish_game_camera(&g)==FISH_BOAT_RIGHT-120);
+    assert(fish_map_depth(FISH_STATION_X)==0 && fish_map_zone(FISH_STATION_X)<0);
     assert(fish_floats[1].strike_window_bonus_percent==15 && fish_floats[2].night_bite_bonus_percent==15);
     puts("PASS: continuous virtual terrain, shoreline/bottom exclusions, bait weighting, no fallback, all species reachable");
     printf("PASS: %u local weighted draws, equipment UI state, rods/line-hook sets/depth, both docks/walking/reboarding\n",samples);

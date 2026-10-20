@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "clock": "One real second is one game minute; weather pauses during resource loading and is saved.",
+  "period_game_hours": 72,
+  "pattern_period_game_days": 96,
+  "rain_chance_percent_per_period": 40,
+  "rain_duration_game_minutes": [
+    120,
+    2880
+  ],
+  "fade_game_minutes": 8,
+  "first_morning": "Wetland only:07:30-10:00",
+  "wetness_full_game_minutes": 60,
+  "dry_full_game_minutes": 120,
+  "wetness_speed_loss_percent_max": 20,
+  "latte_stack": "Multiplicative:110% *80%=88% retrieval/payout speed at full wetness.",
+  "shelters": "Stores, covered fish stall, cargo page entered from a store, and train travel.",
+  "visual": "Original 2..6px light rain plus 9..12px middle and 15..21px near streaks; near opacity reaches224/255 with smooth four-hour intensity swells. No new bitmap/particle array/framebuffer.",
+  "rain_weight_percent": {
+    "carp": 110,
+    "yellow_catfish": 115,
+    "sharpbelly": 92,
+    "culter_alburnus": 112,
+    "yellowcheek": 110,
+    "longsnout_catfish": 115,
+    "catfish": 115
+  },
+  "weight_basis": "Game tuning only:blend linearly with rain intensity; retain habitat, bait zeros, size profiles and the conditional1% variant roll. Not real ecology or percentage points.",
+  "status_ui": "Two18x18 icons with bottom-up wetness fill and remaining-latte fill; no long text bar or large background panel.",
+  "region_independence": "Same saved absolute clock; separate deterministic map-seeded schedules, including local rain swells. Changing map never transfers rain.",
+  "rain_strength_changes_wetness_rate": false,
+  "city_clear_mist": "Full20:00-06:00; fades06:00-08:00 and18:00-20:00; rain strengthens it. Influence extends downward before docks/actors."
+}

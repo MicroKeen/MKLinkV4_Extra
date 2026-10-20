@@ -2,7 +2,7 @@
 #ifndef FISH_MERCHANT_DIALOGUE_DATA_H
 #define FISH_MERCHANT_DIALOGUE_DATA_H
 typedef struct {unsigned char pose;const char *lines[2];} fish_merchant_dialogue_t;
-static const fish_merchant_dialogue_t fish_merchant_dialogue[14]={
+static const fish_merchant_dialogue_t fish_merchant_dialogue[15]={
     {0,{"你好啊，孩子。","东西都在这儿。"}},
     {1,{"有收获啊，拿来瞧瞧。","这几条不错。"}},
     {3,{"好家伙——拿来我称称","今天手气不错啊。"}},
@@ -17,5 +17,6 @@ static const fish_merchant_dialogue_t fish_merchant_dialogue[14]={
     {2,{"这鲤子红得喜庆，尾巴也俊。","谁家院里有缸，准得惦记它。"}},
     {3,{"白壳红眼的鳖，我还真少见。","手离远点，白的也咬人。"}},
     {0,{"钓着颜色怪的、尾巴长的，带来。","有人专收这些，价钱给得不低。"}},
+    {2,{"这副细线不收钱，拿着先用。","这副细线不收钱，拿着先用。"}},
 };
 #endif

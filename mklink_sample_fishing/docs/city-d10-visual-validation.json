@@ -1,0 +1,20 @@
+{
+  "pfb_frames": 103,
+  "centred_hold_portraits": 25,
+  "active_guide_entries": 24,
+  "min_portrait_match": 1.0,
+  "opaque_ground_from_y": 144,
+  "moon_occlusion_pixels": 72,
+  "light_on_at_minute": 1080,
+  "light_off_at_minute": 360,
+  "light_texture_size": [
+    36,
+    36
+  ],
+  "light_alpha_max": 95,
+  "checked_alpha_blended_pixels": 96,
+  "lossless_day_panoramas": 2,
+  "wetland_pixels_identical_to_d5": true,
+  "resource_version": "2026.10.19.5",
+  "payload_bytes": 447884
+}

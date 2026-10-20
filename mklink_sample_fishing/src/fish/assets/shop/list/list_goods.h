@@ -15,5 +15,9 @@ extern const arm_2d_tile_t c_tileShopGoods10RGB565;
 extern const arm_2d_tile_t c_tileShopGoods11RGB565;
 extern const arm_2d_tile_t c_tileShopGoods12RGB565;
 extern const arm_2d_tile_t c_tileShopGoods13RGB565;
-extern const arm_2d_tile_t *const fish_shop_list_goods[16];
+extern const arm_2d_tile_t c_tileShopGoods16RGB565;
+extern const arm_2d_tile_t c_tileShopGoods17RGB565;
+extern const arm_2d_tile_t c_tileShopGoods18RGB565;
+extern const arm_2d_tile_t c_tileShopGoods19RGB565;
+extern const arm_2d_tile_t *const fish_shop_list_goods[22];
 #endif

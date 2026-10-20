@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "notes": "City sales only; wetland catalog and old bait IDs unchanged. Existing purchased items can travel between maps.",
+  "baits": [
+    {
+      "id": "snail",
+      "index": 6,
+      "name_zh": "螺蛳",
+      "short_description_zh": "青鱼爱这一口",
+      "description_zh": "主要吸引青鱼，屏蔽小杂鱼，等口可能更久。",
+      "price_per_5": 30,
+      "wetland_weights": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "city_weights": {
+        "1": 1,
+        "17": 8
+      }
+    },
+    {
+      "id": "corn",
+      "index": 7,
+      "name_zh": "玉米",
+      "short_description_zh": "留给鲢鳙草的大餐",
+      "description_zh": "偏向鲢鱼、鳙鱼和草鱼，减少小杂鱼，等口可能更久。",
+      "price_per_5": 24,
+      "wetland_weights": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "city_weights": {
+        "0": 1,
+        "1": 1,
+        "16": 8,
+        "18": 8,
+        "24": 8
+      }
+    },
+    {
+      "id": "lifelike_lure",
+      "index": 8,
+      "name_zh": "栩栩如生的假饵",
+      "short_description_zh": "大掠食者的心头好",
+      "description_zh": "偏向肉食鱼，并更容易遇见其中较大的个体。每次抛竿消耗一份，不保证巨物。",
+      "price_per_5": 65,
+      "wetland_weights": [
+        0,
+        0,
+        0,
+        6,
+        0,
+        7,
+        1,
+        0,
+        8,
+        0,
+        0
+      ],
+      "city_weights": {
+        "15": 8,
+        "20": 5,
+        "22": 7,
+        "23": 3
+      }
+    }
+  ],
+  "latte": {
+    "name_zh": "热拿铁",
+    "price": 35,
+    "duration_game_minutes": 360,
+    "retrieve_percent": 110,
+    "payout_percent": 110,
+    "strike_window_percent": 110,
+    "description_zh": "收放线和提竿窗口+10%",
+    "refresh_rule": "立即饮用；重复购买刷新为6游戏小时；乘车扣除5游戏小时。"
+  },
+  "city_wait": {
+    "base_attempt_percent": 85,
+    "specialty_activity_percent_min": 25,
+    "specialty_activity_percent_max": 100,
+    "basis": "专饵按当前可用鱼群的总权重相对普通假饵计算活性，乘50%后限制在25%-100%；拒绝鱼群减少时等待会变长。"
+  },
+  "pe8_line": {
+    "item_id": 21,
+    "line_index": 3,
+    "name_zh": "八编PE线组",
+    "description_zh": "像一条钢缆，会吓跑小鱼",
+    "price": 600,
+    "real_name_reference": "https://fish.shimano.com/en-GB/product/line/braided/a155f00000c5ijsqa3.html",
+    "note": "Generic8-carrier PE braid; gameplay strength/length/encounter tuning is fictional, not a real product rating."
+  }
+}

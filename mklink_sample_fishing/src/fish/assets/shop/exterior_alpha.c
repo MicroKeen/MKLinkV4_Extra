@@ -17,6 +17,11 @@
 
 
 
+/* SD_PACK_ARRAY */
+#if defined(FISH_EXTERNAL_ASSETS)
+#include "fish_asset_layout.h"
+#define c_bmpShopExteriorAlphaGRAY8 ((uint8_t *)FISH_ASSET_POINTER(FISH_OFFSET_c_bmpShopExteriorAlphaGRAY8))
+#else
 ARM_SECTION("arm2d.asset.c_bmpShopExteriorAlphaGRAY8")
 const uint8_t c_bmpShopExteriorAlphaGRAY8[66*50] = {
 /* -0- */
@@ -220,6 +225,7 @@ const uint8_t c_bmpShopExteriorAlphaGRAY8[66*50] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 
 };
+#endif
 
 
 extern const arm_2d_tile_t c_tileShopExteriorAlphaGRAY8;

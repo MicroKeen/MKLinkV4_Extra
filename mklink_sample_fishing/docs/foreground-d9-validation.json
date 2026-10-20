@@ -1,0 +1,20 @@
+{
+  "native_grid": [
+    2,
+    2
+  ],
+  "shared_actor_opaque_pixels": 272,
+  "exact_pfb_actor_pixels": 1088,
+  "shore_poses_and_facings": 12,
+  "min_shore_match": 1.0,
+  "near_plane_shift_px": 8,
+  "water_y": 143,
+  "ground_y": 142,
+  "night_road_luminance_ratios": [
+    0.39380229616656937,
+    0.5073332851672567
+  ],
+  "rendered_foreground_frames": 64,
+  "hold_background": "collection_card",
+  "container_header_icon_scale": 1
+}

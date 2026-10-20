@@ -29,7 +29,7 @@ int main(void)
     printf("state_bytes=%zu species_record_bytes=%zu catalog_bytes=%zu\n",
         sizeof(fish_game_t),sizeof(fish_species_t),sizeof(fish_species));
     puts("id,min_g,mean_g,max_g,min_pull,max_pull,landing_ms");
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+    for (unsigned i=0;i<FISH_LEGACY_SPECIES_COUNT;i++) {
         const fish_species_t *s=&fish_species[i];
         uint32_t previous=0; int previous_pull=0;
         assert(s->burst_ms<s->fight_cycle_ms && s->bite_window_ms-s->strike_delay_ms>=400);
@@ -67,7 +67,7 @@ int main(void)
     }
     assert(patterns==31);
     /* Actual bite timing, including line-window modifiers and exact boundaries. */
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) for(unsigned line=0;line<FISH_LINE_COUNT;line++) for(unsigned fl=0;fl<FISH_FLOAT_COUNT;fl++) {
+    for (unsigned i=0;i<FISH_LEGACY_SPECIES_COUNT;i++) for(unsigned line=0;line<FISH_LINE_COUNT;line++) for(unsigned fl=0;fl<FISH_FLOAT_COUNT;fl++) {
         const fish_species_t *s=&fish_species[i];fish_game_t test;
         unsigned base=(s->bite_window_ms-s->strike_delay_ms)*fish_line_sets[line].strike_window_percent/100;
         unsigned end=s->strike_delay_ms+base*(fl==1?115:100)/100;
@@ -215,7 +215,7 @@ int main(void)
     fish_game_update(&g,1150);assert(g.mode==FISH_AIM);
     /* Motion must remain continuous through burst edges and actual reel/ease
      * detents, deterministic at different render rates, and not repeat a cycle. */
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+    for (unsigned i=0;i<FISH_LEGACY_SPECIES_COUNT;i++) {
         const fish_species_t *s=&fish_species[i];
         hook_matched(&a,i,s->max_mm,0); a.cast_x=270; a.cast_start_x=162; b=a;
         uint32_t catalog_rng=a.random_state;

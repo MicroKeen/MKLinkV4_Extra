@@ -17,7 +17,7 @@ def compact_save_file(match):
     path=match[2].replace('\\','/')
     compact=('/src/fish/crypto/source/' in path or '/lcd/fatfs/' in path or
              '/lcd/adapt/spi_sd_adapt.c' in path or
-             path.rsplit('/',1)[-1] in {'fish_save.c','fish_save_crypto.c','fish_save_key.c','fish_save_hpm.c'})
+             path.rsplit('/',1)[-1] in {'fish_game.c','fish_save.c','fish_save_crypto.c','fish_save_key.c','fish_save_hpm.c','fish_resources.c','fish_resources_hpm.c','fish_fs_hpm.c'})
     body=match[3]
     if compact and 'gcc_optimization_level=' not in body:
         body=body.replace('<configuration Name="Common"','<configuration Name="Common" gcc_optimization_level="Level 2 for size"',1)

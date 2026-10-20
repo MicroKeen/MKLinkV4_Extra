@@ -43,7 +43,7 @@ int main(void)
     unsigned cases=0,landed=0,failed=0,payout_cases=0,longest=0;
     /* One detent per 100ms, with genuinely delayed tension/cue observations.
      * No species/weight knowledge, predictive force access or teleport reeling. */
-    for (unsigned id=0;id<FISH_SPECIES_COUNT;id++) {
+    for (unsigned id=0;id<FISH_LEGACY_SPECIES_COUNT;id++) {
         const fish_species_t *s=&fish_species[id];
         uint16_t sizes[11]={s->min_mm,(s->mean_x2_mm+1)/2,s->max_mm};
         for (unsigned i=0;i<4;i++) {sizes[3+i*2]=s->star_min_mm[i]-1;sizes[4+i*2]=s->star_min_mm[i];}
@@ -87,7 +87,7 @@ int main(void)
         if(line==2) assert(wins==128);
     }
     /* Small fish: no large fixed burst bonus. Calm animals never make splash bursts. */
-    for (unsigned id=0;id<FISH_SPECIES_COUNT;id++) {
+    for (unsigned id=0;id<FISH_LEGACY_SPECIES_COUNT;id++) {
         const fish_species_t *s=&fish_species[id];fish_game_t g;
         hook(&g,id,s->min_mm,FISH_DEFAULT_ROD,FISH_DEFAULT_LINE_SET);
         assert(g.base_pull<=30);

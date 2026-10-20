@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-19",
   "map_id": "north_wetland_park",
   "map_name_zh": "北方湿地公园",
   "region_zh": "虚构的淡水湿地公园，不对应任何真实地区或公园",
@@ -1884,7 +1884,7 @@
         "stamina_base": 110,
         "run_percent": 100
       },
-      "catch_comment_zh": "金灿灿的，先别下锅。",
+      "catch_comment_zh": "哇 金色传说!",
       "rarity": "bronze",
       "game_distribution": {
         "layers": [
@@ -2040,7 +2040,7 @@
         "stamina_base": 45,
         "run_percent": 140
       },
-      "catch_comment_zh": "这尾巴，可别给碰坏了。",
+      "catch_comment_zh": "别碰伤它的尾巴。",
       "rarity": "silver",
       "game_distribution": {
         "layers": [
@@ -2198,7 +2198,7 @@
         "stamina_base": 90,
         "run_percent": 135
       },
-      "catch_comment_zh": "尾巴一摆，红了一片。",
+      "catch_comment_zh": "要许个愿吗？",
       "rarity": "bronze",
       "game_distribution": {
         "layers": [
@@ -2359,7 +2359,7 @@
         "stamina_base": 55,
         "run_percent": 100
       },
-      "catch_comment_zh": "白得晃眼，还挺精神。",
+      "catch_comment_zh": "你已经在估价了。",
       "rarity": "gold",
       "game_distribution": {
         "layers": [
@@ -2392,6 +2392,1501 @@
       ],
       "special_variant": true,
       "base_index": 9
+    },
+    {
+      "id": "culter_alburnus",
+      "index": 15,
+      "name_zh": "翘嘴鲌",
+      "scientific_name": "Culter alburnus",
+      "aliases": [],
+      "ui_name": "CULTER ALBURNUS",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        180,
+        1100
+      ],
+      "game_typical_range_mm": [
+        350,
+        750
+      ],
+      "reference_size": {
+        "upper_mm": 1100,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "primary_layer": "surface",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/culter_alburnus-v3.png",
+        "sprite_png": "assets/processed/river/culter_alburnus.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 550.0,
+        "stddev_mm": 200.0,
+        "bounds_mm": [
+          180,
+          1100
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          365,
+          557,
+          759,
+          997
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1100,
+        "anchor_weight_g": 12000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 2,
+        "bite_style": "fast_dip",
+        "pull_base": 95,
+        "burst_bonus": 35,
+        "bite_window_ms": 800,
+        "fight_cycle_ms": 1600,
+        "burst_ms": 450,
+        "description_zh": "出水即炸水，连续跳跃甩头，横向高速冲刺且频繁松线，脱钩率极高",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 100,
+        "stamina_base": 95,
+        "run_percent": 165
+      },
+      "catch_comment_zh": "———被钓成翘嘴。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 1,
+          "open_pond": 4,
+          "mud_channel": 4,
+          "stream_inlet": 6,
+          "gravel_margin": 2
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          120,
+          145,
+          90
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        26
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ]
+    },
+    {
+      "id": "grass_carp",
+      "index": 16,
+      "name_zh": "草鱼",
+      "scientific_name": "Ctenopharyngodon idella",
+      "aliases": [],
+      "ui_name": "GRASS CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        200,
+        1450
+      ],
+      "game_typical_range_mm": [
+        400,
+        950
+      ],
+      "reference_size": {
+        "upper_mm": 1450,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "primary_layer": "middle",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/grass_carp-v2.png",
+        "sprite_png": "assets/processed/river/grass_carp.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 675.0,
+        "stddev_mm": 275.0,
+        "bounds_mm": [
+          200,
+          1450
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          429,
+          689,
+          965,
+          1296
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1450,
+        "anchor_weight_g": 45000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 1,
+        "bite_style": "fast_dip",
+        "pull_base": 108,
+        "burst_bonus": 38,
+        "bite_window_ms": 1050,
+        "fight_cycle_ms": 4200,
+        "burst_ms": 1300,
+        "description_zh": "第一波冲刺最凶，之后靠体重贴底僵持犁地，耐力极强，会径直奔向水草堆",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 180,
+        "stamina_base": 180,
+        "run_percent": 175
+      },
+      "catch_comment_zh": "沉稳的素食主义者。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 5,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 2,
+          "gravel_margin": 3
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          115,
+          135,
+          85
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        35
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "black_carp",
+      "index": 17,
+      "name_zh": "青鱼",
+      "scientific_name": "Mylopharyngodon piceus",
+      "aliases": [],
+      "ui_name": "BLACK CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        250,
+        1700
+      ],
+      "game_typical_range_mm": [
+        500,
+        1100
+      ],
+      "reference_size": {
+        "upper_mm": 1700,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "bottom"
+        ],
+        "primary_layer": "bottom",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/black_carp-v3.png",
+        "sprite_png": "assets/processed/river/black_carp.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 800.0,
+        "stddev_mm": 300.0,
+        "bounds_mm": [
+          250,
+          1700
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          523,
+          812,
+          1116,
+          1487
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 850,
+        "anchor_weight_g": 8750,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 3,
+        "bite_style": "fast_dip",
+        "pull_base": 110,
+        "burst_bonus": 18,
+        "bite_window_ms": 1300,
+        "fight_cycle_ms": 7000,
+        "burst_ms": 850,
+        "description_zh": "全程沉稳如拖石块，长时间压底不动，偶发短促发力，持续磨线与磨竿",
+        "status": "game_design",
+        "fight_style_index": 1,
+        "fight_style": "slow_drag",
+        "strike_delay_ms": 250,
+        "stamina_base": 240,
+        "run_percent": 130
+      },
+      "catch_comment_zh": "还以为挂底了。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 1,
+          "open_pond": 2,
+          "mud_channel": 6,
+          "stream_inlet": 2,
+          "gravel_margin": 3
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          100,
+          115,
+          100
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        27
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "silver_carp",
+      "index": 18,
+      "name_zh": "白鲢",
+      "scientific_name": "Hypophthalmichthys molitrix",
+      "aliases": [],
+      "ui_name": "SILVER CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        180,
+        1000
+      ],
+      "game_typical_range_mm": [
+        300,
+        700
+      ],
+      "reference_size": {
+        "upper_mm": 1000,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "surface"
+        ],
+        "primary_layer": "surface",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/silver_carp-v2.png",
+        "sprite_png": "assets/processed/river/silver_carp.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 500.0,
+        "stddev_mm": 200.0,
+        "bounds_mm": [
+          180,
+          1000
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          329,
+          512,
+          710,
+          931
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1000,
+        "anchor_weight_g": 40000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 2,
+        "bite_style": "fast_dip",
+        "pull_base": 88,
+        "burst_bonus": 32,
+        "bite_window_ms": 750,
+        "fight_cycle_ms": 1800,
+        "burst_ms": 500,
+        "description_zh": "中上层翻滚乱窜并跳跃，嘴薄易豁口，脱钩率为本表最高",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 100,
+        "stamina_base": 100,
+        "run_percent": 145
+      },
+      "catch_comment_zh": "银白色的滤食性鱼类。",
+      "rarity": "bronze",
+      "game_distribution": {
+        "layers": [
+          "surface"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 1,
+          "open_pond": 5,
+          "mud_channel": 4,
+          "stream_inlet": 3,
+          "gravel_margin": 1
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          125,
+          130,
+          70
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        46
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ]
+    },
+    {
+      "id": "redeye",
+      "index": 19,
+      "name_zh": "赤眼鳟",
+      "scientific_name": "Squaliobarbus curriculus",
+      "aliases": [],
+      "ui_name": "REDEYE",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        100,
+        750
+      ],
+      "game_typical_range_mm": [
+        220,
+        480
+      ],
+      "reference_size": {
+        "upper_mm": 750,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "primary_layer": "middle",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/redeye.png",
+        "sprite_png": "assets/processed/river/redeye.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 350.0,
+        "stddev_mm": 130.0,
+        "bounds_mm": [
+          100,
+          750
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          227,
+          354,
+          487,
+          649
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 750,
+        "anchor_weight_g": 6000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 2,
+        "bite_style": "fast_dip",
+        "pull_base": 78,
+        "burst_bonus": 27,
+        "bite_window_ms": 850,
+        "fight_cycle_ms": 1800,
+        "burst_ms": 450,
+        "description_zh": "短促连续冲刺配急转向，绝对力气不大但极灵活，靠变向磨线",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 100,
+        "stamina_base": 70,
+        "run_percent": 145
+      },
+      "catch_comment_zh": "它看起来不太高兴。",
+      "rarity": "bronze",
+      "game_distribution": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 2,
+          "open_pond": 3,
+          "mud_channel": 2,
+          "stream_inlet": 6,
+          "gravel_margin": 4
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          125,
+          140,
+          80
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        40
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ]
+    },
+    {
+      "id": "yellowcheek",
+      "index": 20,
+      "name_zh": "鳡",
+      "scientific_name": "Elopichthys bambusa",
+      "aliases": [],
+      "ui_name": "YELLOWCHEEK",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        250,
+        2000
+      ],
+      "game_typical_range_mm": [
+        600,
+        1250
+      ],
+      "reference_size": {
+        "upper_mm": 2000,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "primary_layer": "surface",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/yellowcheek-v4.png",
+        "sprite_png": "assets/processed/river/yellowcheek.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 925.0,
+        "stddev_mm": 325.0,
+        "bounds_mm": [
+          250,
+          2000
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          610,
+          933,
+          1265,
+          1678
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 2000,
+        "anchor_weight_g": 55000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 1,
+        "bite_style": "fast_dip",
+        "pull_base": 125,
+        "burst_bonus": 65,
+        "bite_window_ms": 750,
+        "fight_cycle_ms": 2600,
+        "burst_ms": 1050,
+        "description_zh": "直线高速冲刺把线拖到极限，伴随跳跃甩头，瞬时爆发力全场最强",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 100,
+        "stamina_base": 190,
+        "run_percent": 210
+      },
+      "catch_comment_zh": "体验《老人与海》的战斗。",
+      "rarity": "gold",
+      "game_distribution": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 1,
+          "open_pond": 3,
+          "mud_channel": 5,
+          "stream_inlet": 6,
+          "gravel_margin": 1
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          110,
+          145,
+          90
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        29
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "mongolian_culter",
+      "index": 21,
+      "name_zh": "红尾鲌",
+      "scientific_name": "Culter mongolicus",
+      "aliases": [],
+      "ui_name": "MONGOLIAN CULTER",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        100,
+        600
+      ],
+      "game_typical_range_mm": [
+        200,
+        400
+      ],
+      "reference_size": {
+        "upper_mm": 600,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "primary_layer": "surface",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/mongolian_culter.png",
+        "sprite_png": "assets/processed/river/mongolian_culter.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 300.0,
+        "stddev_mm": 100.0,
+        "bounds_mm": [
+          100,
+          600
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          204,
+          303,
+          405,
+          529
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 600,
+        "anchor_weight_g": 4000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 2,
+        "bite_style": "fast_dip",
+        "pull_base": 80,
+        "burst_bonus": 28,
+        "bite_window_ms": 750,
+        "fight_cycle_ms": 1500,
+        "burst_ms": 400,
+        "description_zh": "小号翘嘴，连续跳跃与甩头，节奏快但续航短",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 100,
+        "stamina_base": 60,
+        "run_percent": 155
+      },
+      "catch_comment_zh": "红尾巴，一眼就认出来。",
+      "rarity": "bronze",
+      "game_distribution": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 650,
+        "zone_multipliers": {
+          "reed_bay": 2,
+          "open_pond": 4,
+          "mud_channel": 2,
+          "stream_inlet": 6,
+          "gravel_margin": 3
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          125,
+          140,
+          80
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        37
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ],
+      "retired": true
+    },
+    {
+      "id": "longsnout_catfish",
+      "index": 22,
+      "name_zh": "长吻鮠",
+      "scientific_name": "Leiocassis longirostris",
+      "aliases": [],
+      "ui_name": "LONGSNOUT CATFISH",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        150,
+        1000
+      ],
+      "game_typical_range_mm": [
+        300,
+        650
+      ],
+      "reference_size": {
+        "upper_mm": 1000,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "bottom"
+        ],
+        "primary_layer": "bottom",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/longsnout_catfish-v2.png",
+        "sprite_png": "assets/processed/river/longsnout_catfish.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 475.0,
+        "stddev_mm": 175.0,
+        "bounds_mm": [
+          150,
+          1000
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          313,
+          482,
+          659,
+          876
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1000,
+        "anchor_weight_g": 15000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 3,
+        "bite_style": "fast_dip",
+        "pull_base": 92,
+        "burst_bonus": 24,
+        "bite_window_ms": 1150,
+        "fight_cycle_ms": 3800,
+        "burst_ms": 900,
+        "description_zh": "贴底滚翻打转往石缝里钻，靠扭绞摩擦磨线，几乎不出水",
+        "status": "game_design",
+        "fight_style_index": 1,
+        "fight_style": "slow_drag",
+        "strike_delay_ms": 200,
+        "stamina_base": 140,
+        "run_percent": 125
+      },
+      "catch_comment_zh": "溜得快，拿稳了。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 1,
+          "open_pond": 2,
+          "mud_channel": 6,
+          "stream_inlet": 3,
+          "gravel_margin": 5
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          80,
+          135,
+          145
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        31
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "obscure_puffer",
+      "index": 23,
+      "name_zh": "暗纹东方鲀",
+      "scientific_name": "Takifugu obscurus",
+      "aliases": [],
+      "ui_name": "OBSCURE PUFFER",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        100,
+        400
+      ],
+      "game_typical_range_mm": [
+        180,
+        300
+      ],
+      "reference_size": {
+        "upper_mm": 400,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "bottom"
+        ],
+        "primary_layer": "bottom",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/obscure_puffer.png",
+        "sprite_png": "assets/processed/river/obscure_puffer.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 240.0,
+        "stddev_mm": 60.0,
+        "bounds_mm": [
+          100,
+          400
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          180,
+          240,
+          302,
+          372
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 400,
+        "anchor_weight_g": 3000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 4,
+        "bite_style": "fast_dip",
+        "pull_base": 35,
+        "burst_bonus": 0,
+        "bite_window_ms": 1400,
+        "fight_cycle_ms": 3600,
+        "burst_ms": 0,
+        "description_zh": "几乎不挣扎，但会原地膨胀增重并咬线，收线过程持续掉线值",
+        "status": "game_design",
+        "fight_style_index": 2,
+        "fight_style": "passive_load",
+        "strike_delay_ms": 300,
+        "stamina_base": 60,
+        "run_percent": 100
+      },
+      "catch_comment_zh": "水中液压钳。",
+      "rarity": "gold",
+      "game_distribution": {
+        "layers": [
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 2,
+          "open_pond": 1,
+          "mud_channel": 4,
+          "stream_inlet": 3,
+          "gravel_margin": 5
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          100,
+          120,
+          100
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        35
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "bighead_carp",
+      "index": 24,
+      "name_zh": "鳙鱼",
+      "scientific_name": "Hypophthalmichthys nobilis",
+      "aliases": [],
+      "ui_name": "BIGHEAD CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        200,
+        1450
+      ],
+      "game_typical_range_mm": [
+        450,
+        1000
+      ],
+      "reference_size": {
+        "upper_mm": 1450,
+        "metric": "total_length",
+        "qualifier": "author_csv_game_limit",
+        "source": "data/river_fish_data.csv"
+      },
+      "habitat": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "primary_layer": "middle",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "巨大宽头、低位小眼、深灰斑驳侧身、银白腹部",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 0,
+      "reference_urls": [
+        "https://www.fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_bigheadcarp.htm"
+      ],
+      "photo_reference_urls": [],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/river/bighead_carp-v1.png",
+        "sprite_png": "assets/processed/river/bighead_carp.png",
+        "native_size": [
+          96,
+          56
+        ],
+        "logical_grid": [
+          96,
+          56
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 1
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 725.0,
+        "stddev_mm": 275.0,
+        "bounds_mm": [
+          200,
+          1450
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.939319373,
+        "fallback_probability": 1.142e-39,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          466,
+          733,
+          1011,
+          1330
+        ],
+        "expected_rates": [
+          0.147875,
+          0.349792,
+          0.352293,
+          0.139785,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1450,
+        "anchor_weight_g": 60000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 1,
+        "bite_style": "fast_dip",
+        "pull_base": 105,
+        "burst_bonus": 28,
+        "bite_window_ms": 1100,
+        "fight_cycle_ms": 4200,
+        "burst_ms": 950,
+        "description_zh": "大头摆动，借体重持续横向拉扯，短冲后僵持，不连续跃水",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 150,
+        "stamina_base": 170,
+        "run_percent": 145
+      },
+      "catch_comment_zh": "剁椒 花椒 豆豉。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "middle",
+          "lower"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 2,
+          "open_pond": 5,
+          "mud_channel": 5,
+          "stream_inlet": 3,
+          "gravel_margin": 1
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          115,
+          130,
+          85
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        42
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ]
     }
   ],
   "size_rating": {
@@ -2489,11 +3984,18 @@
     "stamina_min_tension_percent": 13,
     "stamina_model": "base + isqrt(weight_g * 4) * (active ? weight_scale : 1), capped",
     "fatigue_model": "fatigue_max_percent * (stamina_max - stamina) / stamina_max",
-    "landing_rule": "stamina == 0 and reel_units == 10000 and tension in [13%,90%)",
+    "landing_rule": "reel_units == 10000; above 6500 g requires stamina <= 20% of stamina_max",
     "strike_model": "species delay + (species bite end - delay) * line window percent; early/late fail",
     "stamina_recovery_delay_ms": 1500,
     "stamina_recovery_interval_ms": 200,
-    "stamina_resume_percent": 20
+    "stamina_resume_percent": 20,
+    "large_fish_threshold_g": 6500,
+    "large_fish_retrieve_limit_fresh": 9500,
+    "large_fish_landing_stamina_percent": 20,
+    "large_fish_stamina_work_extra": 2,
+    "giant_force_extra": "above 20000 g: +1 base force per 2000 g, capped +30; fatigues normally; final pull cap 140",
+    "large_fish_run_extra": "above 6500 g: +1 run unit per 2500 g excess, capped +8, then species multiplier",
+    "slow_heavy_pressure": "above 6500 g: tension rise clamp(1+response_pull/35,2,5) per 100ms"
   },
   "catch_comments": {
     "version": 1,
@@ -2584,5 +4086,786 @@
   },
   "base_species_count": 11,
   "variant_chance_percent": 1,
-  "variant_price_multiplier": 10
+  "variant_price_multiplier": 10,
+  "city_profiles": [
+    {
+      "id": "crucian",
+      "index": 0,
+      "name_zh": "鲫鱼",
+      "scientific_name": "Carassius auratus",
+      "aliases": [],
+      "ui_name": "CRUCIAN",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        80,
+        450
+      ],
+      "game_typical_range_mm": [
+        150,
+        320
+      ],
+      "reference_size": {
+        "upper_mm": 480,
+        "metric": "total_length",
+        "qualifier": "reported_maximum",
+        "source": "https://www.fishbase.se/summary/Carassius-auratus.html",
+        "note": ""
+      },
+      "habitat": {
+        "layers": [
+          "bottom"
+        ],
+        "primary_layer": "bottom",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "银灰高体、小口无须、长背鳍、叉尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 48,
+      "reference_urls": [
+        "https://www.fishbase.se/summary/Carassius-auratus.html",
+        "https://www.mdb.fish/fish-fact-sheets/goldfish"
+      ],
+      "photo_reference_urls": [
+        "https://fishesofaustralia.net.au/home/species/1855"
+      ],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/species/crucian.png",
+        "sprite_png": "assets/processed/species/crucian.png",
+        "native_size": [
+          48,
+          28
+        ],
+        "logical_grid": [
+          48,
+          28
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 2
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 235.0,
+        "stddev_mm": 85.0,
+        "bounds_mm": [
+          80,
+          450
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.927848725,
+        "fallback_probability": 2.909e-37,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          157,
+          238,
+          323,
+          419
+        ],
+        "expected_rates": [
+          0.14968,
+          0.346346,
+          0.351141,
+          0.142577,
+          0.010256
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 450,
+        "anchor_weight_g": 2500,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 0,
+        "bite_style": "tap_lift",
+        "pull_base": 52,
+        "burst_bonus": 15,
+        "bite_window_ms": 1100,
+        "fight_cycle_ms": 2400,
+        "burst_ms": 450,
+        "description_zh": "轻点后抬漂；短促挣扎，间歇明显",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 360,
+        "stamina_base": 70,
+        "run_percent": 100
+      },
+      "catch_comment_zh": "小鲫小鲫，今天大吉！",
+      "rarity": "bronze",
+      "game_distribution": {
+        "layers": [
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 4,
+          "open_pond": 3,
+          "mud_channel": 2,
+          "stream_inlet": 1,
+          "gravel_margin": 3
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          100,
+          130,
+          85
+        ]
+      },
+      "portrait_visible_px": [
+        88,
+        52
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ]
+    },
+    {
+      "id": "carp",
+      "index": 1,
+      "name_zh": "鲤鱼",
+      "scientific_name": "Cyprinus carpio",
+      "aliases": [],
+      "ui_name": "CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        150,
+        1300
+      ],
+      "game_typical_range_mm": [
+        350,
+        850
+      ],
+      "reference_size": {
+        "upper_mm": 1290,
+        "metric": "total_length",
+        "qualifier": "reported_maximum",
+        "source": "https://www.fishbase.se/summary/Cyprinus-carpio",
+        "note": ""
+      },
+      "habitat": {
+        "layers": [
+          "bottom"
+        ],
+        "primary_layer": "bottom",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "金铜色大鳞、下位厚唇、两对短须、长背鳍",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 40,
+      "reference_urls": [
+        "https://www.fishbase.se/summary/Cyprinus-carpio",
+        "https://www.fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_commoncarp.htm"
+      ],
+      "photo_reference_urls": [
+        "https://www.floridamuseum.ufl.edu/discover-fish/florida-fishes-gallery/common-carp/"
+      ],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/species/carp.png",
+        "sprite_png": "assets/processed/species/carp.png",
+        "native_size": [
+          48,
+          28
+        ],
+        "logical_grid": [
+          48,
+          28
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 2,
+        "large_sprite_png": "assets/processed/species/carp_large.png",
+        "large_native_size": [
+          96,
+          56
+        ],
+        "large_min_scale_q8": 257
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 600.0,
+        "stddev_mm": 250.0,
+        "bounds_mm": [
+          150,
+          1300
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.930350449,
+        "fallback_probability": 9.406e-38,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          371,
+          610,
+          863,
+          1163
+        ],
+        "expected_rates": [
+          0.149916,
+          0.347522,
+          0.35169,
+          0.140603,
+          0.010269
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1300,
+        "anchor_weight_g": 40000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 1,
+        "bite_style": "sink_walk",
+        "pull_base": 68,
+        "burst_bonus": 18,
+        "bite_window_ms": 1000,
+        "fight_cycle_ms": 3400,
+        "burst_ms": 1100,
+        "description_zh": "缓沉后横走；长段冲刺后停顿",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 180,
+        "stamina_base": 90,
+        "run_percent": 135
+      },
+      "catch_comment_zh": "鲤好呀，老朋友！",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 2,
+          "open_pond": 4,
+          "mud_channel": 5,
+          "stream_inlet": 2,
+          "gravel_margin": 2
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          100,
+          130,
+          85
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        42
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "sharpbelly",
+      "index": 7,
+      "name_zh": "白条",
+      "scientific_name": "Hemiculter leucisculus",
+      "aliases": [],
+      "ui_name": "SHARPBELLY",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        60,
+        250
+      ],
+      "game_typical_range_mm": [
+        90,
+        170
+      ],
+      "reference_size": {
+        "upper_mm": 290,
+        "metric": "total_length",
+        "qualifier": "reported_maximum",
+        "source": "https://www.fishbase.se/summary/Hemiculter-eigenmanni.html",
+        "note": ""
+      },
+      "habitat": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "primary_layer": "surface",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "城市江河的游戏分布",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "细长银白、上位小口、腹棱、后位短背鳍、叉尾",
+      "color_policy": "natural_wild_type",
+      "encounter_weight": 32,
+      "reference_urls": [
+        "https://www.fishbase.se/summary/Hemiculter-eigenmanni.html",
+        "https://fishdb.sinica.edu.tw/eng/species.php?id=381012"
+      ],
+      "photo_reference_urls": [
+        "https://ihb.cas.cn/pic/wsszg/202403/t20240306_7014695.html"
+      ],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/species/sharpbelly.png",
+        "sprite_png": "assets/processed/species/sharpbelly.png",
+        "native_size": [
+          48,
+          28
+        ],
+        "logical_grid": [
+          48,
+          28
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 2
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 130.0,
+        "stddev_mm": 40.0,
+        "bounds_mm": [
+          60,
+          250
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.933999658,
+        "fallback_probability": 1.681e-38,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          94,
+          132,
+          172,
+          222
+        ],
+        "expected_rates": [
+          0.147424,
+          0.343139,
+          0.35308,
+          0.146274,
+          0.010083
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 250,
+        "anchor_weight_g": 150,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 2,
+        "bite_style": "fast_dip",
+        "pull_base": 78,
+        "burst_bonus": 20,
+        "bite_window_ms": 650,
+        "fight_cycle_ms": 1300,
+        "burst_ms": 250,
+        "description_zh": "密集轻点后急沉；轻而频繁",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 80,
+        "stamina_base": 40,
+        "run_percent": 100
+      },
+      "catch_comment_zh": "怎么又是你",
+      "rarity": "bronze",
+      "game_distribution": {
+        "layers": [
+          "surface",
+          "middle"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 1600,
+        "zone_multipliers": {
+          "reed_bay": 3,
+          "open_pond": 5,
+          "mud_channel": 2,
+          "stream_inlet": 4,
+          "gravel_margin": 3
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          130,
+          115,
+          60
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        26
+      ],
+      "portrait_centre_px": [
+        48,
+        27
+      ]
+    },
+    {
+      "id": "carp_red_longfin",
+      "index": 13,
+      "name_zh": "红色长尾鲤",
+      "scientific_name": "Cyprinus carpio",
+      "aliases": [],
+      "ui_name": "RED LONGFIN CARP",
+      "kind": "fish",
+      "size_metric": "total_length",
+      "size_unit": "mm",
+      "game_size_range_mm": [
+        150,
+        1300
+      ],
+      "game_typical_range_mm": [
+        350,
+        850
+      ],
+      "reference_size": {
+        "upper_mm": 1290,
+        "metric": "total_length",
+        "qualifier": "reported_maximum",
+        "source": "https://www.fishbase.se/summary/Cyprinus-carpio",
+        "note": ""
+      },
+      "habitat": {
+        "layers": [
+          "lower",
+          "bottom"
+        ],
+        "primary_layer": "lower",
+        "numeric_depth_m": null,
+        "depth_status": "qualitative_only_numeric_depth_not_established",
+        "description_zh": "泥底湖湾、植被边缘；觅食可上浮",
+        "map_zones": [
+          "reed_bay",
+          "open_pond",
+          "mud_channel"
+        ],
+        "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+      },
+      "appearance_zh": "红色大鳞鲤体、短口须、长叉尾和拖长红鳍",
+      "color_policy": "rare_game_variant",
+      "encounter_weight": 0,
+      "reference_urls": [
+        "https://www.fishbase.se/summary/Cyprinus-carpio",
+        "https://www.fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_commoncarp.htm"
+      ],
+      "photo_reference_urls": [
+        "https://www.floridamuseum.ufl.edu/discover-fish/florida-fishes-gallery/common-carp/"
+      ],
+      "art_status": "stylized_species_reference",
+      "asset": {
+        "source_png": "assets/source/species/carp_red_longfin.png",
+        "sprite_png": "assets/processed/species/carp_red_longfin.png",
+        "native_size": [
+          48,
+          28
+        ],
+        "logical_grid": [
+          48,
+          28
+        ],
+        "default_facing": "right",
+        "frames": 1,
+        "display_scale": 2
+      },
+      "size_distribution": {
+        "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+        "mean_mm": 600.0,
+        "stddev_mm": 250.0,
+        "bounds_mm": [
+          150,
+          1300
+        ],
+        "rounding": "nearest_integer_mm_half_up",
+        "attempt_limit": 32,
+        "fallback": "rounded_mean",
+        "acceptance_probability": 0.930350449,
+        "fallback_probability": 9.406e-38,
+        "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+      },
+      "size_rating": {
+        "lower_bounds_mm": [
+          371,
+          610,
+          863,
+          1163
+        ],
+        "expected_rates": [
+          0.149916,
+          0.347522,
+          0.35169,
+          0.140603,
+          0.010269
+        ]
+      },
+      "weight_model": {
+        "algorithm": "cubic_game_anchor_v1",
+        "anchor_size_mm": 1300,
+        "anchor_weight_g": 40000,
+        "exponent": 3,
+        "unit": "g",
+        "rounding": "nearest_half_up_min_1g",
+        "status": "game_design_estimate",
+        "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+      },
+      "fishing_behavior": {
+        "bite_style_index": 1,
+        "bite_style": "sink_walk",
+        "pull_base": 68,
+        "burst_bonus": 18,
+        "bite_window_ms": 1000,
+        "fight_cycle_ms": 3400,
+        "burst_ms": 1100,
+        "description_zh": "缓沉后横走；长段冲刺后停顿",
+        "status": "game_design",
+        "fight_style_index": 0,
+        "fight_style": "active_burst",
+        "strike_delay_ms": 180,
+        "stamina_base": 90,
+        "run_percent": 135
+      },
+      "catch_comment_zh": "尾巴一摆，红了一片。",
+      "rarity": "silver",
+      "game_distribution": {
+        "layers": [
+          "middle",
+          "lower",
+          "bottom"
+        ],
+        "nearshore_only": false,
+        "min_depth_cm": 0,
+        "max_depth_cm": 650,
+        "zone_multipliers": {
+          "reed_bay": 3,
+          "open_pond": 4,
+          "mud_channel": 3,
+          "stream_inlet": 1,
+          "gravel_margin": 1
+        },
+        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "activity_percent": [
+          100,
+          130,
+          85
+        ]
+      },
+      "portrait_visible_px": [
+        92,
+        40
+      ],
+      "portrait_centre_px": [
+        48,
+        28
+      ],
+      "special_variant": true,
+      "base_index": 1
+    }
+  ],
+  "legacy_city_silver": {
+    "id": "silver_carp",
+    "index": 18,
+    "name_zh": "白鲢",
+    "scientific_name": "Hypophthalmichthys molitrix",
+    "aliases": [],
+    "ui_name": "SILVER CARP",
+    "kind": "fish",
+    "size_metric": "total_length",
+    "size_unit": "mm",
+    "game_size_range_mm": [
+      180,
+      1300
+    ],
+    "game_typical_range_mm": [
+      350,
+      850
+    ],
+    "reference_size": {
+      "upper_mm": 1300,
+      "metric": "total_length",
+      "qualifier": "author_csv_game_limit",
+      "source": "data/river_fish_data.csv"
+    },
+    "habitat": {
+      "layers": [
+        "surface",
+        "middle"
+      ],
+      "primary_layer": "surface",
+      "numeric_depth_m": null,
+      "depth_status": "qualitative_only_numeric_depth_not_established",
+      "description_zh": "城市江河的游戏分布",
+      "map_zones": [
+        "reed_bay",
+        "open_pond",
+        "mud_channel"
+      ],
+      "layer_basis": "qualitative ecology; map weighting is a game-design interpretation"
+    },
+    "appearance_zh": "长筒体、蛇形扁头、灰黑斑块、长背臀鳍、圆尾",
+    "color_policy": "natural_wild_type",
+    "encounter_weight": 0,
+    "reference_urls": [],
+    "photo_reference_urls": [],
+    "art_status": "stylized_species_reference",
+    "asset": {
+      "source_png": "assets/source/river/silver_carp-v2.png",
+      "sprite_png": "assets/processed/river/silver_carp.png",
+      "native_size": [
+        96,
+        56
+      ],
+      "logical_grid": [
+        96,
+        56
+      ],
+      "default_facing": "right",
+      "frames": 1,
+      "display_scale": 1
+    },
+    "size_distribution": {
+      "algorithm": "normal_approx_sum12_u8_reject_bounds_v1",
+      "mean_mm": 600.0,
+      "stddev_mm": 250.0,
+      "bounds_mm": [
+        180,
+        1300
+      ],
+      "rounding": "nearest_integer_mm_half_up",
+      "attempt_limit": 32,
+      "fallback": "rounded_mean",
+      "acceptance_probability": 0.939319373,
+      "fallback_probability": 1.142e-39,
+      "note_zh": "近似正态分布的有界游戏尺寸模型，非生物统计测量。超界重抽，避免硬钳位堆积。"
+    },
+    "size_rating": {
+      "lower_bounds_mm": [
+        380,
+        614,
+        864,
+        1164
+      ],
+      "expected_rates": [
+        0.147875,
+        0.349792,
+        0.352293,
+        0.139785,
+        0.010256
+      ]
+    },
+    "weight_model": {
+      "algorithm": "cubic_game_anchor_v1",
+      "anchor_size_mm": 1300,
+      "anchor_weight_g": 40000,
+      "exponent": 3,
+      "unit": "g",
+      "rounding": "nearest_half_up_min_1g",
+      "status": "game_design_estimate",
+      "note_zh": "按本物种TL/CL/CW口径独立锚定；不是实测回归，可替换参数。"
+    },
+    "fishing_behavior": {
+      "bite_style_index": 2,
+      "bite_style": "fast_dip",
+      "pull_base": 88,
+      "burst_bonus": 32,
+      "bite_window_ms": 750,
+      "fight_cycle_ms": 1800,
+      "burst_ms": 500,
+      "description_zh": "中上层翻滚乱窜并跳跃，嘴薄易豁口，脱钩率为本表最高",
+      "status": "game_design",
+      "fight_style_index": 0,
+      "fight_style": "active_burst",
+      "strike_delay_ms": 100,
+      "stamina_base": 100,
+      "run_percent": 145
+    },
+    "catch_comment_zh": "眼睛长得真靠下。",
+    "rarity": "silver",
+    "game_distribution": {
+      "layers": [
+        "surface",
+        "middle"
+      ],
+      "nearshore_only": false,
+      "min_depth_cm": 0,
+      "max_depth_cm": 650,
+      "zone_multipliers": {
+        "reed_bay": 1,
+        "open_pond": 5,
+        "mud_channel": 4,
+        "stream_inlet": 3,
+        "gravel_margin": 1
+      },
+      "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+      "activity_percent": [
+        125,
+        130,
+        70
+      ]
+    },
+    "portrait_visible_px": [
+      92,
+      46
+    ],
+    "portrait_centre_px": [
+      48,
+      28
+    ]
+  }
 }

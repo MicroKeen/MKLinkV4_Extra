@@ -1,5 +1,5 @@
 #include "list_goods.h"
-const arm_2d_tile_t *const fish_shop_list_goods[16]={
+const arm_2d_tile_t *const fish_shop_list_goods[22]={
     &c_tileShopGoods0RGB565,
     &c_tileShopGoods1RGB565,
     &c_tileShopGoods2RGB565,
@@ -16,4 +16,10 @@ const arm_2d_tile_t *const fish_shop_list_goods[16]={
     &c_tileShopGoods13RGB565,
     &c_tileShopGoods0RGB565,
     NULL,
+    &c_tileShopGoods16RGB565,
+    &c_tileShopGoods17RGB565,
+    &c_tileShopGoods18RGB565,
+    &c_tileShopGoods19RGB565,
+    &c_tileShopGoods3RGB565,
+    &c_tileShopGoods4RGB565,
 };

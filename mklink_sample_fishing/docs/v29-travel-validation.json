@@ -1,0 +1,42 @@
+{
+  "version": 29,
+  "pfb_frames": 16,
+  "external_arrays": 49,
+  "payload_bytes": 455404,
+  "validated_night_pixels": 4724,
+  "night_palette_colors": 64,
+  "night_decode_buffer_bytes": 960,
+  "progress_frames": [
+    0,
+    25,
+    60,
+    95
+  ],
+  "selected_scene_alpha": 205,
+  "unselected_scene_alpha": 55,
+  "unused_species_icons_public": false,
+  "travel_fare": 180,
+  "travel_minutes": 300,
+  "city_sprite": [
+    480,
+    240
+  ],
+  "raft_sprite": [
+    64,
+    36
+  ],
+  "maps": [
+    {
+      "id": 0,
+      "file": "maps/0_wetland.fgpk",
+      "bytes": 455468,
+      "sha256": "582028cf526f3cc5fb6b73ce0a62f92e18797fbdb0fece23b32468a0a71eb558"
+    },
+    {
+      "id": 1,
+      "file": "maps/1_city_river.fgpk",
+      "bytes": 455468,
+      "sha256": "5a9614836756055974e9bc2ac1c7ab606fd0bad47417ace3192b9781316cfdb7"
+    }
+  ]
+}

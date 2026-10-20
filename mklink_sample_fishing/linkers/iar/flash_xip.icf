@@ -27,9 +27,9 @@ if (isdefinedsymbol(_flash_size)) {
 }
 
 /* Regions */
-define region NOR_CFG_OPTION = mem:[ from 0x80000400 size 0x0C00 ];
-define region BOOT_HEADER = mem:[ from 0x80001000 size 0x90 ];
-define region XPI0 = mem:[from 0x80003000 size (__size_flash__ - 0x3000) ];   /* XPI0 */
+define region NOR_CFG_OPTION = mem:[ from 0x80020400 size 0x0C00 ];
+define region BOOT_HEADER = mem:[ from 0x80021000 size 0x90 ];
+define region XPI0 = mem:[from 0x80023000 size 0x5D000 ];   /* XPI0 */
 define region ILM = mem:[from 0x00000000 size 128k];        /* ILM */
 define region DLM = mem:[from 0x00080300 size (128k - 768)];        /* DLM */
 define region AHB_SRAM = mem:[from 0xF0400000 size 32k];
