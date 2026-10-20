@@ -1,0 +1,50 @@
+{
+  "frames": 40,
+  "maps": 2,
+  "distant_contrast_ratios": [
+    0.5773212548811933,
+    0.5003596029085328
+  ],
+  "unchanged_foreground_actor_pixels": 544,
+  "icon_size": [
+    18,
+    18
+  ],
+  "wetness_fill_difference_bounds": [
+    [
+      9,
+      53,
+      25,
+      61
+    ],
+    [
+      9,
+      45,
+      25,
+      61
+    ],
+    [
+      9,
+      53,
+      25,
+      61
+    ],
+    [
+      9,
+      45,
+      25,
+      61
+    ]
+  ],
+  "latte_icon_bounds": [
+    30,
+    44,
+    48,
+    62
+  ],
+  "status_text_bars": false,
+  "new_bitmaps": 0,
+  "new_full_framebuffers": 0,
+  "resource_version": "2026.10.19.5",
+  "packs_identical_to_d10": true
+}

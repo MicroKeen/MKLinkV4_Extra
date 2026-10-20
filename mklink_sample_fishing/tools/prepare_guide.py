@@ -6,6 +6,8 @@ c=json.loads((r/'data/species.json').read_text(encoding='utf-8'))
 m=json.loads((r/'data/map.json').read_text(encoding='utf-8'))
 e=json.loads((r/'data/equipment.json').read_text(encoding='utf-8'))
 rows=[];hints=[]
+city={s['index']:s for s in json.loads((r/'data/city_fish.json').read_text(encoding='utf-8'))['species']}
+new_baits=json.loads((r/'data/city_items.json').read_text(encoding='utf-8'))['baits']
 for s in c['species']:
     d=s['game_distribution'];base=s.get('base_index',s['index'])
     day,dusk,night=d['activity_percent']
@@ -17,10 +19,18 @@ for s in c['species']:
     weights=d['zone_multipliers'];zone=max(m['zones'],key=lambda z:weights[z['id']])['name_zh']
     layers=d['layers'];near=d['nearshore_only']
     if layers==['bottom']:layer='近岸钓底' if near else '钓底'
+    elif layers==['surface']:layer='表层'
     elif set(layers)=={'surface','middle'}:layer='表层、中层'
+    elif set(layers)=={'middle','lower'}:layer='中下层'
     elif 'bottom' in layers:layer='中下层、钓底'
     else:layer='表层至下层'
-    baits=sorted(e['baits'][:5],key=lambda b:b['multipliers'][base],reverse=True)[:2]
+    if base>=15 and base in city:
+        available=[(e['baits'][i],city[base]['baits'][i]) for i in (3,4)]
+        available += [(b,b['city_weights'].get(str(base),0)) for b in new_baits]
+        baits=[b for b,w in sorted(available,key=lambda pair:pair[1],reverse=True) if w>0][:2]
+        zone={'reed_bay':'河岸草湾','open_pond':'桥下开阔水面','mud_channel':'江心深槽','stream_inlet':'急缓流交界','gravel_margin':'石砌岸边'}[max(weights,key=weights.get)]
+    elif base>=15:baits=e['baits'][:2]
+    else:baits=sorted(e['baits'][:5],key=lambda b:b['multipliers'][base],reverse=True)[:2]
     bait='、'.join(b['name_zh'] for b in baits)
     fields=[f'时段：{active}',f'水域：{zone}',f'钓层：{layer}',f'推荐：{bait}']
     rows.append(fields);hints.append('同种的稀有变异' if s.get('special_variant') else layer)

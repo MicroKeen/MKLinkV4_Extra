@@ -4,7 +4,7 @@
 #include <string.h>
 int main(void)
 {
-    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_SPECIES_COUNT;v++) {
+    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_LEGACY_SPECIES_COUNT;v++) {
         unsigned base=fish_species_parent(v),special=0;uint32_t seed=0x8bd134u+v;
         for(unsigned n=0;n<200000;n++) {unsigned id=fish_species_special_roll(&seed,base);assert(id==base || id==v);special+=id==v;}
         assert(special>1800 && special<2200);

@@ -9,14 +9,34 @@ uint32_t fish_random_next(uint32_t *state)
     return value;
 }
 #define next_random fish_random_next
+static const uint8_t guide_order[FISH_GUIDE_COUNT]={
+    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,19,20,22,23};
+unsigned fish_guide_index_at(unsigned position) {return guide_order[position%FISH_GUIDE_COUNT];}
+unsigned fish_guide_position(unsigned index) {
+    for(unsigned i=0;i<FISH_GUIDE_COUNT;i++)if(guide_order[i]==index)return i;
+    return 0;
+}
+extern const fish_species_t fish_city_profiles[4];
+extern const fish_species_t fish_legacy_city_silver;
+const fish_species_t *fish_species_profile(unsigned map,unsigned index)
+{
+    if(map==2 && index==18)return &fish_legacy_city_silver;
+    if(map) {
+        if(index==0)return &fish_city_profiles[0];
+        if(index==1)return &fish_city_profiles[1];
+        if(index==7)return &fish_city_profiles[2];
+        if(index==13)return &fish_city_profiles[3];
+    }
+    return &fish_species[index<FISH_SPECIES_COUNT?index:0];
+}
 unsigned fish_species_parent(unsigned index)
 {
     static const uint8_t parent[FISH_VARIANT_COUNT]={3,2,1,9};
-    return index>=FISH_BASE_SPECIES_COUNT && index<FISH_SPECIES_COUNT?parent[index-FISH_BASE_SPECIES_COUNT]:index;
+    return fish_species_is_variant(index)?parent[index-FISH_BASE_SPECIES_COUNT]:index;
 }
 unsigned fish_species_special_roll(uint32_t *state,unsigned index)
 {
-    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_SPECIES_COUNT;v++)
+    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_LEGACY_SPECIES_COUNT;v++)
         if(fish_species_parent(v)==index) return next_random(state)%100==0?v:index;
     return index;
 }
@@ -35,6 +55,8 @@ void fish_species_roll(uint32_t *state, uint8_t *index, uint16_t *size_mm)
 }
 
 bool fish_species_roll_weights(uint32_t *state,const uint16_t *weights,uint8_t *index,uint16_t *size)
+{return fish_species_roll_weights_on(state,weights,0,index,size);}
+bool fish_species_roll_weights_on(uint32_t *state,const uint16_t *weights,unsigned map,uint8_t *index,uint16_t *size)
 {
     unsigned total=0;
     for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) total+=weights[i];
@@ -42,7 +64,7 @@ bool fish_species_roll_weights(uint32_t *state,const uint16_t *weights,uint8_t *
     unsigned ticket=next_random(state)%total;
     for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
         if (ticket<weights[i]) {
-            *index=(uint8_t)i; *size=fish_species_sample_size(state,&fish_species[i]); return true;
+            *index=(uint8_t)i; *size=fish_species_sample_size(state,fish_species_profile(map,i)); return true;
         }
         ticket-=weights[i];
     }

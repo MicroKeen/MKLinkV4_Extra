@@ -15,6 +15,16 @@ const fish_species_art_t fish_species_art[FISH_SPECIES_COUNT]={
     {&c_tileSpeciesHooksnoutLongfinRGB565,&c_tileSpeciesHooksnoutLongfinAlphaGRAY8},
     {&c_tileSpeciesCarpRedLongfinRGB565,&c_tileSpeciesCarpRedLongfinAlphaGRAY8},
     {&c_tileSpeciesSoftshellAlbinoRGB565,&c_tileSpeciesSoftshellAlbinoAlphaGRAY8},
+    {&c_tileSpeciesCulterAlburnusRGB565,&c_tileSpeciesCulterAlburnusAlphaGRAY8},
+    {&c_tileSpeciesGrassCarpRGB565,&c_tileSpeciesGrassCarpAlphaGRAY8},
+    {&c_tileSpeciesBlackCarpRGB565,&c_tileSpeciesBlackCarpAlphaGRAY8},
+    {&c_tileSpeciesSilverCarpRGB565,&c_tileSpeciesSilverCarpAlphaGRAY8},
+    {&c_tileSpeciesRedeyeRGB565,&c_tileSpeciesRedeyeAlphaGRAY8},
+    {&c_tileSpeciesYellowcheekRGB565,&c_tileSpeciesYellowcheekAlphaGRAY8},
+    {&c_tileSpeciesMongolianCulterRGB565,&c_tileSpeciesMongolianCulterAlphaGRAY8},
+    {&c_tileSpeciesLongsnoutCatfishRGB565,&c_tileSpeciesLongsnoutCatfishAlphaGRAY8},
+    {&c_tileSpeciesObscurePufferRGB565,&c_tileSpeciesObscurePufferAlphaGRAY8},
+    {&c_tileSpeciesBigheadCarpRGB565,&c_tileSpeciesBigheadCarpAlphaGRAY8},
 };
 const fish_species_art_t fish_species_large_art[FISH_SPECIES_COUNT]={
     [1]={&c_tileSpeciesCarpLargeRGB565,&c_tileSpeciesCarpLargeAlphaGRAY8},

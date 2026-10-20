@@ -66,11 +66,14 @@ typedef struct fish_game {
     fish_loss_t loss;
     uint16_t species_catches[FISH_SPECIES_COUNT];
     uint16_t species_best_size_mm[FISH_SPECIES_COUNT];
+    uint8_t species_best_map[FISH_SPECIES_COUNT],last_map;
     fish_economy_t economy;
     fish_money_feedback_t money; /* Visual feedback only; never saved. */
     uint32_t clock_at;
+    uint32_t latte_remaining_ms; /* One real second is one game minute; persists in V11. */
+    uint32_t weather_ms,wetness_units; /* Independent weather clock; full wet=120000. */
     uint16_t game_minute,clock_remainder_ms;
-    uint8_t shop_index,hold_return_mode,merchant_line_variant;
+    uint8_t shop_index,hold_return_mode,merchant_line_variant,shop_venue;
     uint32_t shop_closed_at;
     bool shop_closed_notice;
     fish_merchant_reply_t merchant_reply;
@@ -78,6 +81,13 @@ typedef struct fish_game {
 } fish_game_t;
 
 enum {FISH_MAP_COUNT=2,FISH_TRAVEL_FARE=180,FISH_TRAVEL_MINUTES=300};
+enum {FISH_WEATHER_PERIOD_MS=4320000,FISH_WEATHER_CYCLE_MS=32*FISH_WEATHER_PERIOD_MS,
+      FISH_WEATHER_FADE_MS=8000,FISH_WETNESS_FULL=120000,FISH_WET_SPEED_LOSS_PERCENT=20};
+unsigned fish_weather_rain(const fish_game_t *g); /* 0..255, smooth rain envelope. */
+unsigned fish_weather_strength(const fish_game_t *g); /* 0..255 extra near rain; zero retains light rain. */
+unsigned fish_game_wetness_percent(const fish_game_t *g);
+unsigned fish_game_line_speed_percent(const fish_game_t *g);
+void fish_weather_advance(fish_game_t *g,uint32_t elapsed_ms,bool sheltered);
 extern const char *const fish_map_names[FISH_MAP_COUNT];
 void fish_game_travel_complete(fish_game_t *g,bool success);
 void fish_game_init(fish_game_t *g, uint32_t now);
@@ -91,6 +101,7 @@ bool fish_game_ashore(const fish_game_t *g);
 bool fish_game_at_shop(const fish_game_t *g);
 bool fish_game_at_station(const fish_game_t *g);
 bool fish_game_shop_open(const fish_game_t *g);
+bool fish_game_vendor_open(const fish_game_t *g,unsigned venue);
 unsigned fish_game_night_opacity(const fish_game_t *g);
 int fish_game_dock_action(const fish_game_t *g);
 uint16_t fish_game_rig_depth(const fish_game_t *g);

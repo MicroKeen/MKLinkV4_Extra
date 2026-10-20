@@ -1,0 +1,1 @@
+#define HPM_L1C_CACHELINE_SIZE 32

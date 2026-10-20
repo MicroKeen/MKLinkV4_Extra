@@ -7,10 +7,10 @@
 #include <time.h>
 #include "save_long_vector.h"
 
-static uint8_t slots[10][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
-static int exists[10],read_error[10],write_result=1;
+static uint8_t slots[FISH_SAVE_SLOT_COUNT][FISH_SAVE_FILE_BYTES],queued[FISH_SAVE_FILE_BYTES];
+static int exists[FISH_SAVE_SLOT_COUNT],read_error[FISH_SAVE_SLOT_COUNT],write_result=1;
 static unsigned queued_slot,writes;
-static size_t slot_lengths[10];
+static size_t slot_lengths[FISH_SAVE_SLOT_COUNT];
 static const uint8_t key[32]={1,2,3};
 int fish_storage_init(uint8_t k[32]) {memcpy(k,key,32);return 0;}
 int fish_storage_read(unsigned slot,uint8_t *file,size_t len)
@@ -33,7 +33,7 @@ static void reset(void)
 {
     memset(slots,0,sizeof(slots));memset(exists,0,sizeof(exists));memset(read_error,0,sizeof(read_error));
     writes=0;write_result=1;
-    for(unsigned i=0;i<10;i++) slot_lengths[i]=FISH_SAVE_FILE_BYTES;
+    for(unsigned i=0;i<FISH_SAVE_SLOT_COUNT;i++) slot_lengths[i]=FISH_SAVE_FILE_BYTES;
 }
 static void caught(fish_game_t *g)
 {
@@ -153,7 +153,7 @@ int main(void)
 
     /* Every rare guide/cargo record and exact x10 valuation survive v5. */
     fish_game_init(&g,0);g.economy.container=2;
-    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_SPECIES_COUNT;i++) {
+    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_LEGACY_SPECIES_COUNT;i++) {
         uint16_t size=fish_species[i].mean_x2_mm/2;g.species_catches[i]=1;g.species_best_size_mm[i]=size;
         ++g.catches;g.last_species=i;g.last_size_mm=size;
         assert(fish_hold_add(&g.economy,i,size,fish_species_weight_g(&fish_species[i],size))==FISH_STORED);
@@ -194,6 +194,17 @@ int main(void)
     reset();read_error[0]=-1;fish_game_init(&loaded,0);fish_save_init(&s,&loaded,0);
     assert(s.blocked && s.status==FISH_SAVE_ERROR);
     loaded.save_requested=true;fish_save_tick(&s,&loaded,1);assert(!writes && s.status==FISH_SAVE_ERROR);
+    /* A transient boot I/O error must not lock saving for this whole session. */
+    read_error[0]=0;loaded.map_index=1;loaded.economy.coins=432;manual(&s,&loaded,10);
+    assert(!s.blocked && s.sequence==1);
+    fish_game_init(&loaded,20);fish_save_init(&s,&loaded,20);
+    assert(!s.blocked && loaded.map_index==1 && loaded.economy.coins==432);
+    /* An inaccessible newer slot may contain progress not loaded this boot.
+     * A retry must preserve it and require a normal restart to restore it. */
+    read_error[s.active_slot]=-1;fish_game_init(&loaded,30);fish_save_init(&s,&loaded,30);
+    assert(s.blocked && s.active_slot<0);memset(read_error,0,sizeof(read_error));
+    before=writes;loaded.save_requested=true;fish_save_tick(&s,&loaded,31);
+    assert(s.blocked && writes==before && s.error_code==0x2100);
     /* Timer wrap remains a full five-minute interval. */
     reset();fish_game_init(&g,UINT32_MAX-100);fish_save_init(&s,&g,UINT32_MAX-100);caught(&g);
     fish_save_tick(&s,&g,299898);assert(!writes);fish_save_tick(&s,&g,299899);assert(writes==1);
@@ -212,7 +223,7 @@ int main(void)
     unchanged=loaded;payload[FISH_SAVE_V5_PAYLOAD_BYTES]=FISH_SOUND_COUNT;
     assert(!fish_save_unpack(&loaded,payload) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
     reset();fish_game_init(&g,0);caught(&g);
-    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_SPECIES_COUNT;i++) {
+    for(unsigned i=FISH_BASE_SPECIES_COUNT;i<FISH_LEGACY_SPECIES_COUNT;i++) {
         uint16_t mm=fish_species[i].weight_anchor_mm;
         g.species_catches[i]=1;g.species_best_size_mm[i]=mm;g.catches++;
         assert(fish_hold_add(&g.economy,i,mm,fish_species_weight_g(&fish_species[i],mm))==FISH_STORED);
@@ -272,6 +283,26 @@ int main(void)
     assert(!memcmp(slots[2],file,FISH_SAVE_V7_FILE_BYTES));
     fish_game_init(&g,0);fish_save_init(&s,&g,0);assert(g.map_index==1);
     fish_save_pack(&g,payload);payload[FISH_SAVE_V7_PAYLOAD_BYTES]=2;assert(!fish_save_unpack(&g,payload));
+    /* V13 preserves exact outdoor position through every menu, plus the
+     * sub-minute clock and regional weather. Invalid locations are atomic. */
+    for(unsigned map=0;map<2;map++)for(unsigned land=0;land<2;land++)for(unsigned left=0;left<2;left++) {
+        fish_game_init(&g,0);g.map_index=(uint8_t)map;
+        g.boat_x=left?FISH_BOAT_LEFT:FISH_BOAT_RIGHT;
+        g.shore_x=left?-120:FISH_STATION_X;g.facing=left?-1:1;
+        g.mode=FISH_BAG;g.bag_return_mode=land?FISH_SHORE:FISH_MOVE;
+        g.game_minute=1361;g.clock_remainder_ms=996;g.weather_ms=13612278;
+        g.wetness_units=FISH_WETNESS_FULL;g.latte_remaining_ms=123456;
+        fish_save_pack(&g,payload);fish_save_encode(key,93,payload,file);
+        assert(fish_save_decode(key,file,sizeof(file),&seq,output) && seq==93);
+        fish_game_init(&loaded,20);assert(fish_save_unpack(&loaded,output));
+        assert(loaded.map_index==map && loaded.boat_x==g.boat_x && loaded.shore_x==g.shore_x);
+        assert(loaded.facing==g.facing && loaded.mode==(land?FISH_SHORE:FISH_MOVE));
+        assert(loaded.game_minute==1361 && loaded.clock_remainder_ms==996);
+        assert(loaded.weather_ms==13612278 && loaded.wetness_units==FISH_WETNESS_FULL);
+        assert(loaded.latte_remaining_ms==123456 && !loaded.shore_speed);
+        unchanged=loaded;output[FISH_SAVE_POSITION_OFFSET]=0;output[FISH_SAVE_POSITION_OFFSET+1]=0;
+        assert(!fish_save_unpack(&loaded,output) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
+    }
     /* Compute benchmark; excludes SD/filesystem latency and debug IO. */
     fish_game_init(&g,0);caught(&g);fish_save_pack(&g,payload);
     clock_t start=clock();for(unsigned i=0;i<10000;i++) fish_save_encode(key,i+1,payload,file);

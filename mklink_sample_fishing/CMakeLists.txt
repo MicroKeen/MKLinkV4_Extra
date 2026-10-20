@@ -9,6 +9,11 @@ set(CONFIG_HPM_SPI 1)
 set(CONFIG_SDMMC 1)
 set(CONFIG_HPM_SPI_SDCARD 1)
 set(CONFIG_RTTHREAD_NANO 1)
+set(CONFIG_CHERRYUSB 1)
+set(CONFIG_USB_DEVICE 1)
+set(CONFIG_CHERRYUSB_DEVICE 1)
+set(CONFIG_USB_DEVICE_MSC 0)
+# Local licensed MSC class adds command-drain checks; transfers are scene-polled.
 set(CUSTOM_GCC_LINKER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/linkers/gcc/flash_xip.ld CACHE FILEPATH "Fish app partition linker" FORCE)
 set(CUSTOM_SES_LINKER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/linkers/segger/flash_xip.icf CACHE FILEPATH "Fish app partition linker" FORCE)
 set(CUSTOM_IAR_LINKER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/linkers/iar/flash_xip.icf CACHE FILEPATH "Fish app partition linker" FORCE)
@@ -20,6 +25,10 @@ if(NOT FISH_PYTHON_EXECUTABLE)
     set(FISH_PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE}")
 endif()
 project(mklink_sample_fishing)
+# Storage setup and retained diagnostics are cold paths; favour compact code.
+set_source_files_properties(src/fish/fish_hpm_runtime.c src/fish/fish_resources_hpm.c
+    src/fish/fish_media.c src/fish/fish_usb_hpm.c
+    PROPERTIES COMPILE_OPTIONS "-Os")
 # The SDK forces floating scanf into every GNU app. This game never scans input;
 # let section GC discard it while retaining floating printf for diagnostics.
 get_target_property(FISH_SDK_LINK_OPTIONS ${HPM_SDK_LIB_ITF} INTERFACE_LINK_LIBRARIES)
@@ -91,11 +100,21 @@ file(GLOB FISH_CRYPTO_SOURCES CONFIGURE_DEPENDS src/fish/crypto/source/*.c)
 set_source_files_properties(${FISH_CRYPTO_SOURCES}
     src/fish/fish_save.c src/fish/fish_save_crypto.c src/fish/fish_save_key.c
     src/fish/fish_resources.c src/fish/fish_resources_hpm.c src/fish/fish_fs_hpm.c
+    src/fish/fish_media.c src/fish/fish_usb_hpm.c src/fish/fish_usb_msc_class.c src/fish/fish_sd_guard.c
     src/fish/fish_save_hpm.c lcd/adapt/spi_sd_adapt.c lcd/fatfs/ff.c
     src/fish/fish_game.c src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
+    src/fish/fish_species.c src/fish/fish_hpm_feedback.c
     lcd/fatfs/ffunicode.c lcd/fatfs/diskio.c lcd/fatfs/spi_sd/hpm_spi_sd_disk.c
     PROPERTIES COMPILE_OPTIONS "-Os")
 set_source_files_properties(src/fish/fish_scene.c PROPERTIES COMPILE_OPTIONS "-Os")
+set_source_files_properties(
+    ${HPM_SDK_BASE}/middleware/cherryusb/core/usbd_core.c
+    ${HPM_SDK_BASE}/middleware/cherryusb/port/hpmicro/usb_dc_hpm.c
+    ${HPM_SDK_BASE}/middleware/cherryusb/port/hpmicro/usb_glue_hpm.c
+    ${HPM_SDK_BASE}/components/usb/device/hpm_usb_device.c
+    ${HPM_SDK_BASE}/drivers/src/hpm_usb_drv.c
+    TARGET_DIRECTORY hpm_sdk_lib
+    PROPERTIES COMPILE_OPTIONS "-Os")
 sdk_app_src_glob(src/fish/assets/*.c)
 sdk_app_src(../common/lcd/st7789.c)
 sdk_app_src(../common/lcd/fonts.c)
@@ -104,7 +123,7 @@ sdk_app_src(../common/lcd/arm2d_port/lcd_spi_port_hpm.c)
 sdk_app_src_glob(../common/lcd/arm2d_port/math/*.c)
 
 sdk_compile_definitions(-D_RTE_ -DCONFIG_NDEBUG_CONSOLE=1)
-sdk_compile_definitions(-DSD_FATFS_ENABLE=1 -DFISH_EXTERNAL_ASSETS=1)
+sdk_compile_definitions(-DSD_FATFS_ENABLE=1 -DFISH_EXTERNAL_ASSETS=1 -DFISH_SD_CPU_IO=1)
 sdk_compile_definitions(-D__REF_GUI_APP_CFG_HEADER_H__="rg_app_cfg.h")
 sdk_compile_definitions(-D__NGY_APP_CFG_HEADER_H__="rg_app_cfg.h")
 sdk_compile_definitions(-D__PERFC_CFG_PORTING_INCLUDE__="perfc_port_user.h")

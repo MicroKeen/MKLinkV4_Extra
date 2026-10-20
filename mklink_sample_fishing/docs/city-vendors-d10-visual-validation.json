@@ -1,0 +1,41 @@
+{
+  "resource_version": "2026.10.19.5",
+  "payload_bytes": 447884,
+  "cache_free_bytes": 19060,
+  "legacy_portrait_pixels_losslessly_verified": 8000,
+  "pfb_portrait_scores": [
+    {
+      "frame": 6,
+      "pose": "CityClerkGreeting",
+      "matched": 4092,
+      "total": 4092
+    },
+    {
+      "frame": 7,
+      "pose": "CityClerkLatte",
+      "matched": 4808,
+      "total": 4808
+    },
+    {
+      "frame": 10,
+      "pose": "MerchantGreeting",
+      "matched": 3532,
+      "total": 3532
+    },
+    {
+      "frame": 13,
+      "pose": "MerchantSold",
+      "matched": 3540,
+      "total": 3540
+    },
+    {
+      "frame": 14,
+      "pose": "MerchantBought",
+      "matched": 3452,
+      "total": 3452
+    }
+  ],
+  "new_full_image_buffers": 0,
+  "reused_scanline_buffer_bytes": 960,
+  "frames": 22
+}

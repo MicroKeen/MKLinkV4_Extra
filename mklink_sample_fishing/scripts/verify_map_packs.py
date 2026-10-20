@@ -9,22 +9,29 @@ def verify():
     def constant(name):return int(re.search(r'#define '+name+r' (0x[0-9a-f]+|\d+)u',code)[1],0)
     assert m['payload_bytes']==constant('FISH_ASSET_PAYLOAD_BYTES')<=0x72000
     assert int(m['layout_crc'],16)==constant('FISH_ASSET_LAYOUT_CRC')
+    assert m['pack_format']==constant('FISH_ASSET_PACK_FORMAT')==2
+    assert m['resource_version_id']==constant('FISH_ASSET_VERSION_ID')
+    assert (root/'VERSION.txt').read_text().strip()==m['resource_version']
     end=0
     for e in m['entries']:
         assert e['offset']%4==0 and e['offset']>=end
         assert e['offset']==constant('FISH_OFFSET_'+e['symbol'])
         end=e['offset']+e['bytes'];assert end<=m['payload_bytes']
     night=constant('FISH_ASSET_NIGHT_OFFSET');sky=constant('FISH_ASSET_SKYLINE_OFFSET')
-    assert end<=sky and sky+240==night and night+28928==m['payload_bytes']
+    day=constant('FISH_ASSET_DAY_OFFSET')
+    assert end<=day and day+28928==sky and sky+240==night and night+28928==m['payload_bytes']
     for row in m['maps']:
+        assert row['file']==('maps/1_city_river.fgpk' if row['id'] else 'maps/0_wetland.fgpk')
         b=(root/row['file']).read_bytes();assert len(b)==row['bytes']==64+m['payload_bytes']
         assert hashlib.sha256(b).hexdigest()==row['sha256']
-        magic,version,map_id,layout,n,crc,hcrc=struct.unpack_from('<4s6I',b)
-        assert magic==b'FGRP' and version==1 and map_id==row['id']
+        magic,version,map_id,layout,n,crc,resource_version,hcrc=struct.unpack_from('<4s7I',b)
+        assert magic==b'FGRP' and version==2 and map_id==row['id']
+        assert resource_version==constant('FISH_ASSET_VERSION_ID')
         assert layout==constant('FISH_ASSET_LAYOUT_CRC') and n==m['payload_bytes']
         assert crc==zlib.crc32(b[64:])==constant(f'FISH_ASSET_MAP{map_id}_CRC')
-        assert hcrc==zlib.crc32(b[:24]) and not any(b[28:64])
+        assert hcrc==zlib.crc32(b[:28]) and not any(b[32:64])
         assert max(b[64+sky:64+sky+240])<=120
+        assert max(b[64+day+128:64+day+28928])<64
         layer=b[64+night:64+night+28928]
         if map_id:assert max(layer[128:])<64 and any(layer[:128])
         else:assert not any(layer)

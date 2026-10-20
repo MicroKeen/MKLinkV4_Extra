@@ -125,7 +125,7 @@ int main(void)
         }
     }
     /* Casting, preview camera and physical length share the same gear limit. */
-    static const unsigned line_cm[]={450,650,850};
+    static const unsigned line_cm[]={450,650,850,1050};
     for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++)
     for(int facing=-1;facing<=1;facing+=2) {
         fish_game_init(&g,0);g.boat_x=480;g.rod_index=rod;g.facing=facing;fish_game_equip_line(&g,line);

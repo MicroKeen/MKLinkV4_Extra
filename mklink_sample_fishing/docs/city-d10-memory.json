@@ -1,0 +1,202 @@
+{
+  "firmware_sha256": "141104bd45a389140488564c5f1cabd800fddb4fd7ceae751adab50e29522232",
+  "regions": [
+    {
+      "name": "APP_FLASH",
+      "used": 366652,
+      "capacity": 380928,
+      "free": 14276
+    },
+    {
+      "name": "ILM",
+      "used": 2440,
+      "capacity": 131072,
+      "free": 128632
+    },
+    {
+      "name": "DLM",
+      "used": 126480,
+      "capacity": 130304,
+      "free": 3824
+    },
+    {
+      "name": "AHB_SRAM",
+      "used": 28,
+      "capacity": 32768,
+      "free": 32740
+    }
+  ],
+  "components": {
+    "block": {
+      "address": 536768,
+      "bytes": 4096
+    },
+    "header": {
+      "address": 536704,
+      "bytes": 64
+    },
+    "city_night_rows": {
+      "address": 549000,
+      "bytes": 960
+    },
+    "scene": {
+      "address": 549960,
+      "bytes": 9488
+    },
+    "s_tPFBs": {
+      "address": 560664,
+      "bytes": 23096
+    },
+    "arm_2d_stack": {
+      "address": 526488,
+      "bytes": 8192
+    },
+    "worker_stack": {
+      "address": 544720,
+      "bytes": 4096
+    },
+    "queued": {
+      "address": 543224,
+      "bytes": 1495
+    },
+    "checked": {
+      "address": 541728,
+      "bytes": 1495
+    },
+    "rt_heap": {
+      "address": 586044,
+      "bytes": 16384
+    }
+  },
+  "libc_heap_reserved_bytes": 24576,
+  "rtthread_heap_reserved_bytes": 16384,
+  "main_stack_reserved_bytes": 4096,
+  "resource_cache_location": "external Flash",
+  "resource_cache_sram_bytes": 0,
+  "resource_cache_payload_bytes": 447884,
+  "resource_cache_free_bytes": 19060,
+  "loading_buffer_bytes": 4096,
+  "shared_day_night_row_buffer_bytes": 960,
+  "new_full_framebuffer_bytes": 0,
+  "runtime_arm2d_scratch": {
+    "0": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ],
+    "1": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ]
+  },
+  "hardware_heap_peak_measured": false,
+  "hardware_stack_watermark_measured": false,
+  "limitations": [
+    "Runtime trace measures Arm-2D scratch calls on the host-compiled exported HPM scene, not MCU libc/RT-Thread heap peaks.",
+    "ELF region accounting includes reserved libc heap, RT-Thread pool, main stack, scene stack and save stack; do not add them again.",
+    "The generic Map tool treats the 32 KiB AHB region as total RAM and misreads some symbol rows. Its aggregate warning is not a valid HPM DLM result. ELF regions and ELF32 symbol tables are authoritative here."
+  ]
+}

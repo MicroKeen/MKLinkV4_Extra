@@ -36,7 +36,7 @@ void fish_hpm_feedback_update(const fish_game_t *game)
         sound_mode=game->sound_mode;
     }
     bool traded=sound_mode==FISH_SOUND_ALL && shop && shopping && game->economy.coins!=coins &&
-        (game->merchant_reply==FISH_MERCHANT_BOUGHT || game->merchant_reply==FISH_MERCHANT_SOLD);
+        (game->merchant_reply==FISH_MERCHANT_BOUGHT || game->merchant_reply==FISH_MERCHANT_LATTE || game->merchant_reply==FISH_MERCHANT_SOLD);
     shopping=shop;coins=game->economy.coins;
     if(sound_mode==FISH_SOUND_OFF) {fighting=false;bursting=false;return;}
     if(game->mode!=FISH_FIGHT) {

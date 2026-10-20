@@ -216,6 +216,11 @@ DRESULT disk_read(
 )
 {
     DRESULT res;
+#if defined(FISH_SD_CPU_IO) && FISH_SD_CPU_IO
+    /* SPI SD transfers are CPU-blocking in this app, not DMA. Keep the CPU
+     * pointer unchanged and never invalidate bytes just written by the CPU. */
+    if (pdrv == DEV_SD) return disk_read_private(pdrv, buff, sector, count);
+#endif
 #if !defined(FATFS_ONLY_NONCACHEABLE_BUF) || !FATFS_ONLY_NONCACHEABLE_BUF
     WORD sector_size;
     res = disk_ioctl(pdrv, GET_SECTOR_SIZE, &sector_size);
@@ -304,6 +309,9 @@ DRESULT disk_write(
 )
 {
     DRESULT res;
+#if defined(FISH_SD_CPU_IO) && FISH_SD_CPU_IO
+    if (pdrv == DEV_SD) return disk_write_private(pdrv, buff, sector, count);
+#endif
 #if !defined(FATFS_ONLY_NONCACHEABLE_BUF) || !FATFS_ONLY_NONCACHEABLE_BUF
     WORD sector_size;
     res = disk_ioctl(pdrv, GET_SECTOR_SIZE, &sector_size);

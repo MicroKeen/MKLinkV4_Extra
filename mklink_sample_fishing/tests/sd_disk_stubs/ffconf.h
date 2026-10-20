@@ -1,0 +1,1 @@
+/* No filesystem operations are linked into the SD geometry test. */

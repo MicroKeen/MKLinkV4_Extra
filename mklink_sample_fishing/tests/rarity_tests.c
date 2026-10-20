@@ -36,7 +36,7 @@ int main(void)
     fish_game_input(&g,FISH_PRESS,0,10);
     fish_game_input(&g,FISH_ROTATE,1,30); assert(g.mode==FISH_GUIDE && g.guide_index==0);
     fish_game_input(&g,FISH_RELEASE,0,40); assert(g.mode==FISH_GUIDE && !g.pressed);
-    fish_game_input(&g,FISH_ROTATE,-1,50); assert(g.guide_index==FISH_SPECIES_COUNT-1);
+    fish_game_input(&g,FISH_ROTATE,-1,50); assert(g.guide_index==fish_guide_index_at(FISH_GUIDE_COUNT-1));
     fish_game_input(&g,FISH_ROTATE,2,60); assert(g.guide_index==1);
     fish_game_update(&g,5000); assert(g.mode==FISH_GUIDE);
     assert(g.random_state==before && g.boat_x==x && g.catches==0);

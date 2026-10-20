@@ -1,4 +1,75 @@
-# SD卡存档 v7 / SD saves v7
+# SD卡存档 V13 / SD saves V13
+
+## 当前 D12：存档、分区天气与线组 / Current D12
+
+以[完整D12设定与修复记录](rain-depth-and-lines-d12.md)为准。V13仍1503B，独立A/B并保留旧档、原密钥和目录；保存岸/船位置、朝向、时间、天气、潮湿与拿铁，启动资源加载后恢复原位置。修复SD单扇区写入CRC、延迟响应和有界忙等待；主机验证不代替实机测试；作者已反馈当前版本基本稳定，掉电/拔卡等异常测试仍未专项验收。
+
+两地天气独立，雨期2～48游戏小时；中近景长雨线增强景深，都市夜间/清晨保留向下延展的薄雾。都市码头增加台阶，船及水中人物再下移8像素，岸上人物略缩小；鱼摊缩小并在06:00–16:00绘出柜台后摊主，便利店仍09:00–21:00，路灯加高。
+
+删除最后收线距离锁；青鱼和鱤鱼冲刺产生更明显真实位移，70%朝远离玩家方向。线组120/200/450G，都市新增600G八编PE线组，“像一条钢缆，会吓跑小鱼”。真正断线损坏当前线组，备件自动切换；金币不足120G且没有细线小钩即可免费补一副，无鱼获和其他线组条件。对应补给台词见两地店主台词.md。
+
+V13 preserves outdoor position, clock and regional weather without increasing file size. The SD writer handles CRC16 and delayed responses with bounded waits. Independent2–48h rain, city geometry/mist, stronger giant surges and paid/free rig replacement are included. Existing2026.10.19.5 packs remain compatible. The author reports basic stability and approved publication; power-loss/card-removal and hardware peak tests remain outstanding. 以下版本章节为历史。
+
+## 当前 D11：雨天、远景薄雾与潮湿 / Current D11
+
+以[雨天与潮湿说明](rain-and-wetness-d11.md)为当前设定。两图加入自动降雨、远景薄雾、像素雨线及仅在水面出现的扩散小涟漪，前景主角、码头与夜光漂保持清楚。天气独立于钓鱼随机数，晴雨缓慢过渡。
+
+持续淋雨60个游戏分钟达到100%潮湿，线性降低收放线速度，满值减20%；晴天或棚下120个游戏分钟完全晾干。热拿铁与潮湿相乘，满潮湿拿铁为88%基础收放线速度，提竿窗口仍+10%。坐车会推进天气且在车内晾干；加载与离线不计时。
+
+潮湿与拿铁改为18×18状态小图标：图标背景内填充分别显示潮湿程度和拿铁剩余时间，没有长文字条或大底框。
+
+雨天原始出现权重：鲤鱼110%、白条92%，湿地土鲶/黄颡115%，都市长吻鮠115%、翘嘴112%、鱤鱼110%。其他鱼、水层与饵料排除规则、体型以及条件1%稀有变异规则保留。
+
+V12存档1503B，追加8B天气进度和潮湿状态，独立V12_A/B并保留全部旧档、道具、图鉴、地图与拿铁。沿用D10资源2026.10.19.5，已复制的包无需重拷，不新增位图或整屏RAM。
+
+Both maps gain gradual rain, distant haze and water rings. Wetness fills in60game minutes and reduces retrieval/payout speed by up to20%; drying takes120game minutes. Compact status icons show wetness and remaining latte. Slight fish-weight changes retain habitat/bait exclusions and conditional1% variants. V12 adds8bytes; D10 map packs stay compatible. Local only, no publishing or hardware flashing.
+
+## 当前 D10：都市两处商家、专饵与热拿铁 / Current D10
+
+当前以[都市两处商家与热拿铁](city-vendors-d10.md)及[内存核对](city-d10-memory.md)为准，D9以下保留为历史。硬件MKLink V4，本地开发，不推Git。
+
+便利店保持在都市地图最左侧，女店员只卖热拿铁；带棚子的江边鱼摊位于右侧、靠近码头，壮硕男性摊主负责收鱼和出售渔具、鱼饵、容器。两处各自走近停车、短按进入，暂沿用09:00–21:00。
+
+都市取消蚯蚓、米饭、面饵与鹅毛漂的出售，新增螺蛳（青鱼）、玉米（鲢/鳙/草）与栩栩如生的假饵（肉食、大个体）。普通等待间隔减15%；专饵屏蔽常见鱼后可能等更久。湿地旧商品、鱼饵、漂和原权重不变，旧库存不清除。
+
+热拿铁35G，购买后立即饮用，6游戏小时内收放线速度与提竿窗口各+10%；再次购买刷新，不叠加；乘车扣除5游戏小时。HUD显示剩余时间，V11存档1495B保存新饵库存与剩余毫秒，原密钥、目录、装备初始化世代及所有旧档均保留。
+
+程序Flash余14276B、地图缓存余19060B、DLM静态余3824B。商人立绘改6bit无损索引；湿地四表情8000像素逐像素核对，新增资源复用960B行缓冲，无整图解压RAM。必须使用资源2026.10.19.5。
+
+City-only split: leftmost convenience store sells hot latte; a covered stall nearer the pier buys catches and sells tackle/bait. Wetland inventory/catalog stays intact. The saved six-hour latte buff grants10% faster retrieval/payout and10% wider strike window. Vendor portraits use palette packing without changing original wetland colours; no new full-image buffer. Matching2026.10.19.5 resources required.
+
+## 当前 D7：鳙鱼与深河道 / Current D7
+
+以本节为当前设定，后面D6及更早章节作为历史。2026-10-19，本地开发，不推Git，硬件MKLink V4。
+
+白鲢：铜稀有度、仅表层、100cm/40kg；鳙鱼：白银、中下层、145cm/60kg，独立大头/斑驳立绘。红尾退出可钓种和正常图鉴，旧档记录、鱼获和售价保留，不转为鳙鱼。城市仍12种可钓，活动图鉴24项。评语沿用作者修改，按鱼名匹配稳定ID。
+
+城市近岸采样点3.6/4.2米、江心16米；钓深0、0.5、2、4、6.5、9、12米和钓底，HUD/落点/鱼层使用独立剖面。湿地原地形、装备与图鉴定性钓层保持不变。
+
+资源版本2026.10.19.2，两图均需更新。V10存档1485B，独立A/B，读取V1–V9，保留旧文件与装备；D6白鲢记录保留原130cm曲线和原售价。资源缓存剩12,936B；整包驻Flash，未新增整屏SRAM缓冲。详见 [D7设置与兼容](city-revision-d7.md) 和 [内存报告](city-d7-memory.md)。
+
+Silver carp is bronze/surface-only at 100cm/40kg; bighead is silver/middle-lower at 145cm/60kg. Retired redtail remains compatible with historical saves. The city uses deeper banks and a 16m channel, with wetland tuning preserved. Matching 2026.10.19.2 packs and separate 1485-byte V10 saves are required; old saves/gear survive. Local only, no Git push.
+
+
+## 当前 D6：城市内容 / Current D6 city content
+
+2026-10-19，本地开发，**不推Git**。本节为当前实现，后面的版本记录为历史说明。硬件为MKLink V4。
+
+城市江河实装12鱼种（新增9种，鲫鱼/鲤鱼/白条共享图鉴与素材、城市独立数值）；青鱼为白银，巨物不为旧装备削弱。湿地原规则保留。城市便利店09:00–21:00，湿地渔具店07:00–18:00，车站24小时。现代女店员有四个表情与14组双句台词；草地、公园码头、路灯与带雾感的都市昼夜远景已接入。翘嘴鲌/白鲢/红尾鲌跃水时更易因松线脱钩；东方鲀间歇鼓胀并磨损当前线强度，每次新中鱼恢复装备强度。
+
+重量大于1000克显示一位小数kg（1450克→1.5 kg，70000克→70.0 kg），1000克及以下保留克；数值和售价不受显示取整影响。收鱼评语统一在 [catch-comments.md](catch-comments.md)，店员台词在 [city-merchant-dialogue.md](city-merchant-dialogue.md)，均可手改表格。中文保持12像素。
+
+资源包必须与固件匹配 **2026.10.19.1**，两图都要更新。V9存档1470 B，追加9种鱼与来源地图字段，保留V1–V8文件、装备、声音、金币和鱼获。切回湿地仍能查看/售出城市鱼。缓存载荷449,976 B，剩余16,968 B；应用Flash与实测构建余量见本次验证报告。
+
+D6 is local only. Twelve city fish use independent profiles while retaining shared collection IDs for returning species. The 09:00–21:00 convenience store has a four-expression clerk; wetland hours remain 07:00–18:00. Updated park art and atmospheric skyline are integrated. Weights above 1000 g use one decimal kg. Matching 2026.10.19.1 packs and separate 1470-byte V9 saves preserve legacy progress. See [D6 details](city-integration-d6.md) for deployment, migration and validation limits.
+
+### V9 字节布局 / V9 layout
+
+V8前缀1286 B保持字段偏移。1286–1411追加9个14 B记录（钓获次数2、最佳尺寸2、实物数量2、总克数4、总售价4）；1412–1435记录24项最佳尺寸的来源地图；1436船尾鱼来源，1437最近鱼获来源。头16 B＋认证标签16 B＋1438 B载荷＝1470 B。11–14仍为原稀有变异，15–23为城市新鱼，空船尾哨兵为24。旧档15哨兵读取后转换为24。
+
+写入 `NorthWetland_V9_Save_A/B_DO_NOT_DELETE.sav`，读取优先V9→V8→V7→V6→V5→V1–V4。旧版本按真实长度认证后补齐字段，旧纪录来源默认为湿地；设备密钥与UUID派生不变，装备世代仍为1。PC对应 `progress_v9_0/1.sav`，旧文件只读迁移。
+
+## 历史记录 / Earlier versions
 
 ## 最新 v29：路线与城市 / Latest v29: route and city
 

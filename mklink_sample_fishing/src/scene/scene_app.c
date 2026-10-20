@@ -7,6 +7,8 @@
 #include "key_task.h"
 #include "fish_scene.h"
 #include "fish_hpm_input.h"
+#include "fish_usb_hpm.h"
+#include "fish_hpm_runtime.h"
 
 ref_gui_t g_tMyGUI;
 static ngy_msg_t messages[32];
@@ -39,7 +41,9 @@ static void arm_2d_thread_entry(void *parameter)
     watchdog.cnt_src_freq=32768;
     watchdog.ctrl_config.timeout_reset_us=10*1000*1000;
     ewdg_init(HPM_EWDG0,&watchdog);
+    fish_hpm_watchdog_ready();
     lcd_spi_init();ST7789_Init();
+    fish_hpm_storage_heartbeat();
     arm_irq_safe {arm_2d_init();}
     disp_adapter0_init();
     rg_init(&g_tMyGUI,(ref_gui_cfg_t *)&gui_config);
@@ -47,8 +51,14 @@ static void arm_2d_thread_entry(void *parameter)
     /* Initialize the branch's existing key driver after the message pool is live. */
     key_init();key_encoder_init();
     for (;;) {
+        /* USB polling and resource probes share this scene thread. */
+        fish_hpm_storage_heartbeat();
+        fish_hpm_load_stage(FISH_HPM_MEDIA);
+        fish_usb_poll();
+        fish_hpm_storage_heartbeat();
+        fish_hpm_load_stage(FISH_HPM_GUI);
         arm_fsm_rt_t result=rg_task(&g_tMyGUI,30);
-        ewdg_refresh(HPM_EWDG0);
+        fish_hpm_storage_heartbeat();
         if (result==arm_fsm_rt_cpl) rt_thread_mdelay(1);
     }
 }

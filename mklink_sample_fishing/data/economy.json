@@ -48,9 +48,10 @@
       1800
     ],
     "line": [
-      35,
-      0,
-      100
+      120,
+      200,
+      450,
+      600
     ],
     "float": [
       0,
@@ -93,5 +94,7 @@
     "close_game_minute": 1080,
     "display": "07:00 AM - 06:00 PM",
     "closing": "reject entry/trade; return from shop or its container view to shore"
-  }
+  },
+  "line_damage": "A broken current rig is destroyed, removed from ownership and saved immediately. Switch to a spare if available; without a rig casting is blocked until replacement purchase. Slack/missed/early losses preserve rigs.",
+  "free_fine_rig": "When coins<120 and no intact fine rig is owned, either tackle merchant grants one free, regardless of cargo/other rigs; equip and save, no duplicates."
 }

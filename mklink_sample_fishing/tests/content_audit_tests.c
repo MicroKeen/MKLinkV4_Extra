@@ -17,7 +17,8 @@ static void landed(fish_game_t *g,unsigned id)
 {
     g->mode=FISH_BITE;g->phase_at=g->now-fish_species[g->pending_species].strike_delay_ms;
     fish_game_input(g,FISH_PRESS,0,g->now);fish_game_input(g,FISH_RELEASE,0,g->now);
-    assert(g->mode==FISH_FIGHT);g->reel_units=9999;
+    /* This audit verifies landed identity/economy, after the fight is spent. */
+    assert(g->mode==FISH_FIGHT);g->reel_units=9999;g->stamina=0;
     fish_game_input(g,FISH_ROTATE,1,g->now);
     assert(g->mode==FISH_CAUGHT && g->last_species==id && g->species_catches[id]==1);
     assert(g->species_best_size_mm[id]==g->last_size_mm && fish_catch_price(id,g->last_size_mm)>0);
@@ -49,7 +50,7 @@ int main(void)
         printf("species=%s casts=200000 selected=%u rare=%u boat=%d facing=%d hold_ms=%d depth=%u bait=%u\n",
             fish_species[target].id,count,rare,best.boat,best.facing,best.hold,best.depth,best.bait);
     }
-    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)assert(seen[i]>0);
+    for(unsigned i=0;i<FISH_LEGACY_SPECIES_COUNT;i++)assert(seen[i]>0);
     /* Both lines in every semantic context must select its configured expression. */
     static const fish_merchant_reply_t replies[]={FISH_MERCHANT_SOLD,FISH_MERCHANT_BOUGHT,FISH_MERCHANT_POOR,
         FISH_MERCHANT_EMPTY,FISH_MERCHANT_OWNED,FISH_MERCHANT_FULL};

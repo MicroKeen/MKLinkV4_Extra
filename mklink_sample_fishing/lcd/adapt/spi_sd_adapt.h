@@ -16,5 +16,7 @@
 #endif
 
 hpm_stat_t spi_sd_init(void);
+hpm_stat_t spi_sd_write_sector(uint32_t sector,const uint8_t *buffer,bool high_capacity);
+unsigned spi_sd_write_diagnostic(void);
 
 #endif
