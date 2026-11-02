@@ -18,6 +18,8 @@ uint32_t fish_random_next(uint32_t *random_state);
 typedef enum { FISH_RARITY_BRONZE, FISH_RARITY_SILVER, FISH_RARITY_GOLD, FISH_RARITY_SPECIAL, FISH_RARITY_COUNT } fish_rarity_t;
 typedef enum { FISH_SIZE_TOTAL_LENGTH, FISH_SIZE_CARAPACE_LENGTH, FISH_SIZE_CARAPACE_WIDTH,FISH_SIZE_SHELL_LENGTH,FISH_SIZE_MANTLE_LENGTH } fish_size_metric_t;
 enum { FISH_LAYER_SURFACE=1, FISH_LAYER_MIDDLE=2, FISH_LAYER_LOWER=4, FISH_LAYER_BOTTOM=8, FISH_LAYER_SHORE=16 };
+/* Ordinary gold pool ceiling per encounter attempt; special branches are separate. */
+#define FISH_GOLD_POOL_CAP_PERCENT 5
 typedef enum {FISH_FIGHT_ACTIVE,FISH_FIGHT_SLOW,FISH_FIGHT_PASSIVE} fish_fight_style_t;
 typedef struct {
     const char *id, *name_zh, *scientific_name, *ui_name;

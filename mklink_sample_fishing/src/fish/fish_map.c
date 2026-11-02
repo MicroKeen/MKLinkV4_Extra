@@ -66,9 +66,7 @@ uint16_t fish_map_weight(unsigned index,int x,int hook,unsigned bait)
 }
 bool fish_map_roll(uint32_t *random,int x,int hook,unsigned bait,uint8_t *index,uint16_t *size)
 {
-    uint16_t weights[FISH_SPECIES_COUNT];
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) weights[i]=fish_map_weight(i,x,hook,bait);
-    return fish_species_roll_weights(random,weights,index,size);
+    return fish_map_roll_on(random,0,x,hook,bait,720,index,size);
 }
 static unsigned activity(const uint8_t *p,unsigned minute)
 {
@@ -93,9 +91,7 @@ uint16_t fish_map_weight_at(unsigned index,int x,int hook,unsigned bait,unsigned
 }
 bool fish_map_roll_at(uint32_t *random,int x,int hook,unsigned bait,unsigned minute,uint8_t *index,uint16_t *size)
 {
-    uint16_t weights[FISH_SPECIES_COUNT];
-    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) weights[i]=fish_map_weight_at(i,x,hook,bait,minute);
-    return fish_species_roll_weights(random,weights,index,size);
+    return fish_map_roll_on(random,0,x,hook,bait,minute,index,size);
 }
 extern const fish_distribution_t fish_city_distributions[FISH_SPECIES_COUNT];
 extern const uint8_t fish_city_encounters[FISH_SPECIES_COUNT],fish_city_baits[FISH_BAIT_COUNT][FISH_SPECIES_COUNT];
@@ -174,10 +170,31 @@ uint16_t fish_map_lamp_weight_on(unsigned map,unsigned index,int x,int hook,unsi
     }
     return (uint16_t)(weight>UINT16_MAX?UINT16_MAX:weight);
 }
+const uint8_t fish_map_base_priors[3]={70,27,3};
+void fish_map_encounter_weights_on(unsigned map,int x,int hook,unsigned bait,unsigned minute,unsigned rain,unsigned line,bool lamp,uint16_t weights[FISH_SPECIES_COUNT])
+{
+    unsigned baseline[3]={0};
+    enum {REFERENCE_BAIT=5}; /* Stable ordinary-plastic bait ID. */
+    /* Calibrate eligible tiers before bait/tackle changes. A layer with one
+     * bronze species must not become silver-heavy merely by species count.
+     * Ordinary plastic bait at the same time/layer is the neutral reference. */
+    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        unsigned tier=fish_species_profile(map,i)->rarity;
+        if(tier<3)baseline[tier]+=fish_map_weight_on(map,i,x,hook,REFERENCE_BAIT,minute);
+        weights[i]=fish_map_lamp_weight_on(map,i,x,hook,bait,minute,rain,line,lamp);
+    }
+    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        unsigned tier=fish_species_profile(map,i)->rarity;
+        if(weights[i] && tier<3 && baseline[tier]) {
+            unsigned n=(unsigned)weights[i]*fish_map_base_priors[tier]*32/baseline[tier];
+            weights[i]=(uint16_t)(n>UINT16_MAX?UINT16_MAX:n?n:1);
+        }
+    }
+}
 bool fish_map_roll_lamp_on(uint32_t *state,unsigned map,int x,int hook,unsigned bait,unsigned minute,unsigned rain,unsigned line,bool lamp,uint8_t *index,uint16_t *size)
 {
     uint16_t weights[FISH_SPECIES_COUNT];
-    for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)weights[i]=fish_map_lamp_weight_on(map,i,x,hook,bait,minute,rain,line,lamp);
+    fish_map_encounter_weights_on(map,x,hook,bait,minute,rain,line,lamp,weights);
     bool found=fish_species_roll_weights_on(state,weights,map,index,size);
     if(found && bait==FISH_BAIT_LIFELIKE) {
         /* Two ordinary samples favour a larger individual, never bypass caps. */

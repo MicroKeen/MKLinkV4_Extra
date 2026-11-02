@@ -7,8 +7,8 @@ unsigned fish_cat_day(const fish_game_t *g){return g->weather_ms/1440000u;}
 static unsigned encounter(const fish_game_t *g){return fish_cat_day(g)*24+g->game_minute/60+1;}
 static bool scheduled(const fish_game_t *g)
 {
-    if(g->map_index!=1 || fish_cat_owned(g) || g->game_minute<720 || g->game_minute%60>=30)return false;
-    /* Independent hourly visits with a half-hour gap. Reloading cannot reroll
+    if(g->map_index!=1 || fish_cat_owned(g) || g->game_minute<720)return false;
+    /* Independent full-hour visits. Reloading cannot reroll
      * presence or reset the three interactions of the same encounter. */
     uint32_t h=(encounter(g)+53u)*0x9e3779b9u;h^=h>>16;h*=0x85ebca6bu;h^=h>>13;
     return h%100<FISH_CAT_HOURLY_CHANCE_PERCENT;

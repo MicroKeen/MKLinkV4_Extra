@@ -76,8 +76,8 @@ int main(void)
  /* Independent control uses the same eligible species weights with normal size sampling. */
  uint64_t sizes[2]={0};unsigned counts[2]={0};
  for(unsigned seed=1;seed<=10000;seed++)for(unsigned variant=0;variant<2;variant++) {
-  uint32_t random=seed*0x9e3779b9u;uint8_t id;uint16_t size;uint16_t weights[25];
-  for(unsigned i=0;i<25;i++)weights[i]=fish_map_weight_on(1,i,480,1600,8,720);
+  uint32_t random=seed*0x9e3779b9u;uint8_t id;uint16_t size;uint16_t weights[FISH_SPECIES_COUNT];
+  for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)weights[i]=fish_map_weight_on(1,i,480,1600,8,720);
   bool found=variant?fish_map_roll_on(&random,1,480,1600,8,720,&id,&size):fish_species_roll_weights_on(&random,weights,1,&id,&size);
   assert(found);if(id==22){sizes[variant]+=size;++counts[variant];}
  }

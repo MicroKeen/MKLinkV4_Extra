@@ -52,4 +52,6 @@ uint16_t fish_map_lamp_weight_on(unsigned map,unsigned index,int world_x,int hoo
 static inline bool fish_map_night(unsigned minute) {return minute%1440<360 || minute%1440>=1080;}
 static inline bool fish_map_light_target(unsigned species)
 {return species==34 || species==FISH_SQUID || species==FISH_CHUB_MACKEREL;}
+void fish_map_encounter_weights_on(unsigned map,int x,int hook,unsigned bait,unsigned minute,unsigned rain,unsigned line,bool lamp,uint16_t weights[FISH_SPECIES_COUNT]);
+extern const uint8_t fish_map_base_priors[3]; /* Bronze/silver/gold, before bait and tackle. */
 #endif

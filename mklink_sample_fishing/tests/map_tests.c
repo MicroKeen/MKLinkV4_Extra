@@ -47,14 +47,19 @@ int main(void)
     for(int x=64;x<904;x+=16) for(unsigned bait=0;bait<FISH_BAIT_COUNT;bait++) {
         int bottom=fish_map_depth(x);unsigned sum=0;
         for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)sum+=fish_map_weight(i,x,bottom,bait);
-        unsigned turtle=fish_map_weight(9,x,bottom,bait);
-        if(sum) {unsigned ppm=turtle*1000000u/sum;assert(ppm<10000);if(ppm>max_turtle_ppm)max_turtle_ppm=ppm;}
+        unsigned turtle=fish_map_weight(9,x,bottom,bait),gold=0;
+        for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)if(fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i))gold+=fish_map_weight(i,x,bottom,bait);
+        if(sum) {unsigned ppm=turtle*1000000u/sum;
+            if(gold*100>sum*FISH_GOLD_POOL_CAP_PERCENT)ppm=turtle*(FISH_GOLD_POOL_CAP_PERCENT*10000u)/gold;
+            assert(ppm<=50000);if(ppm>max_turtle_ppm)max_turtle_ppm=ppm;}
     }
     for(unsigned bait=0;bait<FISH_BAIT_COUNT;bait++) {
         unsigned turtle=0;uint32_t seed=4123;uint8_t id;uint16_t size;
         if(bait==FISH_BAIT_RAGWORM){assert(!fish_map_roll(&seed,480,600,bait,&id,&size));continue;}
         for(unsigned n=0;n<100000;n++){assert(fish_map_roll(&seed,480,600,bait,&id,&size));turtle+=id==9;}
-        assert(turtle<1000);printf("lake_centre_bait=%u turtle_per_100000=%u\n",bait,turtle);
+        assert(turtle<5500);
+        if(bait==4)assert(turtle>=1000 && turtle<=3500);
+        printf("lake_centre_bait=%u turtle_per_100000=%u\n",bait,turtle);
     }
     printf("maximum_local_turtle_ppm=%u\n",max_turtle_ppm);
     for (unsigned n=0;n<FISH_DEPTH_NODE_COUNT;n++) assert(fish_map_depth(fish_depth_profile[n].x)==fish_depth_profile[n].depth_cm);

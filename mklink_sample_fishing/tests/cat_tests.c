@@ -28,7 +28,7 @@ int main(void)
     unsigned present=0,absent=0;
     for(unsigned day=0;day<7;day++)for(unsigned minute=0;minute<1440;minute+=15){
         b=g;b.cat.flags=0;b.game_minute=(uint16_t)minute;b.weather_ms=(day*1440+minute)*1000;
-        bool seen=fish_cat_present(&b);if(minute<720 || minute%60>=30)assert(!seen);
+        bool seen=fish_cat_present(&b);if(minute<720)assert(!seen);
         if(minute>=720){present+=seen;absent+=!seen;}
     }
     assert(present && absent && g.random_state==rng);
@@ -36,14 +36,14 @@ int main(void)
     unsigned hourly=0;
     for(unsigned day=0;day<96;day++)for(unsigned hour=12;hour<24;hour++){
         b=g;b.cat.flags=0;b.game_minute=hour*60;b.weather_ms=(day*1440+hour*60)*1000;
-        hourly+=fish_cat_present(&b);
-        b.game_minute+=30;assert(!fish_cat_present(&b));
+        bool seen=fish_cat_present(&b);hourly+=seen;
+        b.game_minute+=30;assert(fish_cat_present(&b)==seen);
         b.map_index=0;assert(!fish_cat_present(&b));b.map_index=2;assert(!fish_cat_present(&b));
     }
-    assert(hourly>96*12*60/100 && hourly<96*12*70/100 && g.random_state==rng);
+    assert(hourly>96*12*80/100 && hourly<96*12*90/100 && g.random_state==rng);
     printf("CAT_VISITS,%u,1152\n",hourly);
     /* Visible visits and absent streets both remain stable while watched. */
-    visit(&b);b.cat.actions=3;b.game_minute+=45;b.weather_ms=b.game_minute*1000;
+    visit(&b);b.cat.actions=3;b.game_minute=0;b.weather_ms=1440000;
     fish_cat_update(&b);assert(fish_cat_present(&b) && b.cat.actions==3);
     b.cat.walk_x=-7;b.cat.flags=FISH_CAT_READY|FISH_CAT_VISIBLE|FISH_CAT_WALK_LEFT;
     fish_save_pack(&b,p);fish_game_t restored;fish_game_init(&restored,123);assert(fish_save_unpack(&restored,p));
@@ -153,5 +153,5 @@ int main(void)
         uint32_t no_variant=before_rng;assert(fish_species_special_roll_cat(&no_variant,17)==17 && no_variant==before_rng);
     }
     assert(normal>3600 && normal<4400 && with_cat>9300 && with_cat<10700);
-    printf("PASS:65%% hourly visits, six directed three-map routes and failed loads, destination saves, shared feeds, stationary boat poses; variants/400000 normal=%u cat=%u\n",normal,with_cat);
+    printf("PASS:85%% full-hour visits, six directed three-map routes and failed loads, destination saves, shared feeds, stationary boat poses; variants/400000 normal=%u cat=%u\n",normal,with_cat);
 }

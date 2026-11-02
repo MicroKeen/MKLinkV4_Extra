@@ -156,13 +156,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 4,
+          "reed_bay": 3,
           "open_pond": 3,
-          "mud_channel": 2,
-          "stream_inlet": 1,
-          "gravel_margin": 2
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           125,
@@ -323,12 +323,12 @@
         "max_depth_cm": 650,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 4,
+          "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           130,
@@ -480,13 +480,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 300,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 1,
-          "mud_channel": 1,
-          "stream_inlet": 6,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           130,
           115,
@@ -645,13 +645,13 @@
         "min_depth_cm": 80,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 2,
-          "mud_channel": 5,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           65,
           125,
@@ -801,13 +801,13 @@
         "min_depth_cm": 5,
         "max_depth_cm": 250,
         "zone_multipliers": {
-          "reed_bay": 3,
-          "open_pond": 1,
+          "reed_bay": 4,
+          "open_pond": 2,
           "mud_channel": 1,
           "stream_inlet": 2,
-          "gravel_margin": 6
+          "gravel_margin": 4
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           115,
           110,
@@ -968,13 +968,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 450,
         "zone_multipliers": {
-          "reed_bay": 5,
-          "open_pond": 2,
-          "mud_channel": 1,
-          "stream_inlet": 1,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           125,
           130,
@@ -1129,13 +1129,13 @@
         "min_depth_cm": 15,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 4,
-          "open_pond": 2,
-          "mud_channel": 4,
-          "stream_inlet": 2,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           65,
           130,
@@ -1288,13 +1288,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 300,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 5,
-          "mud_channel": 2,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 2
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           135,
           110,
@@ -1448,13 +1448,13 @@
         "min_depth_cm": 30,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 1,
-          "mud_channel": 2,
-          "stream_inlet": 5,
-          "gravel_margin": 4
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           115,
@@ -1515,7 +1515,7 @@
       },
       "appearance_zh": "扁平软甲无硬甲盾、长颈管鼻、蹼足",
       "color_policy": "natural_wild_type",
-      "encounter_weight": 1,
+      "encounter_weight": 3,
       "reference_urls": [
         "https://nas.er.usgs.gov/Queries/FactSheet.aspx?SpeciesID=1278",
         "https://www.wwfchina.org/content/press/publication/turtle.pdf",
@@ -1608,13 +1608,13 @@
         "min_depth_cm": 15,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 1,
-          "mud_channel": 1,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           85,
           110,
@@ -1770,13 +1770,13 @@
         "min_depth_cm": 15,
         "max_depth_cm": 200,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 1,
+          "reed_bay": 4,
+          "open_pond": 2,
           "mud_channel": 1,
-          "stream_inlet": 3,
-          "gravel_margin": 6
+          "stream_inlet": 2,
+          "gravel_margin": 4
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           70,
           125,
@@ -1929,13 +1929,13 @@
         "min_depth_cm": 80,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 2,
-          "mud_channel": 5,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           65,
           125,
@@ -2089,13 +2089,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 300,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 1,
-          "mud_channel": 1,
-          "stream_inlet": 6,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           130,
           115,
@@ -2252,12 +2252,12 @@
         "max_depth_cm": 650,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 4,
+          "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           130,
@@ -2413,13 +2413,13 @@
         "min_depth_cm": 15,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 1,
-          "mud_channel": 1,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           85,
           110,
@@ -2568,13 +2568,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 4,
-          "mud_channel": 4,
-          "stream_inlet": 6,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           120,
           145,
@@ -2721,13 +2721,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 5,
+          "reed_bay": 3,
           "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 2,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           115,
           135,
@@ -2872,13 +2872,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 2,
-          "mud_channel": 6,
-          "stream_inlet": 2,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           115,
@@ -3023,13 +3023,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 5,
-          "mud_channel": 4,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 1
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           125,
           130,
@@ -3176,13 +3176,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 2,
+          "reed_bay": 3,
           "open_pond": 3,
-          "mud_channel": 2,
-          "stream_inlet": 6,
-          "gravel_margin": 4
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           125,
           140,
@@ -3329,13 +3329,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 1,
+          "reed_bay": 3,
           "open_pond": 3,
-          "mud_channel": 5,
-          "stream_inlet": 6,
-          "gravel_margin": 1
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           110,
           145,
@@ -3482,13 +3482,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 650,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 4,
-          "mud_channel": 2,
-          "stream_inlet": 6,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           125,
           140,
@@ -3634,13 +3634,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 2,
-          "mud_channel": 6,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 5
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           80,
           135,
@@ -3785,13 +3785,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 1,
-          "mud_channel": 4,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 5
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           100,
           120,
@@ -3940,13 +3940,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 5,
-          "mud_channel": 5,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 1
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "大部分鱼全水域分布，钓层、饵料与时段决定吸引力；仅趴地虎和溪蟹限制两侧近岸。",
         "activity_percent": [
           115,
           130,
@@ -4101,7 +4101,7 @@
           "stream_inlet": 0,
           "gravel_margin": 0
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -4255,13 +4255,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 5,
-          "open_pond": 5,
+          "reed_bay": 3,
+          "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 1,
-          "gravel_margin": 0
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           130,
           120,
@@ -4417,13 +4417,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 4,
-          "open_pond": 5,
+          "reed_bay": 3,
+          "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 0,
-          "gravel_margin": 0
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           80,
           130,
@@ -4579,12 +4579,12 @@
         "max_depth_cm": 12500,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 5,
-          "mud_channel": 5,
-          "stream_inlet": 2,
-          "gravel_margin": 0
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -4738,13 +4738,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 5,
-          "open_pond": 5,
+          "reed_bay": 4,
+          "open_pond": 4,
           "mud_channel": 3,
           "stream_inlet": 0,
           "gravel_margin": 0
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           140,
           110,
@@ -4899,12 +4899,12 @@
         "max_depth_cm": 12500,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 5,
-          "mud_channel": 5,
-          "stream_inlet": 2,
-          "gravel_margin": 0
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -5058,13 +5058,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 5,
-          "open_pond": 4,
-          "mud_channel": 1,
-          "stream_inlet": 0,
-          "gravel_margin": 0
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -5219,12 +5219,12 @@
         "max_depth_cm": 12500,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 5,
-          "mud_channel": 4,
-          "stream_inlet": 1,
-          "gravel_margin": 0
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -5381,10 +5381,10 @@
           "reed_bay": 0,
           "open_pond": 0,
           "mud_channel": 1,
-          "stream_inlet": 4,
-          "gravel_margin": 5
+          "stream_inlet": 3,
+          "gravel_margin": 4
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -5540,13 +5540,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 0,
-          "open_pond": 0,
-          "mud_channel": 1,
-          "stream_inlet": 4,
-          "gravel_margin": 5
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           80,
           120,
@@ -5709,7 +5709,7 @@
           "stream_inlet": 0,
           "gravel_margin": 5
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -5864,13 +5864,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 0,
-          "open_pond": 0,
-          "mud_channel": 1,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
           "stream_inlet": 3,
-          "gravel_margin": 5
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           120,
           120,
@@ -6028,11 +6028,11 @@
         "zone_multipliers": {
           "reed_bay": 0,
           "open_pond": 0,
-          "mud_channel": 0,
-          "stream_inlet": 2,
-          "gravel_margin": 5
+          "mud_channel": 1,
+          "stream_inlet": 3,
+          "gravel_margin": 4
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           120,
           120,
@@ -7147,7 +7147,7 @@
           "stream_inlet": 0,
           "gravel_margin": 0
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           110,
           120,
@@ -7305,13 +7305,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 1,
+          "reed_bay": 3,
           "open_pond": 3,
-          "mud_channel": 5,
-          "stream_inlet": 5,
-          "gravel_margin": 5
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           70,
           120,
@@ -7469,13 +7469,13 @@
         "min_depth_cm": 0,
         "max_depth_cm": 12500,
         "zone_multipliers": {
-          "reed_bay": 1,
-          "open_pond": 4,
-          "mud_channel": 5,
-          "stream_inlet": 4,
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
-        "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
+        "basis": "多数海鱼全海面分布；口虾蛄、鲻鱼限近岸，鮟鱇、蓝鳍金枪偏外海，皇带鱼限深海。仍须满足钓层、昼夜与实际线长。",
         "activity_percent": [
           100,
           130,
@@ -8322,10 +8322,10 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 4,
+          "reed_bay": 3,
           "open_pond": 3,
-          "mud_channel": 2,
-          "stream_inlet": 1,
+          "mud_channel": 3,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
         "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -8484,11 +8484,11 @@
         "min_depth_cm": 0,
         "max_depth_cm": 1600,
         "zone_multipliers": {
-          "reed_bay": 2,
-          "open_pond": 4,
-          "mud_channel": 5,
-          "stream_inlet": 2,
-          "gravel_margin": 2
+          "reed_bay": 3,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
         "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
         "activity_percent": [
@@ -8643,9 +8643,9 @@
         "max_depth_cm": 1600,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 5,
-          "mud_channel": 2,
-          "stream_inlet": 4,
+          "open_pond": 3,
+          "mud_channel": 3,
+          "stream_inlet": 3,
           "gravel_margin": 3
         },
         "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -8802,10 +8802,10 @@
         "max_depth_cm": 650,
         "zone_multipliers": {
           "reed_bay": 3,
-          "open_pond": 4,
+          "open_pond": 3,
           "mud_channel": 3,
-          "stream_inlet": 1,
-          "gravel_margin": 1
+          "stream_inlet": 3,
+          "gravel_margin": 3
         },
         "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
         "activity_percent": [

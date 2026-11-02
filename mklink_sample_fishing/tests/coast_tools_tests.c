@@ -29,8 +29,9 @@ int main(void)
         assert(!fish_map_lamp_weight_on(2,id,x,0,4,day,0,FISH_MARINE_LINE,true));
         assert(!fish_map_lamp_weight_on(2,id,x,-1,4,night,0,FISH_MARINE_LINE,true));
     }
-    assert(fish_map_lamp_weight_on(2,34,600,0,4,night,0,0,true)>0);
-    assert(!fish_map_lamp_weight_on(2,34,600,0,4,night,0,0,false));
+    unsigned shore_hairtail=fish_map_lamp_weight_on(2,34,600,0,4,night,0,0,false);
+    assert(shore_hairtail>0); /* Broad night surface habitat, even without a lamp. */
+    assert(fish_map_lamp_weight_on(2,34,600,0,4,night,0,0,true)==shore_hairtail*4);
     assert(fish_map_weight_on(2,FISH_CHUB_MACKEREL,x,0,3,night)>0);
     unsigned mackerel=fish_map_lamp_weight_on(2,FISH_CHUB_MACKEREL,x,0,3,night,0,0,false);
     assert(fish_map_lamp_weight_on(2,FISH_CHUB_MACKEREL,x,0,3,night,0,0,true)==mackerel*4);

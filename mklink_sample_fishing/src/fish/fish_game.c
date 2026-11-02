@@ -497,6 +497,7 @@ int fish_game_camera(const fish_game_t *g)
 
 static void select_fish(fish_game_t *g)
 {
+    g->simulation_at=g->now; /* Reused outside fighting for empty-pool retry timing. */
     g->pending_species=FISH_SPECIES_COUNT;g->pending_variant=0; g->pending_size_mm=0; g->pending_weight_g=0;
     g->bite_wait_ms=0;
     unsigned rain=fish_weather_rain(g);
@@ -597,7 +598,7 @@ void fish_game_update(fish_game_t *g, uint32_t now)
                 g->boat_speed=0;g->boat_motion_q8=0;
             }
         }
-    } else if (g->mode!=FISH_FIGHT) {g->simulation_at=now;g->boat_motion_q8=0;}
+    } else if (g->mode!=FISH_FIGHT && g->mode!=FISH_WAIT) {g->simulation_at=now;g->boat_motion_q8=0;}
     if (g->pressed && (g->mode == FISH_MOVE || g->mode == FISH_AIM)
         && now - g->pressed_at >= FISH_HOLD_MS && g->economy.lines && fish_tackle_compatible(g->rod_index,g->line_index)) phase(g, FISH_CHARGE);
     if (g->mode == FISH_CAST && now - g->phase_at >= 650){
@@ -619,6 +620,10 @@ void fish_game_update(fish_game_t *g, uint32_t now)
         if(g->reel_units==10000){g->rig_depth_cm=g->cast_depth_cm=0;phase(g,FISH_AIM);}
     }
     if(g->map_index==2 && g->mode==FISH_WAIT && was_night!=fish_map_night(g->game_minute)){select_fish(g);phase(g,FISH_WAIT);}
+    if(g->mode==FISH_WAIT && g->pending_species==FISH_SPECIES_COUNT && now-g->simulation_at>=fish_rules.bite_attempt_ms) {
+        select_fish(g);
+        if(g->pending_species<FISH_SPECIES_COUNT)phase(g,FISH_WAIT);
+    }
     if (g->mode == FISH_WAIT && now - g->phase_at >= (g->bite_wait_ms?g->bite_wait_ms:fish_rules.bite_attempt_ms)
         && g->pending_species<FISH_SPECIES_COUNT) { g->reel = 0; phase(g, FISH_BITE); }
     if (g->mode == FISH_BITE && now - g->phase_at >= strike_deadline(g)) lost(g,FISH_LOSS_MISSED);

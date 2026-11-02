@@ -64,31 +64,31 @@
   "zones": [
     {
       "id": "reed_bay",
-      "name_zh": "芦苇浅湾",
+      "name_zh": "左岸水域",
       "left": 56,
       "right": 200
     },
     {
       "id": "open_pond",
-      "name_zh": "开阔水面",
+      "name_zh": "偏左水面",
       "left": 200,
       "right": 352
     },
     {
       "id": "mud_channel",
-      "name_zh": "泥底深槽",
+      "name_zh": "中央水域",
       "left": 352,
       "right": 672
     },
     {
       "id": "stream_inlet",
-      "name_zh": "缓流入口",
+      "name_zh": "偏右水面",
       "left": 672,
       "right": 784
     },
     {
       "id": "gravel_margin",
-      "name_zh": "浅岸砾石",
+      "name_zh": "右岸水域",
       "left": 784,
       "right": 904
     }

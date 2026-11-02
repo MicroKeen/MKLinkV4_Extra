@@ -1,3 +1,7 @@
+# D29 分布与鳖／猫 / Habitats, turtles and cats
+
+多数鱼取消水平偏区；普通金级池每次判定上限5%，鳖强化虾／小鱼饵，猫85%整小时候选。[当前设定](encounters-d29.md)。V22与资源包不变。 / Broad habitats, gold ceiling, turtle bait tuning and full-hour cat visits.
+
 # D28R2 声音设置 / Sound mode
 
 “仅鱼讯”只提醒可提竿时机，一口鱼一次；上钩、挣扎、收银仅“全部开启”播放。关闭保持静音。[规则与核验](strike-cue-d28-r2.md)。V22和资源不变。 / Fish-only cues only the valid strike window; All retains hook/struggle/trade sounds.

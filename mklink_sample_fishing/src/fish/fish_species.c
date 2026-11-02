@@ -69,11 +69,22 @@ bool fish_species_roll_weights(uint32_t *state,const uint16_t *weights,uint8_t *
 {return fish_species_roll_weights_on(state,weights,0,index,size);}
 bool fish_species_roll_weights_on(uint32_t *state,const uint16_t *weights,unsigned map,uint8_t *index,uint16_t *size)
 {
-    unsigned total=0;
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) total+=weights[i];
+    unsigned total=0,gold=0;
+    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        total+=weights[i];
+        if(fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i))gold+=weights[i];
+    }
     if (!total) return false; /* Empty water does not fall back to global fish. */
+    int tier=-1;
+    if(gold*100>total*FISH_GOLD_POOL_CAP_PERCENT) {
+        tier=next_random(state)%100<FISH_GOLD_POOL_CAP_PERCENT;
+        total=tier?gold:total-gold;
+        if(!total)return false; /* Rare-only bait/depth stays waiting, never becomes guaranteed gold. */
+    }
     unsigned ticket=next_random(state)%total;
     for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        bool is_gold=fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i);
+        if(tier>=0 && is_gold!=(bool)tier)continue;
         if (ticket<weights[i]) {
             *index=(uint8_t)i; *size=fish_species_sample_size(state,fish_species_profile(map,i)); return true;
         }

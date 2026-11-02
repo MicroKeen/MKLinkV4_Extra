@@ -1790,10 +1790,10 @@ static void catch_card(const arm_2d_tile_t *tile, fish_scene_t *self, bool mirro
         if(known) {
             for(unsigned i=0;i<4;i++) {
                 const char *field=fish_guide_fields[index][i];
-                if(game->map_index && i==1) {
-                    if(index==0)field="水域：河岸草湾";
-                    else if(index==1 || index==13)field="水域：江心深槽";
-                    else if(index==7)field="水域：桥下开阔水面";
+                if(game->map_index==1 && i>=2) {
+                    if(index==0)field=fish_guide_city_fields[0][i-2];
+                    else if(index==1 || index==13)field=fish_guide_city_fields[1][i-2];
+                    else if(index==7)field=fish_guide_city_fields[2][i-2];
                 }
                 ui_text(tile,34,83+(int)i*27,174,i==3?SUN:CREAM,INK,field);
             }
@@ -2167,7 +2167,7 @@ static void media_page(const arm_2d_tile_t *tile,fish_media_status_t status)
         box(tile,0,0,240,240,INK);
         bool checking=state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY || state==FISH_MEDIA_SETTLE;
         caption(tile,120,25,state==FISH_MEDIA_FAULT?"上次为看门狗重启":checking?"正在检查资源包":status.receiving?"正在接收资源":"需要游戏资源",CREAM,INK);
-        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D28R2",SUN,INK);
+        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D29",SUN,INK);
         char label[64];
         if(state==FISH_MEDIA_FAULT) {
             snprintf(label,sizeof(label),"S%02u  %08lx",status.reset_stage,(unsigned long)status.fault.detail);
