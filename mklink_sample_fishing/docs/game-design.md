@@ -1,3 +1,7 @@
+# D26R2 当前设定 / Current settings
+
+[背包时钟与休息计时](cat-rest-d26-r2.md)：当前时间常显，累计时长松开保留，存档和资源保持。 / Visible backpack clock and retained rest duration; save/resource formats unchanged.
+
 # D26R1 当前设定 / Current settings
 
 [猫咪与休息](cat-rest-d26-r1.md)：都市猫65%候选概率、三图跟随，船上长按20倍时间。V21与2026.10.31.4资源保持。 / More frequent cats, global adoption and hold-to-rest time acceleration.

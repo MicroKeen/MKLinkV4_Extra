@@ -184,6 +184,7 @@ static bool unpack(fish_game_t *g,const uint8_t p[FISH_SAVE_PAYLOAD_BYTES])
         g->boat_x=FISH_BOAT_RIGHT;g->shore_x=FISH_STATION_X;g->facing=-1;g->mode=FISH_SHORE;
     }
     g->boat_speed=g->shore_speed=0;
+    g->rest_elapsed_ms=0;
     g->sound_mode=p[FISH_SAVE_V5_PAYLOAD_BYTES];
     if(!p[201]) {
         /* This release resets legacy equipment once; progress and cargo stay. */

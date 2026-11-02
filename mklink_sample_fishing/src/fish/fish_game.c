@@ -534,6 +534,8 @@ void fish_game_update(fish_game_t *g, uint32_t now)
         uint32_t fast=now-g->pressed_at-FISH_REST_HOLD_MS;if(fast>delta)fast=delta;
         uint32_t limit=(UINT32_MAX-delta)/(FISH_REST_SPEED-1);if(fast>limit)fast=limit;
         delta+=fast*(FISH_REST_SPEED-1);
+        uint32_t elapsed=fast*FISH_REST_SPEED;
+        g->rest_elapsed_ms=elapsed>UINT32_MAX-g->rest_elapsed_ms?UINT32_MAX:g->rest_elapsed_ms+elapsed;
     }
     bool sheltered=fish_game_sheltered(g);
     fish_weather_advance(g,delta,sheltered);
@@ -542,7 +544,6 @@ void fish_game_update(fish_game_t *g, uint32_t now)
     g->clock_remainder_ms=(uint16_t)(remainder%1000);
     g->latte_remaining_ms=delta>=g->latte_remaining_ms?0:g->latte_remaining_ms-delta;
     if(!g->latte_remaining_ms)g->comforts&=(uint8_t)~FISH_COMFORT_NOODLES;
-    g->now = now;
     fish_cat_update(g);fish_forage_update(g);
     fish_money_update(g);
     if(g->mode==FISH_ROUTE && g->pressed && now-g->pressed_at>=FISH_GUIDE_HOLD_MS) {
@@ -756,6 +757,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
         g->shore_speed=0;g->shore_remainder=0;
         g->boat_speed=0;g->boat_motion_q8=0;
         g->pressed = true; g->pressed_at = now; g->previous_mode = g->mode;
+        if(g->mode==FISH_BAG && g->bag_index==FISH_BAG_REST)g->rest_elapsed_ms=0;
         if (g->mode==FISH_BITE) {
             if (!fish_game_strike_ready(g)) {lost(g,FISH_LOSS_EARLY);return;}
             int dx,dy; fish_game_float(g,&dx,&dy);

@@ -1185,8 +1185,9 @@ static void hud(const arm_2d_tile_t *tile, const fish_scene_t *self)
         chinese_text_tinted(tile,53,1,"行囊",(arm_2d_size_t){26,19},RPG_LIGHT,RPG_DARK);
         coin_count(tile,83,8,game->economy.coins);
     } else if(game->mode!=FISH_SHOP && game->mode!=FISH_HOLD) coin_count(tile,8,7,game->economy.coins);
-    if(game->mode!=FISH_BAG && game->mode!=FISH_GUIDE && game->mode!=FISH_SHOP && game->mode!=FISH_HOLD) {
-        snprintf(label,sizeof(label),"%02u:%02u",game->game_minute/60,game->game_minute%60);text(tile,121,7,CREAM,label);
+    if(game->mode!=FISH_GUIDE && game->mode!=FISH_SHOP && game->mode!=FISH_HOLD) {
+        snprintf(label,sizeof(label),"%02u:%02u",game->game_minute/60,game->game_minute%60);
+        text(tile,game->mode==FISH_BAG?143:121,game->mode==FISH_BAG?18:7,CREAM,label);
     }
     if (game->mode==FISH_GUIDE) {
         ui_text(tile,122,4,48,GREEN,INK,"图鉴");
@@ -1348,7 +1349,9 @@ static const char *bag_attributes(const fish_game_t *g,char *scratch,size_t leng
         case FISH_BAG_GUIDE:return "查看已收集的鱼种";
         case FISH_BAG_SAVE:return "每五分钟自动存档";
         case FISH_BAG_SOUND:return fish_sound_names[g->sound_mode];
-        case FISH_BAG_REST:return fish_game_resting(g)?"松开结束休息":"长按加快时间";
+        case FISH_BAG_REST:
+            if(!g->pressed && !g->rest_elapsed_ms)return "长按加快时间";
+            snprintf(scratch,length,"已休息%lu小时%02lu分",(unsigned long)g->rest_elapsed_ms/60000,(unsigned long)g->rest_elapsed_ms/1000%60);return scratch;
         default:return "回到湖上继续垂钓";
     }
 }
@@ -2164,7 +2167,7 @@ static void media_page(const arm_2d_tile_t *tile,fish_media_status_t status)
         box(tile,0,0,240,240,INK);
         bool checking=state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY || state==FISH_MEDIA_SETTLE;
         caption(tile,120,25,state==FISH_MEDIA_FAULT?"上次为看门狗重启":checking?"正在检查资源包":status.receiving?"正在接收资源":"需要游戏资源",CREAM,INK);
-        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D26R1",SUN,INK);
+        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D26R2",SUN,INK);
         char label[64];
         if(state==FISH_MEDIA_FAULT) {
             snprintf(label,sizeof(label),"S%02u  %08lx",status.reset_stage,(unsigned long)status.fault.detail);

@@ -89,6 +89,7 @@ typedef struct fish_game {
     bool shop_closed_notice;
     fish_merchant_reply_t merchant_reply;
     fish_cargo_result_t cargo_result;
+    uint32_t rest_elapsed_ms; /* Last held rest's game time; UI only, not saved. */
 } fish_game_t;
 
 enum {FISH_TRAVEL_FARE=180,FISH_TRAVEL_SEA_FARE=280,FISH_TRAVEL_MINUTES=300,FISH_MOTOR_FAST_PX_PER_S=60};
