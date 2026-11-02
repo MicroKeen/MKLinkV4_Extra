@@ -8,17 +8,17 @@
 /* Species indices are stable across saves: see data/species.json. */
 const uint16_t fish_base_prices[FISH_SPECIES_COUNT]={20,20,50,20,50,50,50,20,72,60,50,200,500,200,600,48,50,60,40,20,160,20,68,180,52,20,50,180,50,20,20,40,120,65,20,1600,55,105,20,20,50,50,20,20,200,20,20,1,80,80};
 const fish_container_t fish_containers[FISH_CONTAINER_COUNT]={
-    {"小木桶",10000,0},{"大木桶",20000,300},{"储鱼箱",35000,750}};
+    {"小木桶",10000,0},{"大木桶",20000,300},{"储鱼箱",35000,750},{"大型储鱼箱",80000,1800}};
 typedef struct {uint8_t slot,index;uint16_t price;} shop_item_t;
 /* sell, rods, lines, floats, five packs of bait, return */
 static const shop_item_t items[FISH_SHOP_COUNT]={
     {5,0,0},{0,1,550},{0,2,1800},{1,0,120},{1,2,450},{2,1,90},{2,2,120},
     {3,0,8},{3,1,6},{3,2,10},{3,3,18},{3,4,20},{4,1,0},{4,2,0},{5,1,0},{5,2,0},{3,6,30},{3,7,24},{3,8,600},{6,0,35},{1,1,200},{1,3,600},
     {0,FISH_LONG_ROD,3500},{FISH_SHOP_UTILITY,0,160},{FISH_SHOP_DRINK,1,28},{FISH_SHOP_FOOD,0,25},{FISH_SHOP_SERVICE,3,FISH_CABIN_PRICE},
-    {FISH_SHOP_LINE,FISH_MARINE_LINE,1200},{FISH_SHOP_UTILITY,1,FISH_LAMP_PRICE},{FISH_SHOP_ROD,FISH_HEAVY_SEA_ROD,6000},{FISH_SHOP_TOOL,0,120},{FISH_SHOP_TOOL,1,180}};
+    {FISH_SHOP_LINE,FISH_MARINE_LINE,1200},{FISH_SHOP_UTILITY,1,FISH_LAMP_PRICE},{FISH_SHOP_ROD,FISH_HEAVY_SEA_ROD,6000},{FISH_SHOP_TOOL,0,120},{FISH_SHOP_TOOL,1,180},{FISH_SHOP_CONTAINER,3,0}};
 /* Stable item IDs are saved/tested independently of each vendor's order. */
 static const uint8_t wetland_tackle[]={0,1,2,3,20,4,5,6,7,8,9,10,11,12,13,14,15};
-static const uint8_t city_tackle[]={0,1,2,22,3,20,4,21,6,10,11,16,17,18,12,13,14,15};
+static const uint8_t city_tackle[]={0,1,2,22,3,20,4,21,6,10,11,16,17,18,13,FISH_SHOP_LARGE_BOX,14,15};
 static const uint8_t coast_tackle[]={0,FISH_SHOP_HEAVY_ROD,FISH_SHOP_PE_LINE,FISH_SHOP_MARINE_LINE,FISH_SHOP_LAMP,FISH_SHOP_SHOVEL,FISH_SHOP_CROWBAR,FISH_SHOP_CABIN,FISH_SHOP_CARGO,FISH_SHOP_BACK};
 static const uint8_t convenience[]={19,24,23,25,15};
 unsigned fish_shop_count(const struct fish_game *g)
@@ -93,10 +93,9 @@ unsigned fish_cargo_page_index(const struct fish_game *g,unsigned page)
 {for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)if(fish_cargo_count(g,i)){if(!page)return i;--page;}return !page && g->economy.hanging_species<FISH_SPECIES_COUNT?FISH_SPECIES_COUNT:FISH_SPECIES_COUNT+1;}
 fish_cargo_result_t fish_hold_add(fish_economy_t *e,unsigned species,uint16_t size_mm,uint32_t grams)
 {return fish_hold_add_on(e,0,species,size_mm,grams);}
-fish_cargo_result_t fish_hold_add_on(fish_economy_t *e,unsigned map,unsigned species,uint16_t size_mm,uint32_t grams)
+static fish_cargo_result_t hold_add_priced(fish_economy_t *e,unsigned map,unsigned species,uint16_t size_mm,uint32_t grams,uint32_t price)
 {
     if(species>=FISH_SPECIES_COUNT || !grams) return FISH_RELEASED;
-    uint32_t price=fish_catch_price_on(map,species,size_mm);
     if(map==2 && e->cabin_owned && species>=FISH_COAST_FIRST && grams<=FISH_CABIN_CAPACITY_G && fish_cabin_weight(e)<=FISH_CABIN_CAPACITY_G-grams) {
         unsigned k=species-FISH_COAST_FIRST;if(e->cabin_count[k]==UINT16_MAX)return FISH_RELEASED;
         ++e->cabin_count[k];e->cabin_grams[k]+=grams;e->cabin_value[k]+=price;
@@ -133,6 +132,9 @@ bool fish_equipment_owned(const fish_economy_t *e,unsigned slot,unsigned index)
     if(slot==FISH_BAG_BAIT) return index==FISH_PLASTIC_BAIT || (index<FISH_BAIT_COUNT && e->bait_stock[index]);
     return slot==FISH_BAG_DEPTH && (index==0 || index==1 || index==FISH_DEPTH_OPTION_COUNT-1);
 }
+fish_cargo_result_t fish_hold_add_on(fish_economy_t *e,unsigned map,unsigned species,uint16_t size_mm,uint32_t grams)
+{return hold_add_priced(e,map,species,size_mm,grams,fish_catch_price_on(map,species,size_mm));}
+
 const char *fish_shop_name(unsigned item)
 {
     if(item>=FISH_SHOP_COUNT) return "返回小径";
@@ -253,7 +255,7 @@ fish_merchant_reply_t fish_shop_trade(struct fish_game *g,unsigned item)
         /* Move an existing hanging fish only when the larger container fits it.
          * The normal add path leaves all state untouched when space is short. */
         if(e->hanging_species<FISH_SPECIES_COUNT && e->hanging_grams<=fish_hold_capacity(e) &&
-           fish_hold_add_on(e,e->hanging_map,e->hanging_species,e->hanging_size_mm,e->hanging_grams)==FISH_STORED) {
+           hold_add_priced(e,e->hanging_map,e->hanging_species,e->hanging_size_mm,e->hanging_grams,e->hanging_value)==FISH_STORED) {
             e->hanging_species=FISH_SPECIES_COUNT;e->hanging_map=0;e->hanging_size_mm=0;e->hanging_grams=0;e->hanging_value=0;
         }
     }

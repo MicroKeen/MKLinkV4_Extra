@@ -1539,7 +1539,7 @@ static void shop_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     else if(item==FISH_SHOP_UMBRELLA)vendor_view(tile,&fish_image_Umbrella,18,174,14,18,0);
     else if(item==FISH_SHOP_CAT_FOOD)vendor_image(tile,&fish_image_CatFood,16,178,0);
     else if(kind==FISH_SHOP_TOOL)vendor_view(tile,index?&fish_image_Crowbar:&fish_image_Shovel,20,169,12,23,0);
-    else if((item<25 && fish_shop_list_goods[item]) || item==FISH_SHOP_MARINE_LINE) {
+    else if((item<25 && fish_shop_list_goods[item]) || item==FISH_SHOP_MARINE_LINE || item==FISH_SHOP_LARGE_BOX) {
         arm_2d_point_float_t icon_centre={32,193};
         arm_2dp_tile_transform_xy((arm_2d_op_trans_t *)&self->shop_detail_operation,tile,NULL,&icon_centre);
         ARM_2D_OP_WAIT_ASYNC(&self->shop_detail_operation);
@@ -2167,7 +2167,7 @@ static void media_page(const arm_2d_tile_t *tile,fish_media_status_t status)
         box(tile,0,0,240,240,INK);
         bool checking=state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY || state==FISH_MEDIA_SETTLE;
         caption(tile,120,25,state==FISH_MEDIA_FAULT?"上次为看门狗重启":checking?"正在检查资源包":status.receiving?"正在接收资源":"需要游戏资源",CREAM,INK);
-        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D27",SUN,INK);
+        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D28",SUN,INK);
         char label[64];
         if(state==FISH_MEDIA_FAULT) {
             snprintf(label,sizeof(label),"S%02u  %08lx",status.reset_stage,(unsigned long)status.fault.detail);
@@ -2291,7 +2291,7 @@ static void frame_start(arm_2d_scene_t *s)
         if (fish_smoke_test && result<0) {fprintf(stderr,"Rod transform prepare failed: %d\n",result);exit(1);}
     }
     if(game->mode==FISH_SHOP) {
-        unsigned icon=game->shop_index==FISH_SHOP_MARINE_LINE?FISH_SHOP_PE_LINE:game->shop_index;
+        unsigned icon=game->shop_index==FISH_SHOP_LARGE_BOX?13:game->shop_index==FISH_SHOP_MARINE_LINE?FISH_SHOP_PE_LINE:game->shop_index;
         if(icon<25 && fish_shop_list_goods[icon])
             arm_2dp_rgb565_tile_transform_xy_only_prepare(&self->shop_detail_operation,fish_shop_list_goods[icon],
                 (arm_2d_point_float_t){8,8},0,2,2);

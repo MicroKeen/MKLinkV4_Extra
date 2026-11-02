@@ -44,9 +44,47 @@ static void trial(result_t *r,matchup_t c,unsigned mm,unsigned rod,unsigned line
  r->pays+=pays;r->ms+=g.now;if(peak>r->peak)r->peak=peak;
  if(g.mode==FISH_CAUGHT)assert(g.reel_units==10000 && g.loss==FISH_LOSS_NONE && g.last_species==c.id);
 }
+static void predator_regressions(void)
+{
+ const unsigned ids[]={5,8,15,20,28,32,36,37};
+ for(unsigned n=0;n<sizeof(ids)/sizeof(ids[0]);n++){
+  unsigned id=ids[n],map=id>=28?2:(id==15 || id==20)?1:0,rod=map==2?4:map==1?3:2,line=rod;
+  matchup_t c={0};bool found=false;
+  for(unsigned i=0;i<sizeof(matchups)/sizeof(matchups[0]);i++)if(matchups[i].map==map && matchups[i].id==id){c=matchups[i];found=true;break;}
+  assert(found);const fish_species_t *s=fish_species_profile(map,id);
+  assert(s->burst_force_extra && s->fight_cycle_ms>=s->burst_ms+1000);
+  for(unsigned seed=1;seed<=64;seed++){
+   fish_game_t g;hook(&g,c,s->max_mm,rod,line,seed);
+   if(id==5){
+    /* Heavy first contact is visible immediately, yet never an instant break. */
+    assert(g.tension>25 && g.tension<=g.line_strength*9/10 && !g.overload_ms);
+    int pressure=g.tension;fish_game_input(&g,FISH_ROTATE,-1,0);
+    assert(g.tension<pressure && g.mode==FISH_FIGHT);
+   }else assert(g.tension==25);
+   g.now=fish_rules.hook_settle_ms-1;assert(fish_game_burst_warning(&g) && !fish_game_burst_active(&g));
+   g.now=fish_rules.hook_settle_ms;assert(fish_game_burst_active(&g));
+   int burst=fish_game_pull(&g,g.now),calm=fish_game_pull(&g,g.now+s->burst_ms);
+   assert(burst>calm);
+   /* A fresh burst travels in either direction; outward remains the drawn bias.
+    * Pin direction only here so these checks don't depend on the random seed. */
+   fish_game_t outward=g,inward=g;
+   outward.phase_at=inward.phase_at=0;
+   outward.simulation_at=inward.simulation_at=g.now;
+   outward.run_burst=inward.run_burst=true;
+   outward.run_direction=1;inward.run_direction=-1;
+   fish_game_update(&outward,g.now+300);fish_game_update(&inward,g.now+300);
+   assert(outward.mode==FISH_FIGHT && inward.mode==FISH_FIGHT);
+   assert(outward.reel_units<g.reel_units && inward.reel_units>g.reel_units);
+   g.stamina_recovering=true;assert(fish_game_pull(&g,g.now)<=12 && !fish_game_burst_active(&g));
+  }
+  result_t r={0};for(unsigned seed=1;seed<=64;seed++)trial(&r,c,s->max_mm,rod,line,seed,6);
+  assert(r.wins && !r.timeouts); /* No forced minimum duration or unwinnable gate. */
+ }
+}
 int main(int argc,char **argv)
 {
  setvbuf(stdout,NULL,_IONBF,0);bool sample=argc>1 && !strcmp(argv[1],"--sample");
+ predator_regressions();
  puts("map,species,mm,grams,rod,line,policy,seeds,landed,breaks,range,slack,timeouts,mean_ms,peak_tension,payouts");
  unsigned rows=0;
  for(unsigned n=0;n<sizeof(matchups)/sizeof(matchups[0]);n++){

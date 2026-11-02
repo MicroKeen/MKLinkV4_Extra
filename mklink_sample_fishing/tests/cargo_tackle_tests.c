@@ -1,4 +1,5 @@
 #include "fish_save.h"
+#include "fish_save_crypto.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +28,7 @@ int main(void)
      * Real fish/price records must survive validation, reload and sale. */
     for(unsigned container=0;container<FISH_CONTAINER_COUNT;container++) {
         fish_game_init(&g,0);g.map_index=1;g.game_minute=720;g.economy.container=(uint8_t)container;
-        unsigned fill=container==2?11:container==1?6:0;
+        unsigned fill=container==3?29:container==2?11:container==1?6:0;
         for(unsigned i=0;i<fill;i++)assert(fish_hold_add_on(&g.economy,1,0,450,2500)==FISH_STORED);
         uint32_t stored=fish_hold_weight(&g.economy);
         assert(fish_hold_add_on(&g.economy,1,17,(uint16_t)mm,grams)==FISH_HANGING);
@@ -44,6 +45,48 @@ int main(void)
     fish_game_init(&g,0);g.map_index=1;g.economy.container=2;
     assert(fish_hold_add_on(&g.economy,1,17,(uint16_t)mm,grams)==FISH_STORED);
     assert(g.economy.hanging_species==FISH_SPECIES_COUNT);
+    /* City replaces the wooden bucket with a portable80kg upgrade. Historical
+     * cargo and hanging-fish prices must survive moving into the bigger box. */
+    for(unsigned old=0;old<3;old++){
+        fish_game_init(&g,0);g.map_index=1;g.mode=FISH_SHOP;g.shop_venue=FISH_VENDOR_TACKLE;g.game_minute=720;g.economy.container=old;
+        assert(fish_shop_position(&g,12)==fish_shop_count(&g) && fish_shop_position(&g,13)<fish_shop_position(&g,FISH_SHOP_LARGE_BOX));
+        assert(fish_shop_price(FISH_SHOP_LARGE_BOX)==1800 && fish_containers[3].capacity_g==80000);
+        assert(fish_hold_add_on(&g.economy,1,0,200,160)==FISH_STORED);g.economy.value[0]=17;g.economy.prices[0]=(fish_price_group_t){17,1};
+        assert(fish_hold_add_on(&g.economy,1,17,1411,40025)==FISH_HANGING);g.economy.hanging_value=777;
+        g.economy.coins=1799;fish_economy_t before=g.economy;
+        assert(fish_shop_trade(&g,FISH_SHOP_LARGE_BOX)==FISH_MERCHANT_POOR && !memcmp(&before,&g.economy,sizeof(before)));
+        g.economy.coins=1800;assert(fish_shop_trade(&g,FISH_SHOP_LARGE_BOX)==FISH_MERCHANT_BOUGHT);
+        assert(g.economy.container==3 && !g.economy.coins && fish_hold_weight(&g.economy)==40185 && fish_hold_value(&g.economy)==794 && g.economy.hanging_species==FISH_SPECIES_COUNT);
+        assert(fish_shop_trade(&g,FISH_SHOP_LARGE_BOX)==FISH_MERCHANT_OWNED);
+        fish_save_pack(&g,payload);fish_game_init(&loaded,0);assert(fish_save_unpack(&loaded,payload) && loaded.economy.container==3 && fish_hold_value(&loaded.economy)==794);
+        g.map_index=0;assert(fish_shop_trade(&g,FISH_SHOP_LARGE_BOX)==FISH_MERCHANT_EMPTY && fish_hold_capacity(&g.economy)==80000);
+        assert(fish_shop_position(&g,12)<fish_shop_count(&g));
+        g.map_index=2;assert(fish_shop_trade(&g,FISH_SHOP_LARGE_BOX)==FISH_MERCHANT_EMPTY && fish_hold_capacity(&g.economy)==80000);
+    }
+    fish_game_init(&g,0);g.economy.container=3;assert(fish_hold_add_on(&g.economy,1,17,1411,40000)==FISH_STORED);
+    assert(fish_hold_add_on(&g.economy,1,17,1411,40000)==FISH_STORED && fish_hold_weight(&g.economy)==80000);
+    assert(fish_hold_add_on(&g.economy,1,0,80,1)==FISH_RELEASED);
+    /* The larger box must preserve money even if the fixed price ledger fills. */
+    fish_game_init(&g,0);g.map_index=1;g.game_minute=720;g.shore_x=FISH_CITY_STALL_X;
+    g.economy.container=3;uint32_t historical_total=0;
+    for(unsigned i=0;i<FISH_PORTABLE_PRICE_GROUPS;i++){
+        g.economy.prices[i]=(fish_price_group_t){(uint16_t)(1000+i),1};historical_total+=1000+i;
+    }
+    g.economy.count[0]=FISH_PORTABLE_PRICE_GROUPS;g.economy.grams[0]=22400;g.economy.value[0]=historical_total;
+    uint32_t extra_price=fish_catch_price_on(1,17,1411);assert(extra_price<1000);
+    assert(fish_hold_add_on(&g.economy,1,17,1411,40000)==FISH_STORED && fish_hold_weight(&g.economy)==62400);
+    fish_save_pack(&g,payload);fish_game_init(&loaded,0);assert(fish_save_unpack(&loaded,payload));
+    assert(fish_hold_value(&loaded.economy)==historical_total+extra_price);
+    uint32_t before_coins=loaded.economy.coins;
+    assert(fish_shop_trade(&loaded,0)==FISH_MERCHANT_SOLD && loaded.economy.coins==before_coins+historical_total+extra_price);
+    /* Authentic V21 migrates the same payload without assigning the new item. */
+    uint8_t key[32]={7},file[FISH_SAVE_FILE_BYTES],out[FISH_SAVE_PAYLOAD_BYTES];uint64_t seq;
+    for(unsigned old=0;old<3;old++){
+        fish_game_init(&g,0);g.economy.container=old;g.economy.coins=12345;fish_save_pack(&g,payload);fish_save_encode(key,77,payload,file);file[4]=21;
+        fish_save_seal(key,file,16,payload,sizeof(payload),file+16,file+32);
+        assert(fish_save_decode(key,file,sizeof(file),&seq,out));fish_game_init(&loaded,0);assert(fish_save_unpack(&loaded,out) && loaded.economy.container==old && loaded.economy.coins==12345);
+        fish_save_encode(key,78,out,file);assert(file[4]==22 && FISH_SAVE_FILE_BYTES==2147);
+    }
     /* The casting path cannot bypass rod/rig compatibility or consume bait. */
     for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++) {
         fish_game_init(&g,0);g.rod_index=(uint8_t)rod;g.economy.rods|=(uint8_t)(1u<<rod);

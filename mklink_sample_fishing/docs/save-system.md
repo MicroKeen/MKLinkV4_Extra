@@ -1,3 +1,7 @@
+# D28 储鱼箱与鱼种挣扎 / Cargo and predator behavior
+
+当前设定见[predators-d28.md](predators-d28.md)：80kg大型储鱼箱1800G，黑鱼首口重压、鳡／斑鳜／大梭鱼／金枪鱼等挣扎复核，V22独立A/B兼容旧档，资源保持2026.10.31.4。 / Current D28 settings; earlier entries below are historical.
+
 # D26 当前版本 / Current version
 
 完整本版设定见[rewards-d26.md](rewards-d26.md)：批量赶海、两种金色生物、铜银基价、240px深海延伸、V21迁移。配套2026.10.31.4资源。以下为历史版本记录。 / See rewards-d26.md for current settings; earlier entries below are historical.

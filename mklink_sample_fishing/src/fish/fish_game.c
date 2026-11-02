@@ -73,7 +73,7 @@ int fish_game_pull(const fish_game_t *g, uint32_t elapsed_ms)
     int p=fight_cycle_phase(g,elapsed_ms);
     if (p>=0 && p<s->burst_ms) pull+=s->burst_bonus*pull/90;
     if(g->pending_species==23 && elapsed_ms%4000<900)pull+=12; /* Puffer inflates against retrieval. */
-    return clamp(pull,3,(mass?140:100)+ocean_load);
+    return clamp(pull,3,(mass?140:100)+ocean_load+(p>=0 && p<s->burst_ms?s->burst_force_extra:0));
 }
 
 static unsigned strike_deadline(const fish_game_t *g)
@@ -775,7 +775,9 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             g->struggle_percent=fish_species_profile(g->map_index,g->pending_species)->fight_style==FISH_FIGHT_ACTIVE?
                 (uint8_t)(85+disposition%36):100;
             g->line_response_percent=(uint8_t)fish_line_response_percent(g->line_index,g->pending_weight_g);
-            g->reel=0; g->reel_units=0; g->tension=25;
+            g->reel=0; g->reel_units=0;
+            unsigned impact=fish_species_profile(g->map_index,g->pending_species)->hook_pressure_percent;
+            g->tension=clamp(25+(int)(g->base_pull*g->line_response_percent*impact/10000),25,g->line_strength*9/10);
             g->stamina_max=fish_species_stamina(fish_species_profile(g->map_index,g->pending_species),g->pending_weight_g);
             g->stamina=g->stamina_max;g->stamina_recovering=false;g->recovery_ms=0;
             if(g->cast_distance>0) {

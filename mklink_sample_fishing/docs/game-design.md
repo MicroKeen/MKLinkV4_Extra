@@ -1,3 +1,7 @@
+# D28 储鱼箱与鱼种挣扎 / Cargo and predator behavior
+
+当前设定见[predators-d28.md](predators-d28.md)：80kg大型储鱼箱1800G，黑鱼首口重压、鳡／斑鳜／大梭鱼／金枪鱼等挣扎复核，V22独立A/B兼容旧档，资源保持2026.10.31.4。 / Current D28 settings; earlier entries below are historical.
+
 # D27 搏鱼整体复核 / Fight balance
 
 当前统一规则见[fight-d27.md](fight-d27.md)和[数值审计](fight-d27-audit.md)：质量阻力、持续发力、装备响应和无门槛正进度；尺寸、价格和资源不变。 / Shared mass drag, sustained exertion and gear response; no artificial landing gate.

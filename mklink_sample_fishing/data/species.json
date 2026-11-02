@@ -140,7 +140,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 360,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "小鲫小鲫，今天大吉！",
       "rarity": "bronze",
@@ -304,7 +306,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 90,
-        "run_percent": 135
+        "run_percent": 135,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "鲤好呀，老朋友！",
       "rarity": "bronze",
@@ -461,7 +465,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 45,
-        "run_percent": 140
+        "run_percent": 140,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "嘴巴挺大，个头挺小！",
       "rarity": "silver",
@@ -625,7 +631,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 240,
         "stamina_base": 110,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "一身泥色，藏得真好！",
       "rarity": "bronze",
@@ -779,7 +787,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 300,
         "stamina_base": 40,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "趴在水底，也被找到了！",
       "rarity": "silver",
@@ -942,7 +952,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 75,
-        "run_percent": 100
+        "run_percent": 135,
+        "hook_pressure_percent": 100,
+        "burst_force_extra": 10
       },
       "catch_comment_zh": "酸菜雷龙！",
       "rarity": "silver",
@@ -1103,7 +1115,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "有刺！",
       "rarity": "silver",
@@ -1259,7 +1273,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 80,
         "stamina_base": 40,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "怎么又是你",
       "rarity": "bronze",
@@ -1406,17 +1422,19 @@
         "bite_style_index": 1,
         "bite_style": "sink_walk",
         "pull_base": 90,
-        "burst_bonus": 26,
+        "burst_bonus": 55,
         "bite_window_ms": 900,
-        "fight_cycle_ms": 3100,
-        "burst_ms": 2100,
+        "fight_cycle_ms": 2400,
+        "burst_ms": 1400,
         "description_zh": "短沉后横走；一阵猛冲一阵停",
         "status": "game_design",
         "fight_style_index": 0,
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 70,
-        "run_percent": 130
+        "run_percent": 175,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 15
       },
       "catch_comment_zh": "很帅一条",
       "rarity": "gold",
@@ -1576,7 +1594,9 @@
         "fight_style": "slow_drag",
         "strike_delay_ms": 300,
         "stamina_base": 55,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "还有意外收获？",
       "rarity": "gold",
@@ -1736,7 +1756,9 @@
         "fight_style": "passive_load",
         "strike_delay_ms": 350,
         "stamina_base": 35,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "当宠物养？",
       "rarity": "silver",
@@ -1893,7 +1915,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 240,
         "stamina_base": 110,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "哇 金色传说!",
       "rarity": "bronze",
@@ -2050,7 +2074,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 45,
-        "run_percent": 140
+        "run_percent": 140,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "别碰伤它的尾巴。",
       "rarity": "silver",
@@ -2209,7 +2235,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 90,
-        "run_percent": 135
+        "run_percent": 135,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "要许个愿吗？",
       "rarity": "bronze",
@@ -2371,7 +2399,9 @@
         "fight_style": "slow_drag",
         "strike_delay_ms": 300,
         "stamina_base": 55,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "你已经在估价了。",
       "rarity": "gold",
@@ -2523,7 +2553,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 95,
-        "run_percent": 165
+        "run_percent": 185,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 12
       },
       "catch_comment_zh": "———被钓成翘嘴。",
       "rarity": "silver",
@@ -2674,7 +2706,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 180,
-        "run_percent": 175
+        "run_percent": 175,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "沉稳的素食主义者。",
       "rarity": "silver",
@@ -2824,7 +2858,9 @@
         "fight_style": "slow_drag",
         "strike_delay_ms": 250,
         "stamina_base": 240,
-        "run_percent": 130
+        "run_percent": 130,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "还以为挂底了。",
       "rarity": "silver",
@@ -2973,7 +3009,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 100,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "银白色的滤食性鱼类。",
       "rarity": "bronze",
@@ -3123,7 +3161,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 70,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "它看起来不太高兴。",
       "rarity": "bronze",
@@ -3274,7 +3314,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 190,
-        "run_percent": 210
+        "run_percent": 235,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 25
       },
       "catch_comment_zh": "体验《老人与海》的战斗。",
       "rarity": "gold",
@@ -3425,7 +3467,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 100,
         "stamina_base": 60,
-        "run_percent": 155
+        "run_percent": 155,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "红尾巴，一眼就认出来。",
       "rarity": "bronze",
@@ -3576,7 +3620,9 @@
         "fight_style": "slow_drag",
         "strike_delay_ms": 200,
         "stamina_base": 140,
-        "run_percent": 125
+        "run_percent": 125,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "溜得快，拿稳了。",
       "rarity": "silver",
@@ -3725,7 +3771,9 @@
         "fight_style": "passive_load",
         "strike_delay_ms": 300,
         "stamina_base": 60,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "水中液压钳。",
       "rarity": "gold",
@@ -3877,7 +3925,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 150,
         "stamina_base": 170,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "剁椒 花椒 豆豉。",
       "rarity": "silver",
@@ -4031,7 +4081,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 120
+        "run_percent": 120,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "海中拳击手",
       "rarity": "bronze",
@@ -4189,7 +4241,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 180,
-        "run_percent": 155
+        "run_percent": 155,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "适合刺身",
       "rarity": "silver",
@@ -4348,7 +4402,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "黄金般的颜色和售价",
       "rarity": "gold",
@@ -4508,7 +4564,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 180,
-        "run_percent": 210
+        "run_percent": 210,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 20
       },
       "catch_comment_zh": "冠以海狼之名",
       "rarity": "silver",
@@ -4666,7 +4724,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "鲻鱼头的鲻鱼",
       "rarity": "bronze",
@@ -4824,7 +4884,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 180,
-        "run_percent": 120
+        "run_percent": 120,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "不对称",
       "rarity": "bronze",
@@ -4982,7 +5044,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "以前是驾校教练",
       "rarity": "bronze",
@@ -5140,7 +5204,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 350,
-        "run_percent": 210
+        "run_percent": 210,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 15
       },
       "catch_comment_zh": "石斑鱼之王",
       "rarity": "gold",
@@ -5298,7 +5364,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 180,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "丑到极致就是好看",
       "rarity": "bronze",
@@ -5457,7 +5525,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 150
+        "run_percent": 150,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "闪闪发亮",
       "rarity": "bronze",
@@ -5618,7 +5688,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 350,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "风浪越大，鱼越贵",
       "rarity": "special",
@@ -5778,7 +5850,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 350,
-        "run_percent": 230
+        "run_percent": 230,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 20
       },
       "catch_comment_zh": "金枪鱼为什么是粉色的？",
       "rarity": "silver",
@@ -5937,7 +6011,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 350,
-        "run_percent": 250
+        "run_percent": 250,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 20
       },
       "catch_comment_zh": "远海泥头车",
       "rarity": "gold",
@@ -6097,7 +6173,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "鲜味小贝壳",
       "rarity": "bronze",
@@ -6255,7 +6333,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "开袋即食",
       "rarity": "bronze",
@@ -6411,7 +6491,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "温润如玉的大蜗牛",
       "rarity": "silver",
@@ -6569,7 +6651,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "八只手各有各的想法",
       "rarity": "silver",
@@ -6725,7 +6809,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 110
+        "run_percent": 110,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "可爱但凶狠",
       "rarity": "bronze",
@@ -6881,7 +6967,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 110
+        "run_percent": 110,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "白灼",
       "rarity": "bronze",
@@ -7039,7 +7127,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 125
+        "run_percent": 125,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "华丽的海中拳击手。",
       "rarity": "special",
@@ -7200,7 +7290,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 130
+        "run_percent": 130,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "这下有得嚼了。",
       "rarity": "bronze",
@@ -7362,7 +7454,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 145
+        "run_percent": 145,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "背上这花纹，认得准。",
       "rarity": "bronze",
@@ -7520,7 +7614,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "其貌不扬，但没有鱼能拒绝它",
       "rarity": "bronze",
@@ -7678,7 +7774,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "这壳子可舍不得敲",
       "rarity": "gold",
@@ -7836,7 +7934,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 200,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "这钳子可不是摆设",
       "rarity": "gold",
@@ -7982,7 +8082,8 @@
     "giant_force_extra": "above 20000 g: +1 base force per 2000 g, capped +30; fatigues normally; final pull cap 140",
     "large_fish_run_extra": "above 6500 g: +1 run unit per 2500 g excess, capped +8, then species multiplier",
     "slow_heavy_pressure": "above 6500 g: tension rise clamp(1+response_pull/35,2,5) per 100ms",
-    "reel_mass_drag": "gain*100/(100+min(floor(weight_g/1000),40)*6), final safe gain >=1"
+    "reel_mass_drag": "gain*100/(100+min(floor(weight_g/1000),40)*6), final safe gain >=1",
+    "predator_traits": "species hook-pressure percent, species burst force-cap headroom; no instant overload on strike"
   },
   "catch_comments": {
     "version": 1,
@@ -8207,7 +8308,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 360,
         "stamina_base": 70,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "小鲫小鲫，今天大吉！",
       "rarity": "bronze",
@@ -8367,7 +8470,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 90,
-        "run_percent": 135
+        "run_percent": 135,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "鲤好呀，老朋友！",
       "rarity": "silver",
@@ -8522,7 +8627,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 80,
         "stamina_base": 40,
-        "run_percent": 100
+        "run_percent": 100,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "怎么又是你",
       "rarity": "bronze",
@@ -8678,7 +8785,9 @@
         "fight_style": "active_burst",
         "strike_delay_ms": 180,
         "stamina_base": 90,
-        "run_percent": 135
+        "run_percent": 135,
+        "hook_pressure_percent": 0,
+        "burst_force_extra": 0
       },
       "catch_comment_zh": "尾巴一摆，红了一片。",
       "rarity": "silver",

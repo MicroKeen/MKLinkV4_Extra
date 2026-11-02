@@ -1,6 +1,6 @@
-# MKLink V4 D27 构建核验 / Build validation
+# MKLink V4 D28 构建核验 / Build validation
 
-D27：全鱼种搏鱼平衡复核，修正大鱼收线过快、强线双重减压，以及深水末段零进度／疲劳误判松线。详见[fight-d27.md](fight-d27.md)。D26R2：背包常显游戏时间，休息显示本次已过去的小时／分钟，松开保留结果。详见[时间显示](cat-rest-d26-r2.md)。D26R1：猫每小时出现概率65%，三图跟随；船上选中休息，长按600ms后20倍推进时间，松开恢复。存档和资源不变。详见[猫与休息](cat-rest-d26-r1.md)。本版：海图1680px、右端125m，连续旋转灯塔，批量赶海与两种金色生物，偏低铜／银基价20G／50G。V21存档2147B迁移旧档，完整资源2026.10.31.4。详见[本版设定](rewards-d26.md)、[回归核验](rewards-d26-build-validation.json)、[内存报告](rewards-d26-memory.md)。本地未上传。 / Extended deep sea, continuous lighthouse rotation, batch shore rewards, gold species and price increases. V21 migrates older saves; matching2026.10.31.4 resources. Local only.
+D28：江河新增80kg大型储鱼箱1800G、下架大木桶；黑鱼首口重压，鳡／斑鳜／大梭鱼／金枪鱼等挣扎特征复核。V22仍2147B，保留V21旧档与资源。详见[predators-d28.md](predators-d28.md)。D27：全鱼种搏鱼平衡复核，修正大鱼收线过快、强线双重减压，以及深水末段零进度／疲劳误判松线。详见[fight-d27.md](fight-d27.md)。D26R2：背包常显游戏时间，休息显示本次已过去的小时／分钟，松开保留结果。详见[时间显示](cat-rest-d26-r2.md)。D26R1：猫每小时出现概率65%，三图跟随；船上选中休息，长按600ms后20倍推进时间，松开恢复。存档和资源不变。详见[猫与休息](cat-rest-d26-r1.md)。本版：海图1680px、右端125m，连续旋转灯塔，批量赶海与两种金色生物，偏低铜／银基价20G／50G。V21存档2147B迁移旧档，完整资源2026.10.31.4。详见[本版设定](rewards-d26.md)、[回归核验](rewards-d26-build-validation.json)、[内存报告](rewards-d26-memory.md)。本地未上传。 / Extended deep sea, continuous lighthouse rotation, batch shore rewards, gold species and price increases. V21 migrates older saves; matching2026.10.31.4 resources. Local only.
 
 以下为历史版本摘要；以本版设定及本文件数值表为准。 / Earlier revision notes follow; current settings and measured region sizes take precedence.
 
@@ -33,7 +33,7 @@ The application ends before 0x80080000. The 460 KiB map cache ends before 0x800F
 
 | 工具链/区域 / Toolchain/region | 占用 / Used | 容量 / Capacity | 余量 / Free |
 |---|---:|---:|---:|
-| GNU / APP_FLASH | 372,736 B | 380,928 B | 8,192 B |
+| GNU / APP_FLASH | 371,384 B | 380,928 B | 9,544 B |
 | GNU / ILM | 2,440 B | 131,072 B | 128,632 B |
 | GNU / DLM | 128,528 B | 130,304 B | 1,776 B |
 | GNU / AHB_SRAM | 32,288 B | 32,768 B | 480 B |
@@ -49,4 +49,4 @@ The twelve city fish use independent profiles and bait weights; giants are not w
 未执行实板烧录、拔卡/掉电、电气、帧率、栈水位或蜂鸣器试听；中断测试使用主机 Flash 模型。保留第三方库已有宏/未使用变量警告。
 No hardware flashing, card-removal/power-loss, electrical, FPS, stack-watermark or audio-audition tests were performed. Interruption tests use a host flash model. Existing third-party warnings remain.
 
-GNU UF2 SHA-256: `4617a764987cbc1849d150d0c4aa0543c11250a3e70b84aa82a3a030696d7487`.
+GNU UF2 SHA-256: `93610bc91b6c64b1b7efb4f9dfc8d6eb1d45ceec7cf5ba72120a19ffeba2df77`.

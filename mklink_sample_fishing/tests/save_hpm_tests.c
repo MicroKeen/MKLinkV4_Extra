@@ -81,16 +81,28 @@ static void landed(fish_game_t *g,unsigned species,unsigned mm)
 int main(void)
 {
     fixture();fish_game_t g,loaded;fish_save_t s,restarted;
-    /* All36 reconstructed paths exactly preserve their historical filenames. */
+    /* All38 reconstructed paths exactly preserve their historical filenames. */
     assert(!fish_fs_lock());
     for(unsigned slot=0;slot<FISH_SAVE_SLOT_COUNT;slot++){
         char expected[128];
-        if(slot<34)snprintf(expected,sizeof(expected),"3:/FishingGame_Saves_DO_NOT_DELETE/NorthWetland_V%u_Save_%c_DO_NOT_DELETE.sav",21-slot/2,'A'+slot%2);
+        if(slot<FISH_SAVE_SLOT_COUNT-2)snprintf(expected,sizeof(expected),"3:/FishingGame_Saves_DO_NOT_DELETE/NorthWetland_V%u_Save_%c_DO_NOT_DELETE.sav",FISH_SAVE_VERSION-slot/2,'A'+slot%2);
         else snprintf(expected,sizeof(expected),"3:/FishingGame_Saves_DO_NOT_DELETE/NorthWetland_Save_%c_DO_NOT_DELETE.sav",'A'+slot%2);
         assert(!strcmp(slot_path_locked(slot),expected));
     }
     fish_fs_unlock();
-    fish_game_init(&g,now);fish_save_init(&s,&g,now);assert(!s.blocked);save(&s,&g);
+    fish_game_init(&g,now);fish_save_init(&s,&g,now);assert(!s.blocked);
+    /* Load an authenticated real V21 file, then write only V22 A/B files. */
+    uint8_t legacy[FISH_SAVE_FILE_BYTES],legacy_payload[FISH_SAVE_PAYLOAD_BYTES];
+    g.economy.coins=4321;g.economy.container=2;fish_save_pack(&g,legacy_payload);
+    fish_save_encode(s.key,41,legacy_payload,legacy);legacy[4]=21;
+    fish_save_seal(s.key,legacy,16,legacy_payload,sizeof(legacy_payload),legacy+16,legacy+32);
+    FIL historical;UINT written;assert(!fish_fs_lock());
+    assert(f_open(&historical,slot_path_locked(2),FA_WRITE|FA_CREATE_NEW)==FR_OK);
+    assert(f_write(&historical,legacy,sizeof(legacy),&written)==FR_OK && written==sizeof(legacy));
+    assert(f_sync(&historical)==FR_OK && f_close(&historical)==FR_OK);fish_fs_unlock();
+    fish_game_init(&g,now);fish_save_init(&s,&g,now);
+    assert(!s.blocked && s.sequence==41 && g.economy.coins==4321 && g.economy.container==2);
+    g.economy.container=3;save(&s,&g);
     uint8_t boot[512];memcpy(boot,card,512);
     /* Existing downloader files must survive every game save and retry. */
     static const char original[]="MKLink downloader configuration: preserve exactly.";
@@ -135,6 +147,8 @@ int main(void)
     assert(f_open(&existing,"3:/MKLINK.BIN",FA_READ)==FR_OK && f_size(&existing)==sizeof(original));
     assert(f_read(&existing,preserved,sizeof(preserved),&count)==FR_OK && count==sizeof(preserved));
     assert(f_close(&existing)==FR_OK && !memcmp(original,preserved,sizeof(original)));fish_fs_unlock();
+    uint8_t unchanged[FISH_SAVE_FILE_BYTES];
+    assert(fish_storage_read(2,unchanged,sizeof(unchanged))==0 && !memcmp(legacy,unchanged,sizeof(legacy)));
     assert(!memcmp(card,boot,512));free(card);
     puts("PASS: actual HPM worker/FatFs city travel, every fish landing, A/B writes, S08/01 recovery, exact position/time/weather reboot; existing downloader file and volume boot sector preserved");
 }

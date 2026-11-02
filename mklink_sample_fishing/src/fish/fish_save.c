@@ -213,6 +213,7 @@ bool fish_save_decode(const uint8_t key[32],const uint8_t *file,size_t len,uint6
     if(version<1 || version>FISH_SAVE_VERSION || len!=bytes+32 || memcmp(file,"FSG1",4) || get16(file+6)!=bytes) return false;
     memset(p,0,FISH_SAVE_PAYLOAD_BYTES);
     if(!fish_save_open(key,file,16,file+16,file+32,bytes,p)) return false;
+    if(version<22 && p[200]>=3)return false;
     if(version==20){
         if(p[5]>=48 || p[187]>48)return false;
         if(p[187]==48)p[187]=FISH_SPECIES_COUNT;

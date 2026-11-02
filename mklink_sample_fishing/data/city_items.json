@@ -129,5 +129,20 @@
     ],
     "city_weights": {},
     "consumable": true
-  }
+  },
+  "containers": [
+    {
+      "index": 2,
+      "name_zh": "储鱼箱",
+      "capacity_g": 35000,
+      "price": 750
+    },
+    {
+      "index": 3,
+      "name_zh": "大型储鱼箱",
+      "capacity_g": 80000,
+      "price": 1800
+    }
+  ],
+  "city_wooden_bucket_for_sale": false
 }

@@ -12,6 +12,7 @@
 #include "fish_fs_hpm.h"
 #include "spi_sd_adapt.h"
 #include <string.h>
+#include <stdio.h>
 
 
 static struct rt_thread worker;
@@ -29,40 +30,15 @@ unsigned fish_storage_write_diagnostic(void) {return spi_sd_write_diagnostic();}
 static int failed(unsigned stage,FRESULT result) {diagnostic=(stage<<8)|(unsigned)result;return -1;}
 extern int64_t get_system_time_ms(void);
 #define SAVE_DIRECTORY "3:/FishingGame_Saves_DO_NOT_DELETE"
-static const char *paths[]={"/NorthWetland_V21_Save_A_DO_NOT_DELETE.sav","/NorthWetland_V21_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V20_Save_A_DO_NOT_DELETE.sav","/NorthWetland_V20_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V19_Save_A_DO_NOT_DELETE.sav","/NorthWetland_V19_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V18_Save_A_DO_NOT_DELETE.sav","/NorthWetland_V18_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V17_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V17_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V16_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V16_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V15_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V15_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V14_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V14_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V13_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V13_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V12_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V12_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V11_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V11_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V10_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V10_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V9_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V9_Save_B_DO_NOT_DELETE.sav","/NorthWetland_V8_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V8_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V7_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V7_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V6_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V6_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_V5_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_V5_Save_B_DO_NOT_DELETE.sav",
-    "/NorthWetland_Save_A_DO_NOT_DELETE.sav",
-    "/NorthWetland_Save_B_DO_NOT_DELETE.sav"};
-_Static_assert(sizeof(paths)/sizeof(paths[0])==FISH_SAVE_SLOT_COUNT,"save slot table");
-_Static_assert(sizeof(SAVE_DIRECTORY)-1+sizeof("/NorthWetland_V21_Save_A_DO_NOT_DELETE.sav")<=sizeof(checked),"save path buffer");
-
+_Static_assert(FISH_SAVE_SLOT_COUNT==2*(FISH_SAVE_VERSION-4)+2,"save slot numbering");
+_Static_assert(sizeof(SAVE_DIRECTORY)-1+sizeof("/NorthWetland_V22_Save_A_DO_NOT_DELETE.sav")<=sizeof(checked),"save path buffer");
 static const char *slot_path_locked(unsigned slot)
 {
-    /* f_open consumes the path synchronously. Reuse the existing readback
-     * buffer under the filesystem lock instead of repeating the folder in ROM. */
-    const size_t prefix=sizeof(SAVE_DIRECTORY)-1;
-    memcpy(checked,SAVE_DIRECTORY,prefix);
-    strcpy((char *)checked+prefix,paths[slot]);
+    /* FatFs consumes this path synchronously while the filesystem is locked;
+     * checked is reused only after open for the existing chunked readback. */
+    if(slot<FISH_SAVE_SLOT_COUNT-2)
+        snprintf((char *)checked,sizeof(checked),SAVE_DIRECTORY "/NorthWetland_V%u_Save_%c_DO_NOT_DELETE.sav",FISH_SAVE_VERSION-slot/2,'A'+slot%2);
+    else snprintf((char *)checked,sizeof(checked),SAVE_DIRECTORY "/NorthWetland_Save_%c_DO_NOT_DELETE.sav",'A'+slot%2);
     return (const char *)checked;
 }
 static int storage_read_locked(unsigned slot,uint8_t *data,size_t len)
@@ -133,9 +109,9 @@ int fish_storage_init(uint8_t key[32])
     FRESULT made=f_mkdir(SAVE_DIRECTORY);if(made!=FR_OK && made!=FR_EXIST) {fish_fs_unlock();return failed(3,made);}
     /* A visible, human-readable ownership note; never replace an existing note. */
     FIL note;
-    if(f_open(&note,SAVE_DIRECTORY "/README_V21_DO_NOT_DELETE.txt",FA_WRITE|FA_CREATE_NEW)==FR_OK) {
+    if(f_open(&note,SAVE_DIRECTORY "/README_V22_DO_NOT_DELETE.txt",FA_WRITE|FA_CREATE_NEW)==FR_OK) {
         static const char info[]="钓鱼游戏存档，请勿删除。\r\n"
-            "V21_A/B为本版，旧版本请一并保留。不要格式化SD。\r\n"
+            "V22_A/B为本版，旧版本请一并保留。不要格式化SD。\r\n"
             "备份整个目录，仅恢复至同一板卡。\r\n"
             "Fishing saves: keep all versions. Back up this folder; restore on the same board. Never format SD.\r\n";
         UINT count;f_write(&note,info,sizeof(info)-1,&count);f_sync(&note);f_close(&note);

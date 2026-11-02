@@ -34,6 +34,7 @@ typedef struct {
     uint8_t portrait_centre_x,portrait_centre_y;
     uint8_t run_percent; /* Burst-only outward movement, 100 = original pace. */
     uint8_t coast_weight_index; /* 0 retains legacy cubic;1..22 is a reviewed endpoint fit. */
+    uint8_t hook_pressure_percent,burst_force_extra; /* Use existing tail padding. */
 } fish_species_t;
 extern const fish_species_t fish_species[FISH_SPECIES_COUNT];
 const fish_species_t *fish_species_profile(unsigned map,unsigned index);

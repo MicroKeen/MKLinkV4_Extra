@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 /* Storage owns async worker buffers. Boot reads run before the scene starts.
- * Slots0/1 V21;2/3 V20;4/5 V19;...;32/33 V5;34/35 V1-V4 are read-only.
+ * Slots0/1 V22;2/3 V21;4/5 V20;...;34/35 V5;36/37 V1-V4 are read-only.
  * Only0/1 are written; all older-version files stay untouched.
  * read: 0 exact file, -2 absent, -3 wrong size, -1 IO error.
  * begin: 0 accepted; poll: 0 pending, 1 durable+readback verified, -1 failed.
