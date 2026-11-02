@@ -350,7 +350,10 @@ void fish_save_tick(fish_save_t *s,fish_game_t *g,uint32_t now)
         }
         return;
     }
-    bool manual=s->manual_pending;s->manual_pending=false;
+    /* Fast-forward can change cat visits/daily state every few real seconds.
+     * Merge those requests until rest ends; the real-time autosave still runs. */
+    bool manual=s->manual_pending && !fish_game_resting(g);
+    if(manual)s->manual_pending=false;
     if(s->status!=FISH_SAVE_IDLE && now-s->status_at>=2500) s->status=FISH_SAVE_IDLE;
     bool due=now-s->auto_at>=FISH_SAVE_INTERVAL_MS;
     if(due) s->auto_at=now;

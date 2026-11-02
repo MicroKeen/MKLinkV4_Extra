@@ -42,7 +42,7 @@ typedef struct {
     fish_save_status_t status;
     fish_save_status_t blocked_status;
     uint16_t error_code;
-    bool writing,blocked,manual_pending;
+    bool writing,blocked,manual_pending; /* Rest merges requests; real-time checkpoints remain. */
 } fish_save_t;
 void fish_save_pack(const fish_game_t *g,uint8_t payload[FISH_SAVE_PAYLOAD_BYTES]);
 bool fish_save_unpack(fish_game_t *g,const uint8_t payload[FISH_SAVE_PAYLOAD_BYTES]);

@@ -1,8 +1,14 @@
 # MKLink V4 钓鱼 / North Wetland Fishing
 
-运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D28 / 2026-11-02**，包括湿地湖泊、城市江河与海滩三张地图。
+运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D28R1 / 2026-11-02**，包括湿地湖泊、城市江河与海滩三张地图。
 
-A 240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)** with an ST7789 screen and one rotary encoder. **D28 / 2026-11-02** includes wetland, city-river and coastal regions.
+A 240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)** with an ST7789 screen and one rotary encoder. **D28R1 / 2026-11-02** includes wetland, city-river and coastal regions.
+
+## D28R1 休息存档 / Held-rest saves
+
+休息时合并猫到访、跨日和赶海刷新产生的保存请求；松开或旋转退出后保存最新状态。已开始的写入正常完成，保留每5真实分钟的定时检查，避免游戏加速带来频繁写卡。V22／资源不变。[说明](docs/rest-save-d28-r1.md)。
+
+Held rest coalesces event save requests and flushes the latest state on exit. Existing writes finish normally; five-minute wall-clock checkpoints remain. Save/resource formats are unchanged.
 
 ## D28 储鱼箱与挣扎特征 / Cargo and predator behavior
 
@@ -63,11 +69,11 @@ Rotate to move, browse or reel/ease line; press to interact. Hold/release to cas
 
 **V22存档2147B**，独立A/B，保留原密钥、UUID、目录及所有V1～V21文件。保存装备、金币、图鉴、单鱼历史售价、位置、时间、天气、声音、猫状态，以及工具耐久、沙蚕库存和每日赶海点。旧鱼获不因本轮提价重新估价。
 
-131项主机检查通过（主工程93、独立demo38），含真实FatFs内存盘的A/B写入、尾部回读、I/O失败重试、旧档迁移、下载器文件与卷引导扇区保留。53张鱼图解码无截边，三图已加载页面的Arm-2D临时申请为0。Flash余9544B、DLM余1776B、AHB余480B，均已计固定缓冲和预留堆栈；公共／地图缓存合计余101084B。没有新增整屏缓冲或堆分配。实板帧率、掉电及堆栈峰值仍待验。
+131项主机检查通过（主工程93、独立demo38），含真实FatFs内存盘的A/B写入、尾部回读、I/O失败重试、旧档迁移、下载器文件与卷引导扇区保留。53张鱼图解码无截边，三图已加载页面的Arm-2D临时申请为0。Flash余9520B、DLM余1776B、AHB余480B，均已计固定缓冲和预留堆栈；公共／地图缓存合计余101084B。没有新增整屏缓冲或堆分配。实板帧率、掉电及堆栈峰值仍待验。
 
-V22 uses2147-byte A/B saves and preserves original keys, UUID, paths and all V1–V21 files. Equipment, coins, collection, historical catch prices, position, time, weather, sound, cats, tools and daily shore state persist. All131 host checks pass, including actual FatFs on a RAM disk, final-chunk comparison, retry and migration, with downloader files and the volume boot sector preserved. All53 portraits decode without clipped bounds. Application Flash retains9544B, DLM1776B and AHB480B; common/scene cache retains101084B. Hardware FPS, power-loss behavior and stack/heap peaks remain unmeasured.
+V22 uses2147-byte A/B saves and preserves original keys, UUID, paths and all V1–V21 files. Equipment, coins, collection, historical catch prices, position, time, weather, sound, cats, tools and daily shore state persist. All131 host checks pass, including actual FatFs on a RAM disk, final-chunk comparison, retry and migration, with downloader files and the volume boot sector preserved. All53 portraits decode without clipped bounds. Application Flash retains9520B, DLM1776B and AHB480B; common/scene cache retains101084B. Hardware FPS, power-loss behavior and stack/heap peaks remain unmeasured.
 
-[核验报告 / validation](docs/predators-d28-build-validation.json) · [内存 / memory](docs/predators-d28-memory.md) · [鱼类审计 / fish audit](docs/fish-audit-d26.md)
+[核验报告 / validation](docs/rest-save-d28-r1-build-validation.json) · [内存 / memory](docs/rest-save-d28-r1.md) · [鱼类审计 / fish audit](docs/fish-audit-d26.md)
 
 ## 构建与工程 / Building
 

@@ -1,3 +1,7 @@
+# D28R1 休息存档 / Held-rest saves
+
+长按休息期间合并事件保存请求，松开或旋转结束后保存最新状态，保留每5真实分钟检查点。[说明](rest-save-d28-r1.md)。V22和资源不变。 / Merge requests during held rest and flush latest state on exit; five-minute wall-clock checkpoints remain.
+
 # D28 储鱼箱与鱼种挣扎 / Cargo and predator behavior
 
 当前设定见[predators-d28.md](predators-d28.md)：80kg大型储鱼箱1800G，黑鱼首口重压、鳡／斑鳜／大梭鱼／金枪鱼等挣扎复核，V22独立A/B兼容旧档，资源保持2026.10.31.4。 / Current D28 settings; earlier entries below are historical.

@@ -38,13 +38,13 @@
         "bytes": 72
       }
     ],
-    "sha256": "f390613d8430b760cca9ddc68b77da9227cdbbc09404eb3eb7af908459b1e201",
+    "sha256": "932e6c0a115b49618638bbe77b159c3d4403216fe23a3e9408f41b9cb2746583",
     "regions": [
       {
         "name": "APP_FLASH",
-        "used": 371384,
+        "used": 371408,
         "capacity": 380928,
-        "free": 9544
+        "free": 9520
       },
       {
         "name": "ILM",
@@ -81,1020 +81,1020 @@
       {
         "name": ".text",
         "address": 2147628676,
-        "bytes": 268156,
+        "bytes": 268180,
         "nobits": false
       },
       {
         "name": ".eh_frame",
-        "address": 2147896832,
+        "address": 2147896856,
         "bytes": 80,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileWhiteDotRGB565",
-        "address": 2147896912,
+        "address": 2147896936,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpWhiteDotRGB565",
-        "address": 2147896928,
+        "address": 2147896952,
         "bytes": 392,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteBeachIndices",
-        "address": 2147897320,
+        "address": 2147897344,
         "bytes": 1024,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteBeachPalette",
-        "address": 2147898344,
+        "address": 2147898368,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBoatRGB565",
-        "address": 2147898376,
+        "address": 2147898400,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBoatAlphaGRAY8",
-        "address": 2147898392,
+        "address": 2147898416,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileCloudsRGB565",
-        "address": 2147898408,
+        "address": 2147898432,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileCloudsAlphaGRAY8",
-        "address": 2147898424,
+        "address": 2147898448,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileBackpackOpenRGB565",
-        "address": 2147898440,
+        "address": 2147898464,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGBambooRodAlphaGRAY8",
-        "address": 2147898456,
+        "address": 2147898480,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGBambooRodAlphaGRAY8",
-        "address": 2147898472,
+        "address": 2147898496,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGBambooRodRGB565",
-        "address": 2147899384,
+        "address": 2147899408,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGBambooRodRGB565",
-        "address": 2147899400,
+        "address": 2147899424,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGCarbonRodAlphaGRAY8",
-        "address": 2147901224,
+        "address": 2147901248,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGCarbonRodAlphaGRAY8",
-        "address": 2147901240,
+        "address": 2147901264,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGCarbonRodRGB565",
-        "address": 2147902152,
+        "address": 2147902176,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGCarbonRodRGB565",
-        "address": 2147902168,
+        "address": 2147902192,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDepthAlphaGRAY8",
-        "address": 2147903992,
+        "address": 2147904016,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDepthAlphaGRAY8",
-        "address": 2147904008,
+        "address": 2147904032,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDepthRGB565",
-        "address": 2147904408,
+        "address": 2147904432,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDepthRGB565",
-        "address": 2147904424,
+        "address": 2147904448,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDoughAlphaGRAY8",
-        "address": 2147905224,
+        "address": 2147905248,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDoughAlphaGRAY8",
-        "address": 2147905240,
+        "address": 2147905264,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGDoughRGB565",
-        "address": 2147905640,
+        "address": 2147905664,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGDoughRGB565",
-        "address": 2147905656,
+        "address": 2147905680,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFeatherFloatAlphaGRAY8",
-        "address": 2147906456,
+        "address": 2147906480,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFeatherFloatAlphaGRAY8",
-        "address": 2147906472,
+        "address": 2147906496,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFeatherFloatRGB565",
-        "address": 2147906872,
+        "address": 2147906896,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFeatherFloatRGB565",
-        "address": 2147906888,
+        "address": 2147906912,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFiberglassRodAlphaGRAY8",
-        "address": 2147907688,
+        "address": 2147907712,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFiberglassRodAlphaGRAY8",
-        "address": 2147907704,
+        "address": 2147907728,
         "bytes": 912,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGFiberglassRodRGB565",
-        "address": 2147908616,
+        "address": 2147908640,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGFiberglassRodRGB565",
-        "address": 2147908632,
+        "address": 2147908656,
         "bytes": 1824,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGGlowFloatAlphaGRAY8",
-        "address": 2147910456,
+        "address": 2147910480,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGGlowFloatAlphaGRAY8",
-        "address": 2147910472,
+        "address": 2147910496,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGGlowFloatRGB565",
-        "address": 2147910872,
+        "address": 2147910896,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGGlowFloatRGB565",
-        "address": 2147910888,
+        "address": 2147910912,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGHeavyLineAlphaGRAY8",
-        "address": 2147911688,
+        "address": 2147911712,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGHeavyLineAlphaGRAY8",
-        "address": 2147911704,
+        "address": 2147911728,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGHeavyLineRGB565",
-        "address": 2147912104,
+        "address": 2147912128,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGHeavyLineRGB565",
-        "address": 2147912120,
+        "address": 2147912144,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGLightLineAlphaGRAY8",
-        "address": 2147912920,
+        "address": 2147912944,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGLightLineAlphaGRAY8",
-        "address": 2147912936,
+        "address": 2147912960,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGLightLineRGB565",
-        "address": 2147913336,
+        "address": 2147913360,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGLightLineRGB565",
-        "address": 2147913352,
+        "address": 2147913376,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRedWhiteFloatAlphaGRAY8",
-        "address": 2147914152,
+        "address": 2147914176,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRedWhiteFloatAlphaGRAY8",
-        "address": 2147914168,
+        "address": 2147914192,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRedWhiteFloatRGB565",
-        "address": 2147914568,
+        "address": 2147914592,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRedWhiteFloatRGB565",
-        "address": 2147914584,
+        "address": 2147914608,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRiceAlphaGRAY8",
-        "address": 2147915384,
+        "address": 2147915408,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRiceAlphaGRAY8",
-        "address": 2147915400,
+        "address": 2147915424,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGRiceRGB565",
-        "address": 2147915800,
+        "address": 2147915824,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGRiceRGB565",
-        "address": 2147915816,
+        "address": 2147915840,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSatchelAlphaGRAY8",
-        "address": 2147916616,
+        "address": 2147916640,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSatchelAlphaGRAY8",
-        "address": 2147916632,
+        "address": 2147916656,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSatchelRGB565",
-        "address": 2147917032,
+        "address": 2147917056,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSatchelRGB565",
-        "address": 2147917048,
+        "address": 2147917072,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGShrimpAlphaGRAY8",
-        "address": 2147917848,
+        "address": 2147917872,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGShrimpAlphaGRAY8",
-        "address": 2147917864,
+        "address": 2147917888,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGShrimpRGB565",
-        "address": 2147918264,
+        "address": 2147918288,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGShrimpRGB565",
-        "address": 2147918280,
+        "address": 2147918304,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSmallFishAlphaGRAY8",
-        "address": 2147919080,
+        "address": 2147919104,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSmallFishAlphaGRAY8",
-        "address": 2147919096,
+        "address": 2147919120,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGSmallFishRGB565",
-        "address": 2147919496,
+        "address": 2147919520,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGSmallFishRGB565",
-        "address": 2147919512,
+        "address": 2147919536,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGStandardLineAlphaGRAY8",
-        "address": 2147920312,
+        "address": 2147920336,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGStandardLineAlphaGRAY8",
-        "address": 2147920328,
+        "address": 2147920352,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGStandardLineRGB565",
-        "address": 2147920728,
+        "address": 2147920752,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGStandardLineRGB565",
-        "address": 2147920744,
+        "address": 2147920768,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGWormAlphaGRAY8",
-        "address": 2147921544,
+        "address": 2147921568,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGWormAlphaGRAY8",
-        "address": 2147921560,
+        "address": 2147921584,
         "bytes": 400,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileRPGWormRGB565",
-        "address": 2147921960,
+        "address": 2147921984,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRPGWormRGB565",
-        "address": 2147921976,
+        "address": 2147922000,
         "bytes": 800,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFootpathAlphaGRAY8",
-        "address": 2147922776,
+        "address": 2147922800,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFootpathRGB565",
-        "address": 2147922792,
+        "address": 2147922816,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpGameIconIndices",
-        "address": 2147922808,
+        "address": 2147922832,
         "bytes": 461,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpGameIconPalette",
-        "address": 2147923272,
+        "address": 2147923296,
         "bytes": 64,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer0AlphaGRAY8",
-        "address": 2147923336,
+        "address": 2147923360,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer0AlphaGRAY8",
-        "address": 2147923352,
+        "address": 2147923376,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer0RGB565",
-        "address": 2147923632,
+        "address": 2147923656,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer0RGB565",
-        "address": 2147923648,
+        "address": 2147923672,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer1AlphaGRAY8",
-        "address": 2147924208,
+        "address": 2147924232,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer1AlphaGRAY8",
-        "address": 2147924224,
+        "address": 2147924248,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer1RGB565",
-        "address": 2147924504,
+        "address": 2147924528,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer1RGB565",
-        "address": 2147924520,
+        "address": 2147924544,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer2AlphaGRAY8",
-        "address": 2147925080,
+        "address": 2147925104,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer2AlphaGRAY8",
-        "address": 2147925096,
+        "address": 2147925120,
         "bytes": 280,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShorePlayer2RGB565",
-        "address": 2147925376,
+        "address": 2147925400,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShorePlayer2RGB565",
-        "address": 2147925392,
+        "address": 2147925416,
         "bytes": 560,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileReedsRGB565",
-        "address": 2147925952,
+        "address": 2147925976,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileReedsAlphaGRAY8",
-        "address": 2147925968,
+        "address": 2147925992,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.ARM_2D_FONT_Remarks_A1",
-        "address": 2147925984,
+        "address": 2147926008,
         "bytes": 44,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileUTF8RemarksA1Mask",
-        "address": 2147926028,
+        "address": 2147926052,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.c_tUTF8RemarksLookUpTableA1",
-        "address": 2147926044,
+        "address": 2147926068,
         "bytes": 15264,
         "nobits": false
       },
       {
         "name": "arm2d.asset.FONT.c_bmpUTF8RemarksA1Font",
-        "address": 2147941308,
+        "address": 2147941332,
         "bytes": 23491,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteCityIndices",
-        "address": 2147964800,
+        "address": 2147964824,
         "bytes": 1024,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteCityPalette",
-        "address": 2147965824,
+        "address": 2147965848,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteWetlandIndices",
-        "address": 2147965856,
+        "address": 2147965880,
         "bytes": 1024,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpRouteWetlandPalette",
-        "address": 2147966880,
+        "address": 2147966904,
         "bytes": 32,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileCityShopClosedRGB565",
-        "address": 2147966912,
+        "address": 2147966936,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFishCoolerAlphaGRAY8",
-        "address": 2147966928,
+        "address": 2147966952,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFishCoolerAlphaGRAY8",
-        "address": 2147966944,
+        "address": 2147966968,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileFishCoolerRGB565",
-        "address": 2147968096,
+        "address": 2147968120,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpFishCoolerRGB565",
-        "address": 2147968112,
+        "address": 2147968136,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorClosedPatchRGB565",
-        "address": 2147970416,
+        "address": 2147970440,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopExteriorClosedPatchRGB565",
-        "address": 2147970432,
+        "address": 2147970456,
         "bytes": 1840,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorAlphaGRAY8",
-        "address": 2147972272,
+        "address": 2147972296,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopExteriorRGB565",
-        "address": 2147972288,
+        "address": 2147972312,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileLargeBucketAlphaGRAY8",
-        "address": 2147972304,
+        "address": 2147972328,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpLargeBucketAlphaGRAY8",
-        "address": 2147972320,
+        "address": 2147972344,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileLargeBucketRGB565",
-        "address": 2147973472,
+        "address": 2147973496,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpLargeBucketRGB565",
-        "address": 2147973488,
+        "address": 2147973512,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods0RGB565",
-        "address": 2147975792,
+        "address": 2147975816,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods0RGB565",
-        "address": 2147975808,
+        "address": 2147975832,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods1RGB565",
-        "address": 2147976320,
+        "address": 2147976344,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods1RGB565",
-        "address": 2147976336,
+        "address": 2147976360,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods2RGB565",
-        "address": 2147976848,
+        "address": 2147976872,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods2RGB565",
-        "address": 2147976864,
+        "address": 2147976888,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods3RGB565",
-        "address": 2147977376,
+        "address": 2147977400,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods3RGB565",
-        "address": 2147977392,
+        "address": 2147977416,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods4RGB565",
-        "address": 2147977904,
+        "address": 2147977928,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods4RGB565",
-        "address": 2147977920,
+        "address": 2147977944,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods5RGB565",
-        "address": 2147978432,
+        "address": 2147978456,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods5RGB565",
-        "address": 2147978448,
+        "address": 2147978472,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods6RGB565",
-        "address": 2147978960,
+        "address": 2147978984,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods6RGB565",
-        "address": 2147978976,
+        "address": 2147979000,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods7RGB565",
-        "address": 2147979488,
+        "address": 2147979512,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods7RGB565",
-        "address": 2147979504,
+        "address": 2147979528,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods8RGB565",
-        "address": 2147980016,
+        "address": 2147980040,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods8RGB565",
-        "address": 2147980032,
+        "address": 2147980056,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods9RGB565",
-        "address": 2147980544,
+        "address": 2147980568,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods9RGB565",
-        "address": 2147980560,
+        "address": 2147980584,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods10RGB565",
-        "address": 2147981072,
+        "address": 2147981096,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods10RGB565",
-        "address": 2147981088,
+        "address": 2147981112,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods11RGB565",
-        "address": 2147981600,
+        "address": 2147981624,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods11RGB565",
-        "address": 2147981616,
+        "address": 2147981640,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods12RGB565",
-        "address": 2147982128,
+        "address": 2147982152,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods12RGB565",
-        "address": 2147982144,
+        "address": 2147982168,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods13RGB565",
-        "address": 2147982656,
+        "address": 2147982680,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods13RGB565",
-        "address": 2147982672,
+        "address": 2147982696,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods16RGB565",
-        "address": 2147983184,
+        "address": 2147983208,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods16RGB565",
-        "address": 2147983200,
+        "address": 2147983224,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods17RGB565",
-        "address": 2147983712,
+        "address": 2147983736,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods17RGB565",
-        "address": 2147983728,
+        "address": 2147983752,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods18RGB565",
-        "address": 2147984240,
+        "address": 2147984264,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods18RGB565",
-        "address": 2147984256,
+        "address": 2147984280,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods19RGB565",
-        "address": 2147984768,
+        "address": 2147984792,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods19RGB565",
-        "address": 2147984784,
+        "address": 2147984808,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShopGoods24RGB565",
-        "address": 2147985296,
+        "address": 2147985320,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpShopGoods24RGB565",
-        "address": 2147985312,
+        "address": 2147985336,
         "bytes": 512,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileParkLampOnRGB565",
-        "address": 2147985824,
+        "address": 2147985848,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpParkLampOnRGB565",
-        "address": 2147985840,
+        "address": 2147985864,
         "bytes": 1408,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileParkLampAlphaGRAY8",
-        "address": 2147987248,
+        "address": 2147987272,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpParkLampAlphaGRAY8",
-        "address": 2147987264,
+        "address": 2147987288,
         "bytes": 704,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileParkLampRGB565",
-        "address": 2147987968,
+        "address": 2147987992,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpParkLampRGB565",
-        "address": 2147987984,
+        "address": 2147988008,
         "bytes": 1408,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileParkLightAlphaGRAY8",
-        "address": 2147989392,
+        "address": 2147989416,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpParkLightAlphaGRAY8",
-        "address": 2147989408,
+        "address": 2147989432,
         "bytes": 1296,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileParkLightRGB565",
-        "address": 2147990704,
+        "address": 2147990728,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpParkLightRGB565",
-        "address": 2147990720,
+        "address": 2147990744,
         "bytes": 2592,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSmallBucketAlphaGRAY8",
-        "address": 2147993312,
+        "address": 2147993336,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSmallBucketAlphaGRAY8",
-        "address": 2147993328,
+        "address": 2147993352,
         "bytes": 1152,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileSmallBucketRGB565",
-        "address": 2147994480,
+        "address": 2147994504,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.asset.c_bmpSmallBucketRGB565",
-        "address": 2147994496,
+        "address": 2147994520,
         "bytes": 2304,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShoreDockAlphaGRAY8",
-        "address": 2147996800,
+        "address": 2147996824,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileShoreDockRGB565",
-        "address": 2147996816,
+        "address": 2147996840,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileStationAlphaGRAY8",
-        "address": 2147996832,
+        "address": 2147996856,
         "bytes": 16,
         "nobits": false
       },
       {
         "name": "arm2d.tile.c_tileStationRGB565",
-        "address": 2147996848,
+        "address": 2147996872,
         "bytes": 16,
         "nobits": false
       },
@@ -1147,7 +1147,7 @@
         "nobits": true
       }
     ],
-    "flash_end": "0x8007dab8"
+    "flash_end": "0x8007dad0"
   },
   "uf2_blocks": 1451,
   "source_count": 277,
@@ -1201,7 +1201,10 @@
   "source_read_bytes_per_tick": 4096,
   "watchdog_reset_stage_bytes": 28,
   "watchdog_diagnostics_write_sd": false,
-  "diagnostic_revision": "D28",
+  "diagnostic_revision": "D28R1",
+  "rest_save_requests_coalesced": true,
+  "rest_checkpoint_wall_ms": 300000,
+  "rest_exit_flush_latest": true,
   "city_large_box_capacity_g": 80000,
   "city_large_box_price": 1800,
   "city_big_bucket_for_sale": false,
@@ -1548,7 +1551,7 @@
   "hardware_platform": "MKLink V4",
   "test_counts_not_inferred_from_build": true,
   "display_rotation": 0,
-  "distribution_status": "d28",
+  "distribution_status": "d28_r1",
   "original_sd_integrity": "unknown",
   "git_push_allowed": false,
   "user_reported_basic_stability": false,
@@ -2454,5 +2457,5 @@
   "sound_setting_in_save": true,
   "guide_pages": 2,
   "guide_hold_ms": 600,
-  "firmware_sha256": "93610bc91b6c64b1b7efb4f9dfc8d6eb1d45ceec7cf5ba72120a19ffeba2df77"
+  "firmware_sha256": "db1db99f92b8830fb156165665f98515841bc9e7abfeb22e93f76a20e42bd153"
 }
