@@ -87,8 +87,8 @@ int main(void)
             play(&g,4);if(g.mode==FISH_CAUGHT) ++wins;else {assert(g.loss!=FISH_LOSS_NONE);++losses;}
         }
         printf("four_star_seeds line=%u seeds=128 landed=%u lost=%u\n",line,wins,losses);
-        /* The short light line stays risky, with a few recoverable flex cases. */
-        if(line==0) assert(wins>0 && losses>0);
+        /* The4.5m fine rig is a severe mismatch for this large four-star carp. */
+        if(line==0) assert(wins<32 && losses>0);
         if(line==2) assert(wins==128);
     }
     /* Small fish: no large fixed burst bonus. Calm animals never make splash bursts. */

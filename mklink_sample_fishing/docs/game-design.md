@@ -1,3 +1,7 @@
+# D27 搏鱼整体复核 / Fight balance
+
+当前统一规则见[fight-d27.md](fight-d27.md)和[数值审计](fight-d27-audit.md)：质量阻力、持续发力、装备响应和无门槛正进度；尺寸、价格和资源不变。 / Shared mass drag, sustained exertion and gear response; no artificial landing gate.
+
 # D26R2 当前设定 / Current settings
 
 [背包时钟与休息计时](cat-rest-d26-r2.md)：当前时间常显，累计时长松开保留，存档和资源保持。 / Visible backpack clock and retained rest duration; save/resource formats unchanged.

@@ -46,8 +46,8 @@ int main(void)
     /* Fresh giants can land when safely alongside, without a stamina gate. */
     for(unsigned id=15;id<FISH_COAST_FIRST;id++)if(id!=21) {
         hook(&fresh,id,fish_species_weight_g(fish_species_profile(1,id),fish_species_profile(1,id)->max_mm),2,42);
-        fresh.reel_units=9500;fresh.tension=20;
-        fish_game_input(&fresh,FISH_ROTATE,40,0);assert(fresh.mode==FISH_CAUGHT && fresh.reel_units==10000);
+        fresh.reel_units=9999;fresh.tension=20;
+        fish_game_input(&fresh,FISH_ROTATE,1,0);assert(fresh.mode==FISH_CAUGHT && fresh.reel_units==10000);
     }
     /* No input: slow heavy fish must make measurable runs and pressure. */
     hook(&fresh,22,13000,2,42);unsigned peak=0,runs=0;

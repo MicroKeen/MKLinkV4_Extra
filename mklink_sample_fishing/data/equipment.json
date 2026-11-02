@@ -118,8 +118,8 @@
       "capacity_units": 32000,
       "strike_window_percent": 90,
       "diameter_hundredths_mm": 60,
-      "response_percent": 45,
-      "comfortable_weight_g": 30000,
+      "response_percent": 100,
+      "comfortable_weight_g": 40000,
       "bite_percent": [
         4,
         4,
@@ -151,7 +151,7 @@
       "capacity_units": 36000,
       "strike_window_percent": 95,
       "diameter_hundredths_mm": 80,
-      "response_percent": 35,
+      "response_percent": 80,
       "comfortable_weight_g": 60000,
       "bite_percent": [
         8,

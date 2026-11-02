@@ -189,7 +189,7 @@ int main(void)
     assert(g.reel==0 && fish_game_distance(&g)>10000); /* Giving line increases distance. */
     g.reel_units=0; g.tension=60;
     fish_game_input(&g,FISH_ROTATE,1,0);
-    assert(g.reel>0 && fish_game_distance(&g)<10000);
+    assert(g.reel_units>0 && fish_game_distance(&g)<10000); /* Sub-percent progress is still real progress. */
     bite(&g,1,1000,0);fish_game_equip_line(&g,2);
     g.phase_at-=fish_species[1].strike_delay_ms;
     fish_game_input(&g,FISH_PRESS,0,0);fish_game_input(&g,FISH_RELEASE,0,0);g.tension=120;

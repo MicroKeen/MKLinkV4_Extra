@@ -236,7 +236,7 @@ static void fight_update(fish_game_t *g)
         /* Fish can load the line even without retrieval. Rate-limited pressure
          * and stronger payout leave a deliberate recovery action each 100ms. */
         if (elapsed%100==0) {
-            int target=clamp(burst?20+response_pull:20+response_pull*3/5,0,g->line_strength+20);
+            int target=clamp(burst?20+response_pull*(g->pending_weight_g>6500?3:2)/2:20+response_pull*3/5,0,g->line_strength+20);
             int rise=s->fight_style!=FISH_FIGHT_ACTIVE?1:burst?clamp(2+response_pull/20,2,7):2;
             if(s->fight_style==FISH_FIGHT_SLOW && g->pending_weight_g>6500)
                 rise=clamp(1+response_pull/35,2,5);
@@ -714,16 +714,19 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
                      * A safe reel detent must still pull in a little line. */
                     int gain=clamp(850-pull*5,25,850)*fish_rods[g->rod_index].reel_percent/100;
                     gain=gain*(int)fish_game_line_speed_percent(g)/100;
-                    if(g->map_index==2){gain=gain*800/(int)initial_distance_cm(g);if(gain<1)gain=1;}
+                    gain=gain*100/(100+clamp((int)(g->pending_weight_g/1000),0,40)*6);
+                    if(g->map_index==2)gain=gain*800/(int)initial_distance_cm(g);
                     if (g->line_response_percent>=150 && g->pending_weight_g>
                         (uint32_t)fish_line_sets[g->line_index].comfortable_weight_g*4)
                         gain=gain*75/100; /* Severe tackle mismatch loses retrieval leverage. */
                     if (fish_species_profile(g->map_index,g->pending_species)->fight_style==FISH_FIGHT_ACTIVE)
                         gain=gain*(75+tired*25/100)/100;
+                    if(gain<1)gain=1;
                     bool flexing=fish_game_rod_flex(g)>0;
                     if(g->tension<g->line_strength*9/10 || flexing) {
                         if(flexing)gain=gain>1?gain/2:1;
                         g->reel_units=clamp(g->reel_units+gain,10000-(int)(g->line_capacity_units+g->line_capacity_units/10),10000);
+                        if(g->pending_weight_g>6500)g->slack_ms=0;
                         if(g->tension>=g->line_strength*fish_rules.stamina_min_tension_percent/100) {
                             unsigned work=fish_rules.stamina_rest_cost;
                             if(g->pending_weight_g>6500)work+=2;

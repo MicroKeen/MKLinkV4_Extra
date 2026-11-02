@@ -143,3 +143,9 @@ add_executable(forage_tests forage_tests.c ${CORE} ${APP}/fish_save.c ${APP}/fis
 target_include_directories(forage_tests PRIVATE "${APP}" "${APP}/crypto/include")
 target_compile_options(forage_tests PRIVATE -UNDEBUG -Wall -Wextra)
 add_test(NAME daily_forage_tools_qte_bait_and_save COMMAND forage_tests)
+
+add_executable(fight_control_tests fight_control_tests.c ${CORE})
+target_include_directories(fight_control_tests PRIVATE "${APP}")
+target_compile_options(fight_control_tests PRIVATE -UNDEBUG -O2 -Wall -Wextra)
+add_test(NAME all_species_input_policy_audit COMMAND fight_control_tests)
+add_test(NAME river_40kg_pe_bruteforce_and_control COMMAND fight_control_tests --sample)
