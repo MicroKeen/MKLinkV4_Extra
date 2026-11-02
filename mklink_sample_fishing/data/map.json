@@ -64,31 +64,31 @@
   "zones": [
     {
       "id": "reed_bay",
-      "name_zh": "芦苇浅湾",
+      "name_zh": "左岸水域",
       "left": 56,
       "right": 200
     },
     {
       "id": "open_pond",
-      "name_zh": "开阔水面",
+      "name_zh": "偏左水面",
       "left": 200,
       "right": 352
     },
     {
       "id": "mud_channel",
-      "name_zh": "泥底深槽",
+      "name_zh": "中央水域",
       "left": 352,
       "right": 672
     },
     {
       "id": "stream_inlet",
-      "name_zh": "缓流入口",
+      "name_zh": "偏右水面",
       "left": 672,
       "right": 784
     },
     {
       "id": "gravel_margin",
-      "name_zh": "浅岸砾石",
+      "name_zh": "右岸水域",
       "left": 784,
       "right": 904
     }
@@ -203,5 +203,189 @@
     1200,
     65535
   ],
-  "city_depth_note": "宽河道虚拟剖面：硬质近岸3–4米，江心16米；保留湿地原地形。"
+  "city_depth_note": "宽河道虚拟剖面：硬质近岸3–4米，江心16米；保留湿地原地形。",
+  "middle_option": 65534,
+  "depth_menu_indices": [
+    7,
+    0,
+    1
+  ],
+  "depth_menu_names_zh": [
+    "钓底",
+    "顶层",
+    "中层"
+  ],
+  "depth_mode_note": "Keep historical0..7 save IDs:0=surface,7=bottom,all other old fixed-depth IDs now resolve to half the local water depth; only7/0/1 are selectable.",
+  "beach": {
+    "world_width": 1680,
+    "sand_world_range": [
+      -384,
+      384
+    ],
+    "water_world_range": [
+      480,
+      1680
+    ],
+    "boat_range": [
+      540,
+      1608
+    ],
+    "station_x": -312,
+    "walk_range": [
+      -352,
+      480
+    ],
+    "depth_profile": [
+      [
+        0,
+        0
+      ],
+      [
+        480,
+        0
+      ],
+      [
+        540,
+        160
+      ],
+      [
+        620,
+        300
+      ],
+      [
+        720,
+        550
+      ],
+      [
+        840,
+        850
+      ],
+      [
+        960,
+        1200
+      ],
+      [
+        1080,
+        1600
+      ],
+      [
+        1200,
+        6500
+      ],
+      [
+        1320,
+        10500
+      ],
+      [
+        1400,
+        12000
+      ],
+      [
+        1440,
+        12500
+      ],
+      [
+        1680,
+        12500
+      ]
+    ],
+    "route_stop": [
+      484,
+      284
+    ],
+    "island_count": 1,
+    "vehicle": "motor_speedboat",
+    "fish_roster_status": "marine_fishing_and_foraging_playable",
+    "lighthouse_sweep_ms": 12000,
+    "shelf_edge_x": 1080,
+    "max_depth_cm": 12500,
+    "fish_stall_x": -112,
+    "fish_stall_hours": [
+      360,
+      960
+    ],
+    "fish_stall_style": "modern_steel_blue_awning",
+    "reef_world_range": [
+      272,
+      512
+    ],
+    "station_world_bounds": [
+      -384,
+      -192
+    ],
+    "station_native_size": [
+      96,
+      48
+    ],
+    "fish_stall_native_size": [
+      56,
+      38
+    ],
+    "fish_stall_world_bounds": [
+      -168,
+      -56
+    ],
+    "employee_style": "modern_blue_uniform_white_apron",
+    "employee_expressions": [
+      "greeting",
+      "sold",
+      "concerned",
+      "surprised"
+    ],
+    "shore_world_range": [
+      -384,
+      480
+    ],
+    "shore_camera_range": [
+      -384,
+      360
+    ],
+    "reef_native_size": [
+      120,
+      40
+    ],
+    "concrete_platform": false,
+    "foraging_status": "playable",
+    "shore_extension_px": 384,
+    "road_world_range": [
+      -384,
+      112
+    ],
+    "road_native_size": [
+      248,
+      36
+    ],
+    "concrete_road": true,
+    "wooden_pier": false,
+    "boat_moors_at_reef": true,
+    "road_orientation": "horizontal",
+    "parking_bays": 2,
+    "foraging_refresh_minute": 240,
+    "foraging_daily_per_area": [
+      3,
+      6
+    ],
+    "foraging_sand_range": [
+      124,
+      260
+    ],
+    "foraging_reef_range": [
+      288,
+      464
+    ],
+    "foraging_min_spacing_px": 2,
+    "foraging_auto_stop": false,
+    "foraging_layout": "random_daily_bounded",
+    "boat_gear_speeds_px_s": [
+      10,
+      60
+    ],
+    "lighthouse_light": "soft_rotating_fog_scattering",
+    "background_parallax_divisor": 8,
+    "foraging_allow_clusters": true,
+    "foraging_marker": "inverted_drop",
+    "foraging_ground_dot": false,
+    "foraging_visibility_radius_px": 48,
+    "foraging_pin_tip": "ground_contact"
+  }
 }

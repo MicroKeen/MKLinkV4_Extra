@@ -1,0 +1,1962 @@
+{
+  "resource_version": "2026.10.31.1",
+  "firmware_sha256": "cee17e0b3cefd4db5180dacf41facba771e0c51fcf59b8e91d8996a8d0400977",
+  "shared_fish_pack_sha256": "20746df029c138a3a4ede03b4e1eb89a5ab5654c9733171d1a589213d3309562",
+  "images": [
+    {
+      "name": "BigheadCarp",
+      "species_id": 24,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        7,
+        94,
+        49
+      ],
+      "sha256": "4e020ac3a932e1363eaeb6a5ab21b113e5bfddd2f285bfc9412ce75db3443519"
+    },
+    {
+      "name": "BlackCarp",
+      "species_id": 17,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        14,
+        94,
+        41
+      ],
+      "sha256": "ab4a4ba8c678ede6052da4af21cf677f875f03f488b27c0743cb10f246f6ade1"
+    },
+    {
+      "name": "CarpLarge",
+      "species_id": 1,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        7,
+        94,
+        49
+      ],
+      "sha256": "bb92ff9c28646ceca5be865034282dd889497f54e034672c797de3af417e1d96"
+    },
+    {
+      "name": "Carp",
+      "species_id": 1,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        3,
+        47,
+        24
+      ],
+      "sha256": "6cb0703eb25a5cf19ac7e857e6367439448559304a96431e0f73e1e912d8964c"
+    },
+    {
+      "name": "CarpRedLongfin",
+      "species_id": 13,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        4,
+        47,
+        24
+      ],
+      "sha256": "238b2c6ff7e12c6e5a324239da89608fb0dd57485996117797a39b0f2cad9c63"
+    },
+    {
+      "name": "CatfishLarge",
+      "species_id": 3,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        15,
+        94,
+        41
+      ],
+      "sha256": "4a209125b8133002b11a44bceb649d16eaefc27de4409d93bb55d716500376b0"
+    },
+    {
+      "name": "Catfish",
+      "species_id": 3,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        7,
+        44,
+        20
+      ],
+      "sha256": "44c1ab85a91497e88725d7c4cdd56cdbe9acd7df3d5cb53e2eb1128b05a0e4d7"
+    },
+    {
+      "name": "CatfishXanthic",
+      "species_id": 11,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        7,
+        47,
+        20
+      ],
+      "sha256": "e19fc3a5e2a40f661e585fe30515d59f9ff12af07eef072305235140a6c6ef4e"
+    },
+    {
+      "name": "ChinesePrawn",
+      "species_id": 43,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        7,
+        42,
+        23
+      ],
+      "sha256": "2ce81b2e0272b6314ad70fb8100f76ae8929e85f3f8ffa046d76bb0dc2233cb6"
+    },
+    {
+      "name": "ChubMackerel",
+      "species_id": 46,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        11,
+        95,
+        44
+      ],
+      "sha256": "fa589371fa07838af4954886547d21268e3e3c604fe4bb71e5e52e1fc7800756"
+    },
+    {
+      "name": "Crucian",
+      "species_id": 0,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        2,
+        1,
+        46,
+        27
+      ],
+      "sha256": "c18a0d441c9e0791c43c76acdfa5de95bc53b9507825481e73e8f72da7450d31"
+    },
+    {
+      "name": "CulterAlburnus",
+      "species_id": 15,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        15,
+        94,
+        41
+      ],
+      "sha256": "f63041b3f13a92d393a46b99924d59312f9f87637918563ef9afd6c79ad8c4fb"
+    },
+    {
+      "name": "FlatheadMullet",
+      "species_id": 29,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        6,
+        47,
+        21
+      ],
+      "sha256": "b3c82ce621bc236ff4dec9f4298d284dc14a09a3f4634c41b066f6a7368c5125"
+    },
+    {
+      "name": "GiantGrouper",
+      "species_id": 32,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        9,
+        95,
+        47
+      ],
+      "sha256": "2d0802ab304ea8ce3f4e9a450ac3a8ab752d33a3df43b7102ce6ffa79f2eab8a"
+    },
+    {
+      "name": "Goby",
+      "species_id": 4,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        5,
+        47,
+        23
+      ],
+      "sha256": "485cc1c9d81ed34a9828e81b3bf7123fddc556666ab85622f376243cb868ee61"
+    },
+    {
+      "name": "GrassCarp",
+      "species_id": 16,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        10,
+        94,
+        45
+      ],
+      "sha256": "c0b0ee3c8f4f5970f892e6f85cdb1c57a0be1e1af7630e0499fb285bc8891ee6"
+    },
+    {
+      "name": "GreatBarracuda",
+      "species_id": 28,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        15,
+        95,
+        41
+      ],
+      "sha256": "08eab54fc39b408c259bd0b444e54f692b9f58ed0fafdfbd03ae61205a328bca"
+    },
+    {
+      "name": "HenanCrab",
+      "species_id": 10,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        2,
+        47,
+        25
+      ],
+      "sha256": "9584bf52511f5983ec898bbdbca89fd3aca04ab6d6b17052a31cdf98a5fbc9b6"
+    },
+    {
+      "name": "HooksnoutLongfin",
+      "species_id": 12,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        4,
+        47,
+        23
+      ],
+      "sha256": "fabd0d6782eeedb346ca7b056ae6add64c5859bbde1d25bbeb6231f3d7ae8f7b"
+    },
+    {
+      "name": "Hooksnout",
+      "species_id": 2,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        6,
+        47,
+        22
+      ],
+      "sha256": "6b143be53f1dfa83fb037f138ac56a105bf82039dc9e18526e86e303e79b64ef"
+    },
+    {
+      "name": "JinjiangOyster",
+      "species_id": 39,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        2,
+        1,
+        46,
+        27
+      ],
+      "sha256": "c28cac7ab41484379ca3b9b5b3b7cd54068365a911a7532ae6cbe8d59f161f19"
+    },
+    {
+      "name": "LargeYellowCroaker",
+      "species_id": 27,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        6,
+        47,
+        22
+      ],
+      "sha256": "37f13917318e3167bce02977c001a36038619a6ce6c4c7c789a9c2c1a46bc560"
+    },
+    {
+      "name": "LargeheadHairtail",
+      "species_id": 34,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        16,
+        95,
+        35
+      ],
+      "sha256": "65674ba6ad7c4677eeccab033e100e8a589dd8585bd421629c7f1ef7fc46c697"
+    },
+    {
+      "name": "LongsnoutCatfish",
+      "species_id": 22,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        12,
+        94,
+        43
+      ],
+      "sha256": "211c4907b065d4167b4195ca4a4443be84930452a183e2e5a14aec15c3fc295b"
+    },
+    {
+      "name": "LongspinedPorcupinefish",
+      "species_id": 31,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        1,
+        47,
+        26
+      ],
+      "sha256": "6f8a2a509816cb12dcf463387489e186422fc828663bb5e2e2060a2d5749bc1b"
+    },
+    {
+      "name": "Mandarin",
+      "species_id": 8,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        2,
+        47,
+        25
+      ],
+      "sha256": "e3a7117bdf1052300806f6366a6a66a0f64b11709cb7a863a211eafd9b8d4bd0"
+    },
+    {
+      "name": "MantisShrimp",
+      "species_id": 25,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        5,
+        45,
+        21
+      ],
+      "sha256": "b93657bd5fd58cb61ef5821db2bcb13c87f09f2230f4e95f3164ed54449340f6"
+    },
+    {
+      "name": "MeretrixClam",
+      "species_id": 38,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        7,
+        1,
+        41,
+        27
+      ],
+      "sha256": "8d6d005d90995e3adc0492818f3cb6acad7650f43d33285b781b7b8efba8eb04"
+    },
+    {
+      "name": "MongolianCulter",
+      "species_id": 21,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        4,
+        47,
+        23
+      ],
+      "sha256": "8be230ef42a629be90e7e8aa90a4308de6aee2a50352897bceadf312385579b2"
+    },
+    {
+      "name": "MoonSnail",
+      "species_id": 40,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        4,
+        1,
+        44,
+        27
+      ],
+      "sha256": "f8b1622085dfcd669a73c324062a1eb8d61452f3e14283359fdc5b77fea4a29c"
+    },
+    {
+      "name": "Oarfish",
+      "species_id": 35,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        14,
+        95,
+        47
+      ],
+      "sha256": "ff78ab9e9c0f7d42931bddf153b237fe4403f862290e48b579994c81e642e475"
+    },
+    {
+      "name": "ObscurePuffer",
+      "species_id": 23,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        10,
+        94,
+        45
+      ],
+      "sha256": "a67639cf558443e48f4f4f206c6310667d870b2b91efec2bd1e4bbf8b79eb4ba"
+    },
+    {
+      "name": "OliveFlounder",
+      "species_id": 30,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        2,
+        47,
+        25
+      ],
+      "sha256": "b025aa5c2fcd12745cb96df921d8c2522af4f3dee5be7212d5f771d19ea81dd8"
+    },
+    {
+      "name": "PacificBluefinTuna",
+      "species_id": 37,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        8,
+        95,
+        48
+      ],
+      "sha256": "d64a50dd95e95e9598b15629db122e1708cdc880cc8583ac309e10fa6ed3ea80"
+    },
+    {
+      "name": "PeacockMantis",
+      "species_id": 44,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        4,
+        43,
+        22
+      ],
+      "sha256": "15aa567e06f6838f2482e6d4685a847122e57d4063a32ccce32be072aef019ab"
+    },
+    {
+      "name": "RedSeabream",
+      "species_id": 26,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        2,
+        2,
+        47,
+        26
+      ],
+      "sha256": "8604044cf321fa6f2adeaddebc665f1ce50d8e88737d612871e8d1020dfa3d84"
+    },
+    {
+      "name": "Redeye",
+      "species_id": 19,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        8,
+        94,
+        48
+      ],
+      "sha256": "555baa2f71807667698a3bd5f195b494c4862c462ddcd8ac59a927684f47000a"
+    },
+    {
+      "name": "SandCrab",
+      "species_id": 42,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        2,
+        47,
+        25
+      ],
+      "sha256": "cb1de523213bb71873ec61ea423da83f672f64066710924c4e646aca1c0081f2"
+    },
+    {
+      "name": "Sharpbelly",
+      "species_id": 7,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        7,
+        47,
+        20
+      ],
+      "sha256": "9dfc1064cc34750045b4722aa9b1198e0e14781bd7abaac096ca869c599ab796"
+    },
+    {
+      "name": "ShortarmOctopus",
+      "species_id": 41,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        6,
+        1,
+        42,
+        27
+      ],
+      "sha256": "dc191c931c40a4b833b17799f1a32eebae587e211fe03223dd3b19ae8c071b5a"
+    },
+    {
+      "name": "SilverCarp",
+      "species_id": 18,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        5,
+        94,
+        51
+      ],
+      "sha256": "e75a98062913b40e57d67f51b322017bb1c79b653aee14ac2e0b7f747934fd45"
+    },
+    {
+      "name": "SnakeheadLarge",
+      "species_id": 5,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        16,
+        94,
+        40
+      ],
+      "sha256": "8c4abd1b8d0a80f714305ae07c36f0da684dae08f7d6cdd8842fb548aef813aa"
+    },
+    {
+      "name": "Snakehead",
+      "species_id": 5,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        8,
+        47,
+        20
+      ],
+      "sha256": "fa42906d526095e50da925e8caa9b1bf2e5007c5c5b255249a471601d331d708"
+    },
+    {
+      "name": "SoftshellAlbino",
+      "species_id": 14,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        4,
+        47,
+        24
+      ],
+      "sha256": "77d2c7c8a2ab69053f1f32c383405af89d57aa588c65aaa8d36ac54e73a91a9f"
+    },
+    {
+      "name": "Softshell",
+      "species_id": 9,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        2,
+        4,
+        47,
+        23
+      ],
+      "sha256": "828b7c9d323243946db8abd6ddb454f4ce95011cb3504ba57f9f7213944fb3a6"
+    },
+    {
+      "name": "SwordtipSquid",
+      "species_id": 45,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        2,
+        4,
+        47,
+        22
+      ],
+      "sha256": "fb8a79a30eb0cb24bb4a6ce9378a1a4d223cb7d335d265ee51201259fd308a13"
+    },
+    {
+      "name": "YellowCatfish",
+      "species_id": 6,
+      "native_size": [
+        48,
+        28
+      ],
+      "alpha_bounds": [
+        1,
+        2,
+        46,
+        25
+      ],
+      "sha256": "06c4760b77b3a844b76e47a692b86bf6497053cea9c13f22e6000e64abe8b286"
+    },
+    {
+      "name": "YellowGoosefish",
+      "species_id": 33,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        3,
+        95,
+        52
+      ],
+      "sha256": "b5599de02622c57b48b0c9f1f316d302e0a8359328d3bb70765d5f907f68e7b8"
+    },
+    {
+      "name": "Yellowcheek",
+      "species_id": 20,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        2,
+        13,
+        94,
+        42
+      ],
+      "sha256": "c8969c7833943ca83717475ce407a236b62e2c2e434873c61a4f2f6dd6b09e93"
+    },
+    {
+      "name": "YellowfinTuna",
+      "species_id": 36,
+      "native_size": [
+        96,
+        56
+      ],
+      "alpha_bounds": [
+        1,
+        7,
+        94,
+        49
+      ],
+      "sha256": "d349ae50366713186aded52080bb810cc9e8e9e5db231c93fbca64ded2d1bb55"
+    }
+  ],
+  "border_touching_sprites": [],
+  "stable_species": 47,
+  "guide_entries": 46,
+  "hidden_legacy_species": [
+    21
+  ],
+  "forage_placeholders": [
+    38,
+    39,
+    40,
+    41,
+    42,
+    43
+  ],
+  "ordinary_species_per_map": [
+    11,
+    12,
+    14
+  ],
+  "distribution_witnesses": [
+    {
+      "map": 0,
+      "species": 0,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 960
+    },
+    {
+      "map": 0,
+      "species": 1,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 360
+    },
+    {
+      "map": 0,
+      "species": 2,
+      "x": 76,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 52
+    },
+    {
+      "map": 0,
+      "species": 3,
+      "x": 116,
+      "depth_cm": 85,
+      "bait": 0,
+      "minute": 720,
+      "weight": 104
+    },
+    {
+      "map": 0,
+      "species": 4,
+      "x": 60,
+      "depth_cm": 6,
+      "bait": 0,
+      "minute": 720,
+      "weight": 165
+    },
+    {
+      "map": 0,
+      "species": 5,
+      "x": 76,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 62
+    },
+    {
+      "map": 0,
+      "species": 6,
+      "x": 68,
+      "depth_cm": 18,
+      "bait": 0,
+      "minute": 720,
+      "weight": 187
+    },
+    {
+      "map": 0,
+      "species": 7,
+      "x": 76,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 172
+    },
+    {
+      "map": 0,
+      "species": 8,
+      "x": 76,
+      "depth_cm": 30,
+      "bait": 0,
+      "minute": 720,
+      "weight": 6
+    },
+    {
+      "map": 0,
+      "species": 9,
+      "x": 68,
+      "depth_cm": 18,
+      "bait": 0,
+      "minute": 720,
+      "weight": 1
+    },
+    {
+      "map": 0,
+      "species": 10,
+      "x": 68,
+      "depth_cm": 18,
+      "bait": 0,
+      "minute": 720,
+      "weight": 25
+    },
+    {
+      "map": 1,
+      "species": 0,
+      "x": 60,
+      "depth_cm": 306,
+      "bait": 0,
+      "minute": 720,
+      "weight": 22
+    },
+    {
+      "map": 1,
+      "species": 1,
+      "x": 60,
+      "depth_cm": 306,
+      "bait": 0,
+      "minute": 720,
+      "weight": 15
+    },
+    {
+      "map": 1,
+      "species": 7,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 8
+    },
+    {
+      "map": 1,
+      "species": 15,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 2
+    },
+    {
+      "map": 1,
+      "species": 16,
+      "x": 60,
+      "depth_cm": 153,
+      "bait": 0,
+      "minute": 720,
+      "weight": 28
+    },
+    {
+      "map": 1,
+      "species": 17,
+      "x": 60,
+      "depth_cm": 306,
+      "bait": 0,
+      "minute": 720,
+      "weight": 25
+    },
+    {
+      "map": 1,
+      "species": 18,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 6
+    },
+    {
+      "map": 1,
+      "species": 19,
+      "x": 60,
+      "depth_cm": 153,
+      "bait": 0,
+      "minute": 720,
+      "weight": 11
+    },
+    {
+      "map": 1,
+      "species": 20,
+      "x": 60,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 15
+    },
+    {
+      "map": 1,
+      "species": 22,
+      "x": 60,
+      "depth_cm": 306,
+      "bait": 0,
+      "minute": 720,
+      "weight": 12
+    },
+    {
+      "map": 1,
+      "species": 23,
+      "x": 60,
+      "depth_cm": 306,
+      "bait": 0,
+      "minute": 720,
+      "weight": 1
+    },
+    {
+      "map": 1,
+      "species": 24,
+      "x": 60,
+      "depth_cm": 153,
+      "bait": 0,
+      "minute": 720,
+      "weight": 19
+    },
+    {
+      "map": 2,
+      "species": 25,
+      "x": 484,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 594
+    },
+    {
+      "map": 2,
+      "species": 26,
+      "x": 484,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 208
+    },
+    {
+      "map": 2,
+      "species": 27,
+      "x": 508,
+      "depth_cm": 37,
+      "bait": 0,
+      "minute": 720,
+      "weight": 25
+    },
+    {
+      "map": 2,
+      "species": 28,
+      "x": 492,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 105
+    },
+    {
+      "map": 2,
+      "species": 29,
+      "x": 492,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 252
+    },
+    {
+      "map": 2,
+      "species": 30,
+      "x": 484,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 118
+    },
+    {
+      "map": 2,
+      "species": 31,
+      "x": 484,
+      "depth_cm": 0,
+      "bait": 0,
+      "minute": 720,
+      "weight": 198
+    },
+    {
+      "map": 2,
+      "species": 32,
+      "x": 484,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 66
+    },
+    {
+      "map": 2,
+      "species": 33,
+      "x": 844,
+      "depth_cm": 861,
+      "bait": 3,
+      "minute": 720,
+      "weight": 158
+    },
+    {
+      "map": 2,
+      "species": 34,
+      "x": 844,
+      "depth_cm": 430,
+      "bait": 3,
+      "minute": 720,
+      "weight": 86
+    },
+    {
+      "map": 2,
+      "species": 36,
+      "x": 844,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 38
+    },
+    {
+      "map": 2,
+      "species": 37,
+      "x": 1084,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 19
+    },
+    {
+      "map": 2,
+      "species": 45,
+      "x": 492,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 1320,
+      "weight": 288
+    },
+    {
+      "map": 2,
+      "species": 46,
+      "x": 492,
+      "depth_cm": 0,
+      "bait": 3,
+      "minute": 720,
+      "weight": 252
+    }
+  ],
+  "motion": [
+    {
+      "map": 0,
+      "species": 0,
+      "style": 0,
+      "outward_ticks": 136,
+      "inward_ticks": 38,
+      "greatest_displacement_cm": 5,
+      "peak_tension": 53,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 1,
+      "style": 0,
+      "outward_ticks": 444,
+      "inward_ticks": 77,
+      "greatest_displacement_cm": 19,
+      "peak_tension": 114,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 2,
+      "style": 0,
+      "outward_ticks": 108,
+      "inward_ticks": 52,
+      "greatest_displacement_cm": 5,
+      "peak_tension": 44,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 3,
+      "style": 0,
+      "outward_ticks": 240,
+      "inward_ticks": 67,
+      "greatest_displacement_cm": 12,
+      "peak_tension": 131,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 4,
+      "style": 0,
+      "outward_ticks": 53,
+      "inward_ticks": 14,
+      "greatest_displacement_cm": 2,
+      "peak_tension": 27,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 5,
+      "style": 0,
+      "outward_ticks": 206,
+      "inward_ticks": 76,
+      "greatest_displacement_cm": 8,
+      "peak_tension": 89,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 6,
+      "style": 0,
+      "outward_ticks": 111,
+      "inward_ticks": 44,
+      "greatest_displacement_cm": 4,
+      "peak_tension": 47,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 7,
+      "style": 0,
+      "outward_ticks": 69,
+      "inward_ticks": 15,
+      "greatest_displacement_cm": 3,
+      "peak_tension": 39,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 8,
+      "style": 0,
+      "outward_ticks": 156,
+      "inward_ticks": 47,
+      "greatest_displacement_cm": 7,
+      "peak_tension": 68,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 9,
+      "style": 1,
+      "outward_ticks": 26,
+      "inward_ticks": 3,
+      "greatest_displacement_cm": 2,
+      "peak_tension": 43,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 10,
+      "style": 2,
+      "outward_ticks": 0,
+      "inward_ticks": 0,
+      "greatest_displacement_cm": 0,
+      "peak_tension": 25,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 11,
+      "style": 0,
+      "outward_ticks": 240,
+      "inward_ticks": 67,
+      "greatest_displacement_cm": 12,
+      "peak_tension": 131,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 12,
+      "style": 0,
+      "outward_ticks": 108,
+      "inward_ticks": 52,
+      "greatest_displacement_cm": 5,
+      "peak_tension": 44,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 13,
+      "style": 0,
+      "outward_ticks": 444,
+      "inward_ticks": 77,
+      "greatest_displacement_cm": 19,
+      "peak_tension": 114,
+      "idle_losses": 0
+    },
+    {
+      "map": 0,
+      "species": 14,
+      "style": 1,
+      "outward_ticks": 26,
+      "inward_ticks": 3,
+      "greatest_displacement_cm": 2,
+      "peak_tension": 43,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 0,
+      "style": 0,
+      "outward_ticks": 161,
+      "inward_ticks": 66,
+      "greatest_displacement_cm": 9,
+      "peak_tension": 52,
+      "idle_losses": 17
+    },
+    {
+      "map": 1,
+      "species": 1,
+      "style": 0,
+      "outward_ticks": 957,
+      "inward_ticks": 188,
+      "greatest_displacement_cm": 47,
+      "peak_tension": 92,
+      "idle_losses": 16
+    },
+    {
+      "map": 1,
+      "species": 7,
+      "style": 0,
+      "outward_ticks": 55,
+      "inward_ticks": 4,
+      "greatest_displacement_cm": 3,
+      "peak_tension": 34,
+      "idle_losses": 32
+    },
+    {
+      "map": 1,
+      "species": 13,
+      "style": 0,
+      "outward_ticks": 957,
+      "inward_ticks": 188,
+      "greatest_displacement_cm": 47,
+      "peak_tension": 92,
+      "idle_losses": 16
+    },
+    {
+      "map": 1,
+      "species": 15,
+      "style": 0,
+      "outward_ticks": 480,
+      "inward_ticks": 183,
+      "greatest_displacement_cm": 19,
+      "peak_tension": 65,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 16,
+      "style": 0,
+      "outward_ticks": 1120,
+      "inward_ticks": 310,
+      "greatest_displacement_cm": 56,
+      "peak_tension": 106,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 17,
+      "style": 1,
+      "outward_ticks": 1228,
+      "inward_ticks": 176,
+      "greatest_displacement_cm": 107,
+      "peak_tension": 80,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 18,
+      "style": 0,
+      "outward_ticks": 589,
+      "inward_ticks": 174,
+      "greatest_displacement_cm": 30,
+      "peak_tension": 81,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 19,
+      "style": 0,
+      "outward_ticks": 303,
+      "inward_ticks": 87,
+      "greatest_displacement_cm": 14,
+      "peak_tension": 65,
+      "idle_losses": 16
+    },
+    {
+      "map": 1,
+      "species": 20,
+      "style": 0,
+      "outward_ticks": 2180,
+      "inward_ticks": 974,
+      "greatest_displacement_cm": 337,
+      "peak_tension": 123,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 22,
+      "style": 1,
+      "outward_ticks": 159,
+      "inward_ticks": 100,
+      "greatest_displacement_cm": 11,
+      "peak_tension": 55,
+      "idle_losses": 0
+    },
+    {
+      "map": 1,
+      "species": 23,
+      "style": 2,
+      "outward_ticks": 0,
+      "inward_ticks": 0,
+      "greatest_displacement_cm": 0,
+      "peak_tension": 33,
+      "idle_losses": 16
+    },
+    {
+      "map": 1,
+      "species": 24,
+      "style": 0,
+      "outward_ticks": 627,
+      "inward_ticks": 255,
+      "greatest_displacement_cm": 35,
+      "peak_tension": 107,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 25,
+      "style": 0,
+      "outward_ticks": 90,
+      "inward_ticks": 36,
+      "greatest_displacement_cm": 3,
+      "peak_tension": 25,
+      "idle_losses": 48
+    },
+    {
+      "map": 2,
+      "species": 26,
+      "style": 0,
+      "outward_ticks": 1650,
+      "inward_ticks": 800,
+      "greatest_displacement_cm": 66,
+      "peak_tension": 55,
+      "idle_losses": 14
+    },
+    {
+      "map": 2,
+      "species": 27,
+      "style": 0,
+      "outward_ticks": 1009,
+      "inward_ticks": 391,
+      "greatest_displacement_cm": 45,
+      "peak_tension": 55,
+      "idle_losses": 13
+    },
+    {
+      "map": 2,
+      "species": 28,
+      "style": 0,
+      "outward_ticks": 3318,
+      "inward_ticks": 905,
+      "greatest_displacement_cm": 260,
+      "peak_tension": 69,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 29,
+      "style": 0,
+      "outward_ticks": 956,
+      "inward_ticks": 319,
+      "greatest_displacement_cm": 42,
+      "peak_tension": 55,
+      "idle_losses": 16
+    },
+    {
+      "map": 2,
+      "species": 30,
+      "style": 1,
+      "outward_ticks": 126,
+      "inward_ticks": 64,
+      "greatest_displacement_cm": 5,
+      "peak_tension": 49,
+      "idle_losses": 16
+    },
+    {
+      "map": 2,
+      "species": 31,
+      "style": 2,
+      "outward_ticks": 0,
+      "inward_ticks": 0,
+      "greatest_displacement_cm": 0,
+      "peak_tension": 25,
+      "idle_losses": 48
+    },
+    {
+      "map": 2,
+      "species": 32,
+      "style": 1,
+      "outward_ticks": 1873,
+      "inward_ticks": 702,
+      "greatest_displacement_cm": 369,
+      "peak_tension": 221,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 33,
+      "style": 2,
+      "outward_ticks": 0,
+      "inward_ticks": 0,
+      "greatest_displacement_cm": 0,
+      "peak_tension": 38,
+      "idle_losses": 16
+    },
+    {
+      "map": 2,
+      "species": 34,
+      "style": 0,
+      "outward_ticks": 1420,
+      "inward_ticks": 455,
+      "greatest_displacement_cm": 56,
+      "peak_tension": 55,
+      "idle_losses": 5
+    },
+    {
+      "map": 2,
+      "species": 35,
+      "style": 2,
+      "outward_ticks": 0,
+      "inward_ticks": 0,
+      "greatest_displacement_cm": 0,
+      "peak_tension": 61,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 36,
+      "style": 0,
+      "outward_ticks": 3168,
+      "inward_ticks": 1093,
+      "greatest_displacement_cm": 422,
+      "peak_tension": 172,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 37,
+      "style": 0,
+      "outward_ticks": 2967,
+      "inward_ticks": 372,
+      "greatest_displacement_cm": 681,
+      "peak_tension": 190,
+      "idle_losses": 0
+    },
+    {
+      "map": 2,
+      "species": 44,
+      "style": 0,
+      "outward_ticks": 102,
+      "inward_ticks": 28,
+      "greatest_displacement_cm": 3,
+      "peak_tension": 26,
+      "idle_losses": 48
+    },
+    {
+      "map": 2,
+      "species": 45,
+      "style": 0,
+      "outward_ticks": 416,
+      "inward_ticks": 188,
+      "greatest_displacement_cm": 24,
+      "peak_tension": 44,
+      "idle_losses": 27
+    },
+    {
+      "map": 2,
+      "species": 46,
+      "style": 0,
+      "outward_ticks": 591,
+      "inward_ticks": 287,
+      "greatest_displacement_cm": 31,
+      "peak_tension": 49,
+      "idle_losses": 29
+    }
+  ],
+  "controllers": [
+    {
+      "map": 0,
+      "species": 0,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 1,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 2,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 3,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 4,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 5,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 6,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 7,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 8,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 9,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 10,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 11,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 12,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 13,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 0,
+      "species": 14,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 0,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 1,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 7,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 13,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 15,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 16,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 17,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 18,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 19,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 20,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 22,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 23,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 1,
+      "species": 24,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 25,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 26,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 27,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 28,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 29,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 30,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 31,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 32,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 33,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 34,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 35,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 36,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 37,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 44,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 45,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "map": 2,
+      "species": 46,
+      "landed_min_mean_max": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "summary": {
+    "profiles": 44,
+    "motion_trials": 2112,
+    "last_landing_checks": 2112,
+    "safe_deep_reel_checks": 680,
+    "stalls": 0
+  },
+  "controller_trials": 2112,
+  "controller_landings": 2112,
+  "hardware_motion_measured": false,
+  "real_player_win_rate_estimated": false
+}

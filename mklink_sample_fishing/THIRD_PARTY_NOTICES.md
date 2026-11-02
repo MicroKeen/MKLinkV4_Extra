@@ -8,3 +8,6 @@
 - `src/fish/assets/remarks_font.c` 的字形数据由 Noto Sans SC 导出，SIL Open Font License 1.1，见 `src/fish/assets/OFL.txt`；字体生成/Arm-2D glue 的原许可说明保留。
 - 船、湖景、鱼种、装备与行囊像素素材来自本钓鱼项目的生成/加工资产，不包含新增下载的第三方图包。发布者为此项目作者。
 - 商店木屋、柜台内饰、老人四帧与岸边小路来自内置 ImageGen；老人采用 merchant-v6，仓库只提供实际使用的 C 导出资源，原图、变体和提示词不公开。没有引用《暗黑地牢 2》的现成角色或素材。
+
+- D26新增海滩、灯塔、快艇、赶海工具、海鱼、竖琴螺与青蟹等项目自有生成／加工资产；仅发布实际运行的C／压缩包形式，不提供原图和提示词。新增公共鱼图包为原RGB565／Alpha数据的无损索引压缩，解码器为本项目代码。
+- D26 coastal scenes, tools and species are project-generated/processed assets. Only used runtime C/packed data is distributed. The shared portrait pack losslessly encodes RGB565/alpha data with the project decoder.

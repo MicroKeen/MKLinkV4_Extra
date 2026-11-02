@@ -1,6 +1,27 @@
 #include "fish_equipment.h"
 #include "fish_rules.h"
 
+unsigned fish_line_span_cm(unsigned horizontal,unsigned depth)
+{
+    uint32_t n=horizontal*horizontal+depth*depth,root=0,bit=1u<<30;
+    while(bit>n)bit>>=2;
+    while(bit){if(n>=root+bit){n-=root+bit;root=(root>>1)+bit;}else root>>=1;bit>>=2;}
+    return root;
+}
+bool fish_line_bottom_allowed(unsigned line,unsigned bottom)
+{return line<FISH_LINE_COUNT && (line>=2 || bottom<(line?1000u:500u));}
+unsigned fish_line_resolve_layer(unsigned line,unsigned bottom,unsigned horizontal,unsigned requested)
+{
+    if(line>=FISH_LINE_COUNT)return 0;
+    if(requested>2)requested=2;
+    for(unsigned layer=requested;layer;--layer){
+        unsigned depth=layer==2?bottom:bottom/2;
+        if((layer!=2 || fish_line_bottom_allowed(line,bottom)) &&
+           fish_line_span_cm(horizontal,depth)<=fish_line_sets[line].distance_limit_cm)return layer;
+    }
+    return 0;
+}
+
 uint8_t fish_line_bite_percent(unsigned index,uint32_t weight_g)
 {
     if(index==FISH_PE_LINE)return weight_g<=1000?4:weight_g<=5000?18:weight_g<=15000?60:90;

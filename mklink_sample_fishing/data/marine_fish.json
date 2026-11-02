@@ -1,0 +1,910 @@
+{
+  "schema": 1,
+  "source_count": 19,
+  "source_header_count": 25,
+  "reviewed_count": 25,
+  "foraging_count": 9,
+  "species": [
+    {
+      "index": 25,
+      "id": "mantis_shrimp",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        5,
+        3,
+        1,
+        0,
+        0
+      ],
+      "baits": [
+        3,
+        2,
+        2,
+        5,
+        4,
+        1,
+        0,
+        1,
+        0,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 20
+    },
+    {
+      "index": 26,
+      "id": "red_seabream",
+      "status": "fishing",
+      "rarity": "silver",
+      "encounter_weight": 16,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        2,
+        1,
+        2,
+        8,
+        5,
+        2,
+        3,
+        1,
+        1,
+        8
+      ],
+      "activity": [
+        130,
+        120,
+        70
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 50
+    },
+    {
+      "index": 27,
+      "id": "large_yellow_croaker",
+      "status": "fishing",
+      "rarity": "gold",
+      "encounter_weight": 4,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        2,
+        0,
+        0,
+        8,
+        6,
+        2,
+        0,
+        0,
+        2,
+        8
+      ],
+      "activity": [
+        80,
+        130,
+        150
+      ],
+      "night_layers": [
+        "middle",
+        "lower"
+      ],
+      "price": 180
+    },
+    {
+      "index": 28,
+      "id": "great_barracuda",
+      "status": "fishing",
+      "rarity": "silver",
+      "encounter_weight": 16,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        2,
+        8,
+        3,
+        0,
+        0,
+        8,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "surface"
+      ],
+      "price": 50
+    },
+    {
+      "index": 29,
+      "id": "flathead_mullet",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        4,
+        4,
+        3,
+        0,
+        0
+      ],
+      "baits": [
+        1,
+        5,
+        5,
+        2,
+        0,
+        1,
+        0,
+        6,
+        0,
+        8
+      ],
+      "activity": [
+        140,
+        110,
+        60
+      ],
+      "night_layers": [
+        "surface"
+      ],
+      "price": 20
+    },
+    {
+      "index": 30,
+      "id": "olive_flounder",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        1,
+        0,
+        0,
+        6,
+        8,
+        2,
+        0,
+        0,
+        3,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 20
+    },
+    {
+      "index": 31,
+      "id": "longspined_porcupinefish",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        1,
+        0,
+        0,
+        8,
+        4,
+        1,
+        3,
+        0,
+        0,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 40
+    },
+    {
+      "index": 32,
+      "id": "giant_grouper",
+      "status": "fishing",
+      "rarity": "gold",
+      "encounter_weight": 4,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        5,
+        8,
+        2,
+        0,
+        0,
+        8,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 120
+    },
+    {
+      "index": 33,
+      "id": "yellow_goosefish",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        0,
+        0,
+        1,
+        3,
+        4
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        4,
+        8,
+        1,
+        0,
+        0,
+        3,
+        8
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 65
+    },
+    {
+      "index": 34,
+      "id": "largehead_hairtail",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        3,
+        8,
+        3,
+        0,
+        0,
+        7,
+        8
+      ],
+      "activity": [
+        80,
+        120,
+        160
+      ],
+      "night_layers": [
+        "surface",
+        "middle"
+      ],
+      "price": 20
+    },
+    {
+      "index": 35,
+      "id": "oarfish",
+      "status": "storm_special",
+      "rarity": "special",
+      "encounter_weight": 0,
+      "zones": [
+        0,
+        0,
+        0,
+        0,
+        5
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        5,
+        8,
+        3,
+        0,
+        0,
+        7,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "middle",
+        "lower"
+      ],
+      "price": 1600
+    },
+    {
+      "index": 36,
+      "id": "yellowfin_tuna",
+      "status": "fishing",
+      "rarity": "silver",
+      "encounter_weight": 16,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        2,
+        8,
+        3,
+        0,
+        0,
+        8,
+        8
+      ],
+      "activity": [
+        120,
+        120,
+        80
+      ],
+      "night_layers": [
+        "surface"
+      ],
+      "price": 55
+    },
+    {
+      "index": 37,
+      "id": "pacific_bluefin_tuna",
+      "status": "fishing",
+      "rarity": "gold",
+      "encounter_weight": 4,
+      "zones": [
+        0,
+        0,
+        1,
+        3,
+        4
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        2,
+        8,
+        2,
+        0,
+        0,
+        8,
+        8
+      ],
+      "activity": [
+        120,
+        120,
+        80
+      ],
+      "night_layers": [
+        "surface",
+        "middle"
+      ],
+      "price": 105
+    },
+    {
+      "index": 38,
+      "id": "meretrix_clam",
+      "status": "foraging",
+      "rarity": "bronze",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 20
+    },
+    {
+      "index": 39,
+      "id": "jinjiang_oyster",
+      "status": "foraging",
+      "rarity": "bronze",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 20
+    },
+    {
+      "index": 40,
+      "id": "moon_snail",
+      "status": "foraging",
+      "rarity": "silver",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 50
+    },
+    {
+      "index": 41,
+      "id": "shortarm_octopus",
+      "status": "foraging",
+      "rarity": "silver",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 50
+    },
+    {
+      "index": 42,
+      "id": "sand_crab",
+      "status": "foraging",
+      "rarity": "bronze",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 20
+    },
+    {
+      "index": 43,
+      "id": "chinese_prawn",
+      "status": "foraging",
+      "rarity": "bronze",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 20
+    },
+    {
+      "index": 44,
+      "id": "peacock_mantis",
+      "status": "rare_branch",
+      "rarity": "special",
+      "encounter_weight": 0,
+      "zones": [
+        5,
+        3,
+        1,
+        0,
+        0
+      ],
+      "baits": [
+        3,
+        2,
+        2,
+        5,
+        4,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "bottom"
+      ],
+      "price": 200
+    },
+    {
+      "index": 45,
+      "id": "swordtip_squid",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        5,
+        6,
+        2,
+        0,
+        0,
+        6,
+        8
+      ],
+      "activity": [
+        70,
+        120,
+        160
+      ],
+      "night_layers": [
+        "surface",
+        "middle"
+      ],
+      "price": 20
+    },
+    {
+      "index": 46,
+      "id": "chub_mackerel",
+      "status": "fishing",
+      "rarity": "bronze",
+      "encounter_weight": 36,
+      "zones": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        7,
+        4,
+        2,
+        0,
+        0,
+        5,
+        8
+      ],
+      "activity": [
+        100,
+        130,
+        150
+      ],
+      "night_layers": [
+        "surface",
+        "middle"
+      ],
+      "price": 20
+    },
+    {
+      "index": 47,
+      "id": "ragworm",
+      "status": "foraging",
+      "rarity": "bronze",
+      "encounter_weight": 0,
+      "zones": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 1
+    },
+    {
+      "index": 48,
+      "id": "harp_snail",
+      "status": "foraging",
+      "rarity": "gold",
+      "encounter_weight": 0,
+      "zones": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 80
+    },
+    {
+      "index": 49,
+      "id": "green_mud_crab",
+      "status": "foraging",
+      "rarity": "gold",
+      "encounter_weight": 0,
+      "zones": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "baits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "activity": [
+        110,
+        120,
+        100
+      ],
+      "night_layers": [
+        "shore"
+      ],
+      "price": 80
+    }
+  ],
+  "oarfish": {
+    "rarity": "special",
+    "minimum_world_x": 1200,
+    "minimum_rain": 200,
+    "minimum_strength": 200,
+    "roll_per_mille": 10,
+    "cat_per_mille": 25
+  },
+  "peacock": {
+    "parent": 25,
+    "index": 44,
+    "roll_per_mille": 10,
+    "cat_per_mille": 25
+  },
+  "cabin": {
+    "name_zh": "鱼舱",
+    "capacity_g": 200000,
+    "map_index": 2,
+    "price": 2500
+  }
+}

@@ -1,7 +1,7 @@
 /* Generated from docs/city-merchant-dialogue.md. */
 #ifndef FISH_CITY_DIALOGUE_DATA_H
 #define FISH_CITY_DIALOGUE_DATA_H
-static const fish_merchant_dialogue_t fish_city_dialogue[15]={
+static const fish_merchant_dialogue_t fish_city_dialogue[16]={
     {0,{"欢迎光临。","刚补的货，慢慢挑。"}},
     {1,{"今天钓着什么了？","先放这儿，我拿秤。"}},
     {3,{"等等，我把门口腾出来！","这得借个大盆了。"}},
@@ -17,5 +17,6 @@ static const fish_merchant_dialogue_t fish_city_dialogue[15]={
     {3,{"白的？我头一回见。","别摸它的嘴，照样咬人。"}},
     {0,{"钓着不一样的鱼，带来看看。","有人收稀奇鱼，舍得出钱。"}},
     {4,{"小心烫，慢慢喝。","热拿铁好了，趁热吧。"}},
+    {0,{"面泡好了，小心烫。","趁热吃，江边风大。"}},
 };
 #endif

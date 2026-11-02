@@ -46,9 +46,11 @@ int fish_resource_port_init(void)
 int fish_resource_open(unsigned map,uint32_t *bytes)
 {
     static const char *paths[]={"3:/FishingGame_Resources_DO_NOT_DELETE/maps/0_wetland.fgpk",
-        "3:/FishingGame_Resources_DO_NOT_DELETE/maps/1_city_river.fgpk"};
+        "3:/FishingGame_Resources_DO_NOT_DELETE/maps/1_city_river.fgpk",
+        "3:/FishingGame_Resources_DO_NOT_DELETE/maps/2_beach.fgpk",
+        "3:/FishingGame_Resources_DO_NOT_DELETE/common/fish.fgpk"};
     fish_hpm_load_stage_at(FISH_HPM_FS_WAIT,map);
-    if(map>=2 || fish_fs_resource_lock())return -1;
+    if(map>=4 || fish_fs_resource_lock())return -1;
     fish_hpm_load_stage_at(FISH_HPM_SD_OPEN,map);
     FRESULT r=f_open(&file,paths[map],FA_READ);
     if(r==FR_OK) {*bytes=f_size(&file);opened=true;}

@@ -1,5 +1,9 @@
 # 岸、码头、水深与装备背包
 
+## 当前D15本地开发 / Local D15 revision
+
+新增流浪猫与船尾同伴，抚摸+1、鱼罐头+5、每次见面最多3次互动、每天最多喂2次，好感50加入；船上只坐/睡，睡觉飘出zzz，稀有变异由1%升至2.5%。修复升级容器剩余空间不足时误放流大鱼；竹竿限制线组；钓层简化为钓底/顶层/中层；拟真假饵600G永久使用。V15存档1511B兼容全部旧档，原SD包不变。完整当前设定见[流浪猫、鱼获与装备](cat-and-cargo-d15.md)，以下章节为历史。 / Cat companion, cargo fallback, rod/rig compatibility, three depth modes and reusable600G lure. V15 retains older saves and the existing SD packs. See the current D15 guide above; older sections are historical.
+
 更新：2026-10-14。以下内容已经接入原生游戏，水深和分布均为虚拟游戏参数，不对应任何真实地区或公园的测量数据。
 
 ## 地图和位置显示

@@ -9,7 +9,7 @@ enum {FISH_ROUTE_WIDTH=640,FISH_ROUTE_HEIGHT=480,
       FISH_ROUTE_VIEW_X=8,FISH_ROUTE_VIEW_Y=40,
       FISH_ROUTE_VIEW_WIDTH=224,FISH_ROUTE_VIEW_HEIGHT=136,FISH_ROUTE_PAN_MS=360};
 typedef struct {int16_t x,y;} fish_route_stop_t;
-static const fish_route_stop_t fish_route_stops[FISH_MAP_COUNT]={{280,180},{388,230}};
+static const fish_route_stop_t fish_route_stops[FISH_MAP_COUNT]={{280,180},{388,230},{484,284}};
 typedef struct {
     int16_t x,y,from_x,from_y;
     uint32_t started_at;

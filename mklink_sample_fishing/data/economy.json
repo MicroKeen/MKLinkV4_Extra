@@ -25,7 +25,7 @@
   ],
   "container_purchase": "replace with higher tier; transfer existing tail fish if remaining room fits",
   "shop_layout": "shop_layout.json",
-  "overflow": "release; guide record still counts",
+  "overflow": "Store if remaining room fits. Otherwise a fish above10kg may use one empty stern slot, even below an upgraded container total capacity; release only if neither route applies.",
   "price_formula": "max(1, round(base * size_mm^2 / (mean_x2_mm/2)^2))",
   "base_prices": {
     "crucian": 8,
@@ -45,7 +45,8 @@
     "rod": [
       0,
       550,
-      1800
+      1800,
+      3500
     ],
     "line": [
       120,
@@ -95,6 +96,46 @@
     "display": "07:00 AM - 06:00 PM",
     "closing": "reject entry/trade; return from shop or its container view to shore"
   },
-  "line_damage": "A broken current rig is destroyed, removed from ownership and saved immediately. Switch to a spare if available; without a rig casting is blocked until replacement purchase. Slack/missed/early losses preserve rigs.",
-  "free_fine_rig": "When coins<120 and no intact fine rig is owned, either tackle merchant grants one free, regardless of cargo/other rigs; equip and save, no duplicates."
+  "line_damage": "Each overload/range break rolls once:10% destroys the current rig, removes ownership, selects a spare and requests a save;90% preserves the active rig. Slack/missed/early losses and animation frames never roll damage.",
+  "free_fine_rig": "When coins<120 and no intact fine rig is owned, either tackle merchant grants one free, regardless of cargo/other rigs; equip and save, no duplicates.",
+  "comforts": {
+    "umbrella": {
+      "name_zh": "雨伞",
+      "price": 160,
+      "shop": "city_convenience",
+      "permanent": true,
+      "protection": "No further rain wetness; existing wetness dries at normal sheltered rate."
+    },
+    "noodles": {
+      "name_zh": "泡面",
+      "price": 28,
+      "duration_game_minutes": 240,
+      "handling_percent": 110,
+      "strike_window_percent": 100,
+      "stacking": "Shared refreshment slot with hot latte; last purchase replaces previous effect."
+    }
+  },
+  "line_damage_percent": 10,
+  "puffer_escape_bite": {
+    "species": "obscure_puffer",
+    "extra_probability_percent": 20,
+    "independent_of_break_damage": true,
+    "applies_to": [
+      "hooked_overload_break",
+      "hooked_range_break",
+      "hooked_slack_escape"
+    ],
+    "excludes": [
+      "early_strike",
+      "missed_bite"
+    ],
+    "hint_zh": "它咬断了线组",
+    "consume_rigs_at_most": 1
+  },
+  "lifelike_lure": {
+    "price": 600,
+    "consumable": false,
+    "ownership": "Existing positive stock stays owned; one purchase unlocks, duplicate purchases do not charge."
+  },
+  "rod_line_compatibility": "Bamboo rod supports fine/general rigs only. Strong/heavy and8-carrier PE rigs require fiberglass or better. Preserve ownership and choose an owned compatible rig for legacy bamboo combinations."
 }

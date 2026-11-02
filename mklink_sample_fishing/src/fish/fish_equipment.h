@@ -1,9 +1,10 @@
 #ifndef FISH_EQUIPMENT_H
 #define FISH_EQUIPMENT_H
 #include "fish_species.h"
-enum {FISH_ROD_COUNT=3,FISH_LINE_COUNT=4,FISH_PE_LINE=3,FISH_FLOAT_COUNT=3,FISH_BAIT_COUNT=9,
-      FISH_BAIT_SNAIL=6,FISH_BAIT_CORN=7,FISH_BAIT_LIFELIKE=8};
-typedef struct {const char *name; uint16_t max_cast_px; uint8_t reel_percent;} fish_rod_t;
+enum {FISH_ROD_COUNT=5,FISH_LONG_ROD=3,FISH_HEAVY_SEA_ROD=4,FISH_LINE_COUNT=5,FISH_PE_LINE=3,FISH_MARINE_LINE=4,FISH_FLOAT_COUNT=3,FISH_BAIT_COUNT=10,
+      FISH_BAIT_SNAIL=6,FISH_BAIT_CORN=7,FISH_BAIT_LIFELIKE=8,FISH_BAIT_RAGWORM=9};
+static inline bool fish_tackle_compatible(unsigned rod,unsigned line) {return rod!=0 || line<2;}
+typedef struct {const char *name; uint16_t max_cast_px; uint8_t reel_percent,reel_tension_relief;} fish_rod_t;
 typedef struct {
     const char *name,*hook;
     uint16_t capacity_units,distance_limit_cm;
@@ -21,4 +22,8 @@ uint8_t fish_line_bite_percent(unsigned index,uint32_t weight_g);
 unsigned fish_line_response_percent(unsigned index,uint32_t weight_g);
 uint16_t fish_line_bite_wait(uint32_t *random_state,unsigned index,uint32_t weight_g);
 uint16_t fish_line_bite_wait_bonus(uint32_t *random_state,unsigned index,uint32_t weight_g,unsigned bonus_percent);
+unsigned fish_line_span_cm(unsigned horizontal_cm,unsigned depth_cm);
+bool fish_line_bottom_allowed(unsigned line,unsigned bottom_cm);
+/* Requested layer:0=surface,1=middle,2=bottom; resolve toward shallower. */
+unsigned fish_line_resolve_layer(unsigned line,unsigned bottom_cm,unsigned horizontal_cm,unsigned requested);
 #endif

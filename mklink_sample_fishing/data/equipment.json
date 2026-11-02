@@ -12,19 +12,44 @@
       "id": "bamboo",
       "name_zh": "竹竿",
       "max_cast_px": 88,
-      "reel_percent": 90
+      "reel_percent": 90,
+      "reel_tension_relief": 0
     },
     {
       "id": "fiberglass",
       "name_zh": "玻纤竿",
       "max_cast_px": 116,
-      "reel_percent": 100
+      "reel_percent": 100,
+      "reel_tension_relief": 0
     },
     {
       "id": "carbon",
       "name_zh": "碳素竿",
       "max_cast_px": 140,
-      "reel_percent": 110
+      "reel_percent": 110,
+      "reel_tension_relief": 0
+    },
+    {
+      "id": "long_carbon",
+      "name_zh": "高碳长竿",
+      "max_cast_px": 180,
+      "reel_percent": 125,
+      "reel_tension_relief": 1,
+      "price": 3500,
+      "city_only_purchase": true,
+      "small_fish_slack": "At<=500g low-tension slack accumulates50% faster; fades linearly to normal at1.5kg. No random forced escape."
+    },
+    {
+      "id": "heavy_sea",
+      "name_zh": "重型海竿",
+      "max_cast_px": 126,
+      "reel_percent": 150,
+      "reel_tension_relief": 1,
+      "price": 6000,
+      "coast_only_purchase": true,
+      "reference_rod": "long_carbon",
+      "cast_multiplier_percent": 70,
+      "reel_multiplier_percent": 120
     }
   ],
   "line_sets": [
@@ -43,7 +68,9 @@
         94,
         92
       ],
-      "distance_limit_cm": 450
+      "distance_limit_cm": 450,
+      "minimum_rod_index": 0,
+      "bottom_water_limit_exclusive_cm": 500
     },
     {
       "id": "standard",
@@ -60,7 +87,9 @@
         74,
         70
       ],
-      "distance_limit_cm": 650
+      "distance_limit_cm": 650,
+      "minimum_rod_index": 0,
+      "bottom_water_limit_exclusive_cm": 1000
     },
     {
       "id": "heavy",
@@ -77,7 +106,9 @@
         50,
         62
       ],
-      "distance_limit_cm": 850
+      "distance_limit_cm": 2000,
+      "minimum_rod_index": 1,
+      "bottom_water_limit_exclusive_cm": null
     },
     {
       "id": "pe8",
@@ -87,14 +118,14 @@
       "capacity_units": 32000,
       "strike_window_percent": 90,
       "diameter_hundredths_mm": 60,
-      "response_percent": 45,
-      "comfortable_weight_g": 30000,
+      "response_percent": 100,
+      "comfortable_weight_g": 40000,
       "bite_percent": [
         4,
         4,
         90
       ],
-      "distance_limit_cm": 1050,
+      "distance_limit_cm": 2500,
       "description_zh": "像一条钢缆，会吓跑小鱼",
       "price": 600,
       "city_only_purchase": true,
@@ -108,7 +139,31 @@
         18,
         60,
         90
-      ]
+      ],
+      "minimum_rod_index": 1,
+      "bottom_water_limit_exclusive_cm": null
+    },
+    {
+      "id": "marine",
+      "name_zh": "海钓线组",
+      "hook_zh": "大钩",
+      "strength": 240,
+      "capacity_units": 36000,
+      "strike_window_percent": 95,
+      "diameter_hundredths_mm": 80,
+      "response_percent": 80,
+      "comfortable_weight_g": 60000,
+      "bite_percent": [
+        8,
+        35,
+        90
+      ],
+      "distance_limit_cm": 20000,
+      "minimum_rod_index": 1,
+      "price": 1200,
+      "coast_only_purchase": true,
+      "description_zh": "放到底，也得慢慢收回来",
+      "bottom_water_limit_exclusive_cm": null
     }
   ],
   "floats": [
@@ -238,7 +293,7 @@
         3,
         0,
         8,
-        1,
+        4,
         2
       ],
       "short_description_zh": "吓跑卡拉米，吸引掠食者",
@@ -257,7 +312,7 @@
         5,
         2,
         6,
-        1,
+        6,
         7
       ],
       "short_description_zh": "大鱼吃小鱼，小鱼吃虾米",
@@ -283,5 +338,6 @@
       ]
     }
   ],
-  "multiplier_basis": "游戏体验权重，不能解释为实际垂钓成功率"
+  "multiplier_basis": "游戏体验权重，不能解释为实际垂钓成功率",
+  "depth_fallback": "All maps: bottom -> middle -> surface; grade permits bottom, Euclidean(horizontal,hook depth) must fit physical line."
 }

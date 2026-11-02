@@ -1,5 +1,7 @@
 #include "fish_media.h"
 #include "fish_resources.h"
+#include "fish_map_config.h"
+#include "fish_asset_layout.h"
 enum {COPY_QUIET_MS=3000,FINAL_QUIET_MS=1500,PROBE_RETRY_MS=3000};
 static fish_media_phase_t state=FISH_MEDIA_READY;
 static bool visible,probing;
@@ -60,7 +62,7 @@ void fish_media_tick(uint32_t now,bool save_busy)
             error=fish_resources_error();probe_end();state=FISH_MEDIA_WAIT;retry_at=now;return;
         }
         if(fish_resources_phase()!=FISH_RES_DONE)return;
-        if(++map<2) {fish_resources_check_begin(map);return;}
+        if(++map<FISH_RESOURCE_COUNT) {fish_resources_check_begin(map);return;}
         probe_end();
         /* The extra quiet window protects host ownership, not a normal boot
          * with no USB disk. Destination rendering is handled by the scene. */
@@ -83,12 +85,12 @@ fish_media_phase_t fish_media_phase(void) {return state;}
 unsigned fish_media_progress(void)
 {
     if(state==FISH_MEDIA_READY || state==FISH_MEDIA_SETTLE)return 100;
-    return state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY?map*50+fish_resources_progress()/2:0;
+    return state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY?(map*100+fish_resources_progress())/FISH_RESOURCE_COUNT:0;
 }
 fish_media_status_t fish_media_status(void)
 {
     fish_media_status_t result={.phase=state,.progress=fish_media_progress(),
-        .map=map<2?map:1,.received_bytes=received,.elapsed_ms=last_tick-started,
+        .map=map<FISH_RESOURCE_COUNT?map:FISH_RESOURCE_COUNT-1,.received_bytes=received,.elapsed_ms=last_tick-started,
         .error=error,.receiving=visible && received && state==FISH_MEDIA_WAIT &&
             (uint32_t)(last_tick-last_write)<COPY_QUIET_MS,
         .watchdog_reset=fish_media_port_watchdog_reset(),.reset_stage=fish_media_port_reset_stage()};

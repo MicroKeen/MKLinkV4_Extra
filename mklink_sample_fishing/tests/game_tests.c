@@ -75,22 +75,36 @@ int main(void)
     b.boat_x=FISH_BOAT_RIGHT-1;fish_game_update(&b,60100);assert(b.boat_x==FISH_BOAT_RIGHT && !b.boat_speed);
     fish_game_init(&b,UINT32_MAX-49);fish_game_input(&b,FISH_ROTATE,-1,UINT32_MAX-49);
     fish_game_update(&b,50);assert(b.boat_x==149);
+    /* Only the coastal motorboat has a60px/s second gear; both directions
+     * retain deterministic50ms integration and the10px/s slow gear. */
+    for(unsigned map=0;map<3;map++)for(int sign=-1;sign<=1;sign+=2)for(int gear=1;gear<=2;gear++){
+        fish_game_init(&a,0);a.map_index=map;a.boat_x=800;a.boat_speed=sign*gear;a.facing=sign;b=a;
+        for(unsigned t=50;t<=1000;t+=50)fish_game_update(&a,t);
+        fish_game_update(&b,1000);
+        int speed=map==2 && gear==2?60:gear*10;
+        assert(a.boat_x==800+sign*speed && a.boat_x==b.boat_x && a.boat_motion_q8==b.boat_motion_q8);
+    }
     /* Unsigned timestamps work across the millisecond counter wrap. */
     fish_game_init(&g, UINT32_MAX - 500);
     fish_game_input(&g, FISH_PRESS, 0, UINT32_MAX - 500);
     fish_game_input(&g, FISH_RELEASE, 0, 1000); assert(g.mode == FISH_CAST);
     fish_game_init(&g,0);g.mode=FISH_BAG;g.bag_index=FISH_BAG_GUIDE;
     fish_game_input(&g,FISH_ROTATE,1,0);assert(g.bag_index==FISH_BAG_SOUND);
+    fish_game_input(&g,FISH_ROTATE,1,0);assert(g.bag_index==FISH_BAG_REST);
     fish_game_input(&g,FISH_ROTATE,2,0);assert(g.bag_index==FISH_BAG_BACK);
     fish_game_input(&g,FISH_ROTATE,-1,0);assert(g.bag_index==FISH_BAG_SAVE);
-    fish_game_input(&g,FISH_ROTATE,-2,0);assert(g.bag_index==FISH_BAG_GUIDE);
-    fish_game_input(&g,FISH_ROTATE,4,0);assert(g.bag_index==FISH_BAG_ROD);
+    fish_game_input(&g,FISH_ROTATE,-3,0);assert(g.bag_index==FISH_BAG_GUIDE);
+    fish_game_input(&g,FISH_ROTATE,5,0);assert(g.bag_index==FISH_BAG_ROD);
     g.bag_index=FISH_BAG_SOUND;g.save_requested=false;
     fish_game_input(&g,FISH_PRESS,0,10);fish_game_input(&g,FISH_RELEASE,0,11);assert(g.bag_editing);
     fish_game_input(&g,FISH_ROTATE,1,12);assert(g.sound_mode==FISH_SOUND_OFF);
     fish_game_input(&g,FISH_ROTATE,1,13);assert(g.sound_mode==FISH_SOUND_FISH);
     fish_game_input(&g,FISH_PRESS,0,14);fish_game_input(&g,FISH_RELEASE,0,15);
     assert(!g.bag_editing && g.save_requested && g.mode==FISH_BAG);
-    puts("PASS: gameplay, bag order and sound editing/save request");
+    for(unsigned day=0;day<96;day++) {
+        g.weather_ms=day*1440000u;assert(fish_game_moon_phase(&g)==(day/3+1)%8);
+    }
+    g.weather_ms=0;assert(fish_game_moon_phase(&g)==1);
+    puts("PASS: gameplay, bag order, sound editing/save request and96-day moon continuity");
     return 0;
 }

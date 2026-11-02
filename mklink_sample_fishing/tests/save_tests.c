@@ -50,8 +50,62 @@ static void manual(fish_save_t *s,fish_game_t *g,uint32_t now)
     g->save_requested=true;fish_save_tick(s,g,now);assert(s->writing && s->status==FISH_SAVE_SAVING);
     fish_save_tick(s,g,now+10);assert(!s->writing && s->status==FISH_SAVE_OK);
 }
+static void rest_save_regressions(void)
+{
+    /* Real input/time updates cross cat visits, midnight and daily shore resets. */
+    for(unsigned map=0;map<FISH_MAP_COUNT;map++)for(unsigned rotate=0;rotate<2;rotate++){
+        reset();fish_game_t g,loaded;fish_save_t s,restarted;
+        fish_game_init(&g,0);g.map_index=(uint8_t)map;g.boat_x=fish_map_boat_left(map);g.game_minute=900;
+        fish_save_init(&s,&g,0);manual(&s,&g,10);assert(writes==1);
+        g.mode=FISH_BAG;g.bag_return_mode=FISH_MOVE;g.bag_index=FISH_BAG_REST;
+        fish_game_input(&g,FISH_PRESS,0,20);unsigned requests=0;
+        for(unsigned now=620;now<=125020;now+=100){
+            fish_game_update(&g,now);requests+=g.save_requested;
+            fish_save_tick(&s,&g,now);
+            assert(fish_game_resting(&g) && writes==1 && !s.writing);
+        }
+        assert(g.rest_elapsed_ms>1440*1000u); /* Over a game day elapsed. */
+        if(map==2)assert(requests>0 && s.manual_pending);
+        fish_game_input(&g,rotate?FISH_ROTATE:FISH_RELEASE,rotate?1:0,125030);
+        assert(!fish_game_resting(&g) && g.save_requested);
+        uint8_t latest[FISH_SAVE_PAYLOAD_BYTES];fish_save_pack(&g,latest);
+        fish_save_tick(&s,&g,125030);assert(writes==2 && s.writing);
+        fish_save_tick(&s,&g,125040);assert(!s.writing && s.sequence==2 && !s.manual_pending);
+        for(unsigned now=125050;now<127000;now+=10)fish_save_tick(&s,&g,now);
+        assert(writes==2 && !memcmp(latest,s.saved,sizeof(latest)));
+        fish_game_init(&loaded,127000);fish_save_init(&restarted,&loaded,127000);
+        assert(!restarted.blocked && loaded.map_index==map && loaded.game_minute==g.game_minute);
+        assert(loaded.weather_ms==g.weather_ms && loaded.cat.feeds==g.cat.feeds && loaded.forage.day==g.forage.day);
+    }
+    /* Preserve a five-minute wall-clock checkpoint during a very long hold. */
+    reset();fish_game_t g;fish_save_t s;fish_game_init(&g,0);g.map_index=2;g.boat_x=fish_map_boat_left(2);
+    fish_save_init(&s,&g,0);manual(&s,&g,1);
+    g.mode=FISH_BAG;g.bag_return_mode=FISH_MOVE;g.bag_index=FISH_BAG_REST;
+    fish_game_input(&g,FISH_PRESS,0,20);
+    fish_game_update(&g,FISH_SAVE_INTERVAL_MS+1);g.save_requested=true;
+    fish_save_tick(&s,&g,FISH_SAVE_INTERVAL_MS+1);assert(writes==2 && s.writing && s.manual_pending);
+    fish_save_tick(&s,&g,FISH_SAVE_INTERVAL_MS+11);assert(!s.writing);
+    for(unsigned now=FISH_SAVE_INTERVAL_MS+21;now<FISH_SAVE_INTERVAL_MS+1021;now+=100){
+        fish_game_update(&g,now);g.save_requested=true;fish_save_tick(&s,&g,now);
+        assert(writes==2 && s.manual_pending && !s.writing);
+    }
+    fish_game_input(&g,FISH_RELEASE,0,FISH_SAVE_INTERVAL_MS+1021);
+    fish_save_tick(&s,&g,FISH_SAVE_INTERVAL_MS+1021);assert(writes==3 && s.writing);
+    fish_save_tick(&s,&g,FISH_SAVE_INTERVAL_MS+1031);assert(!s.writing && !s.manual_pending);
+    /* A queued write can complete while resting without draining merged events. */
+    reset();fish_game_init(&g,0);fish_save_init(&s,&g,0);
+    g.save_requested=true;fish_save_tick(&s,&g,1);assert(s.writing && writes==1);
+    write_result=0;g.mode=FISH_BAG;g.bag_return_mode=FISH_MOVE;g.bag_index=FISH_BAG_REST;
+    fish_game_input(&g,FISH_PRESS,0,20);fish_game_update(&g,620);g.save_requested=true;
+    fish_save_tick(&s,&g,620);assert(s.writing && s.manual_pending && writes==1);
+    write_result=1;fish_save_tick(&s,&g,630);assert(!s.writing && s.manual_pending);
+    fish_save_tick(&s,&g,640);assert(!s.writing && s.manual_pending && writes==1);
+    fish_game_input(&g,FISH_RELEASE,0,650);fish_save_tick(&s,&g,650);
+    assert(s.writing && writes==2);fish_save_tick(&s,&g,660);assert(!s.writing && !s.manual_pending);
+}
 int main(void)
 {
+    rest_save_regressions();
     /* RFC 5297 Appendix A.1, including the short-plaintext S2V branch. */
     uint8_t vk[32]={0xff,0xfe,0xfd,0xfc,0xfb,0xfa,0xf9,0xf8,0xf7,0xf6,0xf5,0xf4,0xf3,0xf2,0xf1,0xf0,
         0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff};
@@ -257,11 +311,11 @@ int main(void)
     fish_hold_add(&loaded.economy,0,235,fish_species_weight_g(&fish_species[0],235));
     manual(&s,&loaded,2);assert(!memcmp(slots[4],file,FISH_SAVE_V6_FILE_BYTES));
     fish_game_init(&g,3);fish_save_init(&s,&g,3);
-    assert(g.economy.prices[0].price==11 && g.economy.prices[0].count==1 && g.sound_mode==FISH_SOUND_FISH);
+    assert(g.economy.prices[0].price==28 && g.economy.prices[0].count==1 && g.sound_mode==FISH_SOUND_FISH);
     g.mode=FISH_SHOP;g.game_minute=720;uint32_t coins_before=g.economy.coins;
     uint32_t cargo=fish_hold_value(&g.economy);assert(fish_shop_trade(&g,0)==FISH_MERCHANT_SOLD);
     assert(g.economy.coins==coins_before+cargo && g.money.popup[0].aggregate);
-    fish_game_update(&g,g.now+FISH_MONEY_INTERVAL_MS);assert(g.money.popup[1].amount==11);
+    fish_game_update(&g,g.now+FISH_MONEY_INTERVAL_MS);assert(g.money.popup[1].amount==28);
     /* Invalid journal rejects atomically: holes, duplicate prices, excess count/value. */
     fish_game_init(&g,0);caught(&g);fish_save_pack(&g,payload);fish_game_init(&loaded,1);unchanged=loaded;
     unsigned journal=FISH_SAVE_V6_PAYLOAD_BYTES;
@@ -282,7 +336,7 @@ int main(void)
     loaded.map_index=1;manual(&s,&loaded,2);
     assert(!memcmp(slots[2],file,FISH_SAVE_V7_FILE_BYTES));
     fish_game_init(&g,0);fish_save_init(&s,&g,0);assert(g.map_index==1);
-    fish_save_pack(&g,payload);payload[FISH_SAVE_V7_PAYLOAD_BYTES]=2;assert(!fish_save_unpack(&g,payload));
+    fish_save_pack(&g,payload);payload[FISH_SAVE_V7_PAYLOAD_BYTES]=3;assert(!fish_save_unpack(&g,payload));
     /* V13 preserves exact outdoor position through every menu, plus the
      * sub-minute clock and regional weather. Invalid locations are atomic. */
     for(unsigned map=0;map<2;map++)for(unsigned land=0;land<2;land++)for(unsigned left=0;left<2;left++) {
@@ -301,6 +355,17 @@ int main(void)
         assert(loaded.weather_ms==13612278 && loaded.wetness_units==FISH_WETNESS_FULL);
         assert(loaded.latte_remaining_ms==123456 && !loaded.shore_speed);
         unchanged=loaded;output[FISH_SAVE_POSITION_OFFSET]=0;output[FISH_SAVE_POSITION_OFFSET+1]=0;
+        assert(!fish_save_unpack(&loaded,output) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
+    }
+    /* Coast far-water positions exceed the old world and survive exact reload.
+     * Reject a walking position in water without modifying the destination. */
+    for(unsigned land=0;land<2;land++) {
+        fish_game_init(&g,0);g.map_index=2;g.boat_x=land?540:1368;g.shore_x=240;
+        g.mode=land?FISH_SHORE:FISH_MOVE;g.cat.friendship=50;g.weather_ms=13612278;
+        fish_save_pack(&g,payload);fish_save_encode(key,101,payload,file);
+        assert(fish_save_decode(key,file,sizeof(file),&seq,output));fish_game_init(&loaded,20);
+        assert(fish_save_unpack(&loaded,output) && loaded.map_index==2 && loaded.boat_x==g.boat_x && loaded.shore_x==240 && loaded.mode==g.mode);
+        unchanged=loaded;output[202]|=1;output[14]=0x58;output[15]=2;
         assert(!fish_save_unpack(&loaded,output) && !memcmp(&loaded,&unchanged,sizeof(loaded)));
     }
     /* Compute benchmark; excludes SD/filesystem latency and debug IO. */

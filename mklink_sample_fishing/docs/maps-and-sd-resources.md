@@ -1,4 +1,41 @@
+# D26 当前版本 / Current version
+
+完整本版设定见[rewards-d26.md](rewards-d26.md)：批量赶海、两种金色生物、铜银基价、240px深海延伸、V21迁移。配套2026.10.31.4资源。以下为历史版本记录。 / See rewards-d26.md for current settings; earlier entries below are historical.
+
+# D25 海滩赶海 / Beachcombing
+
+气泡尖端贴近脚边，距角色48px内才显示，走远隐藏，再靠近重新出现；已采收点不再显示，发现标记仍保留在存档。气泡位于角色后方，避免盖住腿部。 / Ground-level pins appear within48px, hide outside that radius and reappear on return; harvested spots stay hidden. The actor occludes overlapping pins.
+
+痕迹采用尖端向下的水滴气泡，移除地面黑点；随机点允许紧挨出现，只排除同坐标，交互优先最近点。QTE最快档往返周期1200ms，滑块16px；绿色区统一52px，其他档保留差异。短蛸1400ms／16px、明对虾1500ms／18px、沙蚕1700ms／24px；连续有效按压窗口均不短于200ms。
+
+D25R2：工具耐久在岸上右上角，无背景；赶海点按区域随机分布，经过不停步。海岛蓝色岩体的天空遮罩与雾层视差已修正；灯塔光束在夜色之后显示，随转向形成柔和光锥，雨雾中散射增强，并由前景建筑遮挡。快艇二档由20提高到60px/s，一档10px/s；高速时增加向船尾扩散的泡沫尾浪。票价为湿地↔江河180G、江河↔海滩280G、湿地↔海滩460G；加载成功扣费，失败不扣、重复回调不重复扣，乘车时间保持原设定。完整配套资源2026.10.31.3；V20存档保持兼容。
+
+D25R2 adds freely walkable random traces, a transparent upper-right tool HUD, corrected island/sky masking and parallax, fog-scattered rotating lighthouse light, and60px/s fast motorboat wakes. Fares are180G wetland–river,280G river–coast and460G wetland–coast. Successful arrival charges once. Matching2026.10.31.3 resources are required; V20 saves remain compatible.
+
+D25R2：赶海点在各区范围内随机分布，经过时不停步、不吸附；工具耐久移到岸上右上角，无背景底板。 / Random daily positions, free walking past traces and a transparent upper-right tool HUD.
+
+沙滩／礁石每日各3～6处，04:00刷新；铲子120G、撬棍180G，各20耐久、最多一把。贝螺直接采收，其他60%触发一次滑块QTE。新增沙蚕高效海饵，直接收入饵盒。每日状态与工具、饵料保存在V20（2097B），兼容V1～V19。完整资源2026.10.31.3。详见[赶海设定](forage-d25.md)。以下为历史版本记录。
+
+Daily3–6 beach and reef spots,20-use tools, one-press escape QTE and collectible ragworm bait. V20 saves retain older progress; matching2026.10.31.3 resources required. See forage-d25.md; earlier notes below are historical.
+
+# D24 三图钓深与岸边衔接 / Shared depth policy and shoreline
+
+强韧大钩20m、八编25m，覆盖湿地和江河全部钓底投点；细线<5m、通用<10m，其他只受真实线长限制。用线量包含水平距离和钓深，无法钓底依次退中层／表层。已导入作者MD价格，保留历史鱼获售价，沙滩与礁石平滑衔接。完整资源2026.10.31.1，V19旧档保留。详见depth-shore-d24.md。
+
+D24 shares depth-aware line limits across all maps, extends strong/PE rigs to20m/25m, imports edited price bases and repairs the sand/reef join. Use complete2026.10.31.1 resources; V19 saves remain supported.
+
+# D23 当前资源 / Current resources
+
+当前固件与资源为2026.10.30.9、格式3。左侧水泥道路水平铺设，末端增加停车位，木码头移除，船直接停靠礁石外缘；西侧扩岸384px，沙滩768px、棱角潮间带240px。存档V19与原船位兼容，赶海采集尚未加入。详见beach-foreshore-d23.md。
+
+Use the complete2026.10.30.9 folder with D23, preserving saves and downloader files. The perspective road remains, the pier is removed, and the boat moors at expanded angular reef shelves.
+
 # 车站、城市江河与 SD 资源 v30 / Station, city river and SD resources v30
+
+## 当前D18公共鱼图 / Current D18 shared fish assets
+
+总图鉴保持跨地图可看，28张鱼图无损压缩75.2%，公共缓存不随换图重写。配套资源2026.10.29.2新增common/fish.fgpk；原460KiB缓存拆分公共/场景，总余量约202KiB。V17存档与全部进度保留。详见[公共鱼图与缓存](common-fish-d18.md)，以下为历史版本。 / Lossless shared fish assets and independent cache banks; use the complete matching resource folder. Earlier sections are historical.
+
 
 ## D12 当前资源与地图 / Current resources and maps
 

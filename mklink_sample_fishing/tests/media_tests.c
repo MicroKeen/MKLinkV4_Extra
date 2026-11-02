@@ -17,7 +17,7 @@ int fish_resource_open(unsigned map,uint32_t *size)
 {
     assert(!file && (!disk || probe));
     if(missing&(1u<<map))return -2;
-    char path[1024];snprintf(path,sizeof(path),"%s/maps/%s.fgpk",FISH_TEST_PACK_DIR,map?"1_city_river":"0_wetland");
+    char path[1024];snprintf(path,sizeof(path),"%s/%s.fgpk",FISH_TEST_PACK_DIR,map==3?"common/fish":map==2?"maps/2_beach":map?"maps/1_city_river":"maps/0_wetland");
     file=fopen(path,"rb");assert(file);current_map=map;
     fseek(file,0,SEEK_END);*size=(uint32_t)ftell(file)-((truncated&(1u<<map))?1:0);return 0;
 }

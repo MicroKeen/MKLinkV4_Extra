@@ -10,16 +10,16 @@ static void money_feedback_test(void)
     fish_hold_add(&g.economy,0,200,160);fish_hold_add(&g.economy,12,120,20);
     fish_hold_add(&g.economy,1,1000,fish_species_weight_g(&fish_species[1],1000));
     uint32_t total=fish_hold_value(&g.economy);
-    assert(g.economy.prices[0].count==2 && g.economy.prices[1].price==11);
+    assert(g.economy.prices[0].count==2 && g.economy.prices[1].price==28);
     assert(fish_shop_trade(&g,0)==FISH_MERCHANT_SOLD && g.economy.coins==total && g.save_requested);
-    assert(g.money.popup[0].amount==8 && !g.economy.prices[0].count);
+    assert(g.money.popup[0].amount==20 && !g.economy.prices[0].count);
     /* Failed sales and purchases cannot erase the pending sale sequence. */
     fish_money_feedback_t pending=g.money;
     assert(fish_shop_trade(&g,0)==FISH_MERCHANT_EMPTY && !memcmp(&pending,&g.money,sizeof(pending)));
     assert(fish_shop_trade(&g,2)==FISH_MERCHANT_POOR && !memcmp(&pending,&g.money,sizeof(pending)));
     assert(fish_shop_trade(&g,7)==FISH_MERCHANT_BOUGHT);
     assert(g.money.popup[1].amount==-8 && g.money.sale[0].count==1);
-    uint32_t sum=8;unsigned count=1;
+    uint32_t sum=20;unsigned count=1;
     for(unsigned i=1;i<5;i++) {
         fish_game_update(&g,100+i*FISH_MONEY_INTERVAL_MS);
         unsigned born=0;
@@ -38,7 +38,7 @@ static void money_feedback_test(void)
     bool legacy=false;for(unsigned j=0;j<FISH_MONEY_POPUPS;j++)
         legacy|=g.money.popup[j].amount==29 && g.money.popup[j].aggregate;
     assert(legacy);fish_game_update(&g,g.now+FISH_MONEY_INTERVAL_MS);
-    assert(g.money.popup[1].amount==11 && !g.money.popup[1].aggregate);
+    assert(g.money.popup[1].amount==28 && !g.money.popup[1].aggregate);
     g.mode=FISH_SHORE;fish_game_update(&g,g.now+1);
     fish_money_feedback_t zero={0};assert(!memcmp(&zero,&g.money,sizeof(zero)));
     /* Repeated bait purchases and timestamps across the uint32 wrap. */
@@ -68,7 +68,26 @@ static void money_feedback_test(void)
         unsigned best=0;for(unsigned p=1;p<=max_price;p++) if(cheapest[p]<cheapest[best]) best=p;
         assert(cheapest[best]!=UINT32_MAX);weight+=cheapest[best];cheapest[best]=UINT32_MAX;
     }
-    assert(weight>fish_containers[FISH_CONTAINER_COUNT-1].capacity_g);
+    /* High-value light shells can now exceed the old distinct-price bound.
+     * The existing aggregate fallback must retain every coin on overflow. */
+    if(weight<=fish_containers[FISH_CONTAINER_COUNT-1].capacity_g){
+        fish_game_init(&g,0);g.mode=FISH_SHOP;g.game_minute=720;g.economy.container=2;
+        for(unsigned i=0;i<FISH_PORTABLE_PRICE_GROUPS;i++){
+            g.economy.prices[i]=(fish_price_group_t){(uint16_t)(i+1),1};
+            g.economy.count[0]++;g.economy.grams[0]++;g.economy.value[0]+=i+1;
+        }
+        unsigned id=12,size=fish_species[id].mean_x2_mm/2;
+        assert(fish_catch_price(id,size)>FISH_PORTABLE_PRICE_GROUPS);
+        assert(fish_hold_add(&g.economy,id,size,fish_species_weight_g(&fish_species[id],size))==FISH_STORED);
+        uint32_t expected=fish_hold_value(&g.economy);
+        assert(fish_shop_trade(&g,0)==FISH_MERCHANT_SOLD && g.economy.coins==expected);
+        uint32_t received=0;
+        for(unsigned i=0;i<FISH_PORTABLE_PRICE_GROUPS+2;i++){
+            for(unsigned j=0;j<FISH_MONEY_POPUPS;j++)if(g.money.popup[j].at==g.now && g.money.popup[j].amount>0)received+=(uint32_t)g.money.popup[j].amount;
+            fish_game_update(&g,g.now+FISH_MONEY_INTERVAL_MS);
+        }
+        assert(received==expected);
+    }
 }
 int main(void)
 {
@@ -87,10 +106,14 @@ int main(void)
     fish_economy_init(&g.economy);fish_game_input(&g,FISH_ROTATE,40,0);assert(g.guide_index==0);
     fish_game_init(&g,0);g.game_minute=720;
     for(unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
-        assert(fish_catch_price(i,fish_species[i].mean_x2_mm/2)==fish_base_prices[i]);
+        if(i!=FISH_RAGWORM && i!=FISH_RETIRED_REDTAIL && fish_species[i].rarity==FISH_RARITY_BRONZE)assert(fish_base_prices[i]>=20);
+        if(fish_species[i].rarity==FISH_RARITY_SILVER)assert(fish_base_prices[i]>=40);
+        if(fish_species_is_variant(i))assert(fish_base_prices[i]==fish_base_prices[fish_species_parent(i)]*10);
+        if(i!=FISH_PEACOCK)assert(fish_catch_price(i,fish_species[i].mean_x2_mm/2)==fish_base_prices[i]);
+        else assert(fish_catch_price(i,fish_species[i].mean_x2_mm/2)==10*fish_catch_price(25,fish_species[i].mean_x2_mm/2));
         assert(fish_catch_price(i,fish_species[i].min_mm)<=fish_catch_price(i,fish_species[i].max_mm));
     }
-    assert(fish_base_prices[2]==16 && fish_base_prices[3]==12 && fish_base_prices[8]==72 && fish_base_prices[9]==60);
+    assert(fish_base_prices[2]==50 && fish_base_prices[3]==20 && fish_base_prices[8]==72 && fish_base_prices[9]==60);
     assert(fish_hold_add(&g.economy,0,200,5000)==FISH_STORED);
     assert(fish_hold_add(&g.economy,1,450,5000)==FISH_STORED && fish_hold_weight(&g.economy)==10000);
     fish_economy_t full=g.economy;

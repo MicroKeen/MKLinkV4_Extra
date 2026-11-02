@@ -1,0 +1,39 @@
+{
+  "frames": 20,
+  "maps": 2,
+  "pixel_checks": [
+    {
+      "map": 0,
+      "handheld_exact_pixels": 744,
+      "mounted_canopy_exact_pixels": 576,
+      "meal_icon_difference_bounds": [
+        32,
+        46,
+        45,
+        60
+      ]
+    },
+    {
+      "map": 1,
+      "handheld_exact_pixels": 744,
+      "mounted_canopy_exact_pixels": 576,
+      "meal_icon_difference_bounds": [
+        32,
+        46,
+        45,
+        60
+      ]
+    }
+  ],
+  "umbrella_native_size": [
+    24,
+    28
+  ],
+  "umbrella_render_scale": 2,
+  "umbrella_indexed_rom_bytes": 368,
+  "noodles_icon_rom_bytes": 512,
+  "extra_source_art_published": false,
+  "matching_resource_version": "2026.10.19.5",
+  "packs_unchanged_from_d12": true,
+  "new_full_framebuffer_bytes": 0
+}

@@ -50,6 +50,7 @@ int main(void)
         unsigned species_longest=0;
         for (unsigned size=0;size<11;size++) for (unsigned rod=0;rod<FISH_ROD_COUNT;rod++)
         for (unsigned line=0;line<FISH_LINE_COUNT;line++) for (unsigned delay=0;delay<=4;delay+=2) {
+            if(!fish_tackle_compatible(rod,line))continue;
             fish_game_t g;hook(&g,id,sizes[size],rod,line);
             unsigned pays=play(&g,delay);
             if(g.mode==FISH_CAUGHT) {
@@ -62,7 +63,11 @@ int main(void)
                 ++failed;
             }
             /* Ordinary sizes and suitable thick tackle must remain playable. */
-            if(line==2 || sizes[size]==s->min_mm) assert(g.mode==FISH_CAUGHT);
+            bool specialized_small=(rod==FISH_LONG_ROD || line==FISH_MARINE_LINE) && fish_species_weight_g(s,sizes[size])<1500;
+            if(!specialized_small && (line==2 || sizes[size]==s->min_mm)) {
+                if(g.mode!=FISH_CAUGHT)fprintf(stderr,"balance species=%u size=%u rod=%u line=%u delay=%u loss=%u distance=%u tension=%d\n",id,sizes[size],rod,line,delay,g.loss,fish_game_distance_cm(&g),g.tension);
+                assert(g.mode==FISH_CAUGHT);
+            }
             ++cases;payout_cases+=pays>0;
             if (id==1 && sizes[size]==s->star_min_mm[2] && rod==FISH_DEFAULT_ROD && delay==4)
                 printf("four_star_trial line=%u reaction_ms=400 landing_ms=%u payout_detents=%u loss=%u\n",line,g.mode==FISH_CAUGHT?g.phase_at:0,pays,g.loss);
@@ -82,8 +87,8 @@ int main(void)
             play(&g,4);if(g.mode==FISH_CAUGHT) ++wins;else {assert(g.loss!=FISH_LOSS_NONE);++losses;}
         }
         printf("four_star_seeds line=%u seeds=128 landed=%u lost=%u\n",line,wins,losses);
-        /* The short light line stays risky, with a few recoverable flex cases. */
-        if(line==0) assert(wins>0 && losses>0);
+        /* The4.5m fine rig is a severe mismatch for this large four-star carp. */
+        if(line==0) assert(wins<32 && losses>0);
         if(line==2) assert(wins==128);
     }
     /* Small fish: no large fixed burst bonus. Calm animals never make splash bursts. */

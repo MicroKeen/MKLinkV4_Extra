@@ -1,5 +1,9 @@
 # 漂相、距离与搏鱼行为 v22 / Fishing behavior v22
 
+## 当前D14调整 / D14 update
+
+断线后仅10%概率损坏线组，其余保留并可继续使用；河豚中钩后逃脱额外20%概率咬断线组；泡面改为4游戏小时、收放线速度+10%，不增加提竿窗口。提示采用钓鱼情境用语，详见[线组与泡面调整](line-damage-d14.md)。V14存档及现有SD资源保持兼容。以下D13及更早章节为历史。 / Line breaks now have a10% rig-damage chance; noodles grant10% handling only for four game hours. Existing saves and packs remain compatible. See the linked D14 guide; older sections are historical.
+
 ## 当前 D12：存档、分区天气与线组 / Current D12
 
 以[完整D12设定与修复记录](rain-depth-and-lines-d12.md)为准。V13仍1503B，独立A/B并保留旧档、原密钥和目录；保存岸/船位置、朝向、时间、天气、潮湿与拿铁，启动资源加载后恢复原位置。修复SD单扇区写入CRC、延迟响应和有界忙等待；主机验证不代替实机测试；作者已反馈当前版本基本稳定，掉电/拔卡等异常测试仍未专项验收。
