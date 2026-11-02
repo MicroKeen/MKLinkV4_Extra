@@ -28,7 +28,7 @@ git submodule update --init --recursive
 
 示例工程使用 HPM SDK，构建前需要配置 `HPM_SDK_BASE`。
 
-钓鱼示例见 [mklink_sample_fishing](mklink_sample_fishing/README.md)：**MKLink V4（HPM5301）D28R1**，湿地、城市江河与海滩三地图，含海钓巨物、赶海、商店经济、天气与猫同伴。V22兼容旧档，必须配套完整SD资源2026.10.31.4（格式3）。131项主机检查通过，实板验收待补。The MKLink V4 D28R1 fishing demo adds three regions, marine tackle, beachcombing, shops, weather and a cat companion. V22 saves migrate older progress; install all matching2026.10.31.4 format3 packs. All131 host checks pass; hardware acceptance remains pending.
+钓鱼示例见 [mklink_sample_fishing](mklink_sample_fishing/README.md)：**MKLink V4（HPM5301）D28R2**，湿地、城市江河与海滩三地图，含海钓巨物、赶海、商店经济、天气与猫同伴。V22兼容旧档，必须配套完整SD资源2026.10.31.4（格式3）。131项主机检查通过，实板验收待补。The MKLink V4 D28R2 fishing demo adds three regions, marine tackle, beachcombing, shops, weather and a cat companion. V22 saves migrate older progress; install all matching2026.10.31.4 format3 packs. All131 host checks pass; hardware acceptance remains pending.
 
 ## 火焰示例与 USB 日志
 

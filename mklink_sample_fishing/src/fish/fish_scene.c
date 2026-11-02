@@ -2167,7 +2167,7 @@ static void media_page(const arm_2d_tile_t *tile,fish_media_status_t status)
         box(tile,0,0,240,240,INK);
         bool checking=state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY || state==FISH_MEDIA_SETTLE;
         caption(tile,120,25,state==FISH_MEDIA_FAULT?"上次为看门狗重启":checking?"正在检查资源包":status.receiving?"正在接收资源":"需要游戏资源",CREAM,INK);
-        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D28R1",SUN,INK);
+        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D28R2",SUN,INK);
         char label[64];
         if(state==FISH_MEDIA_FAULT) {
             snprintf(label,sizeof(label),"S%02u  %08lx",status.reset_stage,(unsigned long)status.fault.detail);

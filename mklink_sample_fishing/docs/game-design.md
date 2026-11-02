@@ -1,3 +1,7 @@
+# D28R2 声音设置 / Sound mode
+
+“仅鱼讯”只提醒可提竿时机，一口鱼一次；上钩、挣扎、收银仅“全部开启”播放。关闭保持静音。[规则与核验](strike-cue-d28-r2.md)。V22和资源不变。 / Fish-only cues only the valid strike window; All retains hook/struggle/trade sounds.
+
 # D28R1 休息存档 / Held-rest saves
 
 长按休息期间合并事件保存请求，松开或旋转结束后保存最新状态，保留每5真实分钟检查点。[说明](rest-save-d28-r1.md)。V22和资源不变。 / Merge requests during held rest and flush latest state on exit; five-minute wall-clock checkpoints remain.
