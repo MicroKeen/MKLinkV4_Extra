@@ -1081,6 +1081,7 @@ static const char *control_hint(const fish_game_t *game)
             hint=game->bag_editing?"旋转调整  短按确认":"旋转选格子  短按选配件";
             if(game->bag_index==FISH_BAG_SOUND && !game->bag_editing)hint="旋转选格子 短按设置声音";
             if(game->bag_index==FISH_BAG_SAVE) hint="";
+            if(game->bag_index==FISH_BAG_REST)hint=fish_game_resting(game)?"歇一会儿，松开结束":"长按休息 松开停止";
             break;
         default: break;
     }
@@ -1305,6 +1306,7 @@ static const char *bag_value(const fish_game_t *g,unsigned item,char *scratch,si
         case FISH_BAG_GUIDE:return "图鉴";
         case FISH_BAG_SAVE:return "存档";
         case FISH_BAG_SOUND:return "声音";
+        case FISH_BAG_REST:return "休息";
         default:return "返回";
     }
 }
@@ -1346,6 +1348,7 @@ static const char *bag_attributes(const fish_game_t *g,char *scratch,size_t leng
         case FISH_BAG_GUIDE:return "查看已收集的鱼种";
         case FISH_BAG_SAVE:return "每五分钟自动存档";
         case FISH_BAG_SOUND:return fish_sound_names[g->sound_mode];
+        case FISH_BAG_REST:return fish_game_resting(g)?"松开结束休息":"长按加快时间";
         default:return "回到湖上继续垂钓";
     }
 }
@@ -1372,7 +1375,7 @@ static void bag_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     /* Fixed sockets, one shared detail strip: names never compete with sprites. */
     static const int slots[FISH_BAG_COUNT][4]={
         {30,58,84,82},{121,62,40,30},{173,62,40,30},{121,108,40,32},
-        {173,108,40,32},{26,146,46,31},{216,96,20,36},{6,183,54,18},{180,183,54,18},{122,183,54,18},{64,183,54,18}};
+        {173,108,40,32},{26,146,46,31},{216,96,20,36},{6,183,54,18},{180,183,54,18},{122,183,54,18},{64,183,54,18},{100,183,43,18}};
     static const char *titles[]={"鱼竿","线钩","浮漂","鱼饵","钓深"};
     char label[64],scratch[48];
     arm_2d_point_float_t centre={120.0f,115.0f};
@@ -1380,7 +1383,12 @@ static void bag_panel(const arm_2d_tile_t *tile,const fish_scene_t *self)
     ARM_2D_OP_WAIT_ASYNC(&self->backpack_operation);
     for(unsigned i=0;i<FISH_BAG_COUNT;i++) {
         if(i==FISH_BAG_LAMP && !fish_game_lamp_menu(g)) continue;
+        if(i==FISH_BAG_REST && fish_game_ashore(g))continue;
         int x=slots[i][0],y=slots[i][1],w=slots[i][2],h=slots[i][3];
+        if(!fish_game_ashore(g) && i>=FISH_BAG_GUIDE){
+            unsigned column=i==FISH_BAG_GUIDE?0:i==FISH_BAG_SOUND?1:i==FISH_BAG_REST?2:i==FISH_BAG_SAVE?3:4;
+            x=6+(int)column*47;w=column==4?40:43;
+        }
         rpg_slot(tile,x,y,w,h,i==g->bag_index,g->bag_editing);
         if(i>FISH_BAG_ROD && i<=FISH_BAG_DEPTH) {
             unsigned art=i==FISH_BAG_LINE?RPG_LINE_ART+(g->line_index>=FISH_PE_LINE?2:g->line_index):
@@ -2156,7 +2164,7 @@ static void media_page(const arm_2d_tile_t *tile,fish_media_status_t status)
         box(tile,0,0,240,240,INK);
         bool checking=state==FISH_MEDIA_CHECK || state==FISH_MEDIA_VERIFY || state==FISH_MEDIA_SETTLE;
         caption(tile,120,25,state==FISH_MEDIA_FAULT?"上次为看门狗重启":checking?"正在检查资源包":status.receiving?"正在接收资源":"需要游戏资源",CREAM,INK);
-        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D26",SUN,INK);
+        caption(tile,120,52,"版本 " FISH_ASSET_VERSION " D26R1",SUN,INK);
         char label[64];
         if(state==FISH_MEDIA_FAULT) {
             snprintf(label,sizeof(label),"S%02u  %08lx",status.reset_stage,(unsigned long)status.fault.detail);

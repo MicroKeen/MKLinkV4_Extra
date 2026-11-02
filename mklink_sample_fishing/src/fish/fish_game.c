@@ -137,11 +137,12 @@ bool fish_game_lamp_menu(const fish_game_t *g)
 bool fish_game_lamp_active(const fish_game_t *g)
 {return g->map_index==2 && (g->comforts&(FISH_COMFORT_LAMP|FISH_COMFORT_LAMP_ON))==(FISH_COMFORT_LAMP|FISH_COMFORT_LAMP_ON) && fish_map_night(g->game_minute);}
 unsigned fish_game_bag_count(const fish_game_t *g)
-{return FISH_BAG_VISIBLE_COUNT+(fish_game_lamp_menu(g)?1:0);}
+{return FISH_BAG_VISIBLE_COUNT+(fish_game_lamp_menu(g)?1:0)-(fish_game_ashore(g)?1:0);}
 unsigned fish_game_bag_item_at(const fish_game_t *g,unsigned position)
 {
-    static const uint8_t order[]={FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,FISH_BAG_LAMP,FISH_BAG_GUIDE,FISH_BAG_SOUND,FISH_BAG_SAVE,FISH_BAG_BACK};
+    static const uint8_t order[]={FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,FISH_BAG_LAMP,FISH_BAG_GUIDE,FISH_BAG_SOUND,FISH_BAG_REST,FISH_BAG_SAVE,FISH_BAG_BACK};
     if(!fish_game_lamp_menu(g) && position>=6)++position;
+    if(fish_game_ashore(g) && position>=9)++position;
     return position<sizeof(order)?order[position]:FISH_BAG_BACK;
 }
 static void recover_rig(fish_game_t *g)
@@ -423,6 +424,8 @@ bool fish_game_ashore(const fish_game_t *g)
     if (mode==FISH_BAG) mode=(fish_mode_t)g->bag_return_mode;
     return mode==FISH_SHORE || mode==FISH_SHOP || mode==FISH_ROUTE;
 }
+bool fish_game_resting(const fish_game_t *g)
+{return g->mode==FISH_BAG && g->bag_index==FISH_BAG_REST && !g->bag_editing && !fish_game_ashore(g) && g->pressed && g->now-g->pressed_at>=FISH_REST_HOLD_MS;}
 bool fish_game_at_shop(const fish_game_t *g) {
     if(!fish_game_ashore(g))return false;
     if(g->map_index==2)return abs(g->shore_x-FISH_BEACH_STALL_X)<=FISH_SHOP_REACH;
@@ -524,8 +527,14 @@ static void select_fish(fish_game_t *g)
 
 void fish_game_update(fish_game_t *g, uint32_t now)
 {
+    g->now=now;
     bool was_night=fish_map_night(g->game_minute);
     uint32_t delta=g->mode==FISH_LOADING?0:now-g->clock_at;g->clock_at=now;
+    if(fish_game_resting(g)){
+        uint32_t fast=now-g->pressed_at-FISH_REST_HOLD_MS;if(fast>delta)fast=delta;
+        uint32_t limit=(UINT32_MAX-delta)/(FISH_REST_SPEED-1);if(fast>limit)fast=limit;
+        delta+=fast*(FISH_REST_SPEED-1);
+    }
     bool sheltered=fish_game_sheltered(g);
     fish_weather_advance(g,delta,sheltered);
     unsigned remainder=delta%1000+g->clock_remainder_ms;
@@ -644,6 +653,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             int index=(g->guide_index+clamp(steps,-40,40))%count;
             g->guide_index=(uint8_t)(index<0?index+count:index);
         } else if (g->mode==FISH_BAG && steps) {
+            if(g->pressed && g->bag_index==FISH_BAG_REST){g->pressed=false;g->save_requested=true;}
             int count=FISH_BAG_COUNT,index=g->bag_index;
             if (g->bag_editing) {
                 const int counts[]={FISH_ROD_COUNT,FISH_LINE_COUNT,FISH_FLOAT_COUNT,FISH_BAIT_COUNT,FISH_DEPTH_OPTION_COUNT};
@@ -791,6 +801,7 @@ void fish_game_input(fish_game_t *g, fish_event_t event, int steps, uint32_t now
             else if (g->bag_index<=FISH_BAG_DEPTH || g->bag_index==FISH_BAG_SOUND) g->bag_editing=true;
             else if (g->bag_index==FISH_BAG_MISC) {g->hold_return_mode=FISH_BAG;g->guide_index=0;phase(g,FISH_HOLD);}
             else if (g->bag_index==FISH_BAG_SAVE) g->save_requested=true;
+            else if (g->bag_index==FISH_BAG_REST && now-g->pressed_at>=FISH_REST_HOLD_MS)g->save_requested=true;
             else if (g->bag_index==FISH_BAG_LAMP && fish_game_lamp_menu(g)){g->comforts^=FISH_COMFORT_LAMP_ON;g->save_requested=true;}
             else if (g->bag_index==FISH_BAG_BACK) phase(g,(fish_mode_t)g->bag_return_mode);
             else if (g->bag_index==FISH_BAG_GUIDE) {

@@ -12,12 +12,13 @@
 
 enum { FISH_WORLD_WIDTH = FISH_MAP_WIDTH, FISH_HOLD_MS = 280, FISH_GUIDE_HOLD_MS=600, FISH_FULL_CHARGE_MS = 1400,
        FISH_WORLD_CM_PER_PIXEL = 4, FISH_LOSS_ANIMATION_MS = 1200,
-       FISH_LINE_DAMAGE_PERCENT = 10, FISH_PUFFER_BITE_PERCENT = 20 };
+       FISH_LINE_DAMAGE_PERCENT = 10, FISH_PUFFER_BITE_PERCENT = 20,
+       FISH_REST_HOLD_MS=600,FISH_REST_SPEED=20 };
 typedef enum { FISH_MOVE, FISH_AIM, FISH_CHARGE, FISH_CAST,
                FISH_WAIT, FISH_BITE, FISH_FIGHT, FISH_CAUGHT, FISH_GUIDE,
                FISH_BAG, FISH_SHORE, FISH_LOST, FISH_SHOP, FISH_HOLD, FISH_ROUTE, FISH_LOADING,FISH_CAT,FISH_SINK,FISH_RECOVER,FISH_FORAGE_QTE } fish_mode_t;
 enum {FISH_BAG_ROD,FISH_BAG_LINE,FISH_BAG_FLOAT,FISH_BAG_BAIT,FISH_BAG_DEPTH,FISH_BAG_MISC,
-      FISH_BAG_DOCK,FISH_BAG_GUIDE,FISH_BAG_BACK,FISH_BAG_SAVE,FISH_BAG_SOUND,FISH_BAG_COUNT};
+      FISH_BAG_DOCK,FISH_BAG_GUIDE,FISH_BAG_BACK,FISH_BAG_SAVE,FISH_BAG_SOUND,FISH_BAG_REST,FISH_BAG_COUNT};
 enum {FISH_BAG_VISIBLE_COUNT=FISH_BAG_COUNT-1}; /* Dock ID reserved, no menu entry. */
 enum {FISH_BAG_LAMP=FISH_BAG_DOCK}; /* Reuse the former unused socket. */
 typedef enum { FISH_LOSS_NONE, FISH_LOSS_MISSED, FISH_LOSS_BREAK,
@@ -112,6 +113,7 @@ int fish_game_camera(const fish_game_t *g);
 int fish_game_actor_x(const fish_game_t *g);
 unsigned fish_game_shore_pose(const fish_game_t *g);
 bool fish_game_ashore(const fish_game_t *g);
+bool fish_game_resting(const fish_game_t *g);
 bool fish_game_at_shop(const fish_game_t *g);
 bool fish_game_at_station(const fish_game_t *g);
 bool fish_game_shop_open(const fish_game_t *g);

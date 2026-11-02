@@ -47,9 +47,9 @@ int main(void)
     assert(fish_shop_trade(&g,FISH_SHOP_LAMP)==FISH_MERCHANT_BOUGHT && g.economy.coins==10000);
     assert((g.comforts&FISH_COMFORT_LAMP) && !(g.comforts&FISH_COMFORT_LAMP_ON));
     g.mode=FISH_BAG;g.bag_index=FISH_BAG_LAMP;
-    assert(fish_game_bag_count(&g)==11 && fish_game_bag_item_at(&g,6)==FISH_BAG_LAMP);
+    assert(fish_game_bag_count(&g)==12 && fish_game_bag_item_at(&g,6)==FISH_BAG_LAMP);
     fish_game_input(&g,FISH_PRESS,0,100);fish_game_input(&g,FISH_RELEASE,0,101);
-    g.game_minute=night;assert(fish_game_lamp_active(&g));g.map_index=1;assert(!fish_game_lamp_active(&g) && fish_game_bag_count(&g)==10);g.map_index=2;
+    g.game_minute=night;assert(fish_game_lamp_active(&g));g.map_index=1;assert(!fish_game_lamp_active(&g) && fish_game_bag_count(&g)==11);g.map_index=2;
     uint8_t p[FISH_SAVE_PAYLOAD_BYTES],q[FISH_SAVE_PAYLOAD_BYTES],file[FISH_SAVE_FILE_BYTES],key[32]={1};uint64_t seq;
     g.mode=FISH_MOVE;fish_save_pack(&g,p);fish_save_encode(key,4,p,file);
     assert(sizeof(file)==2147 && FISH_SAVE_V19_FILE_BYTES==2062 && FISH_SAVE_V18_FILE_BYTES==2037 && fish_save_decode(key,file,sizeof(file),&seq,q));fish_game_init(&a,0);

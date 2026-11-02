@@ -32,6 +32,16 @@ int main(void)
         if(minute>=720){present+=seen;absent+=!seen;}
     }
     assert(present && absent && g.random_state==rng);
+    /* Visits span the complete saved calendar and do not consume fishing RNG. */
+    unsigned hourly=0;
+    for(unsigned day=0;day<96;day++)for(unsigned hour=12;hour<24;hour++){
+        b=g;b.cat.flags=0;b.game_minute=hour*60;b.weather_ms=(day*1440+hour*60)*1000;
+        hourly+=fish_cat_present(&b);
+        b.game_minute+=30;assert(!fish_cat_present(&b));
+        b.map_index=0;assert(!fish_cat_present(&b));b.map_index=2;assert(!fish_cat_present(&b));
+    }
+    assert(hourly>96*12*60/100 && hourly<96*12*70/100 && g.random_state==rng);
+    printf("CAT_VISITS,%u,1152\n",hourly);
     /* Visible visits and absent streets both remain stable while watched. */
     visit(&b);b.cat.actions=3;b.game_minute+=45;b.weather_ms=b.game_minute*1000;
     fish_cat_update(&b);assert(fish_cat_present(&b) && b.cat.actions==3);
@@ -70,6 +80,22 @@ int main(void)
     unsigned sleep=0,sit=0;
     for(unsigned t=2000;t<40000;t+=100){g.now=t;unsigned pose=fish_cat_pose(&g,true);assert(pose>=3 && pose<9);sleep+=pose==6 || pose==7;sit+=pose==3 || pose==4;}
     assert(sleep && sit);
+    /* Adoption follows all six directed routes, persists after reloading in
+     * each destination, and survives failed map loads without charging again. */
+    for(unsigned from=0;from<3;from++)for(unsigned to=0;to<3;to++)if(from!=to){
+        fish_game_init(&b,0);b.map_index=from;b.mode=FISH_LOADING;b.travel_target=to;
+        b.travel_requested=b.travel_paid=true;b.economy.coins=1000;
+        b.game_minute=780;b.weather_ms=780000;b.cat.friendship=50;b.cat.tins=7;b.cat.feeds=1;b.cat.day=0;
+        b.cat.flags=FISH_CAT_READY|FISH_CAT_VISIBLE;
+        fish_game_t failed=b;fish_game_travel_complete(&failed,false);fish_cat_update(&failed);
+        assert(failed.map_index==from && fish_cat_owned(&failed) && failed.economy.coins==1000 && failed.cat.feeds==1);
+        unsigned fare=fish_game_travel_fare(from,to);fish_game_travel_complete(&b,true);fish_cat_update(&b);
+        assert(b.map_index==to && fish_cat_owned(&b) && b.economy.coins==1000-fare && b.cat.feeds==1 && b.cat.tins==7);
+        assert(!fish_cat_present(&b) && !(b.cat.flags&FISH_CAT_VISIBLE));
+        fish_save_pack(&b,p);fish_game_init(&restored,123);assert(fish_save_unpack(&restored,p));
+        fish_cat_update(&restored);assert(restored.map_index==to && fish_cat_owned(&restored) && restored.cat.feeds==1 && restored.cat.tins==7);
+        for(unsigned t=2000;t<20000;t+=1000){restored.now=t;unsigned pose=fish_cat_pose(&restored,true);assert(pose>=3 && pose<=7);}
+    }
     /* Actual encoder dispatch: one press opens the cat, rotation selects food,
      * and press/release consumes one can without opening the backpack. */
     visit(&g);g.cat.tins=3;
@@ -127,5 +153,5 @@ int main(void)
         uint32_t no_variant=before_rng;assert(fish_species_special_roll_cat(&no_variant,17)==17 && no_variant==before_rng);
     }
     assert(normal>3600 && normal<4400 && with_cat>9300 && with_cat<10700);
-    printf("PASS: cat encounters/actions/day/save, canned/caught fish, both maps, stationary boat poses; variants/400000 normal=%u cat=%u\n",normal,with_cat);
+    printf("PASS:65%% hourly visits, six directed three-map routes and failed loads, destination saves, shared feeds, stationary boat poses; variants/400000 normal=%u cat=%u\n",normal,with_cat);
 }

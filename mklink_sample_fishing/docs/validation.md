@@ -1,6 +1,6 @@
-# MKLink V4 D26 构建核验 / Build validation
+# MKLink V4 D26R1 构建核验 / Build validation
 
-本版：海图1680px、右端125m，连续旋转灯塔，批量赶海与两种金色生物，偏低铜／银基价20G／50G。V21存档2147B迁移旧档，完整资源2026.10.31.4。详见[本版设定](rewards-d26.md)、[回归核验](rewards-d26-build-validation.json)、[内存报告](rewards-d26-memory.md)。本地未上传。 / Extended deep sea, continuous lighthouse rotation, batch shore rewards, gold species and price increases. V21 migrates older saves; matching2026.10.31.4 resources. Local only.
+D26R1：猫每小时出现概率65%，三图跟随；船上选中休息，长按600ms后20倍推进时间，松开恢复。存档和资源不变。详见[猫与休息](cat-rest-d26-r1.md)。本版：海图1680px、右端125m，连续旋转灯塔，批量赶海与两种金色生物，偏低铜／银基价20G／50G。V21存档2147B迁移旧档，完整资源2026.10.31.4。详见[本版设定](rewards-d26.md)、[回归核验](rewards-d26-build-validation.json)、[内存报告](rewards-d26-memory.md)。本地未上传。 / Extended deep sea, continuous lighthouse rotation, batch shore rewards, gold species and price increases. V21 migrates older saves; matching2026.10.31.4 resources. Local only.
 
 以下为历史版本摘要；以本版设定及本文件数值表为准。 / Earlier revision notes follow; current settings and measured region sizes take precedence.
 
@@ -18,7 +18,7 @@ Each line break makes one10% rig-damage roll. Hooked puffer escapes add an indep
 D13新增都市3500G高碳长竿（7.2米、125%收线、大鱼张力缓冲）、160G永久雨伞及28G泡面（4游戏小时、收放线速度+10%）。雨伞岸上手持、船上固定，阻止新潮湿。泡面和35G拿铁共用状态，后买替换不叠加。V14仍1503B并独立保留V13等旧档；配套资源2026.10.19.5不变。D13新增内容待实机验证，D12稳定反馈不等同新功能已验收。
 D13 adds a3500G city long rod (7.2m,125% retrieval, reduced detent tension above6.5kg), a160G permanent umbrella and28G noodles (four game hours,+10% handling only). The umbrella is held on shore and mounted on the boat. Meal/drink buffs replace rather than stack. V14 remains1503bytes and retains V13 files. The same SD packs work. New D13 features await on-device testing.
 
-GNU RISC-V GCC 13.2、HPM SDK 1.11.0。2026-10-31。本次仅重建 GNU flash_uf2，SEGGER 工程输入已检查，未重新编译 SEGGER。
+GNU RISC-V GCC 13.2、HPM SDK 1.11.0。2026-11-02。本次仅重建 GNU flash_uf2，SEGGER 工程输入已检查，未重新编译 SEGGER。
 
 旧的容量错误测试版保持撤回。当前版本恢复原下载器的 SD 扇区映射，开放前检查原文件系统、容量和 MBR/BPB 边界；CPU 阻塞 SPI 路径不做 DMA 地址转换或接收后缓存失效。
 The original faulty-capacity build remains withdrawn. The current local importer restores stock SD LBA mapping with existing-volume/geometry checks, exclusive ownership and CPU-blocking SPI pointers. Model checks do not establish integrity of user media or hardware acceptance. No user-device writes or flashing were performed. Test results are recorded separately.
@@ -33,7 +33,7 @@ The application ends before 0x80080000. The 460 KiB map cache ends before 0x800F
 
 | 工具链/区域 / Toolchain/region | 占用 / Used | 容量 / Capacity | 余量 / Free |
 |---|---:|---:|---:|
-| GNU / APP_FLASH | 371,916 B | 380,928 B | 9,012 B |
+| GNU / APP_FLASH | 372,560 B | 380,928 B | 8,368 B |
 | GNU / ILM | 2,440 B | 131,072 B | 128,632 B |
 | GNU / DLM | 128,528 B | 130,304 B | 1,776 B |
 | GNU / AHB_SRAM | 32,288 B | 32,768 B | 480 B |
@@ -49,4 +49,4 @@ The twelve city fish use independent profiles and bait weights; giants are not w
 未执行实板烧录、拔卡/掉电、电气、帧率、栈水位或蜂鸣器试听；中断测试使用主机 Flash 模型。保留第三方库已有宏/未使用变量警告。
 No hardware flashing, card-removal/power-loss, electrical, FPS, stack-watermark or audio-audition tests were performed. Interruption tests use a host flash model. Existing third-party warnings remain.
 
-GNU UF2 SHA-256: `ddaccc634905b288375cb6aa23a1a027dba179baeadef6d76492df1ced087772`.
+GNU UF2 SHA-256: `39c19ff4a0b3f622e2346ebf91ac43c6b30dcdcc8c6c3006a0f2c2da037b4c23`.

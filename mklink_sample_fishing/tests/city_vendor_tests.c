@@ -92,6 +92,8 @@ int main(void)
  g.latte_remaining_ms=360001;fish_save_pack(&g,p);assert(!fish_save_unpack(&a,p));
  g.latte_remaining_ms=0;g.economy.bait_stock[8]=1000;fish_save_pack(&g,p);assert(!fish_save_unpack(&a,p));
  fish_game_init(&g,0);g.mode=FISH_SHORE;g.map_index=1;g.shore_x=24;g.boat_x=132;g.game_minute=720;
+ /* This route tests vendor stops; adoption removes the independent cat stop. */
+ g.cat.friendship=FISH_CAT_FRIEND_MAX;
  fish_game_input(&g,FISH_ROTATE,-1,0);for(unsigned t=16;t<5000;t+=16)fish_game_update(&g,t);
  assert(g.shore_x==FISH_CITY_STALL_X && !g.shore_speed);tap(&g,5000);assert(g.mode==FISH_SHOP && g.shop_venue==FISH_VENDOR_TACKLE);
  g.shop_index=15;tap(&g,5002);fish_game_input(&g,FISH_ROTATE,-1,5004);for(unsigned t=5020;t<12000;t+=16)fish_game_update(&g,t);

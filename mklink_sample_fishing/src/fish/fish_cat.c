@@ -11,7 +11,7 @@ static bool scheduled(const fish_game_t *g)
     /* Independent hourly visits with a half-hour gap. Reloading cannot reroll
      * presence or reset the three interactions of the same encounter. */
     uint32_t h=(encounter(g)+53u)*0x9e3779b9u;h^=h>>16;h*=0x85ebca6bu;h^=h>>13;
-    return h%100<35;
+    return h%100<FISH_CAT_HOURLY_CHANCE_PERCENT;
 }
 bool fish_cat_present(const fish_game_t *g)
 {

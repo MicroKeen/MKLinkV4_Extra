@@ -1,8 +1,14 @@
 # MKLink V4 钓鱼 / North Wetland Fishing
 
-运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D26 / 2026-10-31**，包括湿地湖泊、城市江河与海滩三张地图。
+运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D26R1 / 2026-11-02**，包括湿地湖泊、城市江河与海滩三张地图。
 
-A 240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)** with an ST7789 screen and one rotary encoder. **D26 / 2026-10-31** includes wetland, city-river and coastal regions.
+A 240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)** with an ST7789 screen and one rotary encoder. **D26R1 / 2026-11-02** includes wetland, city-river and coastal regions.
+
+## D26R1 猫与休息 / Cats and rest
+
+都市流浪猫每小时候选概率35%→65%；收养后随玩家到湿地、城市、海滩，次数和好感全局保存。船上背包选中“休息”后长按600ms，以20倍推进时间；松开或旋转离开即停，岸上不提供。资源与V21存档不变。[设定与核验](docs/cat-rest-d26-r1.md)。
+
+City-cat hourly visit candidates rise to65%. Adopted cats follow all three maps and survive travel/saves. Select Rest in the boat backpack and hold600ms for20x world time; release or rotate away to stop. Matching2026.10.31.4 resources and V21 saves remain unchanged.
 
 ## 固件与完整资源 / Firmware and complete resources
 
@@ -39,11 +45,11 @@ Rotate to move, browse or reel/ease line; press to interact. Hold/release to cas
 
 **V21存档2147B**，独立A/B，保留原密钥、UUID、目录及所有V1～V20文件。保存装备、金币、图鉴、单鱼历史售价、位置、时间、天气、声音、猫状态，以及工具耐久、沙蚕库存和每日赶海点。旧鱼获不因本轮提价重新估价。
 
-127项主机检查通过（主工程91、独立demo36），含真实FatFs内存盘的A/B写入、尾部回读、I/O失败重试、旧档迁移、下载器文件与卷引导扇区保留。53张鱼图解码无截边，三图已加载页面的Arm-2D临时申请为0。Flash余9012B、DLM余1776B、AHB余480B，均已计固定缓冲和预留堆栈；公共／地图缓存合计余101084B。没有新增整屏缓冲或堆分配。实板帧率、掉电及堆栈峰值仍待验。
+127项主机检查通过（主工程91、独立demo36），含真实FatFs内存盘的A/B写入、尾部回读、I/O失败重试、旧档迁移、下载器文件与卷引导扇区保留。53张鱼图解码无截边，三图已加载页面的Arm-2D临时申请为0。Flash余8368B、DLM余1776B、AHB余480B，均已计固定缓冲和预留堆栈；公共／地图缓存合计余101084B。没有新增整屏缓冲或堆分配。实板帧率、掉电及堆栈峰值仍待验。
 
-V21 uses2147-byte A/B saves and preserves original keys, UUID, paths and all V1–V20 files. Equipment, coins, collection, historical catch prices, position, time, weather, sound, cats, tools and daily shore state persist. All127 host checks pass, including actual FatFs on a RAM disk, final-chunk comparison, retry and migration, with downloader files and the volume boot sector preserved. All53 portraits decode without clipped bounds. Application Flash retains9012B, DLM1776B and AHB480B; common/scene cache retains101084B. Hardware FPS, power-loss behavior and stack/heap peaks remain unmeasured.
+V21 uses2147-byte A/B saves and preserves original keys, UUID, paths and all V1–V20 files. Equipment, coins, collection, historical catch prices, position, time, weather, sound, cats, tools and daily shore state persist. All127 host checks pass, including actual FatFs on a RAM disk, final-chunk comparison, retry and migration, with downloader files and the volume boot sector preserved. All53 portraits decode without clipped bounds. Application Flash retains8368B, DLM1776B and AHB480B; common/scene cache retains101084B. Hardware FPS, power-loss behavior and stack/heap peaks remain unmeasured.
 
-[核验报告 / validation](docs/rewards-d26-build-validation.json) · [内存 / memory](docs/rewards-d26-memory.md) · [鱼类审计 / fish audit](docs/fish-audit-d26.md)
+[核验报告 / validation](docs/cat-rest-d26-r1-build-validation.json) · [内存 / memory](docs/cat-rest-d26-r1-memory.md) · [鱼类审计 / fish audit](docs/fish-audit-d26.md)
 
 ## 构建与工程 / Building
 

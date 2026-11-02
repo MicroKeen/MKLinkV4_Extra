@@ -1,3 +1,7 @@
+# D26R1 当前设定 / Current settings
+
+[猫咪与休息](cat-rest-d26-r1.md)：都市猫65%候选概率、三图跟随，船上长按20倍时间。V21与2026.10.31.4资源保持。 / More frequent cats, global adoption and hold-to-rest time acceleration.
+
 # D26 当前版本 / Current version
 
 完整本版设定见[rewards-d26.md](rewards-d26.md)：批量赶海、两种金色生物、铜银基价、240px深海延伸、V21迁移。配套2026.10.31.4资源。以下为历史版本记录。 / See rewards-d26.md for current settings; earlier entries below are historical.
