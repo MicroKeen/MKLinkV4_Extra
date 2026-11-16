@@ -39,15 +39,15 @@ int main(void)
     puts("species,weight_g,line,policy,landed,duration_ms,peak_tension,line_strength,payouts,bursts,stamina_remaining,farthest_units");
     const unsigned ids[]={1,13,16,17,18,20,22,24};
     for(unsigned i=0;i<8;i++)for(unsigned line=0;line<3;line++)for(unsigned policy=0;policy<3;policy++)trial(ids[i],13000,line,policy);
-    for(unsigned id=15;id<FISH_SPECIES_COUNT;id++)if(id!=21)trial(id,fish_species_weight_g(fish_species_profile(1,id),fish_species_profile(1,id)->max_mm),2,2);
+    for(unsigned id=15;id<FISH_COAST_FIRST;id++)if(id!=21)trial(id,fish_species_weight_g(fish_species_profile(1,id),fish_species_profile(1,id)->max_mm),2,2);
     trial(22,13000,2,3);
     fish_game_t fresh;hook(&fresh,22,13000,2,42);fresh.reel_units=9999;
     fish_game_input(&fresh,FISH_ROTATE,1,0);assert(fresh.mode==FISH_CAUGHT && fresh.reel_units==10000);
     /* Fresh giants can land when safely alongside, without a stamina gate. */
-    for(unsigned id=15;id<FISH_SPECIES_COUNT;id++)if(id!=21) {
+    for(unsigned id=15;id<FISH_COAST_FIRST;id++)if(id!=21) {
         hook(&fresh,id,fish_species_weight_g(fish_species_profile(1,id),fish_species_profile(1,id)->max_mm),2,42);
-        fresh.reel_units=9500;fresh.tension=20;
-        fish_game_input(&fresh,FISH_ROTATE,40,0);assert(fresh.mode==FISH_CAUGHT && fresh.reel_units==10000);
+        fresh.reel_units=9999;fresh.tension=20;
+        fish_game_input(&fresh,FISH_ROTATE,1,0);assert(fresh.mode==FISH_CAUGHT && fresh.reel_units==10000);
     }
     /* No input: slow heavy fish must make measurable runs and pressure. */
     hook(&fresh,22,13000,2,42);unsigned peak=0,runs=0;

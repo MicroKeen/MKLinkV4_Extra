@@ -18,7 +18,7 @@ static void landed(fish_game_t *g,unsigned id)
     g->mode=FISH_BITE;g->phase_at=g->now-fish_species[g->pending_species].strike_delay_ms;
     fish_game_input(g,FISH_PRESS,0,g->now);fish_game_input(g,FISH_RELEASE,0,g->now);
     /* This audit verifies landed identity/economy, after the fight is spent. */
-    assert(g->mode==FISH_FIGHT);g->reel_units=9999;g->stamina=0;
+    assert(g->mode==FISH_FIGHT);g->reel_units=9999;g->stamina=0;g->tension=0;
     fish_game_input(g,FISH_ROTATE,1,g->now);
     assert(g->mode==FISH_CAUGHT && g->last_species==id && g->species_catches[id]==1);
     assert(g->species_best_size_mm[id]==g->last_size_mm && fish_catch_price(id,g->last_size_mm)>0);

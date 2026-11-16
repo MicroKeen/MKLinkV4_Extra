@@ -11,7 +11,7 @@ extern const arm_2d_tile_t c_tileLargeBucketRGB565;
 extern const arm_2d_tile_t c_tileLargeBucketAlphaGRAY8;
 extern const arm_2d_tile_t c_tileFishCoolerRGB565;
 extern const arm_2d_tile_t c_tileFishCoolerAlphaGRAY8;
-extern const fish_ui_art_t fish_container_art[3];
+extern const fish_ui_art_t fish_container_art[4];
 extern const arm_2d_tile_t c_tileCityShopClosedRGB565;
 extern const arm_2d_tile_t c_tileParkLampRGB565,c_tileParkLampAlphaGRAY8;
 extern const arm_2d_tile_t c_tileParkLampOnRGB565;

@@ -1,0 +1,390 @@
+{
+  "firmware_sha256": "4aba504861cdcc5632cf462f87d877bbed622359977574bba0981cd8eaf2a0fa",
+  "regions": [
+    {
+      "name": "APP_FLASH",
+      "used": 365836,
+      "capacity": 380928,
+      "free": 15092
+    },
+    {
+      "name": "ILM",
+      "used": 2440,
+      "capacity": 131072,
+      "free": 128632
+    },
+    {
+      "name": "DLM",
+      "used": 126480,
+      "capacity": 130304,
+      "free": 3824
+    },
+    {
+      "name": "AHB_SRAM",
+      "used": 32288,
+      "capacity": 32768,
+      "free": 480
+    }
+  ],
+  "fish_decode_buffers": [
+    {
+      "name": "rgb",
+      "address": 4030736928,
+      "bytes": 21504
+    },
+    {
+      "name": "alpha",
+      "address": 4030726176,
+      "bytes": 10752
+    }
+  ],
+  "fish_decode_fixed_ahb_bytes": 32256,
+  "fish_decode_slots": 2,
+  "fish_decode_max_canvas": [
+    96,
+    56
+  ],
+  "new_heap_allocations": 0,
+  "new_full_framebuffer_bytes": 0,
+  "loader_staging_bytes": 4096,
+  "shared_row_buffer_bytes": 960,
+  "common_payload_bytes": 64120,
+  "scene_payload_bytes": 203288,
+  "common_free_bytes": 62856,
+  "scene_free_bytes": 132584,
+  "total_cache_free_bytes": 195440,
+  "runtime_arm2d_scratch": {
+    "0": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_wet_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_shore",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_dialogue",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_boat_sleep",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_caught_fish",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ],
+    "1": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_wet_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_shore",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_dialogue",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_boat_sleep",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_caught_fish",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ],
+    "2": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "station",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "modern_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "stall_interior",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "reef_dock",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_near",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_mid",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_far",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "deep_shelf",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_near",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_mid",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_far",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_return",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_lighthouse",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_ocean",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_aboard",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_cat",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "route",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ]
+  },
+  "hardware_heap_peak_measured": false,
+  "hardware_stack_watermark_measured": false
+}

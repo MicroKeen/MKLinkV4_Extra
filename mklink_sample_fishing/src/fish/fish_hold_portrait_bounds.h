@@ -1,4 +1,4 @@
-/* Generated native alpha bounds; centre coordinates doubled. */
+/* Native alpha bounds; centre coordinates doubled. */
 #ifndef FISH_HOLD_PORTRAIT_BOUNDS_H
 #define FISH_HOLD_PORTRAIT_BOUNDS_H
 static const uint8_t fish_hold_portrait_bounds[FISH_SPECIES_COUNT][4]={
@@ -27,5 +27,30 @@ static const uint8_t fish_hold_portrait_bounds[FISH_SPECIES_COUNT][4]={
     {96,55,92,31},
     {96,55,92,35},
     {96,56,92,42},
+    {46,26,44,16},
+    {49,28,45,24},
+    {48,28,46,16},
+    {96,56,94,26},
+    {48,27,46,15},
+    {48,27,46,23},
+    {48,27,46,25},
+    {96,56,94,38},
+    {96,55,94,49},
+    {96,51,94,19},
+    {97,61,93,33},
+    {95,56,93,42},
+    {96,56,94,40},
+    {48,28,34,26},
+    {48,28,44,26},
+    {48,28,40,26},
+    {48,28,36,26},
+    {48,27,46,23},
+    {43,30,41,16},
+    {44,26,42,18},
+    {49,26,45,18},
+    {96,55,94,33},
+    {48,28,44,10},
+    {48,28,28,26},
+    {48,28,46,22},
 };
 #endif

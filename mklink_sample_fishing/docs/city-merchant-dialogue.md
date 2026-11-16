@@ -48,3 +48,5 @@ Open 09:00–21:00. Two editable lines per context; keep IDs and at most sixteen
 携带多种稀有鱼时，优先选择携带总价值最高的一种；稀有鱼对白优先于日常线索和普通招呼。购买、出售等交互完成后的反馈优先显示对应结果。
 
 技术同步入口为 `tools/prepare_merchant_dialogue.py`，生成 `app/fish_city_dialogue_data.h`。保留原台词；当前启用的三类按文首说明，其他行作为历史。
+
+| noodles | 0 | 面泡好了，小心烫。 | 趁热吃，江边风大。 |

@@ -1,0 +1,426 @@
+{
+  "firmware_sha256": "bbd1e1fc9e1f387c8e20409db801e28373ed87f01006139ad641c7c8e37fd81e",
+  "regions": [
+    {
+      "name": "APP_FLASH",
+      "used": 365548,
+      "capacity": 380928,
+      "free": 15380
+    },
+    {
+      "name": "ILM",
+      "used": 2440,
+      "capacity": 131072,
+      "free": 128632
+    },
+    {
+      "name": "DLM",
+      "used": 126480,
+      "capacity": 130304,
+      "free": 3824
+    },
+    {
+      "name": "AHB_SRAM",
+      "used": 28,
+      "capacity": 32768,
+      "free": 32740
+    }
+  ],
+  "components": {
+    "block": {
+      "address": 536416,
+      "bytes": 4096
+    },
+    "header": {
+      "address": 536352,
+      "bytes": 64
+    },
+    "city_night_rows": {
+      "address": 548728,
+      "bytes": 960
+    },
+    "scene": {
+      "address": 549688,
+      "bytes": 9568
+    },
+    "s_tPFBs": {
+      "address": 560472,
+      "bytes": 23096
+    },
+    "arm_2d_stack": {
+      "address": 526136,
+      "bytes": 8192
+    },
+    "worker_stack": {
+      "address": 544400,
+      "bytes": 4096
+    },
+    "queued": {
+      "address": 542888,
+      "bytes": 1511
+    },
+    "checked": {
+      "address": 541376,
+      "bytes": 1511
+    },
+    "rt_heap": {
+      "address": 585852,
+      "bytes": 16384
+    }
+  },
+  "libc_heap_reserved_bytes": 24576,
+  "rtthread_heap_reserved_bytes": 16384,
+  "main_stack_reserved_bytes": 4096,
+  "resource_cache_location": "external Flash",
+  "resource_cache_sram_bytes": 0,
+  "resource_cache_payload_bytes": 449916,
+  "resource_cache_free_bytes": 17028,
+  "loading_buffer_bytes": 4096,
+  "shared_day_night_row_buffer_bytes": 960,
+  "new_full_framebuffer_bytes": 0,
+  "cat_raw_rom_bytes": 0,
+  "cat_sd_bytes": 1664,
+  "umbrella_sd_bytes": 368,
+  "route_thumbnail_rom_bytes": 3168,
+  "cat_state_bytes": 20,
+  "save_bytes": 1511,
+  "runtime_arm2d_scratch": {
+    "0": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_wet_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_shore",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_dialogue",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_boat_sleep",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_caught_fish",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ],
+    "1": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sailing",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "fish_stall",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "guide",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "giant_hold",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "park_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "convenience",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "hot_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_wet_latte",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "rain_shore",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_day",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "heavy_rain_night",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_dialogue",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_boat_sleep",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_caught_fish",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ],
+    "2": [
+      {
+        "phase": "loaded",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "station",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "sand_walk",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "shore_edge",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "dock",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_near",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_mid",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "motorboat_far",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "open_water",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_near",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_mid",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_far",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "storm_return",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_lighthouse",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_ocean",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "cat_aboard",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "night_cat",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      },
+      {
+        "phase": "route",
+        "live_bytes": "0",
+        "phase_peak_bytes": "0",
+        "total_allocations": "0"
+      }
+    ]
+  },
+  "hardware_heap_peak_measured": false,
+  "hardware_stack_watermark_measured": false,
+  "limitations": [
+    "Runtime trace measures Arm-2D scratch calls on the host-compiled exported HPM scene, not MCU libc/RT-Thread heap peaks.",
+    "ELF region accounting includes reserved libc heap, RT-Thread pool, main stack, scene stack and save stack; do not add them again.",
+    "The generic Map tool treats the 32 KiB AHB region as total RAM and misreads some symbol rows. Its aggregate warning is not a valid HPM DLM result. ELF regions and ELF32 symbol tables are authoritative here."
+  ]
+}

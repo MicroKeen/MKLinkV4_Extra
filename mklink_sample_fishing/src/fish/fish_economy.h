@@ -3,10 +3,12 @@
 #include "fish_species.h"
 #include "fish_equipment.h"
 enum {FISH_HOLD_CAPACITY_G=10000,FISH_COIN_LIMIT=1000000000,FISH_BAIT_STOCK_LIMIT=999,
-      FISH_SHOP_COUNT=22,FISH_WETLAND_SHOP_COUNT=17,FISH_SHOP_CONTAINER_FIRST=12,FISH_SHOP_CARGO=14,FISH_SHOP_BACK=15,
+      FISH_SHOP_COUNT=33,FISH_SHOP_LARGE_BOX=32,FISH_SHOP_CABIN=26,FISH_SHOP_MARINE_LINE=27,FISH_SHOP_LAMP=28,FISH_SHOP_HEAVY_ROD=29,FISH_SHOP_SHOVEL=30,FISH_SHOP_CROWBAR=31,FISH_LAMP_PRICE=2800,FISH_WETLAND_SHOP_COUNT=17,FISH_SHOP_CONTAINER_FIRST=12,FISH_SHOP_CARGO=14,FISH_SHOP_BACK=15,
       FISH_SHOP_SNAIL=16,FISH_SHOP_CORN=17,FISH_SHOP_LIFELIKE=18,FISH_SHOP_LATTE=19,FISH_SHOP_STANDARD_LINE=20,FISH_SHOP_PE_LINE=21,
-      FISH_CONTAINER_COUNT=3,FISH_PLASTIC_BAIT=5,FISH_SPECIAL_BAIT_COUNT=5};
-enum {FISH_PRICE_GROUPS=256,FISH_MONEY_POPUPS=4,FISH_MONEY_INTERVAL_MS=250,FISH_MONEY_LIFETIME_MS=900};
+      FISH_SHOP_LONG_ROD=22,FISH_SHOP_UMBRELLA=23,FISH_SHOP_NOODLES=24,FISH_SHOP_CAT_FOOD=25,
+      FISH_CONTAINER_COUNT=4,FISH_PLASTIC_BAIT=5,FISH_SPECIAL_BAIT_COUNT=5};
+enum {FISH_PRICE_GROUPS=256,FISH_PORTABLE_PRICE_GROUPS=224,FISH_CABIN_CAPACITY_G=200000,FISH_CABIN_PRICE=2500,
+      FISH_MONEY_POPUPS=4,FISH_MONEY_INTERVAL_MS=250,FISH_MONEY_LIFETIME_MS=900,FISH_SAVED_CATCH_VALUE_LIMIT=1000000};
 typedef struct {uint16_t price,count;} fish_price_group_t;
 typedef struct {int32_t amount;uint32_t at;bool aggregate;} fish_money_popup_t;
 typedef struct {
@@ -16,13 +18,13 @@ typedef struct {
     fish_money_popup_t popup[FISH_MONEY_POPUPS];
 } fish_money_feedback_t;
 enum {FISH_SHOP_OPEN_MINUTE=420,FISH_SHOP_CLOSE_MINUTE=1080};
-enum {FISH_SHOP_ROD,FISH_SHOP_LINE,FISH_SHOP_FLOAT,FISH_SHOP_BAIT,FISH_SHOP_CONTAINER,FISH_SHOP_SERVICE,FISH_SHOP_DRINK};
+enum {FISH_SHOP_ROD,FISH_SHOP_LINE,FISH_SHOP_FLOAT,FISH_SHOP_BAIT,FISH_SHOP_CONTAINER,FISH_SHOP_SERVICE,FISH_SHOP_DRINK,FISH_SHOP_UTILITY,FISH_SHOP_FOOD,FISH_SHOP_TOOL};
 enum {FISH_VENDOR_TACKLE,FISH_VENDOR_CONVENIENCE,FISH_LATTE_DURATION_MS=360000,FISH_CITY_STALL_X=-92};
-static inline bool fish_bait_consumable(unsigned bait) {return bait<FISH_BAIT_COUNT && bait!=FISH_PLASTIC_BAIT;}
+static inline bool fish_bait_consumable(unsigned bait) {return bait<FISH_BAIT_COUNT && bait!=FISH_PLASTIC_BAIT && bait!=FISH_BAIT_LIFELIKE;}
 typedef struct {const char *name;uint32_t capacity_g;uint16_t price;} fish_container_t;
-typedef enum {FISH_STORED,FISH_HANGING,FISH_RELEASED} fish_cargo_result_t;
+typedef enum {FISH_STORED,FISH_HANGING,FISH_RELEASED,FISH_FED_CAT,FISH_CABIN_STORED,FISH_BAIT_STORED} fish_cargo_result_t;
 typedef enum {FISH_MERCHANT_GREETING,FISH_MERCHANT_SOLD,FISH_MERCHANT_BOUGHT,
-              FISH_MERCHANT_POOR,FISH_MERCHANT_EMPTY,FISH_MERCHANT_OWNED,FISH_MERCHANT_FULL,FISH_MERCHANT_CLOSED,FISH_MERCHANT_LATTE,FISH_MERCHANT_RELIEF} fish_merchant_reply_t;
+              FISH_MERCHANT_POOR,FISH_MERCHANT_EMPTY,FISH_MERCHANT_OWNED,FISH_MERCHANT_FULL,FISH_MERCHANT_CLOSED,FISH_MERCHANT_LATTE,FISH_MERCHANT_RELIEF,FISH_MERCHANT_NOODLES} fish_merchant_reply_t;
 typedef struct {
     uint32_t coins;
     uint8_t rods,lines,floats;
@@ -36,6 +38,9 @@ typedef struct {
     uint32_t hanging_grams,hanging_value;
     /* Equal prices share a count. Existing aggregate-only cargo stays intact. */
     fish_price_group_t prices[FISH_PRICE_GROUPS];
+    uint16_t cabin_count[FISH_COAST_COUNT];
+    uint32_t cabin_grams[FISH_COAST_COUNT],cabin_value[FISH_COAST_COUNT];
+    bool cabin_owned;
 } fish_economy_t;
 struct fish_game;
 extern const uint16_t fish_base_prices[FISH_SPECIES_COUNT];
@@ -48,6 +53,14 @@ uint32_t fish_hold_weight(const fish_economy_t *e);
 uint32_t fish_hold_value(const fish_economy_t *e);
 unsigned fish_hold_page_count(const fish_economy_t *e);
 unsigned fish_hold_page_index(const fish_economy_t *e,unsigned page);
+uint32_t fish_cabin_weight(const fish_economy_t *e);
+uint32_t fish_cabin_value(const fish_economy_t *e);
+unsigned fish_cargo_pages(const struct fish_game *g);
+unsigned fish_cargo_page_index(const struct fish_game *g,unsigned page);
+unsigned fish_cargo_count(const struct fish_game *g,unsigned species);
+uint32_t fish_cargo_grams(const struct fish_game *g,unsigned species);
+uint32_t fish_cargo_value(const struct fish_game *g,unsigned species);
+uint32_t fish_cargo_total_value(const struct fish_game *g);
 fish_cargo_result_t fish_hold_add(fish_economy_t *e,unsigned species,uint16_t size_mm,uint32_t grams);
 fish_cargo_result_t fish_hold_add_on(fish_economy_t *e,unsigned map,unsigned species,uint16_t size_mm,uint32_t grams);
 bool fish_equipment_owned(const fish_economy_t *e,unsigned slot,unsigned index);

@@ -116,7 +116,7 @@ const uint8_t *fish_resource_flash(void) {return cache;}
 int fish_resource_open(unsigned map,uint32_t *bytes)
 {
     assert(!resource_open);if(fish_fs_resource_lock())return -1;
-    char path[128];snprintf(path,sizeof(path),"3:/FishingGame_Resources_DO_NOT_DELETE/maps/%s.fgpk",map?"1_city_river":"0_wetland");
+    char path[128];snprintf(path,sizeof(path),"3:/FishingGame_Resources_DO_NOT_DELETE/%s.fgpk",map==3?"common/fish":map==2?"maps/2_beach":map?"maps/1_city_river":"maps/0_wetland");
     FRESULT result=f_open(&resource,path,FA_READ);
     if(result==FR_OK) {*bytes=(uint32_t)f_size(&resource);resource_open=true;}
     fish_fs_unlock();return result==FR_OK?0:(result==FR_NO_FILE || result==FR_NO_PATH?-2:-1);
@@ -159,8 +159,8 @@ static void verify_file(const char *path)
 static void copy_pack(unsigned map)
 {
     char source[1024],target[128];
-    snprintf(source,sizeof(source),"%s/maps/%s.fgpk",FISH_TEST_PACK_DIR,map?"1_city_river":"0_wetland");
-    snprintf(target,sizeof(target),"0:/FishingGame_Resources_DO_NOT_DELETE/maps/%s.fgpk",map?"1_city_river":"0_wetland");
+    snprintf(source,sizeof(source),"%s/%s.fgpk",FISH_TEST_PACK_DIR,map==3?"common/fish":map==2?"maps/2_beach":map?"maps/1_city_river":"maps/0_wetland");
+    snprintf(target,sizeof(target),"0:/FishingGame_Resources_DO_NOT_DELETE/%s.fgpk",map==3?"common/fish":map==2?"maps/2_beach":map?"maps/1_city_river":"maps/0_wetland");
     FILE *input=fopen(source,"rb");assert(input);FIL f;assert(f_open(&f,target,FA_WRITE|FA_CREATE_NEW)==FR_OK);
     uint8_t data[4096];size_t n;
     while((n=fread(data,1,sizeof(data),input))) {UINT wrote=0;assert(f_write(&f,data,(UINT)n,&wrote)==FR_OK && wrote==n);}
@@ -185,7 +185,7 @@ int main(void)
     FATFS host;assert(f_mount(&host,"0:",1)==FR_OK);
     assert(f_mkdir("0:/FishingGame_Resources_DO_NOT_DELETE")==FR_OK);
     assert(f_mkdir("0:/FishingGame_Resources_DO_NOT_DELETE/maps")==FR_OK);
-    copy_pack(0);copy_pack(1);assert(f_mount(NULL,"0:",0)==FR_OK);
+    assert(f_mkdir("0:/FishingGame_Resources_DO_NOT_DELETE/common")==FR_OK);copy_pack(0);copy_pack(1);copy_pack(2);copy_pack(3);assert(f_mount(NULL,"0:",0)==FR_OK);
     uint8_t scratch[1025];unsigned io_before=writes;
     assert(usbd_msc_sector_read(0,0,0,scratch+1,512)==0);assert(!memcmp(scratch+1,boot_before,512));
     assert(usbd_msc_sector_write(0,0,STOCK_SECTORS,scratch,512)<0);

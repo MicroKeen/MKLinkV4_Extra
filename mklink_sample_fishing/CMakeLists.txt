@@ -30,9 +30,9 @@ set_source_files_properties(src/fish/fish_hpm_runtime.c src/fish/fish_resources_
     src/fish/fish_media.c src/fish/fish_usb_hpm.c
     PROPERTIES COMPILE_OPTIONS "-Os")
 # The SDK forces floating scanf into every GNU app. This game never scans input;
-# let section GC discard it while retaining floating printf for diagnostics.
+# let section GC discard unused floating input/output formatters.
 get_target_property(FISH_SDK_LINK_OPTIONS ${HPM_SDK_LIB_ITF} INTERFACE_LINK_LIBRARIES)
-list(REMOVE_ITEM FISH_SDK_LINK_OPTIONS "-u _scanf_float")
+list(REMOVE_ITEM FISH_SDK_LINK_OPTIONS "-u _scanf_float" "-u _printf_float")
 set_property(TARGET ${HPM_SDK_LIB_ITF} PROPERTY INTERFACE_LINK_LIBRARIES "${FISH_SDK_LINK_OPTIONS}")
 set(FISH_ENCODER_DIRECTION "1" CACHE STRING "Physical encoder direction: 1 or -1")
 if(NOT FISH_ENCODER_DIRECTION STREQUAL "1" AND NOT FISH_ENCODER_DIRECTION STREQUAL "-1")
@@ -102,11 +102,24 @@ set_source_files_properties(${FISH_CRYPTO_SOURCES}
     src/fish/fish_resources.c src/fish/fish_resources_hpm.c src/fish/fish_fs_hpm.c
     src/fish/fish_media.c src/fish/fish_usb_hpm.c src/fish/fish_usb_msc_class.c src/fish/fish_sd_guard.c
     src/fish/fish_save_hpm.c lcd/adapt/spi_sd_adapt.c lcd/fatfs/ff.c
-    src/fish/fish_game.c src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
+    src/fish/fish_game.c src/fish/fish_cat.c src/fish/fish_forage.c src/fish/fish_economy.c src/fish/fish_map.c src/fish/fish_equipment.c
     src/fish/fish_species.c src/fish/fish_hpm_feedback.c
     lcd/fatfs/ffunicode.c lcd/fatfs/diskio.c lcd/fatfs/spi_sd/hpm_spi_sd_disk.c
     PROPERTIES COMPILE_OPTIONS "-Os")
 set_source_files_properties(src/fish/fish_scene.c PROPERTIES COMPILE_OPTIONS "-Os")
+# Keep encoder dispatch and application setup compact as loss feedback grows.
+# These wrappers do not contain Arm-2D pixel kernels.
+set_source_files_properties(src/fish/fish_hpm_input.c src/main.c src/scene/scene_app.c
+    src/key_module/key_module.c ../common/beep_control/beep_control.c
+    PROPERTIES COMPILE_OPTIONS "-Os")
+# Event dispatch is control flow, not a pixel kernel; keep it compact as the
+# city equipment catalog grows. Arm-2D rendering kernels remain at -O3.
+file(GLOB FISH_EVENT_FRONTENDS ../external/notGUIyet/common/message/msg_frontend/*.c)
+set_source_files_properties(${FISH_EVENT_FRONTENDS} PROPERTIES COMPILE_OPTIONS "-Os")
+set_source_files_properties(../common/lcd/reference_gui/ref_gui.c
+    ../external/Arm-2D/Helper/Source/arm_2d_helper_scene.c
+    ../external/Arm-2D/Helper/Source/arm_2d_helper_font.c
+    PROPERTIES COMPILE_OPTIONS "-Os")
 set_source_files_properties(
     ${HPM_SDK_BASE}/middleware/cherryusb/core/usbd_core.c
     ${HPM_SDK_BASE}/middleware/cherryusb/port/hpmicro/usb_dc_hpm.c

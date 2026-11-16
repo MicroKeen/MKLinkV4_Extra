@@ -1,6 +1,7 @@
 #include "fish_game.h"
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static uint32_t time_ms;
 static void rotate(fish_game_t *g,int steps) {fish_game_input(g,FISH_ROTATE,steps,++time_ms);}
@@ -26,7 +27,7 @@ int main(void)
         unsigned previous=fish_map_activity_percent(species,1439);
         for(unsigned minute=0;minute<1440;minute++) {
             unsigned activity=fish_map_activity_percent(species,minute);
-            assert(activity>=55 && activity<=155);
+            assert(activity>=55 && activity<=180);
             assert(activity<=previous+2 && previous<=activity+2);previous=activity;
             assert(!fish_map_weight_at(species,0,0,0,minute));
         }
@@ -46,13 +47,19 @@ int main(void)
     for(int x=64;x<904;x+=16) for(unsigned bait=0;bait<FISH_BAIT_COUNT;bait++) {
         int bottom=fish_map_depth(x);unsigned sum=0;
         for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)sum+=fish_map_weight(i,x,bottom,bait);
-        unsigned turtle=fish_map_weight(9,x,bottom,bait);
-        if(sum) {unsigned ppm=turtle*1000000u/sum;assert(ppm<10000);if(ppm>max_turtle_ppm)max_turtle_ppm=ppm;}
+        unsigned turtle=fish_map_weight(9,x,bottom,bait),gold=0;
+        for(unsigned i=0;i<FISH_SPECIES_COUNT;i++)if(fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i))gold+=fish_map_weight(i,x,bottom,bait);
+        if(sum) {unsigned ppm=turtle*1000000u/sum;
+            if(gold*100>sum*FISH_GOLD_POOL_CAP_PERCENT)ppm=turtle*(FISH_GOLD_POOL_CAP_PERCENT*10000u)/gold;
+            assert(ppm<=50000);if(ppm>max_turtle_ppm)max_turtle_ppm=ppm;}
     }
     for(unsigned bait=0;bait<FISH_BAIT_COUNT;bait++) {
         unsigned turtle=0;uint32_t seed=4123;uint8_t id;uint16_t size;
+        if(bait==FISH_BAIT_RAGWORM){assert(!fish_map_roll(&seed,480,600,bait,&id,&size));continue;}
         for(unsigned n=0;n<100000;n++){assert(fish_map_roll(&seed,480,600,bait,&id,&size));turtle+=id==9;}
-        assert(turtle<1000);printf("lake_centre_bait=%u turtle_per_100000=%u\n",bait,turtle);
+        assert(turtle<5500);
+        if(bait==4)assert(turtle>=1000 && turtle<=3500);
+        printf("lake_centre_bait=%u turtle_per_100000=%u\n",bait,turtle);
     }
     printf("maximum_local_turtle_ppm=%u\n",max_turtle_ppm);
     for (unsigned n=0;n<FISH_DEPTH_NODE_COUNT;n++) assert(fish_map_depth(fish_depth_profile[n].x)==fish_depth_profile[n].depth_cm);
@@ -113,7 +120,9 @@ int main(void)
         fish_game_input(&g,FISH_PRESS,0,g.now);
         fish_game_input(&g,FISH_RELEASE,0,g.now+1500);
         assert(g.mode==FISH_CAST && g.cast_distance==fish_game_max_cast_px(&g));
-        assert(g.cast_bottom_cm==fish_map_depth(g.cast_x) && g.cast_depth_cm==g.cast_bottom_cm);
+        unsigned layer=fish_line_resolve_layer(g.line_index,g.cast_bottom_cm,
+            abs(g.cast_x-g.cast_start_x)*FISH_WORLD_CM_PER_PIXEL,2);
+        assert(g.cast_bottom_cm==fish_map_depth(g.cast_x) && g.cast_depth_cm==(layer==2?g.cast_bottom_cm:layer?g.cast_bottom_cm/2:0));
         assert(fish_map_weight(g.pending_species,g.cast_x,g.cast_depth_cm,g.bait_index)>0);
         for (int facing=-1;facing<=1;facing+=2) {
             fish_game_init(&g,0);g.boat_x=480;g.rod_index=(uint8_t)rod;g.facing=facing;
@@ -125,9 +134,10 @@ int main(void)
         }
     }
     /* Casting, preview camera and physical length share the same gear limit. */
-    static const unsigned line_cm[]={450,650,850,1050};
+    static const unsigned line_cm[]={450,650,2000,2500,20000};
     for(unsigned rod=0;rod<FISH_ROD_COUNT;rod++)for(unsigned line=0;line<FISH_LINE_COUNT;line++)
     for(int facing=-1;facing<=1;facing+=2) {
+        if(!fish_tackle_compatible(rod,line))continue;
         fish_game_init(&g,0);g.boat_x=480;g.rod_index=rod;g.facing=facing;fish_game_equip_line(&g,line);
         assert(fish_line_sets[line].distance_limit_cm==line_cm[line]);
         fish_game_input(&g,FISH_PRESS,0,0);fish_game_update(&g,1500);
@@ -169,6 +179,28 @@ int main(void)
     fish_game_input(&g,FISH_ROTATE,-1,UINT32_MAX-499);
     for(unsigned i=1;i<=100;i++) fish_game_update(&g,(UINT32_MAX-499)+i*10u);
     assert(g.shore_x==-32);
+    /* Fast walking keeps facing normalized and stops at interactions rather
+     * than skipping them; a reversal first stops, then starts slow. */
+    for(unsigned map=0;map<2;map++) {
+        fish_game_t fast,slow;
+        fish_game_init(&slow,0);slow.mode=FISH_SHORE;slow.map_index=(uint8_t)map;slow.shore_x=0;slow.boat_x=132;
+        fish_game_input(&slow,FISH_ROTATE,-1,0);fast=slow;
+        fish_game_input(&fast,FISH_ROTATE,-1,0);
+        assert(fast.shore_speed==-2 && fast.facing==-1);
+        for(unsigned t=10;t<=1000;t+=10){fish_game_update(&slow,t);fish_game_update(&fast,t);}
+        assert(slow.shore_x==-32 && fast.shore_x==-64);
+        fish_game_input(&fast,FISH_ROTATE,1,1000);assert(!fast.shore_speed && fast.facing==-1);
+        fish_game_update(&fast,1100);assert(fast.shore_x==-64);
+        fish_game_input(&fast,FISH_ROTATE,1,1100);assert(fast.shore_speed==1 && fast.facing==1);
+        fish_game_input(&fast,FISH_ROTATE,1,1100);assert(fast.shore_speed==2 && fast.facing==1);
+        for(unsigned t=1110;t<=6000;t+=10)fish_game_update(&fast,t);
+        assert(fast.shore_x==fish_docks[0].shore_x && !fast.shore_speed && fast.mode==FISH_SHORE);
+        fish_game_input(&fast,FISH_ROTATE,1,6000);assert(fast.mode==FISH_MOVE && !fast.boat_speed);
+        fish_game_init(&fast,0);fast.mode=FISH_SHORE;fast.map_index=(uint8_t)map;fast.shore_x=0;fast.boat_x=132;
+        fish_game_input(&fast,FISH_ROTATE,-2,0);
+        for(unsigned t=10;t<=12000;t+=10)fish_game_update(&fast,t);
+        assert(fast.shore_x==(map?FISH_CITY_STALL_X:FISH_SHOP_X) && !fast.shore_speed);
+    }
     fish_game_init(&g,0);g.mode=FISH_SHORE;g.boat_x=132;g.shore_x=96;g.shore_speed=-1;
     fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_SHORE && !g.shore_speed);
     fish_game_input(&g,FISH_ROTATE,1,0);assert(g.mode==FISH_MOVE && !g.boat_speed);

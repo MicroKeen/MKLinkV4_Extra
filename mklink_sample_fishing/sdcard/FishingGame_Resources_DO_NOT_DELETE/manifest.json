@@ -1,11 +1,11 @@
 {
-  "schema": 2,
-  "resource_version": "2026.10.19.5",
-  "resource_version_id": 2026101905,
-  "pack_format": 2,
-  "layout_crc": "602ad0f6",
-  "payload_bytes": 447884,
-  "day_offset": 389788,
+  "schema": 3,
+  "resource_version": "2026.10.31.4",
+  "resource_version_id": 2026103104,
+  "pack_format": 3,
+  "layout_crc": "a7d4bc47",
+  "payload_bytes": 249508,
+  "day_offset": 191412,
   "day_format": "clut64-240x120-v1",
   "cache_base": "0x80080000",
   "cache_end_exclusive": "0x800f3000",
@@ -25,626 +25,633 @@
       "bytes": 2304
     },
     {
+      "symbol": "c_bmpCatFrame0Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 6912,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame0Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 6944,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame1Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7072,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame1Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7104,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame2Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7232,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame2Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7264,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame3Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7392,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame3Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7424,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame4Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7552,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame4Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7584,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame5Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7712,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame5Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7744,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame6Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7872,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame6Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 7904,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame7Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8032,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame7Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8064,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFrame8Palette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8192,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFrame8Indices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8224,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatFoodPalette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8352,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatFoodIndices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8384,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCatHeartPalette",
+      "type": "uint16_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8512,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpCatHeartIndices",
+      "type": "uint8_t",
+      "source": "app/assets/cat_art.c",
+      "offset": 8544,
+      "bytes": 32
+    },
+    {
       "symbol": "c_bmpMerchantGreetingPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 6912,
+      "offset": 8576,
       "bytes": 128
     },
     {
       "symbol": "c_bmpMerchantGreetingIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 7040,
+      "offset": 8704,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpMerchantSoldPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 8540,
+      "offset": 10204,
       "bytes": 128
     },
     {
       "symbol": "c_bmpMerchantSoldIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 8668,
+      "offset": 10332,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpMerchantBoughtPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 10168,
+      "offset": 11832,
       "bytes": 128
     },
     {
       "symbol": "c_bmpMerchantBoughtIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 10296,
+      "offset": 11960,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpMerchantSurprisedPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 11796,
+      "offset": 13460,
       "bytes": 128
     },
     {
       "symbol": "c_bmpMerchantSurprisedIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 11924,
+      "offset": 13588,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpCityClerkGreetingPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 13424,
+      "offset": 15088,
       "bytes": 128
     },
     {
       "symbol": "c_bmpCityClerkGreetingIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 13552,
+      "offset": 15216,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpCityClerkConcernedPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 15052,
+      "offset": 16716,
       "bytes": 128
     },
     {
       "symbol": "c_bmpCityClerkConcernedIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 15180,
+      "offset": 16844,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpCityClerkLattePalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 16680,
+      "offset": 18344,
       "bytes": 128
     },
     {
       "symbol": "c_bmpCityClerkLatteIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 16808,
+      "offset": 18472,
       "bytes": 1500
     },
     {
       "symbol": "c_bmpCityStallExteriorPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 18308,
+      "offset": 19972,
       "bytes": 64
     },
     {
       "symbol": "c_bmpCityStallExteriorIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 18372,
+      "offset": 20036,
       "bytes": 2063
     },
     {
       "symbol": "c_bmpCityStallInteriorPalette",
       "type": "uint16_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 20436,
+      "offset": 22100,
       "bytes": 32
     },
     {
       "symbol": "c_bmpCityStallInteriorIndices",
       "type": "uint8_t",
       "source": "app/assets/city_vendor_indexed.c",
-      "offset": 20468,
+      "offset": 22132,
       "bytes": 4320
     },
     {
       "symbol": "c_bmpCloudsRGB565",
       "type": "uint16_t",
       "source": "app/assets/clouds.c",
-      "offset": 24788,
+      "offset": 26452,
       "bytes": 2208
     },
     {
       "symbol": "c_bmpCloudsAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/clouds_alpha.c",
-      "offset": 26996,
+      "offset": 28660,
       "bytes": 1104
+    },
+    {
+      "symbol": "c_bmpCoastRoadPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 29764,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastRoadIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 29828,
+      "bytes": 5580
+    },
+    {
+      "symbol": "c_bmpCoastReefPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 35408,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastReefIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 35472,
+      "bytes": 3000
+    },
+    {
+      "symbol": "c_bmpCoastStallPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 38472,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastStallIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 38536,
+      "bytes": 1330
+    },
+    {
+      "symbol": "c_bmpCoastInteriorPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 39868,
+      "bytes": 128
+    },
+    {
+      "symbol": "c_bmpCoastInteriorIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_art.c",
+      "offset": 39996,
+      "bytes": 5760
+    },
+    {
+      "symbol": "c_bmpCoastStationPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 45756,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastStationIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 45820,
+      "bytes": 2880
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeGreetingPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 48700,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeGreetingIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 48764,
+      "bytes": 1313
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeSoldPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 50080,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeSoldIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 50144,
+      "bytes": 1313
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeConcernedPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 51460,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeConcernedIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 51524,
+      "bytes": 1313
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeSurprisedPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 52840,
+      "bytes": 64
+    },
+    {
+      "symbol": "c_bmpCoastEmployeeSurprisedIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_staff_art.c",
+      "offset": 52904,
+      "bytes": 1313
+    },
+    {
+      "symbol": "c_bmpBoatLureLampPalette",
+      "type": "uint16_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 54220,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpBoatLureLampIndices",
+      "type": "uint8_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 54252,
+      "bytes": 192
+    },
+    {
+      "symbol": "c_bmpBoatLureGlowRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 54444,
+      "bytes": 5376
+    },
+    {
+      "symbol": "c_bmpBoatLureGlowAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 59820,
+      "bytes": 2688
+    },
+    {
+      "symbol": "c_bmpHeavySeaRodRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 62508,
+      "bytes": 1824
+    },
+    {
+      "symbol": "c_bmpHeavySeaRodAlphaGRAY8",
+      "type": "uint8_t",
+      "source": "app/assets/coast_tools_art.c",
+      "offset": 64332,
+      "bytes": 912
+    },
+    {
+      "symbol": "c_bmpUmbrellaPalette",
+      "type": "uint16_t",
+      "source": "app/assets/comforts_art.c",
+      "offset": 65244,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpUmbrellaIndices",
+      "type": "uint8_t",
+      "source": "app/assets/comforts_art.c",
+      "offset": 65276,
+      "bytes": 336
+    },
+    {
+      "symbol": "c_bmpBackpackOpenRGB565",
+      "type": "uint16_t",
+      "source": "app/assets/equipment/backpack_rgb.c",
+      "offset": 65612,
+      "bytes": 21120
+    },
+    {
+      "symbol": "c_bmpFishCabinPalette",
+      "type": "uint16_t",
+      "source": "app/assets/fish_cabin_art.c",
+      "offset": 86732,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpFishCabinIndices",
+      "type": "uint8_t",
+      "source": "app/assets/fish_cabin_art.c",
+      "offset": 86764,
+      "bytes": 240
     },
     {
       "symbol": "c_bmpFootpathAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/footpath_alpha.c",
-      "offset": 28100,
+      "offset": 87004,
       "bytes": 2400
     },
     {
       "symbol": "c_bmpFootpathRGB565",
       "type": "uint16_t",
       "source": "app/assets/footpath_rgb.c",
-      "offset": 30500,
+      "offset": 89404,
       "bytes": 4800
+    },
+    {
+      "symbol": "c_bmpForageShovelPalette",
+      "type": "uint16_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94204,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpForageShovelIndices",
+      "type": "uint8_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94236,
+      "bytes": 224
+    },
+    {
+      "symbol": "c_bmpForageCrowbarPalette",
+      "type": "uint16_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94460,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpForageCrowbarIndices",
+      "type": "uint8_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94492,
+      "bytes": 224
+    },
+    {
+      "symbol": "c_bmpForageRagwormBaitPalette",
+      "type": "uint16_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94716,
+      "bytes": 32
+    },
+    {
+      "symbol": "c_bmpForageRagwormBaitIndices",
+      "type": "uint8_t",
+      "source": "app/assets/forage_art.c",
+      "offset": 94748,
+      "bytes": 224
     },
     {
       "symbol": "c_bmpReedsRGB565",
       "type": "uint16_t",
       "source": "app/assets/reeds.c",
-      "offset": 35300,
+      "offset": 94972,
       "bytes": 28800
     },
     {
       "symbol": "c_bmpReedsAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/reeds_alpha.c",
-      "offset": 64100,
+      "offset": 123772,
       "bytes": 14400
     },
     {
       "symbol": "c_bmpCityShopClosedRGB565",
       "type": "uint16_t",
       "source": "app/assets/shop/city-closed_rgb.c",
-      "offset": 78500,
+      "offset": 138172,
       "bytes": 6600
     },
     {
       "symbol": "c_bmpShopExteriorAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/shop/exterior_alpha.c",
-      "offset": 85100,
+      "offset": 144772,
       "bytes": 3300
     },
     {
       "symbol": "c_bmpShopExteriorRGB565",
       "type": "uint16_t",
       "source": "app/assets/shop/exterior_rgb.c",
-      "offset": 88400,
+      "offset": 148072,
       "bytes": 6600
     },
     {
       "symbol": "c_bmpShopInteriorPalette",
       "type": "uint16_t",
       "source": "app/assets/shop/interior_indexed.c",
-      "offset": 95000,
+      "offset": 154672,
       "bytes": 666
     },
     {
       "symbol": "c_bmpShopInteriorIndices",
       "type": "uint8_t",
       "source": "app/assets/shop/interior_indexed.c",
-      "offset": 95668,
+      "offset": 155340,
       "bytes": 9722
     },
     {
       "symbol": "c_bmpShoreDockAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/shore_dock_alpha.c",
-      "offset": 105392,
+      "offset": 165064,
       "bytes": 2842
     },
     {
       "symbol": "c_bmpShoreDockRGB565",
       "type": "uint16_t",
       "source": "app/assets/shore_dock_rgb.c",
-      "offset": 108236,
+      "offset": 167908,
       "bytes": 5684
-    },
-    {
-      "symbol": "c_bmpSpeciesBigheadCarpAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/bighead_carp_alpha.c",
-      "offset": 113920,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesBigheadCarpRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/bighead_carp_rgb.c",
-      "offset": 119296,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesBlackCarpAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/black_carp_alpha.c",
-      "offset": 130048,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesBlackCarpRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/black_carp_rgb.c",
-      "offset": 135424,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/carp_alpha.c",
-      "offset": 146176,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpLargeAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/carp_large_alpha.c",
-      "offset": 147520,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpLargeRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/carp_large_rgb.c",
-      "offset": 152896,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpRedLongfinAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/carp_red_longfin_alpha.c",
-      "offset": 163648,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpRedLongfinRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/carp_red_longfin_rgb.c",
-      "offset": 164992,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesCarpRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/carp_rgb.c",
-      "offset": 167680,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/catfish_alpha.c",
-      "offset": 170368,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishLargeAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/catfish_large_alpha.c",
-      "offset": 171712,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishLargeRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/catfish_large_rgb.c",
-      "offset": 177088,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/catfish_rgb.c",
-      "offset": 187840,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishXanthicAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/catfish_xanthic_alpha.c",
-      "offset": 190528,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesCatfishXanthicRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/catfish_xanthic_rgb.c",
-      "offset": 191872,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesCrucianAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/crucian_alpha.c",
-      "offset": 194560,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesCrucianRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/crucian_rgb.c",
-      "offset": 195904,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesCulterAlburnusAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/culter_alburnus_alpha.c",
-      "offset": 198592,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesCulterAlburnusRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/culter_alburnus_rgb.c",
-      "offset": 203968,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesGobyAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/goby_alpha.c",
-      "offset": 214720,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesGobyRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/goby_rgb.c",
-      "offset": 216064,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesGrassCarpAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/grass_carp_alpha.c",
-      "offset": 218752,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesGrassCarpRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/grass_carp_rgb.c",
-      "offset": 224128,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesHenanCrabAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/henan_crab_alpha.c",
-      "offset": 234880,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesHenanCrabRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/henan_crab_rgb.c",
-      "offset": 236224,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesHooksnoutAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/hooksnout_alpha.c",
-      "offset": 238912,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesHooksnoutLongfinAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/hooksnout_longfin_alpha.c",
-      "offset": 240256,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesHooksnoutLongfinRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/hooksnout_longfin_rgb.c",
-      "offset": 241600,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesHooksnoutRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/hooksnout_rgb.c",
-      "offset": 244288,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesLongsnoutCatfishAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/longsnout_catfish_alpha.c",
-      "offset": 246976,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesLongsnoutCatfishRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/longsnout_catfish_rgb.c",
-      "offset": 252352,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesMandarinAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/mandarin_alpha.c",
-      "offset": 263104,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesMandarinRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/mandarin_rgb.c",
-      "offset": 264448,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesMongolianCulterAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/mongolian_culter_alpha.c",
-      "offset": 267136,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesMongolianCulterRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/mongolian_culter_rgb.c",
-      "offset": 268480,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesObscurePufferAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/obscure_puffer_alpha.c",
-      "offset": 271168,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesObscurePufferRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/obscure_puffer_rgb.c",
-      "offset": 276544,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesRedeyeAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/redeye_alpha.c",
-      "offset": 287296,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesRedeyeRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/redeye_rgb.c",
-      "offset": 292672,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesSharpbellyAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/sharpbelly_alpha.c",
-      "offset": 303424,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesSharpbellyRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/sharpbelly_rgb.c",
-      "offset": 304768,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesSilverCarpAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/silver_carp_alpha.c",
-      "offset": 307456,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesSilverCarpRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/silver_carp_rgb.c",
-      "offset": 312832,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesSnakeheadAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/snakehead_alpha.c",
-      "offset": 323584,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesSnakeheadLargeAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/snakehead_large_alpha.c",
-      "offset": 324928,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesSnakeheadLargeRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/snakehead_large_rgb.c",
-      "offset": 330304,
-      "bytes": 10752
-    },
-    {
-      "symbol": "c_bmpSpeciesSnakeheadRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/snakehead_rgb.c",
-      "offset": 341056,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesSoftshellAlbinoAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/softshell_albino_alpha.c",
-      "offset": 343744,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesSoftshellAlbinoRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/softshell_albino_rgb.c",
-      "offset": 345088,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesSoftshellAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/softshell_alpha.c",
-      "offset": 347776,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesSoftshellRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/softshell_rgb.c",
-      "offset": 349120,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesYellowCatfishAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/yellow_catfish_alpha.c",
-      "offset": 351808,
-      "bytes": 1344
-    },
-    {
-      "symbol": "c_bmpSpeciesYellowCatfishRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/yellow_catfish_rgb.c",
-      "offset": 353152,
-      "bytes": 2688
-    },
-    {
-      "symbol": "c_bmpSpeciesYellowcheekAlphaGRAY8",
-      "type": "uint8_t",
-      "source": "app/assets/species/yellowcheek_alpha.c",
-      "offset": 355840,
-      "bytes": 5376
-    },
-    {
-      "symbol": "c_bmpSpeciesYellowcheekRGB565",
-      "type": "uint16_t",
-      "source": "app/assets/species/yellowcheek_rgb.c",
-      "offset": 361216,
-      "bytes": 10752
     },
     {
       "symbol": "c_bmpStationAlphaGRAY8",
       "type": "uint8_t",
       "source": "app/assets/station_alpha.c",
-      "offset": 371968,
+      "offset": 173592,
       "bytes": 5940
     },
     {
       "symbol": "c_bmpStationRGB565",
       "type": "uint16_t",
       "source": "app/assets/station_rgb.c",
-      "offset": 377908,
+      "offset": 179532,
       "bytes": 11880
     }
   ],
@@ -652,14 +659,669 @@
     {
       "id": 0,
       "file": "maps/0_wetland.fgpk",
-      "bytes": 447948,
-      "sha256": "594305f1589d367e8067a68727f2cd439b96cd18ee7e46011f0c2076c59c0fa1"
+      "bytes": 249572,
+      "sha256": "ab3bc85d9ac41ef4ed1d2731d57cd09a1f697e76a5413686e99272aa719c88b4"
     },
     {
       "id": 1,
       "file": "maps/1_city_river.fgpk",
-      "bytes": 447948,
-      "sha256": "0609f08affc235ad4cba4e513f7e98eb61933f6bc5a3bcd76e80c36c655143b7"
+      "bytes": 249572,
+      "sha256": "b54ac34c55ba34ce32351e4864ccefd175e172fab4f092e646412f38b421b47b"
+    },
+    {
+      "id": 2,
+      "file": "maps/2_beach.fgpk",
+      "bytes": 249572,
+      "sha256": "14061ad875bbdd9c5b8f900e51e04776a5e02170f80fa35b715ffc529d2a8af1"
     }
-  ]
+  ],
+  "common": {
+    "id": 3,
+    "file": "common/fish.fgpk",
+    "bytes": 112320,
+    "payload_bytes": 112256,
+    "sha256": "05a002f572d3bc22859a35d0265703a4471d70054a3cf0455b06717b7ba1b750",
+    "codec": "rgb565-palette32-mask1-v1",
+    "images": [
+      {
+        "name": "BigheadCarp",
+        "symbol": "c_bmpSpeciesBigheadCarp",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 0,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 3765324739,
+        "decoded_sha256": "4e020ac3a932e1363eaeb6a5ab21b113e5bfddd2f285bfc9412ce75db3443519"
+      },
+      {
+        "name": "BlackCarp",
+        "symbol": "c_bmpSpeciesBlackCarp",
+        "width": 96,
+        "height": 56,
+        "bits": 4,
+        "offset": 4096,
+        "bytes": 3424,
+        "raw_bytes": 16128,
+        "decoded_crc": 4196654313,
+        "decoded_sha256": "ab4a4ba8c678ede6052da4af21cf677f875f03f488b27c0743cb10f246f6ade1"
+      },
+      {
+        "name": "CarpLarge",
+        "symbol": "c_bmpSpeciesCarpLarge",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 7520,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 1019272126,
+        "decoded_sha256": "bb92ff9c28646ceca5be865034282dd889497f54e034672c797de3af417e1d96"
+      },
+      {
+        "name": "Carp",
+        "symbol": "c_bmpSpeciesCarp",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 11616,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 3852274606,
+        "decoded_sha256": "6cb0703eb25a5cf19ac7e857e6367439448559304a96431e0f73e1e912d8964c"
+      },
+      {
+        "name": "CarpRedLongfin",
+        "symbol": "c_bmpSpeciesCarpRedLongfin",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 12688,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 3455230098,
+        "decoded_sha256": "238b2c6ff7e12c6e5a324239da89608fb0dd57485996117797a39b0f2cad9c63"
+      },
+      {
+        "name": "CatfishLarge",
+        "symbol": "c_bmpSpeciesCatfishLarge",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 13592,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 664910673,
+        "decoded_sha256": "4a209125b8133002b11a44bceb649d16eaefc27de4409d93bb55d716500376b0"
+      },
+      {
+        "name": "Catfish",
+        "symbol": "c_bmpSpeciesCatfish",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 17688,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 3549749114,
+        "decoded_sha256": "44c1ab85a91497e88725d7c4cdd56cdbe9acd7df3d5cb53e2eb1128b05a0e4d7"
+      },
+      {
+        "name": "CatfishXanthic",
+        "symbol": "c_bmpSpeciesCatfishXanthic",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 18760,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 2604239058,
+        "decoded_sha256": "e19fc3a5e2a40f661e585fe30515d59f9ff12af07eef072305235140a6c6ef4e"
+      },
+      {
+        "name": "ChinesePrawn",
+        "symbol": "c_bmpSpeciesChinesePrawn",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 19664,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 3162875473,
+        "decoded_sha256": "2ce81b2e0272b6314ad70fb8100f76ae8929e85f3f8ffa046d76bb0dc2233cb6"
+      },
+      {
+        "name": "ChubMackerel",
+        "symbol": "c_bmpSpeciesChubMackerel",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 20568,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 434818896,
+        "decoded_sha256": "fa589371fa07838af4954886547d21268e3e3c604fe4bb71e5e52e1fc7800756"
+      },
+      {
+        "name": "Crucian",
+        "symbol": "c_bmpSpeciesCrucian",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 24664,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 910237699,
+        "decoded_sha256": "c18a0d441c9e0791c43c76acdfa5de95bc53b9507825481e73e8f72da7450d31"
+      },
+      {
+        "name": "CulterAlburnus",
+        "symbol": "c_bmpSpeciesCulterAlburnus",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 25736,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 2372783311,
+        "decoded_sha256": "f63041b3f13a92d393a46b99924d59312f9f87637918563ef9afd6c79ad8c4fb"
+      },
+      {
+        "name": "FlatheadMullet",
+        "symbol": "c_bmpSpeciesFlatheadMullet",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 29832,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 766771160,
+        "decoded_sha256": "b3c82ce621bc236ff4dec9f4298d284dc14a09a3f4634c41b066f6a7368c5125"
+      },
+      {
+        "name": "GiantGrouper",
+        "symbol": "c_bmpSpeciesGiantGrouper",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 30736,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 237882611,
+        "decoded_sha256": "2d0802ab304ea8ce3f4e9a450ac3a8ab752d33a3df43b7102ce6ffa79f2eab8a"
+      },
+      {
+        "name": "Goby",
+        "symbol": "c_bmpSpeciesGoby",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 34832,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 1446680517,
+        "decoded_sha256": "485cc1c9d81ed34a9828e81b3bf7123fddc556666ab85622f376243cb868ee61"
+      },
+      {
+        "name": "GrassCarp",
+        "symbol": "c_bmpSpeciesGrassCarp",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 35904,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 721649270,
+        "decoded_sha256": "c0b0ee3c8f4f5970f892e6f85cdb1c57a0be1e1af7630e0499fb285bc8891ee6"
+      },
+      {
+        "name": "GreatBarracuda",
+        "symbol": "c_bmpSpeciesGreatBarracuda",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 40000,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 1341587083,
+        "decoded_sha256": "08eab54fc39b408c259bd0b444e54f692b9f58ed0fafdfbd03ae61205a328bca"
+      },
+      {
+        "name": "GreenMudCrab",
+        "symbol": "c_bmpSpeciesGreenMudCrab",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 44096,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 4096924927,
+        "decoded_sha256": "175be448a325424f0df47c0e455b22761bc066885f37b9e220c3876a95c5fc9d"
+      },
+      {
+        "name": "HarpSnail",
+        "symbol": "c_bmpSpeciesHarpSnail",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 45000,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 3137498519,
+        "decoded_sha256": "e32b1ec18f34815bb392a92c55de5f964c5ebac4f59758076b28d15ec6cd0fad"
+      },
+      {
+        "name": "HenanCrab",
+        "symbol": "c_bmpSpeciesHenanCrab",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 45904,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 1060208410,
+        "decoded_sha256": "9584bf52511f5983ec898bbdbca89fd3aca04ab6d6b17052a31cdf98a5fbc9b6"
+      },
+      {
+        "name": "HooksnoutLongfin",
+        "symbol": "c_bmpSpeciesHooksnoutLongfin",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 46976,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1227232745,
+        "decoded_sha256": "fabd0d6782eeedb346ca7b056ae6add64c5859bbde1d25bbeb6231f3d7ae8f7b"
+      },
+      {
+        "name": "Hooksnout",
+        "symbol": "c_bmpSpeciesHooksnout",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 47880,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 1840699267,
+        "decoded_sha256": "6b143be53f1dfa83fb037f138ac56a105bf82039dc9e18526e86e303e79b64ef"
+      },
+      {
+        "name": "JinjiangOyster",
+        "symbol": "c_bmpSpeciesJinjiangOyster",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 48952,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 275259355,
+        "decoded_sha256": "c28cac7ab41484379ca3b9b5b3b7cd54068365a911a7532ae6cbe8d59f161f19"
+      },
+      {
+        "name": "LargeYellowCroaker",
+        "symbol": "c_bmpSpeciesLargeYellowCroaker",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 49856,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 599278025,
+        "decoded_sha256": "37f13917318e3167bce02977c001a36038619a6ce6c4c7c789a9c2c1a46bc560"
+      },
+      {
+        "name": "LargeheadHairtail",
+        "symbol": "c_bmpSpeciesLargeheadHairtail",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 50760,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 3949002225,
+        "decoded_sha256": "65674ba6ad7c4677eeccab033e100e8a589dd8585bd421629c7f1ef7fc46c697"
+      },
+      {
+        "name": "LongsnoutCatfish",
+        "symbol": "c_bmpSpeciesLongsnoutCatfish",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 54856,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 2893203337,
+        "decoded_sha256": "211c4907b065d4167b4195ca4a4443be84930452a183e2e5a14aec15c3fc295b"
+      },
+      {
+        "name": "LongspinedPorcupinefish",
+        "symbol": "c_bmpSpeciesLongspinedPorcupinefish",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 58952,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1236732258,
+        "decoded_sha256": "6f8a2a509816cb12dcf463387489e186422fc828663bb5e2e2060a2d5749bc1b"
+      },
+      {
+        "name": "Mandarin",
+        "symbol": "c_bmpSpeciesMandarin",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 59856,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 1440558993,
+        "decoded_sha256": "e3a7117bdf1052300806f6366a6a66a0f64b11709cb7a863a211eafd9b8d4bd0"
+      },
+      {
+        "name": "MantisShrimp",
+        "symbol": "c_bmpSpeciesMantisShrimp",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 60928,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 381134248,
+        "decoded_sha256": "b93657bd5fd58cb61ef5821db2bcb13c87f09f2230f4e95f3164ed54449340f6"
+      },
+      {
+        "name": "MeretrixClam",
+        "symbol": "c_bmpSpeciesMeretrixClam",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 61832,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 2022762444,
+        "decoded_sha256": "8d6d005d90995e3adc0492818f3cb6acad7650f43d33285b781b7b8efba8eb04"
+      },
+      {
+        "name": "MongolianCulter",
+        "symbol": "c_bmpSpeciesMongolianCulter",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 62736,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 1048343529,
+        "decoded_sha256": "8be230ef42a629be90e7e8aa90a4308de6aee2a50352897bceadf312385579b2"
+      },
+      {
+        "name": "MoonSnail",
+        "symbol": "c_bmpSpeciesMoonSnail",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 63808,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1892757966,
+        "decoded_sha256": "f8b1622085dfcd669a73c324062a1eb8d61452f3e14283359fdc5b77fea4a29c"
+      },
+      {
+        "name": "Oarfish",
+        "symbol": "c_bmpSpeciesOarfish",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 64712,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 2458364171,
+        "decoded_sha256": "ff78ab9e9c0f7d42931bddf153b237fe4403f862290e48b579994c81e642e475"
+      },
+      {
+        "name": "ObscurePuffer",
+        "symbol": "c_bmpSpeciesObscurePuffer",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 68808,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 1838887953,
+        "decoded_sha256": "a67639cf558443e48f4f4f206c6310667d870b2b91efec2bd1e4bbf8b79eb4ba"
+      },
+      {
+        "name": "OliveFlounder",
+        "symbol": "c_bmpSpeciesOliveFlounder",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 72904,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1789236749,
+        "decoded_sha256": "b025aa5c2fcd12745cb96df921d8c2522af4f3dee5be7212d5f771d19ea81dd8"
+      },
+      {
+        "name": "PacificBluefinTuna",
+        "symbol": "c_bmpSpeciesPacificBluefinTuna",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 73808,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 3822772336,
+        "decoded_sha256": "d64a50dd95e95e9598b15629db122e1708cdc880cc8583ac309e10fa6ed3ea80"
+      },
+      {
+        "name": "PeacockMantis",
+        "symbol": "c_bmpSpeciesPeacockMantis",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 77904,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 2355227908,
+        "decoded_sha256": "15aa567e06f6838f2482e6d4685a847122e57d4063a32ccce32be072aef019ab"
+      },
+      {
+        "name": "Ragworm",
+        "symbol": "c_bmpSpeciesRagworm",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 78808,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 725700880,
+        "decoded_sha256": "46b9e7c9160d49c098b07d649c9e4d875b092aa03f2828d09d13a69973ff8506"
+      },
+      {
+        "name": "RedSeabream",
+        "symbol": "c_bmpSpeciesRedSeabream",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 79712,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 436347802,
+        "decoded_sha256": "8604044cf321fa6f2adeaddebc665f1ce50d8e88737d612871e8d1020dfa3d84"
+      },
+      {
+        "name": "Redeye",
+        "symbol": "c_bmpSpeciesRedeye",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 80616,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 3681808226,
+        "decoded_sha256": "555baa2f71807667698a3bd5f195b494c4862c462ddcd8ac59a927684f47000a"
+      },
+      {
+        "name": "SandCrab",
+        "symbol": "c_bmpSpeciesSandCrab",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 84712,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 2855582884,
+        "decoded_sha256": "cb1de523213bb71873ec61ea423da83f672f64066710924c4e646aca1c0081f2"
+      },
+      {
+        "name": "Sharpbelly",
+        "symbol": "c_bmpSpeciesSharpbelly",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 85616,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 640882236,
+        "decoded_sha256": "9dfc1064cc34750045b4722aa9b1198e0e14781bd7abaac096ca869c599ab796"
+      },
+      {
+        "name": "ShortarmOctopus",
+        "symbol": "c_bmpSpeciesShortarmOctopus",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 86688,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 2968140710,
+        "decoded_sha256": "dc191c931c40a4b833b17799f1a32eebae587e211fe03223dd3b19ae8c071b5a"
+      },
+      {
+        "name": "SilverCarp",
+        "symbol": "c_bmpSpeciesSilverCarp",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 87592,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 196301487,
+        "decoded_sha256": "e75a98062913b40e57d67f51b322017bb1c79b653aee14ac2e0b7f747934fd45"
+      },
+      {
+        "name": "SnakeheadLarge",
+        "symbol": "c_bmpSpeciesSnakeheadLarge",
+        "width": 96,
+        "height": 56,
+        "bits": 4,
+        "offset": 91688,
+        "bytes": 3424,
+        "raw_bytes": 16128,
+        "decoded_crc": 408598744,
+        "decoded_sha256": "8c4abd1b8d0a80f714305ae07c36f0da684dae08f7d6cdd8842fb548aef813aa"
+      },
+      {
+        "name": "Snakehead",
+        "symbol": "c_bmpSpeciesSnakehead",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 95112,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1406010241,
+        "decoded_sha256": "fa42906d526095e50da925e8caa9b1bf2e5007c5c5b255249a471601d331d708"
+      },
+      {
+        "name": "SoftshellAlbino",
+        "symbol": "c_bmpSpeciesSoftshellAlbino",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 96016,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 3549290184,
+        "decoded_sha256": "77d2c7c8a2ab69053f1f32c383405af89d57aa588c65aaa8d36ac54e73a91a9f"
+      },
+      {
+        "name": "Softshell",
+        "symbol": "c_bmpSpeciesSoftshell",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 96920,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 3891270169,
+        "decoded_sha256": "828b7c9d323243946db8abd6ddb454f4ce95011cb3504ba57f9f7213944fb3a6"
+      },
+      {
+        "name": "SwordtipSquid",
+        "symbol": "c_bmpSpeciesSwordtipSquid",
+        "width": 48,
+        "height": 28,
+        "bits": 4,
+        "offset": 97992,
+        "bytes": 904,
+        "raw_bytes": 4032,
+        "decoded_crc": 1908020489,
+        "decoded_sha256": "fb8a79a30eb0cb24bb4a6ce9378a1a4d223cb7d335d265ee51201259fd308a13"
+      },
+      {
+        "name": "YellowCatfish",
+        "symbol": "c_bmpSpeciesYellowCatfish",
+        "width": 48,
+        "height": 28,
+        "bits": 5,
+        "offset": 98896,
+        "bytes": 1072,
+        "raw_bytes": 4032,
+        "decoded_crc": 2382587184,
+        "decoded_sha256": "06c4760b77b3a844b76e47a692b86bf6497053cea9c13f22e6000e64abe8b286"
+      },
+      {
+        "name": "YellowGoosefish",
+        "symbol": "c_bmpSpeciesYellowGoosefish",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 99968,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 2279521450,
+        "decoded_sha256": "b5599de02622c57b48b0c9f1f316d302e0a8359328d3bb70765d5f907f68e7b8"
+      },
+      {
+        "name": "Yellowcheek",
+        "symbol": "c_bmpSpeciesYellowcheek",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 104064,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 332322728,
+        "decoded_sha256": "c8969c7833943ca83717475ce407a236b62e2c2e434873c61a4f2f6dd6b09e93"
+      },
+      {
+        "name": "YellowfinTuna",
+        "symbol": "c_bmpSpeciesYellowfinTuna",
+        "width": 96,
+        "height": 56,
+        "bits": 5,
+        "offset": 108160,
+        "bytes": 4096,
+        "raw_bytes": 16128,
+        "decoded_crc": 1367391743,
+        "decoded_sha256": "d349ae50366713186aded52080bb810cc9e8e9e5db231c93fbca64ded2d1bb55"
+      }
+    ]
+  },
+  "common_cache_bytes": 131072,
+  "map_cache_offset": 131072,
+  "common_raw_bytes": 455616
 }

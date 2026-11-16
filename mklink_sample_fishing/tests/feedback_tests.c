@@ -64,11 +64,56 @@ static uint32_t burst_sequence(fish_game_t *g,uint32_t at)
     assert(pulses>=9 && frequency_count>=3 && duration_count>=2 && interval_count>=3);
     return hash;
 }
+static void strike_window_regressions(void)
+{
+    for(unsigned id=0;id<FISH_SPECIES_COUNT;id++){
+        if(id==FISH_RETIRED_REDTAIL || fish_species_is_foraging(id))continue;
+        unsigned map=id<15?0:id<25?1:2,parent=fish_species_parent(id);
+        const fish_species_t *s=fish_species_profile(map,parent);
+        for(unsigned mode=0;mode<FISH_SOUND_COUNT;mode++)for(unsigned wrap=0;wrap<2;wrap++){
+            fish_game_t g;uint32_t start=wrap?UINT_MAX-100u:1000;
+            fish_hpm_feedback_init();fish_game_init(&g,start);g.map_index=(uint8_t)map;
+            g.sound_mode=(uint8_t)mode;g.pending_species=(uint8_t)parent;g.mode=FISH_BITE;g.phase_at=start;
+            unsigned before=tones;update(&g,start+s->strike_delay_ms-1);assert(tones==before);
+            update(&g,start+s->strike_delay_ms);assert(fish_game_strike_ready(&g));
+            assert(tones==before+(mode!=FISH_SOUND_OFF));
+            unsigned count=events;fish_game_t unchanged=g;
+            for(unsigned repeat=0;repeat<20;repeat++)fish_hpm_feedback_update(&g);
+            assert(events==count && !memcmp(&g,&unchanged,sizeof(g)));
+            unsigned end=s->strike_delay_ms;
+            do{g.now=start+ ++end;}while(fish_game_strike_ready(&g));
+            update(&g,start+end);assert(tones==before+(mode!=FISH_SOUND_OFF));
+            g.mode=FISH_WAIT;update(&g,start+end+1);
+            g.mode=FISH_BITE;g.phase_at=start+end+2;
+            update(&g,g.phase_at+s->strike_delay_ms);assert(tones==before+2*(mode!=FISH_SOUND_OFF));
+            if(mode==FISH_SOUND_FISH){
+                before=tones;g.mode=FISH_FIGHT;g.phase_at=g.now;
+                for(unsigned ms=0;ms<6000;ms+=16)update(&g,g.phase_at+ms);
+                g.mode=FISH_CAUGHT;update(&g,g.now+1);g.mode=FISH_LOST;update(&g,g.now+1);
+                assert(tones==before); /* No success cue or struggle pulses. */
+            }
+            /* A first callback after the whole window must not replay a cue. */
+            fish_hpm_feedback_init();g.mode=FISH_BITE;g.phase_at=start;
+            before=tones;update(&g,start+end);assert(tones==before);
+        }
+    }
+    /* The notification follows the real float/latte-adjusted window. */
+    fish_game_t g,plain;fish_game_init(&g,0);g.sound_mode=FISH_SOUND_FISH;
+    g.mode=FISH_BITE;g.pending_species=1;g.phase_at=0;plain=g;
+    unsigned end=fish_species[1].strike_delay_ms;plain.now=end;
+    while(fish_game_strike_ready(&plain))plain.now=++end;
+    g.float_index=2;g.latte_remaining_ms=360000;g.now=end;assert(fish_game_strike_ready(&g));
+    fish_hpm_feedback_init();unsigned before=tones;fish_hpm_feedback_update(&g);assert(tones==before+1);
+    g.sound_mode=FISH_SOUND_OFF;update(&g,end+1);assert(!last_hz);
+    g.sound_mode=FISH_SOUND_FISH;update(&g,end+2);assert(tones==before+2);
+    unsigned count=events;update(&g,end+2);assert(events==count);
+}
 int main(void)
 {
     fish_game_t g;fish_game_init(&g,1000);fish_hpm_feedback_init();
     assert(initialized==1 && events==1 && !last_hz && !last_duty);
-    /* Waiting/probing and all menus stay silent. No species hint before hooking. */
+    /* Waiting/probing and menus stay silent; no cue without a valid strike. */
+    g.pending_species=FISH_SPECIES_COUNT;
     for(unsigned mode=0;mode<=FISH_LOADING;mode++)if(mode!=FISH_FIGHT) {
         g.mode=(fish_mode_t)mode;update(&g,1000+mode);
     }
@@ -144,9 +189,13 @@ int main(void)
         g.mode=FISH_AIM;update(&g,1062);assert(!last_hz || mode!=FISH_SOUND_ALL);
         g.mode=FISH_BITE;g.pending_species=1;g.pending_weight_g=1500;g.pending_size_mm=450;
         g.phase_at=2000-fish_species[1].strike_delay_ms;before=tones;
+        update(&g,1999);assert(tones==before);
+        update(&g,2000);assert(tones==before+(mode!=FISH_SOUND_OFF));
+        count=events;update(&g,2000);assert(events==count);
+        before=tones;
         fish_game_input(&g,FISH_PRESS,0,2000);assert(g.mode==FISH_FIGHT);fish_hpm_feedback_update(&g);
-        assert(tones==before+(mode!=FISH_SOUND_OFF));
-        update(&g,2000+fish_rules.hook_settle_ms);assert(tones==before+2*(mode!=FISH_SOUND_OFF));
+        assert(tones==before+(mode==FISH_SOUND_ALL));
+        update(&g,2000+fish_rules.hook_settle_ms);assert(tones==before+2*(mode==FISH_SOUND_ALL));
         g.sound_mode=FISH_SOUND_OFF;update(&g,g.now+1);assert(!last_hz);
     }
     /* Irregular timing survives real frame quantization and stalls. Missed
@@ -181,6 +230,7 @@ int main(void)
         }
     }
     assert(pulse_count>=9 && longest>shortest);
-    puts("PASS: irregular dense burst pulses, private RNG, repeated callbacks/stalls, cashier notes, three sound modes, exits and clock wrap");
+    strike_window_regressions();
+    puts("PASS:40 catchable strike windows/modes/wrap, fish-only reminder, no replay/late cues, irregular bursts, private RNG and cashier notes");
     return 0;
 }

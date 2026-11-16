@@ -58,10 +58,10 @@ int main(void){
     assert(fish_map_weight_on(1,24,480,900,2,720)>0 && fish_map_weight_on(1,24,480,1200,2,720)>0);
     unsigned guide_seen=0;
     for(unsigned p=0;p<FISH_GUIDE_COUNT;p++) {
-        unsigned id=fish_guide_index_at(p);assert(id!=21 && fish_guide_position(id)==p);guide_seen|=1u<<id;
+        unsigned id=fish_guide_index_at(p);assert(id!=21 && fish_guide_position(id)==p);guide_seen|=1ull<<id;
     }
-    assert(guide_seen&(1u<<24));
-    for(unsigned id=15;id<FISH_SPECIES_COUNT;id++){
+    assert(guide_seen&(1ull<<24));
+    for(unsigned id=15;id<FISH_COAST_FIRST;id++){
         uint32_t state=42;assert(fish_species_parent(id)==id && !fish_species_is_variant(id));
         assert(fish_species_special_roll(&state,id)==id && state==42);
         for(unsigned bait=0;bait<6;bait++)assert(fish_map_weight_on(0,id,480,600,bait,720)==0);
@@ -99,7 +99,7 @@ int main(void){
             g.merchant_line_variant=line;
             assert(fish_merchant_pose(&g)==fish_city_dialogue[context].pose);
             assert(!strcmp(fish_merchant_says(&g),fish_city_dialogue[context].lines[line]));
-            poses|=1u<<fish_merchant_pose(&g);
+            poses|=1ull<<fish_merchant_pose(&g);
         }
     }
     assert(poses==15);

@@ -1,3 +1,7 @@
+# D28R2 声音设置 / Sound mode
+
+“仅鱼讯”只提醒可提竿时机，一口鱼一次；上钩、挣扎、收银仅“全部开启”播放。关闭保持静音。[规则与核验](strike-cue-d28-r2.md)。V22和资源不变。 / Fish-only cues only the valid strike window; All retains hook/struggle/trade sounds.
+
 # MKLink V4 蜂鸣器反馈 v27 / Buzzer feedback v27
 
 复用工程的 `common/beep_control` 驱动，使用 PA10 / GPTMR0 通道2。音效只在游戏线程的状态更新和输入处理之后触发，不在PFB绘图回调中操作硬件；驱动的单次RT-Thread定时器自动停声，无延时等待、独立音频线程或音频素材。

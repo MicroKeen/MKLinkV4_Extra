@@ -1,47 +1,95 @@
 # MKLink V4 钓鱼 / North Wetland Fishing
 
-运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D12 / 2026-10-20**，作者实测反馈“基本稳定”。
+运行于 **MKLink V4（HPM5301）** 的240×240 RGB565像素钓鱼游戏，使用ST7789屏幕和一颗可双向旋转、按下的编码器。当前版本 **D29 / 2026-11-02**，包括湿地湖泊、城市江河与海滩三张地图。
 
-A240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)**, using an ST7789 display and one rotary encoder with a push button. **D12 / 2026-10-20** is published following the author's report of basic stability.
+A 240×240 RGB565 pixel fishing game for **MKLink V4 (HPM5301)** with an ST7789 screen and one rotary encoder. **D29 / 2026-11-02** includes wetland, city-river and coastal regions.
 
-## 下载与资源 / Firmware and resources
+## D29 分布与鳖／猫 / Habitats, turtles and cats
 
-- 固件：[MicroLink.uf2](MicroLink.uf2)。资源版本：**2026.10.19.5**（格式2）。
-- 首次使用，复制完整的 [FishingGame_Resources_DO_NOT_DELETE](sdcard/FishingGame_Resources_DO_NOT_DELETE) 目录到SD根目录，保留其中`maps/`等子目录。不要只复制两个`.fgpk`文件或ZIP本身。
-- 已有2026.10.19.5配套资源时，只更新UF2，无需重拷。旧版本资源需要更新完整目录。
-- 缺少或不匹配资源时，设备检查原文件系统及容量后才开放SD供电脑复制；校验完成后自动隐藏磁盘并进入游戏。正常游戏期间不开放USB磁盘。保留原下载器文件及存档目录；不要格式化磁盘。
+多数鱼在水平方向广泛分布，普通金级池每次判定上限5%，鳖提高虾饵和小鱼饵响应。猫改为85%整小时候选；保留视野内不刷新。图鉴使用可辨认位置与当前饵料。存档和配套资源不变。[设定与审计](docs/encounters-d29.md)。
 
-Download the UF2 above and copy the **entire matching resource directory** to the SD root, preserving its subdirectories. Existing2026.10.19.5 packs need no recopy. Missing/mismatched packs trigger guarded, exclusive SD import; successful validation detaches USB and starts the game. Keep downloader files and saves; do not format the disk. See [resource import](docs/resource-import.md).
+Broad horizontal habitats, an ordinary-gold5% ceiling per encounter attempt, better turtle bait response and85% full-hour city-cat visits. The12px guide uses recognizable positions and current baits. Save/resource formats remain unchanged.
 
-## 游戏内容 / Gameplay
+## D28R2 仅鱼讯 / Strike-window cue
 
-湿地湖泊与城市江河两处钓点，通过24小时车站和纸质路线图往返，每次180G并推进5游戏小时。都市有独立鱼种、深河道、现代天际线和夜间灯光，使用气垫筏。
+“仅鱼讯”只在可提竿窗口响一次，关闭上钩成功、挣扎及收银声；“全部开启”包含提醒及既有反馈。复用实际窗口判断，重复帧不连发，错过不补播。存档／资源不变。[说明](docs/strike-cue-d28-r2.md)。
 
-鱼种依水域、游戏时间、鱼饵和天气分配出现权重；24项活动图鉴包含四种条件1%稀有变异，特殊鱼获为彩色外框并获得10倍售价。鱼竿、线组、浮漂、饵料、容器、金币、买卖、图鉴及声音设置均已实现。
+Fish-only now cues only the valid strike window, once per bite. All includes this reminder and retains hook, struggle and cashier feedback. No replay after a missed window; save/resource formats are unchanged.
 
-两地独立天气，降雨持续2～48游戏小时，包含远景薄雾、分层雨线和水面涟漪。淋雨1游戏小时潮湿满，最多降低20%收放线速度；热拿铁持续6游戏小时，收放线和提竿窗口提高10%。都市便利店09:00–21:00，露天鱼摊06:00–16:00；湿地渔具店07:00–18:00。
+## D28R1 休息存档 / Held-rest saves
 
-大鱼压力通过张力、可见冲刺和线长变化体现，没有最后一段距离锁。真正断线会损坏当前线组；金币不足120G且没有细线小钩时，可免费补一副。都市鱼摊提供600G八编PE线组，降低小鱼上鱼率并延长等待。
+休息时合并猫到访、跨日和赶海刷新产生的保存请求；松开或旋转退出后保存最新状态。已开始的写入正常完成，保留每5真实分钟的定时检查，避免游戏加速带来频繁写卡。V22／资源不变。[说明](docs/rest-save-d28-r1.md)。
 
-Two regions connect through a24-hour station: each trip costs180G and five game hours. The city adds independent fish profiles, a deeper river, night lighting and an inflatable raft. Equipment, bait attraction, fish sales, cargo upgrades, a24-entry active collection, four conditional1% variants and sound settings are implemented. Regional rain lasts2–48game hours. Wetness and hot-latte buffs affect handling. Giant fights use visible surges and tension without an artificial final-distance gate. Broken rigs require replacement; qualifying players can obtain a free fine rig.
+Held rest coalesces event save requests and flushes the latest state on exit. Existing writes finish normally; five-minute wall-clock checkpoints remain. Save/resource formats are unchanged.
+
+## D28 储鱼箱与挣扎特征 / Cargo and predator behavior
+
+江河鱼摊下架20kg大木桶，保留35kg箱，新增80kg大型储鱼箱1800G。黑鱼首口重压，鳡、斑鳜、大梭鱼与金枪鱼等强化各自突冲特征；保留平静、疲劳和救线窗口。V22独立A/B读取旧档，鱼获历史售价保留。资源2026.10.31.4不变。[设定](docs/predators-d28.md) · [策略审计](docs/predators-d28-audit.md)。
+
+The city adds an80kg/1800G cooler, retains35kg and stops selling20kg buckets. Snakehead hook pressure and distinct predator bursts preserve reactive recovery opportunities. V22 uses separate A/B files and migrates older progress. Matching resource packs are unchanged.
+
+## D27 搏鱼平衡 / Fight balance
+
+按全鱼种、体型、装备与操作策略复核。大鱼不再能用高效鱼竿在首次挣扎前快速硬收；保留强线承重优势，增加可判断的持续发力段、质量阻力和超配压力。修复大鱼疲劳时持续收线仍误判松线及深水整数零进度。不加末段距离或强制时间门槛，存档／资源不变。[设定](docs/fight-d27.md) · [逐鱼种数值与对比](docs/fight-d27-audit.md)。
+
+Whole-roster tuning addresses oversized per-detent gains and excessive strong-rig suppression. It preserves gear roles while adding meaningful exertion windows, mass drag and mismatch pressure. Safe retrieval always progresses; tired large fish no longer suffer unavoidable slack losses while reeling. No artificial landing-distance/time gate. Save/resource layouts remain unchanged.
+
+## D26R2 时间显示 / Time display
+
+背包上方常显当前游戏时间；休息详情显示本次已休息的小时和分钟，松开后保留，下一次按住重新计时。跨午夜和超过一天仍正确累计。实际时间继续存档，临时计数不存档。资源和V21格式不变。[说明](docs/cat-rest-d26-r2.md)。
+
+The backpack shows the current clock. Rest displays elapsed game hours/minutes, retained on release and reset on the next press, including multi-day sessions. Only world time persists in saves. Resources and V21 remain unchanged.
+
+## D26R1 猫与休息 / Cats and rest
+
+都市流浪猫每小时候选概率35%→65%；收养后随玩家到湿地、城市、海滩，次数和好感全局保存。船上背包选中“休息”后长按600ms，以20倍推进时间；松开或旋转离开即停，岸上不提供。资源与V21存档不变。[设定与核验](docs/cat-rest-d26-r1.md)。
+
+City-cat hourly visit candidates rise to65%. Adopted cats follow all three maps and survive travel/saves. Select Rest in the boat backpack and hold600ms for20x world time; release or rotate away to stop. Matching2026.10.31.4 resources and V21 saves remain unchanged.
+
+## 固件与完整资源 / Firmware and complete resources
+
+- 固件：[MicroLink.uf2](MicroLink.uf2)。配套资源 **2026.10.31.4，格式3**。
+- 复制完整的 [FishingGame_Resources_DO_NOT_DELETE](sdcard/FishingGame_Resources_DO_NOT_DELETE) 目录到SD根目录，保留`common/`、`maps/`、版本文件及清单。共四个`.fgpk`：公共鱼图与三张地图。
+- **从D16或其他旧版升级时，需完整更新资源目录。** 不要只换UF2、单个鱼图包或部分地图包，也不要将ZIP直接当成资源目录。
+- 保留原下载器文件及`FishingGame_Saves_DO_NOT_DELETE`，不要格式化。缺少或不匹配资源时，设备先检查原文件系统和容量，再独占开放SD供电脑复制；校验完成后隐藏磁盘并进入游戏。
+
+Download the UF2 and copy the **entire matching2026.10.31.4 resource directory** to the SD root, keeping its `common/` and `maps/` subdirectories and metadata. All four packs are required. Older resources must be replaced together. Preserve downloader files and the save directory; do not format the disk. Missing or mismatched resources use guarded, exclusive SD import, followed by verification and USB detach. See [resource import](docs/resource-import.md).
+
+## 三张地图与玩法 / Regions and gameplay
+
+- **湿地湖泊**：木船、山湖、渔具店；保留原装备、鱼种与昼夜习性。
+- **城市江河**：现代天际线、夜景灯光、气垫筏、公园码头、便利店及露天鱼摊；独立鱼种数值与天气，支持100kg级巨物。
+- **海滩**：1680px长地图，左侧公路停车位、鱼档、沙滩和棱角礁石，快艇停靠礁石边缘。大陆架之后水深陡增，最右侧延续125m深海；远处单岛灯塔每12秒连续旋转，雨雾中有柔和散射。
+- **旅行**：24小时车站与纸质路线图；湿地↔城市180G、城市↔海滩280G、湿地↔海滩460G，行程推进5游戏小时。成功抵达扣费，加载失败不扣。
+- **钓鱼**：鱼饵、钓深、游戏时间和天气决定鱼池权重；钓深分为顶层、中层、钓底，实际用线量包括深度。粗线大钩及以上只受实际线长限制；海钓线组缓慢下沉和回收，短线按可达层回退。
+- **海钓装备**：1200G海钓线组、6000G重型海竿、2800G诱鱼灯、2500G／200kg海图鱼舱；夜间灯光吸引鱿鱼、带鱼、青花鱼并缩短等待。
+- **赶海**：每天04:00沙滩与礁石各随机3～6处；走近出现脚边气泡，附近短按采收，经过不吸附。铲子120G、撬棍180G，各20耐久；非贝螺生物60%触发一次滑块QTE。每处文蛤／牡蛎2～4只、沙蚕3～5条，其他单只；每次采收耗1耐久，失败仍扣。沙滩金色竖琴螺、礁石金色青蟹各80G基价，每处3%替换概率。
+- **经济与图鉴**：49项可见图鉴跨地图共用，53张公共鱼图独立缓存；偏低铜级基价20G、银级50G，已有高价保留。符合条件的变异鱼为母种10倍售价，猫同伴将原1%变异概率提高至2.5%。包含容器、鱼舱、船尾挂鱼、逐条出售反馈、声音设置和旧档迁移。
+- **天气与同伴**：三地天气独立，雨持续2～48游戏小时，海图暴雨更强；月相、薄雾、分层雨滴、涟漪、雨伞和店面遮雨。都市流浪猫可抚摸、投喂、收养，船上坐／睡；热拿铁和泡面提供限时加成。
+
+Three distinct regions connect through a24-hour railway route. The city adds modern lighting, large freshwater fish, an inflatable raft and separate vendors. The1680px coast adds a speedboat, angular tidal rocks, parking, a modern fish stall, a continental slope to125m and a continuously rotating fog-lit lighthouse. Fares are180G wetland–city,280G city–coast and460G wetland–coast, charged once after successful arrival.
+
+Bait, depth, time and weather affect fish attraction. Depth-aware marine rigs sink and recover progressively; the night fishing light attracts squid, hairtail and chub mackerel. Daily beachcombing offers3–6 spots per area,20-use tools, a one-press escape QTE and batch shellfish/ragworms. Gold harp snails and green mud crabs have80G bases and a3% per-spot chance. The global49-entry collection shares53 packed portraits. Shops, cargo upgrades, rare variants, regional rain, moon phases, an adoptable cat, refreshments and sound settings remain available. Details: [D26 settings](docs/rewards-d26.md), [marine tackle](docs/coast-tools-d22.md), [depth rules](docs/depth-shore-d24.md).
 
 ## 操作 / Controls
 
-旋转用于移动、浏览或收放线，短按用于交互和确认；钓鱼时按住蓄力、松开抛竿。移动到码头后先停，再次向岸/水方向旋转即可上下船。反向旋转先停止，再次旋转反向移动。图鉴短按翻页、长按返回。只有一颗编码器，没有鼠标或额外方向键。
+旋转用于两档移动、浏览和收放线，短按用于交互和确认；钓鱼时按住蓄力、松开抛竿。反向旋转先停止，再转开始反向移动；抵达码头停住，再次向岸／水方向旋转上下船。图鉴短按翻页、长按返回。赶海QTE在滑块进入绿色区时按下。
 
-Rotate to move, browse or handle line; press to interact/confirm, hold and release to cast. Stop at a dock and rotate again toward shore/water to disembark/board. Reverse once to stop, then again to reverse direction. In the guide, tap to change page and hold to return.
+Rotate to move, browse or reel/ease line; press to interact. Hold/release to cast. Reverse once to stop and again to move the other way. At a dock, rotate toward land/water again to disembark/board. In the guide, short press changes pages and long press returns. Press during the green slider zone in an escape QTE. All controls use the single encoder.
 
 ## 存档与核验 / Saves and validation
 
-V13存档仍为1503B，沿用原密钥、设备UUID和目录，使用独立V13_A/B，读取并保留V1–V12旧档。保存位置、朝向、地图、时间、天气、潮湿、拿铁、声音、装备、金币、图鉴及鱼获；启动加载资源后恢复位置，离线不推进时间。存档目录`FishingGame_Saves_DO_NOT_DELETE`建议整体备份。
+**V22存档2147B**，独立A/B，保留原密钥、UUID、目录及所有V1～V21文件。保存装备、金币、图鉴、单鱼历史售价、位置、时间、天气、声音、猫状态，以及工具耐久、沙蚕库存和每日赶海点。旧鱼获不因本轮提价重新估价。
 
-针对S08/01加入SD写入CRC16、延迟响应与有界忙等待，保留A/B、同步和回读验证，并补充S/W错误编号。72项主工程与27项独立demo检查通过；程序区余8,628B，DLM静态余3,824B，资源缓存余19,060B。作者报告实机基本稳定；掉电、拔卡、硬件堆峰值和栈水位未专项验收，主机测试不代替这些项目。
+131项主机检查通过（主工程93、独立demo38），含真实FatFs内存盘的A/B写入、尾部回读、I/O失败重试、旧档迁移、下载器文件与卷引导扇区保留。53张鱼图解码无截边，三图已加载页面的Arm-2D临时申请为0。Flash余9308B、DLM余1776B、AHB余480B，均已计固定缓冲和预留堆栈；公共／地图缓存合计余101084B。没有新增整屏缓冲或堆分配。实板帧率、掉电及堆栈峰值仍待验。
 
-V13 remains1503bytes, preserves original keys/UUID/path and all old files, and restores location, clock, weather and progress. SD writes now handle CRC16, delayed responses and bounded busy waits while retaining A/B and durable readback checks. All99 workspace checks pass, including27 standalone demo checks. The author reports basic on-device stability; power-loss/card-removal resilience and hardware heap/stack peaks remain untested. See [validation](docs/validation.md), [memory](docs/rain-d12-memory.md) and [D12 release notes](docs/release-d12.md).
+V22 uses2147-byte A/B saves and preserves original keys, UUID, paths and all V1–V21 files. Equipment, coins, collection, historical catch prices, position, time, weather, sound, cats, tools and daily shore state persist. All131 host checks pass, including actual FatFs on a RAM disk, final-chunk comparison, retry and migration, with downloader files and the volume boot sector preserved. All53 portraits decode without clipped bounds. Application Flash retains9308B, DLM1776B and AHB480B; common/scene cache retains101084B. Hardware FPS, power-loss behavior and stack/heap peaks remain unmeasured.
+
+[核验报告 / validation](docs/encounters-d29-build-validation.json) · [内存 / memory](docs/strike-cue-d28-r2.md) · [鱼类审计 / fish audit](docs/fish-audit-d26.md)
 
 ## 构建与工程 / Building
 
-需要HPM SDK1.11.0、RISC-V GCC13.2和CMake/Ninja，先按主仓库说明初始化子模块。设置`HPM_SDK_BASE`、`GNURISCV_TOOLCHAIN_PATH`并把工具加入PATH。
+需要HPM SDK1.11.0、RISC-V GCC13.2和CMake/Ninja，先按主仓库说明初始化子模块。设置`HPM_SDK_BASE`、`GNURISCV_TOOLCHAIN_PATH`并把工具加入PATH。在本目录执行：
 
 ```sh
 cmake -S . -B build-fishing -G Ninja -DBOARD=hpm5301evklite -DBOARD_SEARCH_PATH=.. -DHPM_BUILD_TYPE=flash_uf2 -DPYTHON_EXECUTABLE=python -DFISH_PYTHON_EXECUTABLE=python
@@ -50,9 +98,9 @@ python scripts/verify_build.py --build-dir build-fishing --gnu-only --write-repo
 python scripts/verify_public_assets.py
 ```
 
-默认`FISH_LCD_ROTATION=0`修正屏幕方向，编码器方向可用`-DFISH_ENCODER_DIRECTION=-1`反转。生成的Embedded Studio工程位于`build-fishing/segger_embedded_studio/mklink_sample_fishing.emProject`。应用区`0x80023000–0x80080000`，资源缓存`0x80080000–0x800F3000`；下载器和末尾52KiB不在游戏写入范围。
+默认`FISH_LCD_ROTATION=0`修正屏幕方向，编码器方向可用`-DFISH_ENCODER_DIRECTION=-1`反转。Embedded Studio工程生成于`build-fishing/segger_embedded_studio/mklink_sample_fishing.emProject`。应用区`0x80023000–0x80080000`，公共／地图缓存位于`0x80080000–0x800F3000`；下载器和末尾52KiB不在游戏写入范围。
 
-Use the SDK/toolchain above and initialise repository submodules. CMake generates the GNU build and Embedded Studio project. Pre-generated runtime artwork is included; normal builds need no artwork conversion tools. Host tests use a native GCC/CMake toolchain:
+Use the SDK/toolchain above and initialise repository submodules. CMake generates the GNU build and Embedded Studio project. Pre-generated runtime artwork is included; normal builds need no artwork conversion tools. Host tests use native GCC/CMake:
 
 ```sh
 cmake -S tests -B build-tests -G Ninja
@@ -60,12 +108,12 @@ cmake --build build-tests
 ctest --test-dir build-tests --output-on-failure
 ```
 
-安装SDK在其他位置时，可通过`-DFISH_CHERRYUSB_DIR=/path/to/hpm_sdk/middleware/cherryusb`指定协议测试头文件路径。The optional SDK protocol tests use that configurable header path.
+可用`-DFISH_CHERRYUSB_DIR=/path/to/hpm_sdk/middleware/cherryusb`指定协议测试头文件。The optional SDK protocol tests use that configurable header path.
 
-## 设定、台词与素材 / Design, dialogue and assets
+## 可编辑文案与素材 / Editable text and artwork
 
-[整体设定](docs/game-design.md) · [D12调整](docs/rain-depth-and-lines-d12.md) · [鱼类评语](docs/catch-comments.md) · [装备描述](docs/tackle-descriptions.md) · [湿地店主](docs/merchant-dialogue.md) · [都市摊主](docs/city-fishmonger-dialogue.md) · [便利店员](docs/city-merchant-dialogue.md)
+[整体设定](docs/game-design.md) · [鱼类价格](docs/fish-price-bases-d26.md) · [海图数值](docs/coast-species-review.md) · [鱼类评语](docs/catch-comments.md) · [装备描述](docs/tackle-descriptions.md) · [湿地店主](docs/merchant-dialogue.md) · [都市摊主](docs/city-fishmonger-dialogue.md) · [便利店员](docs/city-merchant-dialogue.md) · [海边员工](docs/coast-merchant-dialogue.md)
 
-仓库只提供C代码用到的共享位图/蒙版/字形、地图tile描述、实际运行`.fgpk`包及必要许可；不提供原画、未采用素材、PNG图集、字体源文件、生成提示词或预览截图。`data/`和Markdown用于编辑设定；运行读取已生成C表，改文字需同步生成表和字形。第三方许可见[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+仓库只提供C代码使用的位图、蒙版、字形、tile描述、运行所需`.fgpk`及必要许可；不提供原画、未采用素材、PNG图集、字体源文件、生成提示词或预览截图。`data/`和Markdown供编辑参考；运行读取已生成C表，改文字需同步生成表和字形。价格总表是当前汇总，海图数值导入工具为`tools/prepare_marine_prices_d22.py`。
 
-Only runtime C assets, required map packs and licenses are published. Source artwork, unused alternatives, image exports, font masters, prompts and previews stay out of the repository. Editable design/dialogue files accompany the generated runtime tables; new glyphs require regeneration.
+Only used runtime C artwork, required packs and licenses are published. Source masters, unused alternatives, image exports, font sources, generation prompts and previews are excluded. Editable data/text accompanies generated C tables; text changes require matching tables and glyphs. The full price table is a snapshot; the marine price importer reads the coastal species review. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Earlier revision records remain under`docs/`.

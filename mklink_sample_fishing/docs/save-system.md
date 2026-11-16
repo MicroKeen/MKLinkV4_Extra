@@ -1,6 +1,61 @@
-# SD卡存档 V13 / SD saves V13
+# D28R1 休息存档 / Held-rest saves
 
-## 当前 D12：存档、分区天气与线组 / Current D12
+长按休息期间合并事件保存请求，松开或旋转结束后保存最新状态，保留每5真实分钟检查点。[说明](rest-save-d28-r1.md)。V22和资源不变。 / Merge requests during held rest and flush latest state on exit; five-minute wall-clock checkpoints remain.
+
+# D28 储鱼箱与鱼种挣扎 / Cargo and predator behavior
+
+当前设定见[predators-d28.md](predators-d28.md)：80kg大型储鱼箱1800G，黑鱼首口重压、鳡／斑鳜／大梭鱼／金枪鱼等挣扎复核，V22独立A/B兼容旧档，资源保持2026.10.31.4。 / Current D28 settings; earlier entries below are historical.
+
+# D26 当前版本 / Current version
+
+完整本版设定见[rewards-d26.md](rewards-d26.md)：批量赶海、两种金色生物、铜银基价、240px深海延伸、V21迁移。配套2026.10.31.4资源。以下为历史版本记录。 / See rewards-d26.md for current settings; earlier entries below are historical.
+
+# D25 海滩赶海 / Beachcombing
+
+气泡尖端贴近脚边，距角色48px内才显示，走远隐藏，再靠近重新出现；已采收点不再显示，发现标记仍保留在存档。气泡位于角色后方，避免盖住腿部。 / Ground-level pins appear within48px, hide outside that radius and reappear on return; harvested spots stay hidden. The actor occludes overlapping pins.
+
+痕迹采用尖端向下的水滴气泡，移除地面黑点；随机点允许紧挨出现，只排除同坐标，交互优先最近点。QTE最快档往返周期1200ms，滑块16px；绿色区统一52px，其他档保留差异。短蛸1400ms／16px、明对虾1500ms／18px、沙蚕1700ms／24px；连续有效按压窗口均不短于200ms。
+
+D25R2：工具耐久在岸上右上角，无背景；赶海点按区域随机分布，经过不停步。海岛蓝色岩体的天空遮罩与雾层视差已修正；灯塔光束在夜色之后显示，随转向形成柔和光锥，雨雾中散射增强，并由前景建筑遮挡。快艇二档由20提高到60px/s，一档10px/s；高速时增加向船尾扩散的泡沫尾浪。票价为湿地↔江河180G、江河↔海滩280G、湿地↔海滩460G；加载成功扣费，失败不扣、重复回调不重复扣，乘车时间保持原设定。完整配套资源2026.10.31.3；V20存档保持兼容。
+
+D25R2 adds freely walkable random traces, a transparent upper-right tool HUD, corrected island/sky masking and parallax, fog-scattered rotating lighthouse light, and60px/s fast motorboat wakes. Fares are180G wetland–river,280G river–coast and460G wetland–coast. Successful arrival charges once. Matching2026.10.31.3 resources are required; V20 saves remain compatible.
+
+D25R2：赶海点在各区范围内随机分布，经过时不停步、不吸附；工具耐久移到岸上右上角，无背景底板。 / Random daily positions, free walking past traces and a transparent upper-right tool HUD.
+
+沙滩／礁石每日各3～6处，04:00刷新；铲子120G、撬棍180G，各20耐久、最多一把。贝螺直接采收，其他60%触发一次滑块QTE。新增沙蚕高效海饵，直接收入饵盒。每日状态与工具、饵料保存在V20（2097B），兼容V1～V19。完整资源2026.10.31.3。详见[赶海设定](forage-d25.md)。以下为历史版本记录。
+
+Daily3–6 beach and reef spots,20-use tools, one-press escape QTE and collectible ragworm bait. V20 saves retain older progress; matching2026.10.31.3 resources required. See forage-d25.md; earlier notes below are historical.
+
+# SD卡存档 V16 / SD saves V16
+
+## 当前D18公共鱼图 / Current D18 shared fish assets
+
+总图鉴保持跨地图可看，28张鱼图无损压缩75.2%，公共缓存不随换图重写。配套资源2026.10.29.2新增common/fish.fgpk；原460KiB缓存拆分公共/场景，总余量约202KiB。V17存档与全部进度保留。详见[公共鱼图与缓存](common-fish-d18.md)，以下为历史版本。 / Lossless shared fish assets and independent cache banks; use the complete matching resource folder. Earlier sections are historical.
+
+
+## 当前D17海滩 / Current D17 beach
+
+车站右下增加海滩，1440像素长、左三分之一沙滩、向右增深、摩托快艇、单岛灯塔扫光与更强暴雨。海鱼/商店后续加入。V17独立存档保留旧档；使用完整2026.10.29.1三图资源包。详见[海滩设定](beach-d17.md)，以下为历史版本。 / Southeast beach route stop, longer world, motorboat, lighthouse and storms. Marine fish deferred; V17 saves and matching three-map resources. Earlier sections are historical.
+
+
+## 当前D16 / Current D16
+
+猫互动改为场景内小选项框，岸边来回走动且屏内不刷新；增加八阶段月相与都市店面遮雨。文案更新为鱼罐头“喵”、拟真假饵“他的饵比我的鱼都大”。V16仍1511B，独立保留V15及所有旧档，原SD资源不变。详见[猫互动、月相与遮雨](cat-ui-and-moon-d16.md)，以下为历史版本。 / Scene-local cat choices, visible strolling, stable on-screen visits, eight moon phases and city awning shelter. See the current D16 guide above.
+
+## D15记录 / D15 history
+
+新增流浪猫与船尾同伴，抚摸+1、鱼罐头+5、每次见面最多3次互动、每天最多喂2次，好感50加入；船上只坐/睡，睡觉飘出zzz，稀有变异由1%升至2.5%。修复升级容器剩余空间不足时误放流大鱼；竹竿限制线组；钓层简化为钓底/顶层/中层；拟真假饵600G永久使用。V15存档1511B兼容全部旧档，原SD包不变。完整当前设定见[流浪猫、鱼获与装备](cat-and-cargo-d15.md)，以下章节为历史。 / Cat companion, cargo fallback, rod/rig compatibility, three depth modes and reusable600G lure. V15 retains older saves and the existing SD packs. See the current D15 guide above; older sections are historical.
+
+## D14记录 / D14 history
+
+断线后仅10%概率损坏线组，其余保留并可继续使用；河豚中钩后逃脱额外20%概率咬断线组；泡面改为4游戏小时、收放线速度+10%，不增加提竿窗口。提示采用钓鱼情境用语，详见[线组与泡面调整](line-damage-d14.md)。V14存档及现有SD资源保持兼容。以下D13及更早章节为历史。 / Line breaks now have a10% rig-damage chance; noodles grant10% handling only for four game hours. Existing saves and packs remain compatible. See the linked D14 guide; older sections are historical.
+
+## D13记录 / D13 history
+
+新增长竿3500G、永久雨伞160G和泡面28G；V14仍1503B并保留旧档。当前新增设定以[都市长竿与便利店道具](city-gear-d13.md)为准，D12及以下章节保留作历史。New city rod, umbrella and noodles use appended IDs; V14 preserves old saves. See the D13 guide above.
+
+
+## D12：存档、分区天气与线组 / D12 history
 
 以[完整D12设定与修复记录](rain-depth-and-lines-d12.md)为准。V13仍1503B，独立A/B并保留旧档、原密钥和目录；保存岸/船位置、朝向、时间、天气、潮湿与拿铁，启动资源加载后恢复原位置。修复SD单扇区写入CRC、延迟响应和有界忙等待；主机验证不代替实机测试；作者已反馈当前版本基本稳定，掉电/拔卡等异常测试仍未专项验收。
 

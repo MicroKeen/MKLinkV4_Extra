@@ -24,8 +24,10 @@ int main(void)
             uint16_t scale=fish_species_scale_q8(s,(uint16_t)size);
             assert(scale>=previous_scale && scale>0); previous_scale=scale;
             assert(s->portrait_width_px*scale/256<=220 && s->portrait_height_px*scale/256<=110);
+            if(i>=FISH_COAST_FIRST)assert(s->portrait_width_px*scale/256<=180 && s->portrait_height_px*scale/256<=56);
         }
-        assert(fish_species_scale_q8(s,s->min_mm)<fish_species_scale_q8(s,(s->mean_x2_mm+1)/2));
+        if(i<FISH_COAST_FIRST)assert(fish_species_scale_q8(s,s->min_mm)<fish_species_scale_q8(s,(s->mean_x2_mm+1)/2));
+        else assert(fish_species_scale_q8(s,s->min_mm)<=fish_species_scale_q8(s,(s->mean_x2_mm+1)/2));
         for (int j=0;j<i;j++) assert(strcmp(s->id,fish_species[j].id));
     }
     assert(fish_species[9].size_metric==FISH_SIZE_CARAPACE_LENGTH);
@@ -58,7 +60,11 @@ int main(void)
             typical+=(size>=s->typical_min_mm && size<=s->typical_max_mm);
             min_endpoint+=(size==s->min_mm); max_endpoint+=(size==s->max_mm);
         }
-        assert(histogram[4]>samples*7/1000 && histogram[4]<samples*20/1000);
+        /* New shell/carapace ranges can have only14 distinct millimetres.
+         * Permit one discrete bin at the 99th-percentile boundary, while
+         * retaining the original strict distribution check for all old fish. */
+        unsigned bin=i<FISH_COAST_FIRST?0:samples/(s->max_mm-s->min_mm+1);
+        assert(histogram[4]+bin>samples*7/1000 && histogram[4]<samples*20/1000+bin);
         assert(histogram[1]+histogram[2]>samples*60/100);
         assert(typical>samples*60/100 && typical<samples*85/100);
         assert(min_endpoint<samples*3/100 && max_endpoint<samples*3/100);

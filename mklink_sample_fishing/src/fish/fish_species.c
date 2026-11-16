@@ -1,5 +1,6 @@
 #include "fish_species.h"
 #include "fish_rules.h"
+#include "fish_marine_weights.h"
 
 uint32_t fish_random_next(uint32_t *state)
 {
@@ -10,7 +11,8 @@ uint32_t fish_random_next(uint32_t *state)
 }
 #define next_random fish_random_next
 static const uint8_t guide_order[FISH_GUIDE_COUNT]={
-    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,19,20,22,23};
+    0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,19,20,22,23,
+    25,26,27,28,29,30,31,32,33,34,35,36,37,44,45,46,38,39,40,41,42,43,47,48,49};
 unsigned fish_guide_index_at(unsigned position) {return guide_order[position%FISH_GUIDE_COUNT];}
 unsigned fish_guide_position(unsigned index) {
     for(unsigned i=0;i<FISH_GUIDE_COUNT;i++)if(guide_order[i]==index)return i;
@@ -32,15 +34,24 @@ const fish_species_t *fish_species_profile(unsigned map,unsigned index)
 unsigned fish_species_parent(unsigned index)
 {
     static const uint8_t parent[FISH_VARIANT_COUNT]={3,2,1,9};
+    if(index==FISH_PEACOCK)return 25;
     return fish_species_is_variant(index)?parent[index-FISH_BASE_SPECIES_COUNT]:index;
 }
 unsigned fish_species_special_roll(uint32_t *state,unsigned index)
 {
+    if(index==25)return next_random(state)%1000<10?FISH_PEACOCK:index;
     for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_LEGACY_SPECIES_COUNT;v++)
         if(fish_species_parent(v)==index) return next_random(state)%100==0?v:index;
     return index;
 }
 
+unsigned fish_species_special_roll_cat(uint32_t *state,unsigned index)
+{
+    if(index==25)return next_random(state)%1000<25?FISH_PEACOCK:index;
+    for(unsigned v=FISH_BASE_SPECIES_COUNT;v<FISH_LEGACY_SPECIES_COUNT;v++)
+        if(fish_species_parent(v)==index)return next_random(state)%1000<25?v:index;
+    return index;
+}
 void fish_species_roll(uint32_t *state, uint8_t *index, uint16_t *size_mm)
 {
     unsigned total=0;
@@ -58,11 +69,22 @@ bool fish_species_roll_weights(uint32_t *state,const uint16_t *weights,uint8_t *
 {return fish_species_roll_weights_on(state,weights,0,index,size);}
 bool fish_species_roll_weights_on(uint32_t *state,const uint16_t *weights,unsigned map,uint8_t *index,uint16_t *size)
 {
-    unsigned total=0;
-    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) total+=weights[i];
+    unsigned total=0,gold=0;
+    for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        total+=weights[i];
+        if(fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i))gold+=weights[i];
+    }
     if (!total) return false; /* Empty water does not fall back to global fish. */
+    int tier=-1;
+    if(gold*100>total*FISH_GOLD_POOL_CAP_PERCENT) {
+        tier=next_random(state)%100<FISH_GOLD_POOL_CAP_PERCENT;
+        total=tier?gold:total-gold;
+        if(!total)return false; /* Rare-only bait/depth stays waiting, never becomes guaranteed gold. */
+    }
     unsigned ticket=next_random(state)%total;
     for (unsigned i=0;i<FISH_SPECIES_COUNT;i++) {
+        bool is_gold=fish_species[i].rarity==FISH_RARITY_GOLD && !fish_species_is_colored(i);
+        if(tier>=0 && is_gold!=(bool)tier)continue;
         if (ticket<weights[i]) {
             *index=(uint8_t)i; *size=fish_species_sample_size(state,fish_species_profile(map,i)); return true;
         }
@@ -111,9 +133,10 @@ static uint32_t isqrt_u32(uint32_t value)
 uint16_t fish_species_scale_q8(const fish_species_t *species, uint16_t size_mm)
 {
     unsigned width=32+(unsigned)size_mm*192/1000;
-    if (width>220) width=220;
+    unsigned max_width=species->coast_weight_index?180:220;
+    if (width>max_width) width=max_width;
     unsigned scale=width*256/species->portrait_width_px;
-    unsigned height_limit=110u*256/species->portrait_height_px;
+    unsigned height_limit=(species->coast_weight_index?56u:110u)*256/species->portrait_height_px;
     return (uint16_t)(scale<height_limit?scale:height_limit);
 }
 
@@ -126,6 +149,17 @@ uint16_t fish_species_stamina(const fish_species_t *species,uint32_t weight_g)
 
 uint32_t fish_species_weight_g(const fish_species_t *species, uint16_t size_mm)
 {
+    if(species->coast_weight_index && species->coast_weight_index<=FISH_COAST_COUNT) {
+        unsigned k=species->coast_weight_index-1,lo=marine_weight_lut[k].lo,hi=marine_weight_lut[k].hi;
+        if(size_mm<=lo)return marine_weight_lut[k].minimum;
+        if(size_mm>=hi)return marine_weight_lut[k].maximum;
+        unsigned power=marine_weight_lut[k].exponent_q8,ratio=((uint32_t)size_mm<<12)/lo,result=4096;
+        for(unsigned n=0;n<(power>>8);n++)result=(uint32_t)((uint64_t)result*ratio>>12);
+        unsigned root=ratio;
+        for(unsigned bit=128;bit;bit>>=1){root=isqrt_u32(root<<12);if(power&bit)result=(uint32_t)((uint64_t)result*root>>12);}
+        uint32_t grams=(uint32_t)(((uint64_t)marine_weight_lut[k].minimum*result+2048)>>12);
+        return grams>marine_weight_lut[k].maximum?marine_weight_lut[k].maximum:grams;
+    }
     /* Game anchor, not a measured species/population regression. One cast only. */
     uint64_t numerator=(uint64_t)species->weight_anchor_g*size_mm*size_mm*size_mm;
     uint64_t denominator=(uint64_t)species->weight_anchor_mm*species->weight_anchor_mm*species->weight_anchor_mm;

@@ -1,6 +1,27 @@
 # 容器、商店与游戏时间 v17
 
-## 当前 D12：存档、分区天气与线组 / Current D12
+## 当前D16 / Current D16
+
+猫互动改为场景内小选项框，岸边来回走动且屏内不刷新；增加八阶段月相与都市店面遮雨。文案更新为鱼罐头“喵”、拟真假饵“他的饵比我的鱼都大”。V16仍1511B，独立保留V15及所有旧档，原SD资源不变。详见[猫互动、月相与遮雨](cat-ui-and-moon-d16.md)，以下为历史版本。 / Scene-local cat choices, visible strolling, stable on-screen visits, eight moon phases and city awning shelter. See the current D16 guide above.
+
+## D15记录 / D15 history
+
+新增流浪猫与船尾同伴，抚摸+1、鱼罐头+5、每次见面最多3次互动、每天最多喂2次，好感50加入；船上只坐/睡，睡觉飘出zzz，稀有变异由1%升至2.5%。修复升级容器剩余空间不足时误放流大鱼；竹竿限制线组；钓层简化为钓底/顶层/中层；拟真假饵600G永久使用。V15存档1511B兼容全部旧档，原SD包不变。完整当前设定见[流浪猫、鱼获与装备](cat-and-cargo-d15.md)，以下章节为历史。 / Cat companion, cargo fallback, rod/rig compatibility, three depth modes and reusable600G lure. V15 retains older saves and the existing SD packs. See the current D15 guide above; older sections are historical.
+
+## 当前D14R1本地调整 / Local D14R1 update
+
+商店商品列表反转滚轮方向；岸上新增第二档快走，32/64像素每秒，同方向再转加速，反向先停。到商店、码头、车站继续自动停车。详见[商店滚轮与岸上快走](shop-walk-d14-r1.md)。以下D14为已上传版本记录。 / Reverse vendor-list navigation and add two-gear shore walking. See the D14R1 guide; D14 below is the published baseline.
+
+## D14记录 / D14 history
+
+断线后仅10%概率损坏线组，其余保留并可继续使用；河豚中钩后逃脱额外20%概率咬断线组；泡面改为4游戏小时、收放线速度+10%，不增加提竿窗口。提示采用钓鱼情境用语，详见[线组与泡面调整](line-damage-d14.md)。V14存档及现有SD资源保持兼容。以下D13及更早章节为历史。 / Line breaks now have a10% rig-damage chance; noodles grant10% handling only for four game hours. Existing saves and packs remain compatible. See the linked D14 guide; older sections are historical.
+
+## D13记录 / D13 history
+
+新增长竿3500G、永久雨伞160G和泡面28G；V14仍1503B并保留旧档。当前新增设定以[都市长竿与便利店道具](city-gear-d13.md)为准，D12及以下章节保留作历史。New city rod, umbrella and noodles use appended IDs; V14 preserves old saves. See the D13 guide above.
+
+
+## D12：存档、分区天气与线组 / D12 history
 
 以[完整D12设定与修复记录](rain-depth-and-lines-d12.md)为准。V13仍1503B，独立A/B并保留旧档、原密钥和目录；保存岸/船位置、朝向、时间、天气、潮湿与拿铁，启动资源加载后恢复原位置。修复SD单扇区写入CRC、延迟响应和有界忙等待；主机验证不代替实机测试；作者已反馈当前版本基本稳定，掉电/拔卡等异常测试仍未专项验收。
 

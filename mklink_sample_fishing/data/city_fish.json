@@ -134,10 +134,10 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 4,
+            "reed_bay": 3,
             "open_pond": 3,
-            "mud_channel": 2,
-            "stream_inlet": 1,
+            "mud_channel": 3,
+            "stream_inlet": 3,
             "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -166,10 +166,10 @@
         2
       ],
       "zones": [
-        4,
         3,
-        2,
-        1,
+        3,
+        3,
+        3,
         3
       ],
       "activity": [
@@ -330,11 +330,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 2,
-            "open_pond": 4,
-            "mud_channel": 5,
-            "stream_inlet": 2,
-            "gravel_margin": 2
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
+            "stream_inlet": 3,
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -362,11 +362,11 @@
         2
       ],
       "zones": [
-        2,
-        4,
-        5,
-        2,
-        2
+        3,
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         100,
@@ -516,11 +516,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 1,
-            "open_pond": 4,
-            "mud_channel": 4,
-            "stream_inlet": 6,
-            "gravel_margin": 2
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
+            "stream_inlet": 3,
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -548,11 +548,11 @@
         2
       ],
       "zones": [
-        1,
-        4,
-        4,
-        6,
-        2
+        3,
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         120,
@@ -709,9 +709,9 @@
           "max_depth_cm": 1600,
           "zone_multipliers": {
             "reed_bay": 3,
-            "open_pond": 5,
-            "mud_channel": 2,
-            "stream_inlet": 4,
+            "open_pond": 3,
+            "mud_channel": 3,
+            "stream_inlet": 3,
             "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -741,9 +741,9 @@
       ],
       "zones": [
         3,
-        5,
-        2,
-        4,
+        3,
+        3,
+        3,
         3
       ],
       "activity": [
@@ -894,10 +894,10 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 5,
+            "reed_bay": 3,
             "open_pond": 3,
             "mud_channel": 3,
-            "stream_inlet": 2,
+            "stream_inlet": 3,
             "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -926,10 +926,10 @@
         2
       ],
       "zones": [
-        5,
         3,
         3,
-        2,
+        3,
+        3,
         3
       ],
       "activity": [
@@ -1078,10 +1078,10 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 1,
-            "open_pond": 2,
-            "mud_channel": 6,
-            "stream_inlet": 2,
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
+            "stream_inlet": 3,
             "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
@@ -1110,10 +1110,10 @@
         2
       ],
       "zones": [
-        1,
-        2,
-        6,
-        2,
+        3,
+        3,
+        3,
+        3,
         3
       ],
       "activity": [
@@ -1262,11 +1262,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 1,
-            "open_pond": 5,
-            "mud_channel": 4,
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
             "stream_inlet": 3,
-            "gravel_margin": 1
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -1294,11 +1294,11 @@
         2
       ],
       "zones": [
-        1,
-        5,
-        4,
         3,
-        1
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         125,
@@ -1448,11 +1448,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 2,
+            "reed_bay": 3,
             "open_pond": 3,
-            "mud_channel": 2,
-            "stream_inlet": 6,
-            "gravel_margin": 4
+            "mud_channel": 3,
+            "stream_inlet": 3,
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -1480,11 +1480,11 @@
         2
       ],
       "zones": [
-        2,
         3,
-        2,
-        6,
-        4
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         125,
@@ -1634,11 +1634,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 1,
+            "reed_bay": 3,
             "open_pond": 3,
-            "mud_channel": 5,
-            "stream_inlet": 6,
-            "gravel_margin": 1
+            "mud_channel": 3,
+            "stream_inlet": 3,
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -1666,11 +1666,11 @@
         2
       ],
       "zones": [
-        1,
         3,
-        5,
-        6,
-        1
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         110,
@@ -1822,11 +1822,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 2,
-            "open_pond": 5,
-            "mud_channel": 5,
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
             "stream_inlet": 3,
-            "gravel_margin": 1
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -1854,11 +1854,11 @@
         2
       ],
       "zones": [
-        2,
-        5,
-        5,
         3,
-        1
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         115,
@@ -2006,11 +2006,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 1,
-            "open_pond": 2,
-            "mud_channel": 6,
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
             "stream_inlet": 3,
-            "gravel_margin": 5
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -2038,11 +2038,11 @@
         2
       ],
       "zones": [
-        1,
-        2,
-        6,
         3,
-        5
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         80,
@@ -2190,11 +2190,11 @@
           "min_depth_cm": 0,
           "max_depth_cm": 1600,
           "zone_multipliers": {
-            "reed_bay": 2,
-            "open_pond": 1,
-            "mud_channel": 4,
+            "reed_bay": 3,
+            "open_pond": 3,
+            "mud_channel": 3,
             "stream_inlet": 3,
-            "gravel_margin": 5
+            "gravel_margin": 3
           },
           "basis": "游戏虚拟水域分布；不表示实际物种深度极限",
           "activity_percent": [
@@ -2222,11 +2222,11 @@
         2
       ],
       "zones": [
-        2,
-        1,
-        4,
         3,
-        5
+        3,
+        3,
+        3,
+        3
       ],
       "activity": [
         100,

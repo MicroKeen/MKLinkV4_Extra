@@ -1,0 +1,9 @@
+#ifndef FISH_COAST_STAFF_ART_H
+#define FISH_COAST_STAFF_ART_H
+#include "city_vendor_indexed.h"
+extern const fish_vendor_image_t fish_image_CoastStation;
+extern const fish_vendor_image_t fish_image_CoastEmployeeGreeting;
+extern const fish_vendor_image_t fish_image_CoastEmployeeSold;
+extern const fish_vendor_image_t fish_image_CoastEmployeeConcerned;
+extern const fish_vendor_image_t fish_image_CoastEmployeeSurprised;
+#endif
